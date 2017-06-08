@@ -3,7 +3,7 @@
     <div class="math">
       <div>{{num1}}</div>
       <div>+ {{num2}}</div>
-      <div class="total">{{total}}</div>
+      <div class="total">{{buffer}}</div>
     </div>
     <numpad></numpad>
   </div>
@@ -48,8 +48,10 @@ const vm = {
     },
     total () {
       return this.$store.state.total
+    },
+    buffer () {
+      return this.$store.state.buffer
     }
-
   },
   mounted () {
     console.log('MOUNTED')

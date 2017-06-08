@@ -1,6 +1,6 @@
 # squares
 
-> Math testing app
+> Arithmetic learning app, currently in development.
 
 ## Build Setup
 

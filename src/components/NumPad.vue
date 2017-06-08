@@ -1,5 +1,5 @@
 <template>
-  <div class="numpad">
+  <div class="numpad" @click="getNum">
     <div>7</div><div>8</div><div>9</div>
     <div>4</div><div>5</div><div>6</div>
     <div>1</div><div>2</div><div>3</div>
@@ -28,6 +28,25 @@
       },
 
       warn: function (message, event) {
+      },
+      getNum: function (e) {
+        const num = e.target.innerText
+        if (num === '=') {
+          return this.checkTotal()
+        }
+        console.log(e.target.innerText)
+        this.$store.commit('ADDTOBUFFER', {num})
+      },
+      checkTotal: function () {
+        const total = this.$store.state.num1 + this.$store.state.num2
+        const buffer = this.$store.state.buffer
+        if (+total === +buffer) {
+          console.log('ok')
+          this.$store.commit('RESET')
+        } else {
+          this.$store.commit('CLEARBUFFER')
+          console.log('NG')
+        }
       }
     },
     computed: {
