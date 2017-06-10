@@ -3,7 +3,7 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div><icon class='del' name="times-circle"></icon></div>
+    <div class="del">&#x2297;</div>
     <div>0</div>
     <div class="eq-button"><span class="eq">=</span></div>
   </div>
@@ -36,6 +36,9 @@
         if (num === '=') {
           return this.checkTotal()
         }
+        if (num === '\u2297') {
+          return this.$store.commit('CLEARBUFFER')
+        }
         console.log(e.target.innerText)
         this.$store.commit('ADDTOBUFFER', {num})
       },
@@ -47,7 +50,6 @@
         console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         const total = 0
         const l = 'total = +num1 ' + op + ' +num2'
-        console.log(l)
         eval('total = +num1 ' + op + ' +num2')
         const buffer = this.$store.state.buffer
         if (+total === +buffer) {
@@ -77,16 +79,12 @@ $button-size: 3em
 .fa-icon
   width: auto;
   height: 1em /* or any other relative font sizes */
-.del
-  color: #f66
-  font-size: 1em
-  padding-bottom: 0
-  line-height: .1em
 .eq-button
   line-height: .8
 .eq
   font-size: 1.2em
   font-weight: bold
+  line-height: .5em
 .numpad
   font-size: 4em
   font-weight: bold
@@ -99,13 +97,19 @@ $button-size: 3em
   border: 0px solid #ccc
   border-radius: 6px
   DIV
+    box-shadow: 1px 1px 3px #888888;
     width: 1em
     //height: $button-size - 10
-    border: 2px solid #ccc
+    border: 1px solid #000
     border-radius: 10px
     margin: 2px
     padding: 8px
     line-height: 1
     height: .9em
     cursor: pointer
+  .del
+    color: #f44
+    font-size: 1em
+    line-height: .8em
+
 </style>

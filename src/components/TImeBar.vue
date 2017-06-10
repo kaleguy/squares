@@ -1,7 +1,6 @@
 <template>
-  <div class="dotbar">
-    <div v-for="dot, index in dots"
-         v-bind:class="[index < count ? 'ball' : '', 'dot']">
+  <div>
+    <div class="timebar">
     </div>
   </div>
 </template>
@@ -49,17 +48,11 @@ export default vm
 </script>
 
 <style lang="sass">
-$size: 1em
-$color: green
-.dot
-  width: $size
-  height: $size
-  border-radius: 4px
-  border: 2px solid $color
-  display: inline-block
-  margin: 3px
-.dotbar
-  margin: 10px
-.ball
-  background: $color
+.timebar
+  width: 14em
+  background: green
+  height: 1em
+  margin-left: auto
+  margin-right: auto
+  margin-bottom: 10px
 </style>

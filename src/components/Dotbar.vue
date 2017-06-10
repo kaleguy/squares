@@ -58,8 +58,10 @@ $color: green
   border: 2px solid $color
   display: inline-block
   margin: 3px
+  margin-bottom: 0
 .dotbar
-  margin: 10px
+  margin: 6px
+  margin-bottom: 4px
 .ball
   background: $color
 </style>

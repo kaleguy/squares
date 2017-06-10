@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <div class="math">
-      <div>{{num1}}</div>
-      <div>+ {{num2}}</div>
-      <div class="total">{{buffer}}</div>
+  <div style="display: flex; flex-direction: column; height: 100%">
+    <div style="margin: auto;">
+      <div class="math">
+        <div>{{num1}}</div>
+        <div>+ {{num2}}</div>
+        <div class="total">{{buffer}}</div>
+      </div>
+      <dots></dots>
+      <timebar></timebar>
+      <numpad></numpad>
     </div>
-
-    <dots></dots>
-    <numpad></numpad>
   </div>
 </template>
 
@@ -22,11 +24,13 @@ document.onkeypress = function (e) {
 }
 import DotBar from './Dotbar'
 import NumPad from './NumPad'
+import TimeBar from './TimeBar'
 const vm = {
   name: 'hello',
   components: {
     numpad: NumPad,
-    dots: DotBar
+    dots: DotBar,
+    timebar: TimeBar
   },
   data () {
     return {
@@ -72,17 +76,19 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-BODY
+HTML, BODY
   width: 100%
   max-width: 100%
+  height: 100%
 .math
+  box-shadow: 2px 2px 5px #888888;
   font-size: 4.5em
   font-family: verdana
   font-weight: bold
   color: #00f
   border: 2px solid blue
   max-width: 300px
-  width: 70%
+  width: 3em
   margin-left: auto
   margin-right: auto
   border-radius: 20px
