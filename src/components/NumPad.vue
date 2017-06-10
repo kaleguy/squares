@@ -1,11 +1,11 @@
 <template>
   <div class="numpad" @click="getNum">
-    <div>7</div><div>8</div><div>9</div>
-    <div>4</div><div>5</div><div>6</div>
     <div>1</div><div>2</div><div>3</div>
+    <div>4</div><div>5</div><div>6</div>
+    <div>7</div><div>8</div><div>9</div>
     <div><icon class='del' name="times-circle"></icon></div>
     <div>0</div>
-    <div><span class="eq">=</span></div>
+    <div class="eq-button"><span class="eq">=</span></div>
   </div>
 </template>
 
@@ -73,34 +73,39 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-$button-size: 1.8em
+$button-size: 3em
 .fa-icon
- width: auto;
- height: 1em; /* or any other relative font sizes */
+  width: auto;
+  height: 1em /* or any other relative font sizes */
 .del
   color: #f66
   font-size: 1em
+  padding-bottom: 0
+  line-height: .1em
+.eq-button
+  line-height: .8
 .eq
   font-size: 1.2em
   font-weight: bold
 .numpad
-  font-size: $button-size
+  font-size: 4em
   font-weight: bold
   display: flex
   flex-direction: row
   flex-flow: row wrap
-  width: $button-size * 4.65
+  width: 4.2em
   margin-left: auto
   margin-right: auto
   border: 0px solid #ccc
   border-radius: 6px
   DIV
-    width: $button-size
-    height: $button-size - 10
+    width: 1em
+    //height: $button-size - 10
     border: 2px solid #ccc
     border-radius: 10px
     margin: 2px
-    padding: 10px
+    padding: 8px
     line-height: 1
+    height: .9em
     cursor: pointer
 </style>

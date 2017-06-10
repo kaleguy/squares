@@ -76,11 +76,11 @@ BODY
   width: 100%
   max-width: 100%
 .math
-  font-size: 4.2em
+  font-size: 4.5em
   font-family: verdana
   font-weight: bold
-  color: #0b97c4
-  border: 2px solid #0b97c4
+  color: #00f
+  border: 2px solid blue
   max-width: 300px
   width: 70%
   margin-left: auto
@@ -96,7 +96,7 @@ BODY
     //border: 1px solid red
     margin-left: 30px
 .total
-  border-top: 10px solid green
+  border-top: 10px solid blue
   //width: 160px
   //float: right
   padding-top: 5px
