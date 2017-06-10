@@ -6,10 +6,19 @@ Vue.use(Vuex)
 // ========= The Store ===============
 export default new Vuex.Store({
   state: {
+    currentLevel: 0,
+    levels: [
+      {
+        op: '+',
+        count: 10,
+        operandLimit: 10
+      }
+    ],
     num1: 0,
     num2: 0,
     total: 0,
-    buffer: ''
+    buffer: '',
+    count: 0
   },
   mutations: {
     RESET (state) {
@@ -24,11 +33,20 @@ export default new Vuex.Store({
     },
     CLEARBUFFER (state) {
       state.buffer = ''
+    },
+    INCCOUNT (state) {
+      state.count = state.count + 1
+    },
+    RESETALL (state) {
+      state.count = 0
+      state.num1 = Math.floor(Math.random() * 10)
+      state.num2 = Math.floor(Math.random() * 10)
+      state.total = state.num1 + state.num2 // TODO: remove
+      state.buffer = ''
     }
-
   },
   actions: {
-    loadLeo (context, o) {
+    dummy (context, o) {
     }
   }
 })
