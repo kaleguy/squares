@@ -1,19 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+const levels = require('./levels.json')
+console.log(levels)
+
 Vue.use(Vuex)
 
 // ========= The Store ===============
 export default new Vuex.Store({
   state: {
     currentLevel: 0,
-    levels: [
-      {
-        op: '+',
-        count: 10,
-        operandLimit: 10
-      }
-    ],
+    levels,
     num1: 0,
     num2: 0,
     total: 0,

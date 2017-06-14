@@ -1,0 +1,27 @@
+[
+  {
+    "operator": "+",
+    "default": "Math.floor(Math.random() * 10)",
+    "levels": [
+      {
+        "num2": 0
+      },
+      {
+        "num2": 1
+      }
+    ]
+  },
+  {
+    "operator": "-",
+    "default": "Math.floor(Math.random() * 10)",
+    "levels": [
+      {
+        "num2": 0
+      },
+      {
+        "num2": 1
+      }
+    ]
+  }
+
+]
