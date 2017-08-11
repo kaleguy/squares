@@ -3,7 +3,7 @@
     <div style="margin: auto;">
       <div class="math">
         <div>{{num1}}</div>
-        <div>+ {{num2}}</div>
+        <div>{{operator}} {{num2}}</div>
         <div class="total">{{buffer}}</div>
       </div>
       <dots></dots>
@@ -15,6 +15,9 @@
 
 
 <script>
+import DotBar from './Dotbar'
+import NumPad from './NumPad'
+import TimeBar from './TimeBar'
 const keyBus = {
   key: ''
 }
@@ -22,9 +25,6 @@ document.onkeypress = function (e) {
   console.log('xx', e.key)
   keyBus.key = e.key
 }
-import DotBar from './Dotbar'
-import NumPad from './NumPad'
-import TimeBar from './TimeBar'
 const vm = {
   name: 'hello',
   components: {
@@ -59,6 +59,9 @@ const vm = {
     },
     buffer () {
       return this.$store.state.buffer
+    },
+    operator () {
+      return this.$route.params.operator || '+'
     }
   },
   mounted () {

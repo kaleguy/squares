@@ -14,7 +14,6 @@ Vue.use(VueEvents)
 Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -32,6 +31,3 @@ new Vue({
   }
 })
 
-// store.commit('increment')
-
-// console.log(store.state.count)

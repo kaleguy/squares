@@ -52,6 +52,7 @@ export default vm
 $size: 1em
 $color: green
 .dot
+  box-shadow: 1px 1px 3px #888888;
   width: $size
   height: $size
   border-radius: 4px

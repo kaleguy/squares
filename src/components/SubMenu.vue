@@ -1,16 +1,20 @@
 <template>
-  <div class="submenu" style="display: flex; flex-direction: row; height: 100%">
+  <div class="squares">
     <div v-for="level in levels" @click="goto(level)">
-      {{level.num2}}
+      {{operator}}{{level.num2}}
     </div>
   </div>
 </template>
 
 
 <script>
+const _ = require('lodash')
 const vm = {
-  name: 'mainmenu',
+  name: 'submenu',
   components: {
+  },
+  props: {
+    // levels: Object
   },
   data () {
     return {
@@ -22,6 +26,7 @@ const vm = {
     },
     goto: function (level) {
       console.log(level.operator)
+      this.$router.replace('/card/' + this.operator + '/' + level.num2)
     }
   },
   computed: {
@@ -29,11 +34,17 @@ const vm = {
       return this.$store.state.num1
     },
     levels () {
-      console.log(this.$store.state.currentLevel)
-      return this.$store.state.levels
+      // console.log('CURRENT LEVEL = ', this.$store.state.currentLevel)
+      const allLevels = this.$store.state.levels
+      const l = _.find(allLevels, l => l.operator === this.operator).levels
+      return l
+    },
+    operator () {
+      return this.$route.params.operator || '+'
     }
   },
   mounted () {
+    console.log('THIS IS A PEN')
   },
   updated () {
   }
@@ -46,22 +57,5 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-HTML, BODY
-  height: 100%
-  width: 100%
-.squares
-  DIV.title-button
-    font-size: 1em
-    background: #33f
-    color: #fff
-    cursor: default
-  DIV
-    cursor: pointer
-    font-size: 2em
-    width: 100px
-    border: 1px solid #ccc
-    border-radius: 10px
-    height: 80px
-    margin: 6px
 
 </style>

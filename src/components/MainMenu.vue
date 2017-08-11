@@ -18,27 +18,23 @@ const vm = {
     }
   },
   methods: {
-    submit: function () {
-      // console.log('foo')
-    },
     goto: function (level) {
       console.log(level.operator)
+      this.$router.replace('/menu/' + level.operator)
+      // route.navigate(submenu, level.operator)
     }
   },
   computed: {
-    num1 () {
-      return this.$store.state.num1
-    },
     levels () {
       console.log(this.$store.state.levels)
       return this.$store.state.levels
     }
   },
   mounted () {
+    console.log('MAIN')
   },
   updated () {
   }
-
 }
 
 export default vm
@@ -47,22 +43,4 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-HTML, BODY
-  height: 100%
-  width: 100%
-.squares
-  DIV.title-button
-    font-size: 1em
-    background: #33f
-    color: #fff
-    cursor: default
-  DIV
-    cursor: pointer
-    font-size: 2em
-    width: 100px
-    border: 1px solid #ccc
-    border-radius: 10px
-    height: 80px
-    margin: 6px
-
 </style>

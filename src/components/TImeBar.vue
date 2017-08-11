@@ -49,6 +49,7 @@ export default vm
 
 <style lang="sass">
 .timebar
+  box-shadow: 1px 1px 3px #888888;
   width: 14em
   background: green
   height: 1em
