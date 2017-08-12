@@ -9,6 +9,7 @@
       <dots></dots>
       <timebar></timebar>
       <numpad></numpad>
+      <div class="arrow" @click="menu">&#x2b05</div>
     </div>
   </div>
 </template>
@@ -40,11 +41,13 @@ const vm = {
     submit: function () {
       // console.log('foo')
     },
-
     warn: function (message, event) {
       // now we have access to the native event
       if (event) event.preventDefault()
       alert(message)
+    },
+    menu: function () {
+      this.$router.replace('/menu/' + this.operator)
     }
   },
   computed: {
@@ -52,7 +55,7 @@ const vm = {
       return this.$store.state.num1
     },
     num2 () {
-      return this.$store.state.num2
+      return this.$store.state.currentLevel.index
     },
     total () {
       return this.$store.state.total
@@ -62,11 +65,16 @@ const vm = {
     },
     operator () {
       return this.$route.params.operator || '+'
+    },
+    level () {
+      return this.$route.params.level || '1'
     }
   },
   mounted () {
     console.log('MOUNTED')
-    this.$store.commit('RESET')
+    const level = this.level
+    const operator = this.operator
+    this.$store.commit('RESET', { operator, level })
   },
   updated () {
   }
@@ -110,4 +118,9 @@ HTML, BODY
   //float: right
   padding-top: 5px
   margin-top: 12px
+.arrow
+  margin-top: 0
+  font-size: 40px
+  color: #ff4444
+  cursor: pointer
 </style>

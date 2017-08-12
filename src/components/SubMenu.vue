@@ -44,7 +44,7 @@ const vm = {
     }
   },
   mounted () {
-    console.log('THIS IS A PEN')
+
   },
   updated () {
   }

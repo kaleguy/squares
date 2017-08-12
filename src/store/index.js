@@ -20,11 +20,15 @@ export default new Vuex.Store({
     count: 0
   },
   mutations: {
-    RESET (state) {
+    RESET (state, o) {
       state.num1 = Math.floor(Math.random() * 10)
       state.num2 = Math.floor(Math.random() * 10)
       state.total = state.num1 + state.num2
       state.buffer = ''
+      // console.log('O', o)
+      if (!o) { return }
+      state.currentLevel.index = o.level
+      state.currentLevel.op = o.operator
     },
     ADDTOBUFFER (state, o) {
       state.buffer = '' + state.buffer + o.num

@@ -21,6 +21,9 @@
 
   const vm = {
     name: 'numpad',
+    props: {
+      level: Object
+    },
     data () {
       return {
       }
@@ -28,7 +31,6 @@
     methods: {
       submit: function () {
       },
-
       warn: function (message, event) {
       },
       getNum: function (e) {
@@ -44,10 +46,13 @@
       },
       checkTotal: function () {
         const num1 = this.$store.state.num1
-        const num2 = this.$store.state.num2
+        const num2 = this.$store.state.currentLevel.index
         const level = this.$store.state.currentLevel
-        const op = this.$store.state.levels[level].op // operator, e.g. '+'
-        console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
+        const foo = this.$store.state.currentLevel.op
+        // let op = this.$store.state.levels[level].op // operator, e.g. '+'
+        let op = this.op
+        if (op === 'x') { op = '*' }
+        //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         const total = 0
         const l = 'total = +num1 ' + op + ' +num2'
         eval('total = +num1 ' + op + ' +num2')
@@ -59,12 +64,13 @@
         } else {
           this.$store.commit('CLEARBUFFER')
           this.$store.commit('RESETALL')
-          console.log('NG')
+          console.log(total, num1, num2, 'NG')
         }
       }
     },
     computed: {
-      num1 () {
+      op () {
+        return this.$store.state.currentLevel.op
       }
     }
   }

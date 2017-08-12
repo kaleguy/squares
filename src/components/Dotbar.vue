@@ -37,7 +37,7 @@ const vm = {
   },
   mounted () {
     console.log('MOUNTED')
-    this.$store.commit('RESET')
+    // this.$store.commit('RESET')
   },
   updated () {
   }
