@@ -17,7 +17,8 @@ export default new Vuex.Store({
     num2: 0,
     total: 0,
     buffer: '',
-    count: 0
+    count: 0,
+    time: 0
   },
   mutations: {
     RESET (state, o) {
@@ -40,11 +41,15 @@ export default new Vuex.Store({
     INCCOUNT (state) {
       state.count = state.count + 1
     },
+    SETTIME (state, o) {
+      state.time = o.time
+    },
     RESETALL (state) {
       state.count = 0
+      state.time = 0
       state.num1 = Math.floor(Math.random() * 10)
       state.num2 = Math.floor(Math.random() * 10)
-      state.total = state.num1 + state.num2 // TODO: remove
+      // state.total = state.num1 + state.num2 // TODO: remove
       state.buffer = ''
     }
   },

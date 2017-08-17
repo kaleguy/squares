@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="timebar">
+      <div id="timebarFill"></div>
     </div>
   </div>
 </template>
@@ -9,6 +10,9 @@
 <script>
 const vm = {
   name: 'timebar',
+  props: {
+    active: 'boolean'
+  },
   components: {
   },
   data () {
@@ -36,7 +40,25 @@ const vm = {
   },
   mounted () {
     console.log('MOUNTED')
-    // this.$store.commit('RESET')
+    const tb = document.getElementById('timebarFill')
+    tb.style.width = 0
+    let w = this.$store.state.time
+    console.log('W', w)
+    const me = this
+    function tick () {
+      w = me.$store.state.time
+      if (w < 240) {
+        w = w + 1
+        tb.style.width = w + 'px'
+      } else {
+        tb.style.width = 0
+        me.$store.commit('RESETALL')
+        w = -8
+      }
+      me.$store.commit('SETTIME', { time: w })
+    }
+    // console.log(tick)
+    window.setInterval(tick, 100)
   },
   updated () {
   }
@@ -50,10 +72,14 @@ export default vm
 <style lang="sass">
 .timebar
   box-shadow: 1px 1px 3px #888888;
-  width: 14em
+  width: 240px
   background: green
   height: 1em
   margin-left: auto
   margin-right: auto
   margin-bottom: 10px
+#timebarFill
+  background: lightgreen
+  height: 100%
+  width: 240px
 </style>

@@ -23,7 +23,7 @@ HTML, BODY
   height: 100%
   width: 100%
 .squares
-  width: 400px
+  width: 342px
   margin-left: auto
   margin-right: auto
   display: flex
@@ -36,8 +36,9 @@ HTML, BODY
     color: #fff
     cursor: default
   DIV
+    box-shadow: 2px 2px 5px #888888;
     cursor: pointer
-    font-size: 3em
+    font-size: 3.5em
     font-weight: bold
     padding-top: 26px
     line-height: 1em
@@ -46,4 +47,15 @@ HTML, BODY
     border-radius: 10px
     height: 80px
     margin: 6px
+  DIV.review-button
+    width: 330px
+DIV.arrow
+  margin-top: 0
+  font-size: 80px
+  color: #ff4444
+  cursor: pointer
+  border: none
+  margin-left: auto
+  margin-right: auto
+  box-shadow: none
 </style>

@@ -118,9 +118,4 @@ HTML, BODY
   //float: right
   padding-top: 5px
   margin-top: 12px
-.arrow
-  margin-top: 0
-  font-size: 40px
-  color: #ff4444
-  cursor: pointer
 </style>

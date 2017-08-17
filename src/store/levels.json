@@ -1,90 +1,14 @@
 [
   {
-    "operator": "+",
-    "defaults": {
-      "num1": "Math.floor(Math.random() * 10)",
-      "title": "num2"
-    },
-    "levels": [
-      {
-        "num2": 0
-      },
-      {
-        "num2": 1
-      },
-      {
-        "num2": 2
-      },
-      {
-        "num2": 3
-      },
-      {
-        "num2": 4
-      },
-      {
-        "num2": 5
-      },
-      {
-        "num2": 6
-      },
-      {
-        "num2": 7
-      },
-      {
-        "num2": 8
-      },
-      {
-        "num2": 9
-      },
-      {
-        "num2": 10
-      },
-      {
-        "num2": "?"
-      }
-    ]
+    "operator": "+"
   },
   {
-    "operator": "-",
-    "default": "Math.floor(Math.random() * num2)",
-    "levels": [
-      {
-        "num2": 0
-      },
-      {
-        "num2": 1
-      },
-      {
-        "num2": 2
-      },
-      {
-        "num2": 3
-      },
-      {
-        "num2": 4
-      },
-      {
-        "num2": 5
-      },
-      {
-        "num2": 6
-      },
-      {
-        "num2": 7
-      },
-      {
-        "num2": 8
-      },
-      {
-        "num2": 9
-      },
-      {
-        "num2": 10
-      },
-      {
-        "num2": "?"
-      }
-    ]
+    "operator": "-"
+  },
+  {
+    "operator": "*"
+  },
+  {
+    "operator": "d"
   }
-
 ]
