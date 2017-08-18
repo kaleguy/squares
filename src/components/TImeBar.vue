@@ -58,7 +58,8 @@ const vm = {
       me.$store.commit('SETTIME', { time: w })
     }
     // console.log(tick)
-    window.setInterval(tick, 100)
+    const timer = window.setInterval(tick, 100)
+    console.log(timer)
   },
   updated () {
   }

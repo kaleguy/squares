@@ -6,12 +6,14 @@ import VueEvents from 'vue-events'
 import App from './App'
 import router from './router'
 import store from './store'
-import Icon from 'vue-awesome/components/Icon.vue'
-import 'vue-awesome/icons/times-circle'
+import VueSweetAlert from 'vue-sweetalert'
+// import Icon from 'vue-awesome/components/Icon.vue'
+// import 'vue-awesome/icons/times-circle'
 
 Vue.use(Vuex)
 Vue.use(VueEvents)
-Vue.component('icon', Icon)
+Vue.use(VueSweetAlert)
+// Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

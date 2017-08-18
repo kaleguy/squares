@@ -61,6 +61,13 @@
           console.log('ok')
           this.$store.commit('INCCOUNT')
           this.$store.commit('RESET')
+          const count = this.$store.state.count
+          if (count === 4) {
+            this.$swal('Good Job!', 'You passed this level', 'success')
+              .then(() => this.$router.replace('/menu/' + op))
+          } else {
+            console.log(count)
+          }
         } else {
           this.$store.commit('CLEARBUFFER')
           this.$store.commit('RESETALL')
