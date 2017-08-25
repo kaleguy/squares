@@ -43,12 +43,11 @@ const vm = {
     const tb = document.getElementById('timebarFill')
     tb.style.width = 0
     let w = this.$store.state.time
-    console.log('W', w)
     const me = this
     function tick () {
       w = me.$store.state.time
       if (w < 240) {
-        w = w + 1
+        w = w + 2
         tb.style.width = w + 'px'
       } else {
         tb.style.width = 0
@@ -58,7 +57,7 @@ const vm = {
       me.$store.commit('SETTIME', { time: w })
     }
     // console.log(tick)
-    const timer = window.setInterval(tick, 100)
+    const timer = window.setInterval(tick, 150)
     console.log(timer)
   },
   updated () {

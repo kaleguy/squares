@@ -3,9 +3,9 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div class="del">&#x2297;</div>
+    <div class="back" @click="menu">&#x2b05;</div>
     <div>0</div>
-    <div class="eq-button"><span class="eq">=</span></div>
+    <div class="del">&#x2297;</div>
   </div>
 </template>
 
@@ -35,21 +35,19 @@
       },
       getNum: function (e) {
         const num = e.target.innerText
-        if (num === '=') {
-          return this.checkTotal()
-        }
         if (num === '\u2297') {
           return this.$store.commit('CLEARBUFFER')
         }
-        console.log(e.target.innerText)
         this.$store.commit('ADDTOBUFFER', {num})
+        return this.checkTotal()
+      },
+      menu: function () {
+        this.$router.replace('/menu/' + this.op)
       },
       checkTotal: function () {
         const num1 = this.$store.state.num1
         const num2 = this.$store.state.currentLevel.index
         const level = this.$store.state.currentLevel
-        const foo = this.$store.state.currentLevel.op
-        // let op = this.$store.state.levels[level].op // operator, e.g. '+'
         let op = this.op
         if (op === 'x') { op = '*' }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
@@ -57,12 +55,14 @@
         const l = 'total = +num1 ' + op + ' +num2'
         eval('total = +num1 ' + op + ' +num2')
         const buffer = this.$store.state.buffer
+        if (buffer < 10 && total > 9) {
+          return
+        }
         if (+total === +buffer) {
-          console.log('ok')
           this.$store.commit('INCCOUNT')
           this.$store.commit('RESET')
           const count = this.$store.state.count
-          if (count === 4) {
+          if (count === 14) {
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + op))
           } else {
@@ -124,5 +124,11 @@ $button-size: 3em
     color: #f44
     font-size: 1em
     line-height: .8em
+  .back
+    width: 64px
+    height: 58px
+    color: #f44
+    font-size: .7em
+    line-height: 1.4em
 
 </style>

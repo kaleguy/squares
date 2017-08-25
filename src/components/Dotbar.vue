@@ -29,7 +29,12 @@ const vm = {
   },
   computed: {
     dots () {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      const numDots = 14
+      const dotArray = []
+      for (let i = 0; i < numDots; i++) {
+        dotArray[i] = 0
+      }
+      return dotArray
     },
     count () {
       return this.$store.state.count
@@ -49,7 +54,7 @@ export default vm
 </script>
 
 <style lang="sass">
-$size: 1em
+$size: 1.4em
 $color: green
 .dot
   box-shadow: 1px 1px 3px #888888;
@@ -61,8 +66,11 @@ $color: green
   margin: 3px
   margin-bottom: 0
 .dotbar
-  margin: 6px
+  width: 240px
+  margin-top: 6px
   margin-bottom: 4px
+  margin-left: auto
+  margin-right: auto
 .ball
   background: $color
 </style>

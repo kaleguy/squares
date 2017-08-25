@@ -1,15 +1,14 @@
 <template>
-  <div style="display: flex; flex-direction: column; height: 100%">
+  <div style="display: flex; flex-direction: column; height: 100%; border:1px solid red;">
     <div style="margin: auto;">
+      <dots></dots>
       <div class="math">
         <div>{{num1}}</div>
         <div>{{operator}} {{num2}}</div>
         <div class="total">{{buffer}}</div>
       </div>
-      <dots></dots>
       <timebar></timebar>
       <numpad></numpad>
-      <div class="arrow" @click="menu">&#x2b05</div>
     </div>
   </div>
 </template>
@@ -23,7 +22,6 @@ const keyBus = {
   key: ''
 }
 document.onkeypress = function (e) {
-  console.log('xx', e.key)
   keyBus.key = e.key
 }
 const vm = {
@@ -45,9 +43,6 @@ const vm = {
       // now we have access to the native event
       if (event) event.preventDefault()
       alert(message)
-    },
-    menu: function () {
-      this.$router.replace('/menu/' + this.operator)
     }
   },
   computed: {

@@ -5,6 +5,15 @@ const levels = require('./levels.json')
 
 Vue.use(Vuex)
 
+function getRandom (first) {
+  var second = Math.floor(Math.random() * 10)
+  if (first !== second) {
+    return second
+  } else {
+    return getRandom(first)
+  }
+}
+
 // ========= The Store ===============
 export default new Vuex.Store({
   state: {
@@ -13,6 +22,7 @@ export default new Vuex.Store({
       index: 0
     },
     levels,
+    passedLevels: {},
     num1: 0,
     num2: 0,
     total: 0,
@@ -22,8 +32,8 @@ export default new Vuex.Store({
   },
   mutations: {
     RESET (state, o) {
-      state.num1 = Math.floor(Math.random() * 10)
-      state.num2 = Math.floor(Math.random() * 10)
+      state.num1 = getRandom(state.num1)
+      state.num2 = getRandom(state.num2)
       state.total = state.num1 + state.num2
       state.buffer = ''
       // console.log('O', o)
@@ -51,6 +61,9 @@ export default new Vuex.Store({
       state.num2 = Math.floor(Math.random() * 10)
       // state.total = state.num1 + state.num2 // TODO: remove
       state.buffer = ''
+    },
+    SETPASS (state, o) {
+      state.passedLevels[o.key] = 1
     }
   },
   actions: {
