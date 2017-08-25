@@ -1,6 +1,8 @@
 <template>
   <div class="squares">
-    <div v-for="level in levels" @click="goto(level)">
+    <div v-for="level in levels"
+         v-bind:class="passed(level)"
+         @click="goto(level)">
       {{operator}}{{level}}
     </div>
     <div class="review-button">Review</div>
@@ -30,8 +32,17 @@ const vm = {
       // console.log('foo')
     },
     goto: function (level) {
-      console.log(level.operator)
       this.$router.replace('/card/' + this.operator + '/' + level)
+    },
+    passed (level) {
+      let cssClass = ''
+      const passedLevels = this.$store.state.passedLevels
+      const levelKey = this.operator + level
+      if (passedLevels[levelKey]) {
+        cssClass = 'passed'
+      }
+      console.log(cssClass, passedLevels)
+      return cssClass
     }
   },
   computed: {
@@ -62,5 +73,7 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+  .passed
+    background: green
 
 </style>

@@ -62,7 +62,10 @@
           this.$store.commit('INCCOUNT')
           this.$store.commit('RESET')
           const count = this.$store.state.count
-          if (count === 14) {
+          if (count === 4) {
+            const levelKey = this.op + num2;
+            console.log(levelKey)
+            this.$store.commit('SETPASS', { key: levelKey })
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + op))
           } else {
