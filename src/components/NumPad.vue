@@ -3,7 +3,7 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div class="back" @click="menu">&#x2b05;</div>
+    <div class="back" @click="menu">&#x21e6;</div>
     <div>0</div>
     <div class="del">&#x2297;</div>
   </div>
@@ -123,12 +123,14 @@ $button-size: 3em
     line-height: 1
     height: .9em
     cursor: pointer
+    font-weight: normal
   .del
     color: #f44
     font-size: 1em
     line-height: .8em
   .back
     width: 64px
+    font-weight: normal
     height: 58px
     color: #f44
     font-size: .7em

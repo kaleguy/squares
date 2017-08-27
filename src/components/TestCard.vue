@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; flex-direction: column; height: 100%; border:1px solid red;">
+  <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="margin: auto;">
       <dots></dots>
       <div class="math">
@@ -88,7 +88,7 @@ HTML, BODY
   height: 100%
 .math
   box-shadow: 2px 2px 5px #888888;
-  font-size: 4.5em
+  font-size: 4em
   font-family: verdana
   font-weight: bold
   color: #00f
@@ -102,7 +102,7 @@ HTML, BODY
   padding: 0px
   line-height: .95em
   padding-right: 30px
-  height: 3.3em
+  height: 3em
   DIV
     text-align: right
     //border: 1px solid red
