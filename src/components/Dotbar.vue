@@ -6,7 +6,6 @@
   </div>
 </template>
 
-
 <script>
 const vm = {
   name: 'dots',
@@ -41,12 +40,9 @@ const vm = {
     }
   },
   mounted () {
-    console.log('MOUNTED')
-    // this.$store.commit('RESET')
   },
   updated () {
   }
-
 }
 
 export default vm
@@ -67,7 +63,7 @@ $color: green
   margin-bottom: 0
 .dotbar
   width: 240px
-  margin-top: 6px
+  margin-top: 3px
   margin-bottom: 4px
   margin-left: auto
   margin-right: auto

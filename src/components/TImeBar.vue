@@ -42,12 +42,13 @@ const vm = {
     console.log('MOUNTED')
     const tb = document.getElementById('timebarFill')
     tb.style.width = 0
+    this.$store.commit('RESETALL')
     let w = this.$store.state.time
     const me = this
     function tick () {
       w = me.$store.state.time
       if (w < 240) {
-        w = w + 2
+        w = w + 1
         tb.style.width = w + 'px'
       } else {
         tb.style.width = 0
@@ -57,8 +58,7 @@ const vm = {
       me.$store.commit('SETTIME', { time: w })
     }
     // console.log(tick)
-    const timer = window.setInterval(tick, 150)
-    console.log(timer)
+    window.mytimer = window.setInterval(tick, 150)
   },
   updated () {
   }

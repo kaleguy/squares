@@ -41,7 +41,7 @@ const vm = {
       if (passedLevels[levelKey]) {
         cssClass = 'passed'
       }
-      console.log(cssClass, passedLevels)
+      // console.log(cssClass, passedLevels)
       return cssClass
     }
   },

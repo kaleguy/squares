@@ -41,7 +41,6 @@ const vm = {
     }
   },
   mounted () {
-    console.log('MAIN')
   },
   updated () {
   }

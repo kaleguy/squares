@@ -66,7 +66,6 @@ const vm = {
     }
   },
   mounted () {
-    console.log('MOUNTED')
     const level = this.level
     const operator = this.operator
     this.$store.commit('RESET', { operator, level })
@@ -88,7 +87,7 @@ HTML, BODY
   height: 100%
 .math
   box-shadow: 2px 2px 5px #888888;
-  font-size: 4em
+  font-size: 3.5em
   font-family: verdana
   font-weight: bold
   color: #00f
@@ -102,7 +101,7 @@ HTML, BODY
   padding: 0px
   line-height: .95em
   padding-right: 30px
-  height: 3em
+  height: 3.5em
   DIV
     text-align: right
     //border: 1px solid red
