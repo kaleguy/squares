@@ -62,7 +62,7 @@ const vm = {
       window.clearInterval(window.mytimer)
     }
     console.log('got here')
-    window.mytimer = window.setInterval(tick, 100)
+    window.mytimer = window.setInterval(tick, 200)
   },
   updated () {
   }
