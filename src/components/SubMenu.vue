@@ -3,10 +3,9 @@
     <div v-for="level in levels"
          v-bind:class="passed(level)"
          @click="goto(level)">
-      {{operator}}{{level}}
+      <span class="operator">{{operator}}</span><span class="level">{{level}}</span>
     </div>
-    <div class="review-button">Review</div>
-    <div class="arrow" @click="menu">&#x2b05</div>
+    <div class="arrow" @click="menu">&#x21e6;</div>
   </div>
 </template>
 
@@ -73,7 +72,16 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-  .passed
-    background: green
-
+.operator
+  font-size: 44px
+  display: inline-block
+  padding-top: 0
+  line-height: .5em
+  margin: 0
+  margin-bottom: 200px
+.level
+  display: inline-block
+  padding: 0
+.passed
+  background: green
 </style>

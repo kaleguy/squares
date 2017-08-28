@@ -2,6 +2,7 @@
   <div>
   <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
     <div class="title-button">squares</div>
+    <div class="title-button" style="background:#fff;color:#000;font-size:160px;line-height:0.7;">&#x25A6;</div>
   </div>
   <div class="squares csquares">
     <!--
@@ -9,10 +10,10 @@
       {{level.operator}}
     </div>
     -->
-    <div @click="goto('+')">+</div>
-    <div @click="goto('+')">--</div>
-    <div @click="goto('X')">X</div>
-    <div @click="goto('/')">/</div>
+    <div @click="goto('+')">&#x002b;</div>
+    <div @click="goto('-')">&#8213;</div>
+    <div @click="goto('X')">&#x00d7;</div>
+    <div @click="goto('/')">&#x00f7;</div>
   </div>
   </div>
 </template>
@@ -54,7 +55,7 @@ export default vm
 <style lang="sass">
 .bsquares
   font-size: 32px
-  width: 180px
+  width: 360px
 .csquares
   font-size: 32px
   width: 360px

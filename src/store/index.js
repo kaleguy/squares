@@ -6,7 +6,7 @@ const levels = require('./levels.json')
 Vue.use(Vuex)
 
 function getRandom (first) {
-  var second = Math.floor(Math.random() * 10)
+  var second = Math.floor(Math.random() * 10) + 1
   if (first !== second) {
     return second
   } else {

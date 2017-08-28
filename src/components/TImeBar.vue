@@ -51,13 +51,17 @@ const vm = {
         w = w + 1
         tb.style.width = w + 'px'
       } else {
-        tb.style.width = 0
+        // tb.style.width = 0
         me.$store.commit('RESETALL')
         w = -8
       }
       me.$store.commit('SETTIME', { time: w })
     }
     // console.log(tick)
+    if (window.mytimer) {
+      window.clearInterval(window.mytimer)
+    }
+    console.log('got here')
     window.mytimer = window.setInterval(tick, 150)
   },
   updated () {
