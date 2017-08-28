@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top:40px;">
   <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
     <div class="title-button">squares</div>
     <div class="title-button" style="background:#fff;color:#000;font-size:160px;line-height:0.7;">&#x25A6;</div>
@@ -53,12 +53,9 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-.bsquares
+.bsquares, .csquares
   font-size: 32px
-  width: 360px
-.csquares
-  font-size: 32px
-  width: 360px
+  width: 310px
 .bsquares DIV
   width: 140px
   height: 120px

@@ -1,5 +1,5 @@
 <template>
-  <div class="squares">
+  <div class="squares" style="margin-top:40px;">
     <div v-for="level in levels"
          v-bind:class="passed(level)"
          @click="goto(level)">

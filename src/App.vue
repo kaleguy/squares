@@ -39,7 +39,7 @@ HTML, BODY
     box-shadow: 2px 2px 5px #888888;
     cursor: pointer
     font-size: 3.5em
-    font-weight: bold
+    font-weight: normal
     padding-top: 26px
     line-height: 1em
     width: 100px
@@ -58,4 +58,5 @@ DIV.arrow
   margin-left: auto
   margin-right: auto
   box-shadow: none
+  font-weight: normal
 </style>
