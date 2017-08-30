@@ -127,8 +127,8 @@ $button-size: 3em
     font-weight: normal
   .del
     color: #f44
-    font-size: .8em
-    line-height: 1em
+    font-size: 60px
+    line-height: .9
     height: 58px
     width: 64px
     display: block
@@ -137,6 +137,6 @@ $button-size: 3em
     font-weight: normal
     height: 58px
     color: #f44
-    font-size: .7em
-    line-height: 1.4em
+    font-size: 50px
+    line-height: 1.2
 </style>
