@@ -49,10 +49,11 @@
         const num2 = this.$store.state.currentLevel.index
         const level = this.$store.state.currentLevel
         let op = this.op
-        if (op === 'x') { op = '*' }
+        if (op === 'X') { op = '*' }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         const total = 0
         const l = 'total = +num1 ' + op + ' +num2'
+        console.log('L', l)
         eval('total = +num1 ' + op + ' +num2')
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
@@ -126,10 +127,11 @@ $button-size: 3em
     font-weight: normal
   .del
     color: #f44
-    font-size: .7em
+    font-size: 1em
     line-height: .8em
-    height: 1.2em
-    display: none
+    height: 58px
+    width: 64px
+    display: block
   .back
     width: 64px
     font-weight: normal
