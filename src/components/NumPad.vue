@@ -68,7 +68,7 @@
             console.log(levelKey)
             this.$store.commit('SETPASS', { key: levelKey })
             this.$swal('Good Job!', 'You passed this level', 'success')
-              .then(() => this.$router.replace('/menu/' + op))
+              .then(() => this.$router.replace('/menu/' + this.op))
           } else {
             console.log(count)
           }
@@ -127,8 +127,8 @@ $button-size: 3em
     font-weight: normal
   .del
     color: #f44
-    font-size: 1em
-    line-height: .8em
+    font-size: .8em
+    line-height: 1em
     height: 58px
     width: 64px
     display: block
