@@ -45,16 +45,24 @@
         this.$router.replace('/menu/' + this.op)
       },
       checkTotal: function () {
-        const num1 = this.$store.state.num1
+        let num1 = this.$store.state.num1
         const num2 = this.$store.state.currentLevel.index
+        if (this.op === '-') {
+          num1 = +this.$store.state.num1 + +num2
+        }
+        if (this.op === 'd') {
+          num1 = +this.$store.state.num1 * +num2
+        }
         const level = this.$store.state.currentLevel
         let op = this.op
         if (op === 'X') { op = '*' }
+        if (op === 'd') { op = '/' }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
-        const total = 0
+        let total = 0
         const l = 'total = +num1 ' + op + ' +num2'
         console.log('L', l)
         eval('total = +num1 ' + op + ' +num2')
+        total = total / 1
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
           return

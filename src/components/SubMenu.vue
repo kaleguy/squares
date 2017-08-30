@@ -55,7 +55,11 @@ const vm = {
       return [1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     operator () {
-      return this.$route.params.operator || '+'
+      let op = this.$route.params.operator || '+'
+      if (op === 'd') {
+        op = '\u00f7'
+      }
+      return op
     }
   },
   mounted () {

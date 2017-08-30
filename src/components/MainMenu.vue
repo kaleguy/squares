@@ -19,7 +19,7 @@
     <div @click="goto('+')">&#x002b;</div>
     <div @click="goto('-')">&#8213;</div>
     <div @click="goto('X')">&#x00d7;</div>
-    <div @click="goto('/')">&#x00f7;</div>
+    <div @click="goto('d')">&#x00f7;</div>
   </div>
   </div>
 </template>

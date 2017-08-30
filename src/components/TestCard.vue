@@ -46,8 +46,18 @@ const vm = {
     }
   },
   computed: {
+    op () {
+      return this.$store.state.currentLevel.op
+    },
     num1 () {
-      return this.$store.state.num1
+      let num = this.$store.state.num1
+      if (this.op === '-') {
+        num = this.$store.state.num1 + +this.num2
+      }
+      if (this.op === 'd') {
+        num = this.$store.state.num1 * this.num2
+      }
+      return num
     },
     num2 () {
       return this.$store.state.currentLevel.index
