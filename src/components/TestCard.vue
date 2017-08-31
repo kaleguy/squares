@@ -67,6 +67,7 @@ const vm = {
       return num
     },
     num2 () {
+      console.log('xxxxxx', this.$store.state.currentLevel.index)
       return this.$store.state.currentLevel.index
     },
     total () {

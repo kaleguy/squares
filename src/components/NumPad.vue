@@ -46,7 +46,7 @@
       },
       checkTotal: function () {
         let num1 = this.$store.state.num1
-        const num2 = this.$store.state.currentLevel.index
+        let num2 = this.$store.state.currentLevel.index
         if (this.op === '-') {
           num1 = +this.$store.state.num1 + +num2
         }
@@ -57,6 +57,10 @@
         let op = this.op
         if (op === 'X') { op = '*' }
         if (op === 'd') { op = '/' }
+        if (op === 's') {
+          op = '+'
+          num2 = 0
+        }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         let total = 0
         const l = 'total = +num1 ' + op + ' +num2'
@@ -69,7 +73,10 @@
         }
         if (+total === +buffer) {
           this.$store.commit('INCCOUNT')
-          this.$store.commit('RESET')
+          this.$store.commit('RESET', {
+            operator: this.$store.state.currentLevel.op,
+            level: this.$store.state.currentLevel.index
+          })
           const count = this.$store.state.count
           if (count === 14) {
             const levelKey = this.op + num2;
