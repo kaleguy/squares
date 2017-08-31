@@ -54,7 +54,7 @@
 
 <script>
 const vm = {
-  name: 'dice',
+  name: 'die',
   props: {
     count: Object
   },

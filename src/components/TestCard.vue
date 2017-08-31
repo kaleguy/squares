@@ -130,17 +130,5 @@ HTML, BODY
   //float: right
   padding-top: 5px
   margin-top: 12px
-.dice
-  width: 220px
-  height: 220px
-  margin-left: auto
-  margin-right: auto
-  background: #fff
-  margin-bottom: 8px
-  TD
-    padding: 4px
-    background: #fff
-    border: 8px solid #fff
-  .d
-    background: blue
+
 </style>
