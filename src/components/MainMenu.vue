@@ -4,7 +4,7 @@
     <div class="title-button">squares</div>
     <div class="title-button"
          @click="goto('s')"
-         style="background:#fff;color:#000;font-size:44px;line-height:0.7;">
+         style="background:#fff;cursor:pointer;color:#000;font-size:44px;line-height:0.7;">
 
       &#x25a0;&#x25a0;&#x25a0;<br />
       &#x25a0;&#x25a0;&#x25a0;<br />
