@@ -2,7 +2,9 @@
   <div style="margin-top:40px;">
   <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
     <div class="title-button">squares</div>
-    <div class="title-button" style="background:#fff;color:#000;font-size:44px;line-height:0.7;">
+    <div class="title-button"
+         @click="goto('s')"
+         style="background:#fff;color:#000;font-size:44px;line-height:0.7;">
 
       &#x25a0;&#x25a0;&#x25a0;<br />
       &#x25a0;&#x25a0;&#x25a0;<br />

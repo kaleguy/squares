@@ -2,10 +2,15 @@
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="margin: auto;">
       <dots></dots>
-      <div class="math">
-        <div>{{num1}}</div>
-        <div>{{operator}} {{num2}}</div>
-        <div class="total">{{buffer}}</div>
+      <div v-if="op==='s'">
+         <dice></dice>
+      </div>
+      <div v-else>
+        <div class="math">
+          <div>{{num1}}</div>
+          <div>{{operator}} {{num2}}</div>
+          <div class="total">{{buffer}}</div>
+        </div>
       </div>
       <timebar></timebar>
       <numpad></numpad>
@@ -18,6 +23,7 @@
 import DotBar from './Dotbar'
 import NumPad from './NumPad'
 import TimeBar from './TimeBar'
+import Dice from './Dice'
 const keyBus = {
   key: ''
 }
@@ -29,7 +35,8 @@ const vm = {
   components: {
     numpad: NumPad,
     dots: DotBar,
-    timebar: TimeBar
+    timebar: TimeBar,
+    dice: Dice
   },
   data () {
     return {
@@ -122,4 +129,17 @@ HTML, BODY
   //float: right
   padding-top: 5px
   margin-top: 12px
+.dice
+  width: 220px
+  height: 220px
+  margin-left: auto
+  margin-right: auto
+  background: #fff
+  margin-bottom: 8px
+  TD
+    padding: 4px
+    background: #fff
+    border: 8px solid #fff
+  .d
+    background: blue
 </style>
