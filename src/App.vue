@@ -62,4 +62,7 @@ DIV.arrow
 .fa-icon
   width: auto
   height: 1em /* or any other relative font sizes */
+.fa
+  font-size: 70px
+
 </style>
