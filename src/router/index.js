@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MainMenu from '@/components/MainMenu'
 import SubMenu from '@/components/SubMenu'
+import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
 
 Vue.use(Router)
@@ -13,6 +14,10 @@ export default new Router({
     {
       path: '/',
       component: MainMenu
+    },
+    {
+      path: '/menu/s',
+      component: DiceMenu
     },
     {
       path: '/menu/:operator',

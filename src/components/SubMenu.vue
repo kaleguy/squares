@@ -3,12 +3,11 @@
     <div v-for="level in levels"
          v-bind:class="passed(level)"
          @click="goto(level)">
-      <span class="operator">{{operator}}</span><span class="level">{{level}}</span>
+      <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
     </div>
     <div class="arrow" @click="menu">&#x21e6;</div>
   </div>
 </template>
-
 
 <script>
 // const _ = require('lodash')
@@ -26,9 +25,6 @@ const vm = {
   methods: {
     menu: function () {
       this.$router.replace('/')
-    },
-    submit: function () {
-      // console.log('foo')
     },
     goto: function (level) {
       this.$router.replace('/card/' + this.operator + '/' + level)
@@ -54,11 +50,17 @@ const vm = {
       // const l = _.find(allLevels, l => l.operator === this.operator).levels
       return [1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
+    visOperator () {
+      if (this.operator === 'd') {
+        return '\u00f7'
+      }
+      if (this.operator === 'X') {
+        return '\u00d7'
+      }
+      return this.operator
+    },
     operator () {
       let op = this.$route.params.operator || '+'
-      if (op === 'd') {
-        op = '\u00f7'
-      }
       return op
     }
   },

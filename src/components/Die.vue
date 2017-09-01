@@ -68,7 +68,7 @@ const vm = {
   },
   computed: {
     num1 () {
-      return this.$store.state.num1
+      return this.$store.state.dice1
     }
   },
   mounted () {
@@ -101,8 +101,10 @@ $color: green
   margin-right: auto
 .ball
   background: $color
-.dtable
-  height: 200px
+DIV.dtable
+  display: inline-block
+  height: 122px
+  width: 122px
 .dice
   width: 140px
   height: 140px

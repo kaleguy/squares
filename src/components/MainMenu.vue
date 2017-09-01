@@ -37,10 +37,8 @@ const vm = {
     }
   },
   methods: {
-    goto: function (level) {
-      console.log(level.operator)
-      this.$router.replace('/menu/' + level)
-      // route.navigate(submenu, level.operator)
+    goto: function (op) {
+      this.$router.replace('/menu/' + op)
     }
   },
   computed: {

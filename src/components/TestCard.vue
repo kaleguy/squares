@@ -3,12 +3,20 @@
     <div style="margin: auto;">
       <dots></dots>
       <div v-if="op==='s'">
-         <dice></dice>
+         <div class="smath">
+           <div v-if="level==1">
+             <dice></dice>
+           </div>
+           <div v-if="level==2">
+             <dice v-bind:count="5"></dice>
+             <dice></dice>
+           </div>
+         </div>
       </div>
       <div v-else>
         <div class="math">
           <div>{{num1}}</div>
-          <div>{{operator}} {{num2}}</div>
+          <div>{{visOperator}} {{num2}}</div>
           <div class="total">{{buffer}}</div>
         </div>
       </div>
@@ -57,17 +65,18 @@ const vm = {
       return this.$store.state.currentLevel.op
     },
     num1 () {
+      console.log('Dd', this.op)
       let num = this.$store.state.num1
       if (this.op === '-') {
         num = this.$store.state.num1 + +this.num2
       }
       if (this.op === 'd') {
+        console.log('D', this.op)
         num = this.$store.state.num1 * this.num2
       }
       return num
     },
     num2 () {
-      console.log('xxxxxx', this.$store.state.currentLevel.index)
       return this.$store.state.currentLevel.index
     },
     total () {
@@ -75,6 +84,15 @@ const vm = {
     },
     buffer () {
       return this.$store.state.buffer
+    },
+    visOperator () {
+      if (this.operator === 'd') {
+        return '\u00f7'
+      }
+      if (this.operator === 'X') {
+        return '\u00d7'
+      }
+      return this.operator
     },
     operator () {
       return this.$route.params.operator || '+'
@@ -103,6 +121,13 @@ HTML, BODY
   width: 100%
   max-width: 100%
   height: 100%
+.smath
+  max-width: 400px
+  margin-left: auto
+  margin-right: auto
+  height: 160px
+  margin-bottom: 8px
+  padding-top: 30px
 .math
   box-shadow: 2px 2px 5px #888888;
   font-size: 3.5em
@@ -130,5 +155,9 @@ HTML, BODY
   //float: right
   padding-top: 5px
   margin-top: 12px
+DIV.dtable
+  display: inline-block
+  height: 122px
+  width: 122px
 
 </style>

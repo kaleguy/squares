@@ -22,7 +22,7 @@
   const vm = {
     name: 'numpad',
     props: {
-      level: Object
+      //level: Object
     },
     data () {
       return {
@@ -47,6 +47,8 @@
       checkTotal: function () {
         let num1 = this.$store.state.num1
         let num2 = this.$store.state.currentLevel.index
+        let dice1 = this.$store.state.dice1
+        let dice2 = this.$store.state.currentLevel.dice2
         if (this.op === '-') {
           num1 = +this.$store.state.num1 + +num2
         }
@@ -59,13 +61,15 @@
         if (op === 'd') { op = '/' }
         if (op === 's') {
           op = '+'
-          num2 = 0
+          if (level.index === '1') { num1 = +dice1; num2 = +0 }
+          if (level.index === '2') { num1 = +dice1 + 5; num2 = +0 }
+          console.log('here')
         }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         let total = 0
         const l = 'total = +num1 ' + op + ' +num2'
-        console.log('L', l)
         eval('total = +num1 ' + op + ' +num2')
+        console.log('T', total, num1, num2)
         total = total / 1
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
@@ -73,14 +77,10 @@
         }
         if (+total === +buffer) {
           this.$store.commit('INCCOUNT')
-          this.$store.commit('RESET', {
-            operator: this.$store.state.currentLevel.op,
-            level: this.$store.state.currentLevel.index
-          })
+          this.$store.commit('RESET')
           const count = this.$store.state.count
           if (count === 14) {
             const levelKey = this.op + num2;
-            console.log(levelKey)
             this.$store.commit('SETPASS', { key: levelKey })
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + this.op))

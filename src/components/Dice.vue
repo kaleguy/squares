@@ -37,9 +37,9 @@
     </div>
     <div v-if="num1===6">
       <table class="dice">
-        <tr><td></td><td></td><td></td></tr>
-        <tr><td></td><td class="d"></td><td></td></tr>
-        <tr><td></td><td></td><td></td></tr>
+        <tr><td class="d"></td><td class=""></td><td class="d"></td></tr>
+        <tr><td class="d"></td><td class=""></td><td class="d"></td></tr>
+        <tr><td class="d"></td><td class=""></td><td class="d"></td></tr>
       </table>
     </div>
     <div v-if="num1 &gt; 6">
@@ -56,7 +56,7 @@
 const vm = {
   name: 'dice',
   props: {
-    count: Object
+    count: Number
   },
   components: {
   },
@@ -68,6 +68,10 @@ const vm = {
   },
   computed: {
     num1 () {
+      if (this.count) { return this.count }
+      if (this.$store.state.currentLevel.op === 's') {
+        return this.$store.state.dice1
+      }
       return this.$store.state.num1
     }
   },
@@ -102,15 +106,14 @@ $color: green
 .ball
   background: $color
 .dtable
-  height: 200px
 .dice
-  width: 140px
-  height: 140px
+  width: 120px
+  height: 120px
   margin-left: auto
   margin-right: auto
   background: #fff
-  margin-top: 40px
-  margin-bottom: auto
+  margin-top: 0
+  margin-bottom: 0
   border: 1px solid #ccc
   border-radius: 10px
   TD
