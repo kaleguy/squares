@@ -62,6 +62,8 @@ export default vm
 .bsquares, .csquares
   font-size: 32px
   width: 310px
+  DIV
+    font-weight: bold
 .bsquares DIV
   width: 140px
   height: 120px

@@ -1,27 +1,39 @@
 <template>
   <div class="dsquares smenu" style="margin-top:40px;">
-    <div @click="goto(1)" style="cursor:pointer" class="srow">
+    <div @click="goto(1)" style="cursor:pointer"
+         v-bind:class="passed('1')"
+         class="srow">
       <dice v-bind:count="3"></dice>
     </div>
-    <div @click="goto(2)" style="cursor:pointer" class="srow">
+    <div @click="goto(2)" style="cursor:pointer"
+         v-bind:class="passed('2')"
+         class="srow">
       <dice v-bind:count="5"></dice>
       <dice v-bind:count="3"></dice>
     </div>
-    <div @click="goto(3)" style="cursor:pointer" class="srow">
+    <div @click="goto(3)" style="cursor:pointer"
+         v-bind:class="passed('3')"
+         class="srow">
       <dice v-bind:count="3"></dice>
       <dice v-bind:count="3"></dice>
     </div>
-    <div class="arrow" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
+    <div class="arrow"
+         style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;margin-top:20px"
+         @click="menu">
+      <leftarrow style="margin-left:60px" width="200"></leftarrow>
+    </div>
   </div>
 </template>
 
 <script>
 // const _ = require('lodash')
 import Dice from './Dice'
+import LeftArrow from './LeftArrow'
 const vm = {
   name: 'dicemenu',
   components: {
-    dice: Dice
+    dice: Dice,
+    leftarrow: LeftArrow
   },
   props: {
     // levels: Object
@@ -40,7 +52,9 @@ const vm = {
     passed (level) {
       let cssClass = ''
       const passedLevels = this.$store.state.passedLevels
+      console.log(passedLevels)
       const levelKey = this.operator + level
+      console.log('LKKK', levelKey)
       if (passedLevels[levelKey]) {
         cssClass = 'passed'
       }
@@ -49,6 +63,9 @@ const vm = {
     }
   },
   computed: {
+    operator () {
+      return 's'
+    }
   },
   mounted () {
 
@@ -87,4 +104,6 @@ DIV.arrow
   border-radius: 10px
   padding-top: 10px
   margin-bottom: 8px
+.passed
+  background: green
 </style>

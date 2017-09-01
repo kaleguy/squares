@@ -10,10 +10,11 @@
    version="1.1"
    id="svg2"
    viewBox="0 0 100 100"
-   width="100"
+   v-bind:width="width"
    xml:space="preserve"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="dark blue left arrow.svg"><sodipodi:namedview
+   sodipodi:docname="dark blue left arrow.svg">
+      <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1"
@@ -72,6 +73,9 @@
 <script>
 const vm = {
   name: 'leftarrow',
+  props: {
+    width: String
+  },
   components: {
   },
   methods: {

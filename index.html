@@ -13,7 +13,11 @@
     </audio>
     <script>
       function playAudio(name) {
-        document.getElementById(audio + name).play();
+        if (!name) {
+          console.log('no audio name specified')
+          return
+        }
+        document.getElementById('audio' + name).play();
       }
     </script>
     <div id="app"></div>

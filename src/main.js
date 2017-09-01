@@ -7,14 +7,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueSweetAlert from 'vue-sweetalert'
-import Icon from 'vue-awesome/components/Icon.vue'
-import 'vue-awesome/icons/times-circle-o'
-import 'vue-awesome/icons/arrow-circle-o-left'
-
 Vue.use(Vuex)
 Vue.use(VueEvents)
 Vue.use(VueSweetAlert)
-Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

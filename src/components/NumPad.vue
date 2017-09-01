@@ -3,9 +3,9 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div class="back" @click="menu"><leftarrow style="margin-left:10px;margin-top:10px"></leftarrow></div>
+    <div class="back" @click="menu"><leftarrow width="110" style="margin-left:10px;margin-top:10px"></leftarrow></div>
     <div>0</div>
-    <div class="del"><icon name="times-circle-o"></icon></div>
+    <div class="del"><xicon width="50" style="margin-top:5px"></xicon></icon></div>
   </div>
 </template>
 
@@ -18,10 +18,12 @@
     keyBus.key = e.key
   }
   import LeftArrow from './LeftArrow'
+  import X from './X'
   const vm = {
     name: 'numpad',
     components: {
-      leftarrow: LeftArrow
+      leftarrow: LeftArrow,
+      xicon: X
     },
     props: {
       //level: Object
@@ -80,8 +82,9 @@
           this.$store.commit('INCCOUNT')
           this.$store.commit('RESET')
           const count = this.$store.state.count
-          if (count === 14) {
-            const levelKey = this.op + num2;
+          console.log('COUNT', count)
+          if (+count === 14) {
+            const levelKey = this.op + level.index;
             this.$store.commit('SETPASS', { key: levelKey })
             playAudio('yay')
             this.$swal('Good Job!', 'You passed this level', 'success')
@@ -146,13 +149,13 @@ $button-size: 3em
     color: #00f
     font-size: 40px
     line-height: 1.8
-    height: 58px
+    height: 57px
     width: 64px
     display: block
   .back
     width: 64px
     font-weight: normal
-    height: 58px
+    height: 57px
     color: #00f
     font-size: 40px
     line-height: 1.8

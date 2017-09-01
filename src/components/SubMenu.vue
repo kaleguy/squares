@@ -5,20 +5,12 @@
          @click="goto(level)">
       <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
     </div>
-<div
-  @click="menu"
-  style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;">
-<leftarrow style="margin-left:60px"></leftarrow>
-</div>
-
-
+    <div
+      @click="menu"
+      style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;">
+      <leftarrow style="margin-left:60px" width="200"></leftarrow>
+    </div>
   </div>
-
-
-
-
-
-
 </template>
 
 <script>
@@ -96,6 +88,7 @@ export default vm
 <style lang="sass">
 .operator
   font-size: 44px
+  font-weight: bold
   display: inline-block
   padding-top: 0
   line-height: .5em
