@@ -82,6 +82,7 @@
           if (count === 14) {
             const levelKey = this.op + num2;
             this.$store.commit('SETPASS', { key: levelKey })
+            playAudio()
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + this.op))
           } else {
