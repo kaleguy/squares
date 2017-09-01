@@ -5,7 +5,7 @@
          @click="goto(level)">
       <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
     </div>
-    <div class="arrow" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
+    <div class="arrow" scale="4" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
   </div>
 </template>
 
