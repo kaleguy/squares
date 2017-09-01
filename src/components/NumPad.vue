@@ -3,7 +3,7 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div class="back" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
+    <div class="back" @click="menu"><leftarrow style="margin-left:10px;margin-top:10px"></leftarrow></div>
     <div>0</div>
     <div class="del"><icon name="times-circle-o"></icon></div>
   </div>
@@ -17,9 +17,12 @@
   document.onkeypress = function (e) {
     keyBus.key = e.key
   }
-
+  import LeftArrow from './LeftArrow'
   const vm = {
     name: 'numpad',
+    components: {
+      leftarrow: LeftArrow
+    },
     props: {
       //level: Object
     },
