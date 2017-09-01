@@ -3,9 +3,9 @@
     <div>1</div><div>2</div><div>3</div>
     <div>4</div><div>5</div><div>6</div>
     <div>7</div><div>8</div><div>9</div>
-    <div class="back" @click="menu">&#x21e6;</div>
+    <div class="back" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
     <div>0</div>
-    <div class="del">&#x2297;</div>
+    <div class="del"><icon name="times-circle-o"></icon></div>
   </div>
 </template>
 
@@ -15,7 +15,6 @@
     key: ''
   }
   document.onkeypress = function (e) {
-    console.log('xx', e.key)
     keyBus.key = e.key
   }
 
@@ -48,7 +47,7 @@
         let num1 = this.$store.state.num1
         let num2 = this.$store.state.currentLevel.index
         let dice1 = this.$store.state.dice1
-        let dice2 = this.$store.state.currentLevel.dice2
+        let dice2 = this.$store.state.dice2
         if (this.op === '-') {
           num1 = +this.$store.state.num1 + +num2
         }
@@ -63,13 +62,12 @@
           op = '+'
           if (level.index === '1') { num1 = +dice1; num2 = +0 }
           if (level.index === '2') { num1 = +dice1 + 5; num2 = +0 }
-          console.log('here')
+          if (level.index === '3') { num1 = +dice1; num2 = +dice2 }
         }
         //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         let total = 0
         const l = 'total = +num1 ' + op + ' +num2'
         eval('total = +num1 ' + op + ' +num2')
-        console.log('T', total, num1, num2)
         total = total / 1
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
@@ -82,7 +80,7 @@
           if (count === 14) {
             const levelKey = this.op + num2;
             this.$store.commit('SETPASS', { key: levelKey })
-            playAudio()
+            playAudio('yay')
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + this.op))
           } else {
@@ -140,11 +138,11 @@ $button-size: 3em
     line-height: 1
     height: .9em
     cursor: pointer
-    font-weight: normal
+    font-weight: bold
   .del
-    color: #f44
-    font-size: 60px
-    line-height: .9
+    color: #00f
+    font-size: 40px
+    line-height: 1.8
     height: 58px
     width: 64px
     display: block
@@ -152,7 +150,7 @@ $button-size: 3em
     width: 64px
     font-weight: normal
     height: 58px
-    color: #f44
-    font-size: 50px
-    line-height: 1.2
+    color: #00f
+    font-size: 40px
+    line-height: 1.8
 </style>

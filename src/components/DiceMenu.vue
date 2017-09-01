@@ -1,5 +1,5 @@
 <template>
-  <div class="dsquares" style="margin-top:40px;">
+  <div class="dsquares smenu" style="margin-top:40px;">
     <div @click="goto(1)" style="cursor:pointer" class="srow">
       <dice v-bind:count="3"></dice>
     </div>
@@ -11,7 +11,7 @@
       <dice v-bind:count="3"></dice>
       <dice v-bind:count="3"></dice>
     </div>
-    <div class="arrow" @click="menu">&#x21e6;</div>
+    <div class="arrow" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ const vm = {
   },
   methods: {
     menu: function () {
-      this.$router.replace('/')
+      this.$router.replace('/main/')
     },
     goto: function (level) {
       this.$router.replace('/card/s/' + level)
@@ -72,15 +72,18 @@ DIV.dtable
   display: inline-block
   height: 122px
   width: 122px
-TABLE.dice
-  border: 1px solid #aaa
+.smenu TABLE.dice
+  border: 1px solid #ccc
 DIV.arrow
-  border: none
+  font-size: 80px
+  width: 100px
+  height: 100px
+  line-height: 1.8
 .passed
   background: green
 .srow
-  border: 1px solid #eee
-  background: #eee
+  border: 1px solid #ccc
+  background: #33f
   border-radius: 10px
   padding-top: 10px
   margin-bottom: 8px

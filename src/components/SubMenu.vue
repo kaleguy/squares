@@ -5,7 +5,7 @@
          @click="goto(level)">
       <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
     </div>
-    <div class="arrow" @click="menu">&#x21e6;</div>
+    <div class="arrow" @click="menu"><icon name="arrow-circle-o-left"></icon></div>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ const vm = {
   },
   methods: {
     menu: function () {
-      this.$router.replace('/')
+      this.$router.replace('/main/')
     },
     goto: function (level) {
       this.$router.replace('/card/' + this.operator + '/' + level)
@@ -57,6 +57,9 @@ const vm = {
       if (this.operator === 'X') {
         return '\u00d7'
       }
+      if (this.operator === '-') {
+        return '\u2212'
+      }
       return this.operator
     },
     operator () {
@@ -88,6 +91,7 @@ export default vm
 .level
   display: inline-block
   padding: 0
+  font-weight: bold
 .passed
   background: green
 </style>

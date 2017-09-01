@@ -11,6 +11,10 @@
              <dice v-bind:count="5"></dice>
              <dice></dice>
            </div>
+           <div v-if="level==3">
+             <dice></dice>
+             <dice v-bind:count="dice2"></dice>
+           </div>
          </div>
       </div>
       <div v-else>
@@ -78,6 +82,9 @@ const vm = {
     },
     num2 () {
       return this.$store.state.currentLevel.index
+    },
+    dice2 () {
+      return this.$store.state.dice2
     },
     total () {
       return this.$store.state.total

@@ -114,7 +114,7 @@ $color: green
   background: #fff
   margin-top: 0
   margin-bottom: 0
-  border: 1px solid #ccc
+  border: 3px solid #666
   border-radius: 10px
   TD
     padding: 4px

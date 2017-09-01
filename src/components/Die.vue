@@ -113,7 +113,7 @@ DIV.dtable
   background: #fff
   margin-top: 40px
   margin-bottom: auto
-  border: 1px solid #ccc
+  border: 3px solid #ccc
   border-radius: 10px
   TD
     padding: 4px

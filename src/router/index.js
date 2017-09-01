@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import FrontPage from '@/components/FrontPage'
 import MainMenu from '@/components/MainMenu'
 import SubMenu from '@/components/SubMenu'
 import DiceMenu from '@/components/DiceMenu'
@@ -13,6 +14,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: FrontPage
+    },
+    {
+      path: '/main/',
       component: MainMenu
     },
     {

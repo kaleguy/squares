@@ -20,15 +20,6 @@ const vm = {
     }
   },
   methods: {
-    submit: function () {
-      // console.log('foo')
-    },
-
-    warn: function (message, event) {
-      // now we have access to the native event
-      if (event) event.preventDefault()
-      alert(message)
-    }
   },
   computed: {
     dots () {
@@ -39,7 +30,6 @@ const vm = {
     }
   },
   mounted () {
-    console.log('MOUNTED')
     const tb = document.getElementById('timebarFill')
     tb.style.width = 0
     this.$store.commit('RESETALL')
@@ -57,11 +47,9 @@ const vm = {
       }
       me.$store.commit('SETTIME', { time: w })
     }
-    // console.log(tick)
     if (window.mytimer) {
       window.clearInterval(window.mytimer)
     }
-    console.log('got here')
     window.mytimer = window.setInterval(tick, 250)
   },
   updated () {

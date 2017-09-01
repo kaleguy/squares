@@ -41,9 +41,7 @@ export default new Vuex.Store({
       state.num2 = getRandom(state.num2)
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
-      console.log('DICE', state.dice1)
       state.buffer = ''
-      // console.log('O', o)
       if (!o) { return }
       state.currentLevel.index = o.level
       state.currentLevel.op = o.operator
@@ -68,8 +66,6 @@ export default new Vuex.Store({
       state.num2 = getRandom()
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
-      console.log('DDICE', state.dice1)
-      // state.total = state.num1 + state.num2 // TODO: remove
       state.buffer = ''
     },
     SETPASS (state, o) {

@@ -52,11 +52,14 @@ HTML, BODY
 DIV.arrow
   margin-top: 0
   font-size: 80px
-  color: #ff4444
+  color: #00f
   cursor: pointer
   border: none
   margin-left: auto
   margin-right: auto
   box-shadow: none
   font-weight: normal
+.fa-icon
+  width: auto
+  height: 1em /* or any other relative font sizes */
 </style>
