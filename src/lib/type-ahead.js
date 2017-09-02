@@ -10,7 +10,6 @@ var TypeAhead = function (element, candidates, opts) {
   opts = opts || {};
 
   typeAhead.element = element;
-
   typeAhead.candidates = candidates || [];
 
   typeAhead.list = new TypeAheadList(typeAhead);
@@ -117,9 +116,12 @@ TypeAhead.prototype.handleKeyDown = function (keyCode) {
  * Input blur event handler
  */
 TypeAhead.prototype.handleBlur = function () {
-  this.value(this.list.items[this.list.active]);
   this.list.hide();
-  this.onKeyDown(this.list.items[this.list.active]);
+  const listValue = this.list.items[this.list.active]
+  if (listValue) {
+    this.value(listValue);
+  }
+  this.onKeyDown(this.element.value);
 };
 
 /**
@@ -163,7 +165,6 @@ TypeAhead.prototype.match = function (candidate) {
 TypeAhead.prototype.value = function (value) {
   this.selected = value;
   this.element.value = this.getItemValue(value);
-
   if (document.createEvent) {
     var e = document.createEvent('HTMLEvents');
     e.initEvent('change', true, false);
