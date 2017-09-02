@@ -14,7 +14,7 @@
 </template>
 
 <script>
-const TypeAhead = require('type-ahead')
+const TypeAhead = require('../lib/type-ahead')
 const vm = {
   name: 'frontpage',
   components: {

@@ -74,7 +74,7 @@ DIV.arrow
   border: 1px solid #CCCCCC
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
   color: #555555
-  font-size: 22px
+  font-size: 24px
   line-height: 1.42857143
   padding: 6px 12px
   //width: 100%
@@ -85,7 +85,7 @@ DIV.arrow
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.17)
   display: none
   float: left
-  font-size: 22px
+  font-size: 24px
   left: 20px
   list-style: none
   margin: 2px 0 0

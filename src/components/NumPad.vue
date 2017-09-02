@@ -11,14 +11,15 @@
 
 
 <script>
+  /* global playAudio */
+  import LeftArrow from './LeftArrow'
+  import X from './X'
   const keyBus = {
     key: ''
   }
   document.onkeypress = function (e) {
     keyBus.key = e.key
   }
-  import LeftArrow from './LeftArrow'
-  import X from './X'
   const vm = {
     name: 'numpad',
     components: {
@@ -26,7 +27,6 @@
       xicon: X
     },
     props: {
-      //level: Object
     },
     data () {
       return {
@@ -69,10 +69,9 @@
           if (level.index === '2') { num1 = +dice1 + 5; num2 = +0 }
           if (level.index === '3') { num1 = +dice1; num2 = +dice2 }
         }
-        //console.log(num1, num2, op) // TODO: remove, this is here bc of jshint
         let total = 0
-        const l = 'total = +num1 ' + op + ' +num2'
-        eval('total = +num1 ' + op + ' +num2')
+        // const l = 'total = +num1 ' + op + ' +num2'
+        eval('total = +num1 ' + op + ' +num2') // eslint-disable-line
         total = total / 1
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
@@ -84,7 +83,7 @@
           const count = this.$store.state.count
           console.log('COUNT', count)
           if (+count === 14) {
-            const levelKey = this.op + level.index;
+            const levelKey = this.op + level.index
             this.$store.commit('SETPASS', { key: levelKey })
             playAudio('yay')
             this.$swal('Good Job!', 'You passed this level', 'success')
