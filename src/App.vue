@@ -65,4 +65,50 @@ DIV.arrow
 .fa
   font-size: 70px
 
+.type-ahead-group
+  position: relative
+.type-ahead-group > input
+  background-color: #FFFFFF
+  background-image: none
+  border-radius: 4px
+  border: 1px solid #CCCCCC
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+  color: #555555
+  font-size: 22px
+  line-height: 1.42857143
+  padding: 6px 12px
+  //width: 100%
+.type-ahead-group > ul
+  background-color: #FFFFFF
+  border-radius: 4px
+  border: 1px solid rgba(0, 0, 0, 0.1)
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.17)
+  display: none
+  float: left
+  font-size: 22px
+  left: 20px
+  list-style: none
+  margin: 2px 0 0
+  min-width: 170px
+  padding: 5px 0
+  position: absolute
+  text-align: left
+  top: 100%
+  z-index: 1000
+
+.type-ahead-group > ul > li > a
+  clear: both
+  color: #333
+  cursor: default
+  display: block
+  font-weight: 400
+  line-height: 1.42857143
+  padding: 3px 20px
+  white-space: nowrap
+
+.type-ahead-group > ul > li.active > a, .type-ahead-group > ul > li > a:hover
+  background-color: #3F9BFA
+  color: #FFFFFF
+  text-decoration: none
+
 </style>

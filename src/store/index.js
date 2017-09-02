@@ -33,7 +33,8 @@ export default new Vuex.Store({
     total: 0,
     buffer: '',
     count: 0,
-    time: 0
+    time: 0,
+    username: ''
   },
   mutations: {
     RESET (state, o) {
@@ -70,6 +71,9 @@ export default new Vuex.Store({
     },
     SETPASS (state, o) {
       state.passedLevels[o.key] = 1
+    },
+    SETUSER (state, o) {
+      state.username = o.username
     }
   },
   actions: {

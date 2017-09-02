@@ -40,7 +40,6 @@
       getNum: function (e) {
         const num = e.target.innerText
         if (typeof num === 'undefined') {
-          console.log('CELR BFF')
           return this.$store.commit('CLEARBUFFER')
         }
         this.$store.commit('ADDTOBUFFER', {num})

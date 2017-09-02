@@ -2,6 +2,10 @@
 
 > Arithmetic learning app, currently in development.
 
+Basic Math Drills.
+
+[Squares](https://kaleguy.github.io/squares)
+
 ## Build Setup
 
 ``` bash
