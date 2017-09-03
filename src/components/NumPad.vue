@@ -140,6 +140,11 @@
         }
       }
     },
+    mounted () {
+      if (!this.username) {
+        this.$router.replace('/')
+      }
+    },
     computed: {
       op () {
         return this.$store.state.currentLevel.op
