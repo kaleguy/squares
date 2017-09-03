@@ -26,20 +26,37 @@ const vm = {
   methods: {
     login: function () {
       this.$router.replace('/main/')
+    },
+    getRecords: function (key) {
+      const records = JSON.parse(localStorage.getItem(key))
+      if (!records) { return }
+      Object.keys(records).forEach(k => {
+        console.log(k)
+        this.$store.commit('SETPASS', {key: k})
+      })
     }
   },
   computed: {
   },
   mounted () {
     const me = this
+    let nameList = JSON.parse(localStorage.getItem('nameList'))
+    if (!nameList) {
+      nameList = {}
+    }
+    const names = Object.keys(nameList)
     const t = new TypeAhead(
       document.getElementById('name'),
-      ['Amy', 'Joe', 'Sky', 'Gaia'],
+      names,
       {
         minLength: 1,
         onKeyDown: function (value) {
-          console.log(value)
-          me.$store.commit('SETUSER', {username: value})
+          if (value.length < 2) { return }
+          me.$store.commit('SETUSER', { username: value })
+          const recordKey = value + '_levels'
+          me.getRecords(recordKey)
+          nameList[value] = 1
+          localStorage.setItem('nameList', JSON.stringify(nameList))
           me.$router.replace('/main/')
         }
       })

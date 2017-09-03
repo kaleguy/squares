@@ -110,5 +110,15 @@ DIV.arrow
   background-color: #3F9BFA
   color: #FFFFFF
   text-decoration: none
-
+DIV.uname
+  font-weight: bold
+  font-size: 75px
+  color: #00F
+  font-family: "Avenir Next"
+  cursor: pointer
+  box-shadow: none
+  width: 100%
+  height: inherit
+  border: none
+  padding: 0
 </style>

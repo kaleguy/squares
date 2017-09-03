@@ -82,12 +82,6 @@ export default vm
   width: 140px
   height: 100px
   line-height: .7
-.uname
-  font-weight: bold
-  font-size: 75px
-  color: #00F
-  font-family: "Avenir Next"
-  cursor: pointer
 //  transform: rotate(90deg)
 //  transform-origin: left top 0
 //  font-weight: bold

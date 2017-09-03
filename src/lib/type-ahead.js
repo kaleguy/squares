@@ -92,10 +92,15 @@ TypeAhead.prototype.handleKeyUp = function (keyCode) {
  * @return {Boolean} Whether event should be captured or not
  */
 TypeAhead.prototype.handleKeyDown = function (keyCode) {
-  if (keyCode === 13 && !this.list.isEmpty()) {
-    this.value(this.list.items[this.list.active]);
+  if (keyCode === 13) {
+    if (!this.list.isEmpty()) {
+      this.value(this.list.items[this.list.active]);
+    } else {
+
+    }
+    const value = this.element.value
     this.list.hide();
-    this.onKeyDown(this.list.items[this.list.active]);
+    this.onKeyDown(value);
     return true;
   }
 

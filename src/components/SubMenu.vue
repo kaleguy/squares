@@ -7,7 +7,10 @@
     </div>
     <div
       @click="menu"
-      style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;">
+      class="uname">{{username}}</div>
+    <div
+      @click="menu"
+      style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;padding-top:0">
       <leftarrow style="margin-left:60px" width="200"></leftarrow>
     </div>
   </div>
@@ -70,6 +73,9 @@ const vm = {
     operator () {
       let op = this.$route.params.operator || '+'
       return op
+    },
+    username () {
+      return this.$store.state.username
     }
   },
   mounted () {
