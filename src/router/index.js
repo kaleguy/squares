@@ -5,6 +5,7 @@ import MainMenu from '@/components/MainMenu'
 import SubMenu from '@/components/SubMenu'
 import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
+import FactTable from '@/components/FactTable'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
     {
       path: '/card/:operator/:level',
       component: TestCard
+    },
+    {
+      path: '/facts/',
+      component: FactTable
     }
   ]
 })
