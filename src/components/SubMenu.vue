@@ -79,7 +79,9 @@ const vm = {
     }
   },
   mounted () {
-
+    if (!this.username) {
+      this.$router.replace('/')
+    }
   },
   updated () {
   }
