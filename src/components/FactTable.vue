@@ -1,21 +1,23 @@
 <template>
-  <div style="position:relative">
+  <div
+    style="position:relative"
+    @click="goto()">
     <div class="fheading">
-      <div class="numerand">?</div>
-      <div class="large-operator">{{operator}}</div>
-      <div class="numerand">1</div>
+      <div class="numerand1">?</div>
+      <div class="large-operator">{{visOperator}}</div>
+      <div class="numerand2">{{level}}</div>
       <div class="large-operator">=</div>
       <div class="product">?</div>
     </div>
   <div class="fact-table">
      <table align="center">
        <tr class="row">
-         <td class="operator">{{operator}}</td>
-         <td v-for="c in 9">{{c}}</td>
+         <td class="operator">{{visOperator2}}</td>
+         <td v-for="c in 9" v-bind:class="num1Class()">{{c}}</td>
        </tr>
        <tr v-for="r in 9">
-         <td class="col">{{r}}</td>
-         <td v-for="c in 9" v-bind:class="{active: isActive(r)}">{{product(r,c)}}</td>
+         <td class="col" v-bind:class="{activen: isActive(r)}">{{r}}</td>
+         <td v-for="c in 9" v-bind:class="num3Class(r)">{{product(r,c)}}</td>
        </tr>
      </table>
   </div>
@@ -29,6 +31,9 @@ const vm = {
   components: {
   },
   methods: {
+    goto: function () {
+      this.$router.replace('/card/' + this.operator + '/' + this.level)
+    },
     submit: function () {
       // console.log('foo')
     },
@@ -38,7 +43,18 @@ const vm = {
       alert(message)
     },
     product (a, b) {
-      return a + b
+      let op = this.operator
+      if (op === 'd') {
+        op = '*'
+      }
+      if (op === 'X') {
+        op = '*'
+      }
+      if (op === '-') {
+        op = '+'
+      }
+      console.log('OP', op)
+      return eval('a ' + op + ' b')// eslint-disable-line
     },
     isActive (i) {
       i = i + ''
@@ -46,6 +62,23 @@ const vm = {
         return true
       }
       return false
+    },
+    num1Class () {
+      if (this.operator === 'd') { return 'product' }
+      if (this.operator === '-') { return 'product' }
+      return 'numerand1'
+    },
+    num2Class () {
+      if (this.operator === 'd') { return 'numerand1' }
+      if (this.operator === '-') { return 'numerand1' }
+      return 'numerand2'
+    },
+    num3Class (r) {
+      r = r + ''
+      if (r !== this.level) { return }
+      if (this.operator === 'd') { return 'numerand1' }
+      if (this.operator === '-') { return 'numerand1' }
+      return 'product'
     }
   },
   computed: {
@@ -64,11 +97,21 @@ const vm = {
       }
       return this.operator
     },
+    visOperator2 () {
+      if (this.operator === 'X' || this.operator === 'd') {
+        return '\u00d7'
+      }
+      if (this.operator === '-') {
+        return '+'
+      }
+      return this.operator
+    },
     operator () {
-      return this.$route.params.operator || '+'
+      let op = this.$route.params.operator || '+'
+      return op
     },
     level () {
-      return this.$store.state.currentLevel.index || '1'
+      return this.$route.params.level || '1'
     }
   },
   mounted () {
@@ -84,6 +127,16 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+.numerand1
+  background: orange
+.activen
+  background: blue
+  color: #fff
+.product
+  background: green
+  color: #fff
+.numerand2
+  background: blue
 .active
   background: green
   font-weight: bold
@@ -100,14 +153,11 @@ export default vm
     width: 60px
     margin: 0
     display: inline-block
-  .numerand
-    background: blue
-  .product
-    background: green
   .large-operator
     color: #000
     width: 30px
 .fact-table
+  cursor: pointer
   width: 340px
   border: 1px solid #fff
   margin-top: 30px
@@ -118,6 +168,8 @@ export default vm
     padding: 6px
     border-right: 2px solid #333
     font-weight: bold
+    font-size: 2em
+    line-height: 1
   .col
     border-right: 2px solid #333
   .row
@@ -133,4 +185,5 @@ export default vm
       padding-bottom: 4px
       border-bottom: 1px solid #ccc
       border-right: 1px solid #ccc
+      width: 30px
 </style>

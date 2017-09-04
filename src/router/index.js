@@ -34,7 +34,7 @@ export default new Router({
       component: TestCard
     },
     {
-      path: '/facts/',
+      path: '/facts/:operator/:level',
       component: FactTable
     }
   ]
