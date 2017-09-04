@@ -1,7 +1,6 @@
 <template>
   <div style="margin-top:40px;">
-    <div class="squares bsquares"
-         @click="login()">
+    <div class="squares bsquares">
       <div class="title-button"
            style="margin-left:auto;margin-right:auto;cursor:pointer">squares</div>
     </div>
@@ -24,9 +23,6 @@ const vm = {
     }
   },
   methods: {
-    login: function () {
-      this.$router.replace('/main/')
-    },
     getRecords: function (key) {
       const records = JSON.parse(localStorage.getItem(key))
       if (!records) { return }
