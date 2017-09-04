@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style lang="sass">
-
 HTML, BODY
   margin: 0
   font-family: 'Avenir', Helvetica, Arial, sans-serif
@@ -64,7 +63,6 @@ DIV.arrow
   height: 1em /* or any other relative font sizes */
 .fa
   font-size: 70px
-
 .type-ahead-group
   position: relative
 .type-ahead-group > input
@@ -105,7 +103,6 @@ DIV.arrow
   line-height: 1.42857143
   padding: 3px 20px
   white-space: nowrap
-
 .type-ahead-group > ul > li.active > a, .type-ahead-group > ul > li > a:hover
   background-color: #3F9BFA
   color: #FFFFFF

@@ -12,7 +12,7 @@
   <div class="fact-table">
      <table align="center">
        <tr class="row">
-         <td class="operator">{{visOperator2}}</td>
+         <td class="toperator">{{visOperator2}}</td>
          <td v-for="c in 9" v-bind:class="num1Class()">{{c}}</td>
        </tr>
        <tr v-for="r in 9">
@@ -164,7 +164,7 @@ export default vm
   position: relative
   margin-left: auto
   margin-right: auto
-  .operator
+  .toperator
     padding: 6px
     border-right: 2px solid #333
     font-weight: bold
