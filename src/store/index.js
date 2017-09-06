@@ -2,25 +2,41 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 const levels = require('./levels.json')
+const shuffle = require('shuffle-array')
 
 Vue.use(Vuex)
 
-const deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+let deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+shuffle(deck)
+function shuffleUniq(last) {
+  shuffle(deck)
+  if (deck[0] === last) {
+    deck.shift()
+    deck.push(last)
+  }
+}
+
 
 function getDealer () {
-  let index = 0
+  let index = -1
   const dealer = function (reset) {
-    if ( reset ) { index = 0 }
+    if (reset) {
+      if (index === -1) {index = 0}
+      shuffleUniq(deck[index])
+      index = -1
+    }
     index = index + 1
-    if ( index > 9 ) {
+    if (index > 8) {
+      shuffleUniq(deck[8])
       index = 0
     }
+    console.log('calling dealer', index, deck[index])
     return deck[index]
   }
   return dealer
 }
 
-function deal1 = getDealer()
+const deal1 = getDealer()
 
 
 function getRandom (first, min, max) {
@@ -78,14 +94,17 @@ export default new Vuex.Store({
     SETTIME (state, o) {
       state.time = o.time
     },
-    RESETALL (state) {
+    RESETALL (state, o) {
       state.count = 0
       state.time = 0
-      state.num1 = getRandom()
+      state.num1 = deal1(true)
       state.num2 = getRandom()
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
+      if (!o) { return }
+      state.currentLevel.index = o.level
+      state.currentLevel.op = o.operator
     },
     SETPASS (state, o) {
       state.passedLevels[o.key] = 1

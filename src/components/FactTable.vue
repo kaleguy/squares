@@ -35,7 +35,6 @@ const vm = {
       this.$router.replace('/card/' + this.operator + '/' + this.level)
     },
     submit: function () {
-      // console.log('foo')
     },
     warn: function (message, event) {
       // now we have access to the native event
@@ -53,7 +52,6 @@ const vm = {
       if (op === '-') {
         op = '+'
       }
-      console.log('OP', op)
       return eval('a ' + op + ' b')// eslint-disable-line
     },
     isActive (i) {

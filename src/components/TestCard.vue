@@ -69,13 +69,11 @@ const vm = {
       return this.$store.state.currentLevel.op
     },
     num1 () {
-      console.log('Dd', this.op)
       let num = this.$store.state.num1
       if (this.op === '-') {
         num = this.$store.state.num1 + +this.num2
       }
       if (this.op === 'd') {
-        console.log('D', this.op)
         num = this.$store.state.num1 * this.num2
       }
       return num
@@ -111,7 +109,7 @@ const vm = {
   mounted () {
     const level = this.level
     const operator = this.operator
-    this.$store.commit('RESET', { operator, level })
+    this.$store.commit('RESETALL', { operator, level })
   },
   updated () {
   }
