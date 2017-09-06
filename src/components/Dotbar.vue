@@ -28,7 +28,7 @@ const vm = {
   },
   computed: {
     dots () {
-      const numDots = 14
+      const numDots = 18
       const dotArray = []
       for (let i = 0; i < numDots; i++) {
         dotArray[i] = 0
@@ -62,7 +62,7 @@ $color: green
   margin: 3px
   margin-bottom: 0
 .dotbar
-  width: 240px
+  width: 300px
   margin-top: 3px
   margin-bottom: 4px
   margin-left: auto

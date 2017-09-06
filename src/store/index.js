@@ -5,6 +5,24 @@ const levels = require('./levels.json')
 
 Vue.use(Vuex)
 
+const deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+function getDealer () {
+  let index = 0
+  const dealer = function (reset) {
+    if ( reset ) { index = 0 }
+    index = index + 1
+    if ( index > 9 ) {
+      index = 0
+    }
+    return deck[index]
+  }
+  return dealer
+}
+
+function deal1 = getDealer()
+
+
 function getRandom (first, min, max) {
   if (!min) { min = 1 }
   if (!max) { max = 9 }
@@ -38,7 +56,7 @@ export default new Vuex.Store({
   },
   mutations: {
     RESET (state, o) {
-      state.num1 = getRandom(state.num1)
+      state.num1 = deal1()
       state.num2 = getRandom(state.num2)
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)

@@ -22,9 +22,6 @@ const vm = {
   methods: {
   },
   computed: {
-    dots () {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    },
     count () {
       return this.$store.state.count
     }
@@ -50,7 +47,7 @@ const vm = {
     if (window.mytimer) {
       window.clearInterval(window.mytimer)
     }
-    window.mytimer = window.setInterval(tick, 250)
+    window.mytimer = window.setInterval(tick, 275)
   },
   updated () {
   }
