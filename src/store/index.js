@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 let deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 shuffle(deck)
-function shuffleUniq(last) {
+function shuffleUniq (last) {
   shuffle(deck)
   if (deck[0] === last) {
     deck.shift()
@@ -16,12 +16,11 @@ function shuffleUniq(last) {
   }
 }
 
-
 function getDealer () {
   let index = -1
   const dealer = function (reset) {
     if (reset) {
-      if (index === -1) {index = 0}
+      if (index === -1) { index = 0 }
       shuffleUniq(deck[index])
       index = -1
     }
