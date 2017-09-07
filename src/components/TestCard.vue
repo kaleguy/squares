@@ -2,6 +2,7 @@
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="margin: auto;">
       <dots></dots>
+      <timebar></timebar>
       <div v-if="op==='s'">
          <div class="smath">
            <div v-if="level==1">
@@ -24,7 +25,6 @@
           <div class="total">{{buffer}}</div>
         </div>
       </div>
-      <timebar></timebar>
       <numpad></numpad>
     </div>
   </div>

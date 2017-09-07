@@ -21,14 +21,19 @@
        </tr>
      </table>
   </div>
+    <div style="width:330px;border:1px solid green;margin-left:auto;margin-right: auto;margin-top:20px;">
+  <test-button></test-button>
+    </div>
   </div>
 </template>
 
 
 <script>
+import TestButton from './testButton'
 const vm = {
   name: 'facttable',
   components: {
+    'test-button': TestButton
   },
   methods: {
     goto: function () {
