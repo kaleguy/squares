@@ -9,31 +9,26 @@
       <div class="large-operator">=</div>
       <div class="product">?</div>
     </div>
-  <div class="fact-table">
-     <table align="center">
-       <tr class="row">
-         <td class="toperator">{{visOperator2}}</td>
-         <td v-for="c in 9" v-bind:class="num1Class()">{{c}}</td>
-       </tr>
-       <tr v-for="r in 9">
-         <td class="col" v-bind:class="{activen: isActive(r)}">{{r}}</td>
-         <td v-for="c in 9" v-bind:class="num3Class(r)">{{product(r,c)}}</td>
-       </tr>
-     </table>
-  </div>
-    <div style="width:330px;border:1px solid green;margin-left:auto;margin-right: auto;margin-top:20px;">
-  <test-button></test-button>
+    <div class="fact-table">
+       <table align="center">
+         <tr class="row">
+           <td class="toperator">{{visOperator2}}</td>
+           <td v-for="c in 9" v-bind:class="num1Class()">{{c}}</td>
+         </tr>
+         <tr v-for="r in 9">
+           <td class="col" v-bind:class="{activen: isActive(r)}">{{r}}</td>
+           <td v-for="c in 9" v-bind:class="num3Class(r)">{{product(r,c)}}</td>
+         </tr>
+       </table>
     </div>
   </div>
-</template>
+ </template>
 
 
 <script>
-import TestButton from './testButton'
 const vm = {
   name: 'facttable',
   components: {
-    'test-button': TestButton
   },
   methods: {
     goto: function () {
