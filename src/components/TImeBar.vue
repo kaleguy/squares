@@ -34,7 +34,7 @@ const vm = {
     const me = this
     function tick () {
       w = me.$store.state.time
-      if (w < 240) {
+      if (w < 285) {
         w = w + 1
         tb.style.width = w + 'px'
       } else {
@@ -47,7 +47,7 @@ const vm = {
     if (window.mytimer) {
       window.clearInterval(window.mytimer)
     }
-    window.mytimer = window.setInterval(tick, 275)
+    window.mytimer = window.setInterval(tick, 250)
   },
   updated () {
   }
@@ -60,8 +60,8 @@ export default vm
 
 <style lang="sass">
 .timebar
-  box-shadow: 1px 1px 3px #888888;
-  width: 240px
+  // box-shadow: 1px 1px 3px #888888;
+  width: 285px
   background: green
   height: 1em
   margin-left: auto

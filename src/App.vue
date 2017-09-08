@@ -35,7 +35,7 @@ HTML, BODY
     color: #fff
     cursor: default
   DIV
-    box-shadow: 2px 2px 5px #888888;
+    // box-shadow: 2px 2px 5px #888888;
     cursor: pointer
     font-size: 3.5em
     font-weight: normal

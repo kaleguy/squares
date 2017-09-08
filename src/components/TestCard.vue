@@ -3,6 +3,12 @@
     <div style="margin: auto;">
       <dots></dots>
       <timebar></timebar>
+      <div id="toggle" v-if="op!=='s'">
+        <toggle-button :value="true"
+                       :width="80"
+                       color="#008000"
+                       :height="40" :sync="true" />
+      </div>
       <div v-if="op==='s'">
          <div class="smath">
            <div v-if="level==1">
@@ -126,6 +132,15 @@ HTML, BODY
   width: 100%
   max-width: 100%
   height: 100%
+#toggle
+  margin-top: 70px
+  margin-left: -30px
+  -webkit-transform: rotate(90deg)
+  -moz-transform: rotate(90deg)
+  -o-transform: rotate(90deg)
+  -ms-transform: rotate(90deg)
+  transform: rotate(90deg)
+  float: left
 .smath
   max-width: 400px
   margin-left: auto
@@ -134,7 +149,7 @@ HTML, BODY
   margin-bottom: 8px
   padding-top: 30px
 .math
-  box-shadow: 2px 2px 5px #888888;
+  // box-shadow: 2px 2px 5px #888888;
   font-size: 3.5em
   font-family: verdana
   font-weight: bold

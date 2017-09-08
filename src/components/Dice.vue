@@ -88,24 +88,6 @@ export default vm
 <style lang="sass">
 $size: 1.4em
 $color: green
-.dot
-  box-shadow: 1px 1px 3px #888888;
-  width: $size
-  height: $size
-  border-radius: 4px
-  border: 2px solid $color
-  display: inline-block
-  margin: 3px
-  margin-bottom: 0
-.dotbar
-  width: 240px
-  margin-top: 3px
-  margin-bottom: 4px
-  margin-left: auto
-  margin-right: auto
-.ball
-  background: $color
-.dtable
 .dice
   width: 120px
   height: 120px

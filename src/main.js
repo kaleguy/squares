@@ -7,6 +7,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueSweetAlert from 'vue-sweetalert'
+import ToggleButton from 'vue-js-toggle-button'
+Vue.use(ToggleButton)
 Vue.use(Vuex)
 Vue.use(VueEvents)
 Vue.use(VueSweetAlert)

@@ -186,7 +186,7 @@
     border: 0px solid #ccc
     border-radius: 6px
     DIV
-      box-shadow: 1px 1px 3px #888888;
+      // box-shadow: 1px 1px 3px #888888;
       width: 1em
       //height: $button-size - 10
       border: 1px solid #000
