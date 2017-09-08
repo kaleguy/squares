@@ -134,7 +134,7 @@ HTML, BODY
   height: 100%
 #toggle
   margin-top: 70px
-  margin-left: -30px
+  margin-left: -20px
   -webkit-transform: rotate(90deg)
   -moz-transform: rotate(90deg)
   -o-transform: rotate(90deg)

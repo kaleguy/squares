@@ -47,7 +47,7 @@ const vm = {
     if (window.mytimer) {
       window.clearInterval(window.mytimer)
     }
-    window.mytimer = window.setInterval(tick, 250)
+    window.mytimer = window.setInterval(tick, 400)
   },
   updated () {
   }
