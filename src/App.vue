@@ -22,7 +22,7 @@ HTML, BODY
   height: 100%
   width: 100%
 .squares
-  width: 342px
+  width: 360px
   margin-left: auto
   margin-right: auto
   display: flex
@@ -38,26 +38,15 @@ HTML, BODY
     // box-shadow: 2px 2px 5px #888888;
     cursor: pointer
     font-size: 3.5em
-    font-weight: normal
     padding-top: 26px
     line-height: 1em
     width: 100px
-    border: 1px solid #ccc
+    border: 3px solid #333
     border-radius: 10px
     height: 80px
     margin: 6px
   DIV.review-button
     width: 330px
-DIV.arrow
-  margin-top: 0
-  font-size: 80px
-  color: #00f
-  cursor: pointer
-  border: none
-  margin-left: auto
-  margin-right: auto
-  box-shadow: none
-  font-weight: normal
 .fa-icon
   width: auto
   height: 1em /* or any other relative font sizes */

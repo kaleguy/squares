@@ -74,17 +74,8 @@ export default vm
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
 .bsquares, .csquares
-  font-size: 32px
-  width: 310px
   DIV
     font-weight: bold
-.bsquares DIV
-  width: 140px
-  height: 120px
-.csquares DIV
-  width: 140px
-  height: 100px
-  line-height: .7
 //  transform: rotate(90deg)
 //  transform-origin: left top 0
 //  font-weight: bold

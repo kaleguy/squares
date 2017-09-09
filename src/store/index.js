@@ -67,7 +67,8 @@ export default new Vuex.Store({
     buffer: '',
     count: 0,
     time: 0,
-    username: ''
+    username: '',
+    mode: 't' // t for test or p for practice
   },
   mutations: {
     RESET (state, o) {
@@ -92,6 +93,9 @@ export default new Vuex.Store({
     },
     SETTIME (state, o) {
       state.time = o.time
+    },
+    SETMODE (state, o) {
+      state.mode = o.mode
     },
     RESETALL (state, o) {
       state.count = 0

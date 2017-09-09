@@ -1,12 +1,18 @@
 <template>
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="margin: auto;">
-      <dots></dots>
-      <timebar></timebar>
+      <answergrid v-if="mode==='p'"></answergrid>
+      <div
+        style="width:340px"
+        v-if="mode==='t'">
+        <dots></dots>
+        <timebar></timebar>
+      </div>
       <div id="toggle" v-if="op!=='s'">
         <toggle-button :value="true"
                        :width="80"
                        color="#008000"
+                       @change="switchMode"
                        :height="40" :sync="true" />
       </div>
       <div v-if="op==='s'">
@@ -42,6 +48,7 @@ import DotBar from './Dotbar'
 import NumPad from './NumPad'
 import TimeBar from './TimeBar'
 import Dice from './Dice'
+import AnswerGrid from './AnswerGrid'
 const keyBus = {
   key: ''
 }
@@ -54,7 +61,8 @@ const vm = {
     numpad: NumPad,
     dots: DotBar,
     timebar: TimeBar,
-    dice: Dice
+    dice: Dice,
+    answergrid: AnswerGrid
   },
   data () {
     return {
@@ -68,9 +76,18 @@ const vm = {
       // now we have access to the native event
       if (event) event.preventDefault()
       alert(message)
+    },
+    switchMode: function (v) {
+      let mode = 'p'
+      if (v.value) { mode = 't' }
+      console.log('MODE', mode, v)
+      this.$store.commit('SETMODE', { mode })
     }
   },
   computed: {
+    mode () {
+      return this.$store.state.mode || 't'
+    },
     op () {
       return this.$store.state.currentLevel.op
     },

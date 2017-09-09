@@ -70,7 +70,8 @@ export default vm
 <style lang="sass">
 .bsquares, .csquares
   font-size: 32px
-  width: 310px
+  font-weight: bold
+  width: 360px
 .bsquares DIV
   width: 140px
   height: 120px

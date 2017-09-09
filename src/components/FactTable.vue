@@ -24,7 +24,6 @@
   </div>
  </template>
 
-
 <script>
 const vm = {
   name: 'facttable',
@@ -147,9 +146,11 @@ export default vm
   width: 300px
   margin-left: auto
   margin-right: auto
+  padding-left: 24px
   DIV
     width: 60px
     margin: 0
+    border-radius: 6px
     display: inline-block
   .large-operator
     color: #000
@@ -175,7 +176,7 @@ export default vm
   TABLE
     width: 100%
     border-collapse: collapse
-    margin-left: -10px
+    // margin-left: -10px
     TD
       font-size: 20px
       font-weight: bold

@@ -206,7 +206,6 @@
       display: block
     .back
       width: 64px
-      font-weight: normal
       height: 57px
       color: #00f
       font-size: 40px
