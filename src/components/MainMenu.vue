@@ -62,6 +62,7 @@ const vm = {
     if (!this.username) {
       this.$router.replace('/')
     }
+    window.scrollTo(0, 0)
   },
   updated () {
   }

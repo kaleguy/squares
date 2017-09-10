@@ -1,9 +1,9 @@
 <template>
   <div style="display: flex; flex-direction: column; height: 100%;">
-    <div style="margin: auto;">
+    <div style="margin: auto;width:400px">
       <answergrid v-if="mode==='p'"></answergrid>
       <div
-        style="width:340px"
+        style="width:340px; margin-left:auto; margin-right: auto; margin-top:6px"
         v-if="mode==='t'">
         <dots></dots>
         <timebar></timebar>
@@ -31,7 +31,7 @@
          </div>
       </div>
       <div v-else>
-        <div class="math">
+        <div class="math" v-bind:class="errorStateClass">
           <div>{{num1}}</div>
           <div>{{visOperator}} {{num2}}</div>
           <div class="total">{{buffer}}</div>
@@ -85,6 +85,12 @@ const vm = {
     }
   },
   computed: {
+    errorStateClass () {
+      const errorState = this.$store.state.errorState
+      let c = ''
+      if (errorState) { c = 'error' }
+      return c
+    },
     mode () {
       return this.$store.state.mode || 't'
     },
@@ -151,7 +157,7 @@ HTML, BODY
   height: 100%
 #toggle
   margin-top: 70px
-  margin-left: -20px
+  margin-left: 20px
   -webkit-transform: rotate(90deg)
   -moz-transform: rotate(90deg)
   -o-transform: rotate(90deg)
@@ -196,5 +202,6 @@ DIV.dtable
   display: inline-block
   height: 122px
   width: 122px
-
+.error
+  color: red
 </style>

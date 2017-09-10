@@ -42,6 +42,7 @@ const vm = {
       let op = this.operator
       if (op === '-') { op = '+' }
       if (op === 'd') { op = '/' }
+      if (op === 'X') { op = '*' }
       let total = 0
       let level = this.level
       this.list.forEach((n) => {
@@ -91,6 +92,11 @@ export default vm
 </script>
 <style lang="sass">
 .answergrid
-  margin-top: 10px
-  margin-bottom: 18px
+  margin-top: 20px
+  margin-bottom: 14px
+  TABLE
+    border: none
+    TD
+      border: none
+      border-right: 1px solid #fff
 </style>

@@ -176,6 +176,7 @@ export default vm
   TABLE
     width: 100%
     border-collapse: collapse
+    border: 1px solid #ccc
     // margin-left: -10px
     TD
       font-size: 20px

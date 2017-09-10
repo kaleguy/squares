@@ -68,10 +68,12 @@ export default new Vuex.Store({
     count: 0,
     time: 0,
     username: '',
-    mode: 't' // t for test or p for practice
+    mode: 't', // t for test or p for practice
+    errorState: false
   },
   mutations: {
     RESET (state, o) {
+      state.errorState = false
       state.num1 = deal1()
       state.num2 = getRandom(state.num2)
       state.dice1 = getRandom(state.dice1, 1, 5)
@@ -80,10 +82,24 @@ export default new Vuex.Store({
       if (!o) { return }
       state.currentLevel.index = o.level
       state.currentLevel.op = o.operator
+      state.errorState = false
+    },
+    // user gave wrong answer
+    SETERRORSTATE (state) {
+      state.errorState = true
+    },
+    CLEARERRORSTATE (state) {
+      state.errorState = false
+      state.buffer = ''
     },
     ADDTOBUFFER (state, o) {
       state.buffer = '' + state.buffer + o.num
       if (state.buffer.length > 2) { state.buffer = state.buffer.substring(1) }
+    },
+    POPBUFFER (state) {
+      if (state.buffer.length > 1) {
+        state.buffer = ''
+      }
     },
     CLEARBUFFER (state) {
       state.buffer = ''
@@ -98,6 +114,7 @@ export default new Vuex.Store({
       state.mode = o.mode
     },
     RESETALL (state, o) {
+      state.errorState = false
       state.count = 0
       state.time = 0
       state.num1 = deal1(true)
@@ -105,6 +122,7 @@ export default new Vuex.Store({
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
+      state.mode = 't'
       if (!o) { return }
       state.currentLevel.index = o.level
       state.currentLevel.op = o.operator

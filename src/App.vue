@@ -34,6 +34,7 @@ HTML, BODY
     background: #33f
     color: #fff
     cursor: default
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   DIV
     // box-shadow: 2px 2px 5px #888888;
     cursor: pointer
@@ -107,4 +108,5 @@ DIV.uname
   height: inherit
   border: none
   padding: 0
+  // text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 </style>

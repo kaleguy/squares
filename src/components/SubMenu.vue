@@ -107,5 +107,6 @@ export default vm
   padding: 0
   font-weight: bold
 .passed
+  color: #fff
   background: green
 </style>

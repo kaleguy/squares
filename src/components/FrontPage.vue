@@ -1,12 +1,16 @@
 <template>
-  <div style="margin-top:40px;">
+  <div style="margin-top:120px;">
     <div class="squares bsquares">
       <div class="title-button"
            style="margin-left:auto;margin-right:auto;cursor:pointer">squares</div>
     </div>
-    <div style="width:260px;margin-left:auto;margin-right:auto;margin-top:20px">
+    <div style="width:278px; margin-left:auto;margin-right:auto;margin-top:20px">
     <div class="type-ahead-group">
-      <input id="name" type="text" autocomplete="off" placeholder="Enter your name">
+      <input id="name"
+             type="text"
+             autocomplete="off"
+             size="16"
+             placeholder="Enter your name">
     </div>
     </div>
   </div>
@@ -27,7 +31,6 @@ const vm = {
       const records = JSON.parse(localStorage.getItem(key))
       if (!records) { return }
       Object.keys(records).forEach(k => {
-        console.log(k)
         this.$store.commit('SETPASS', {key: k})
       })
     }
@@ -71,7 +74,7 @@ export default vm
 .bsquares, .csquares
   font-size: 32px
   font-weight: bold
-  width: 360px
+  width: 316px
 .bsquares DIV
   width: 140px
   height: 120px

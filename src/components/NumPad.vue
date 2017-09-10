@@ -40,18 +40,16 @@
     },
     props: {},
     data () {
-      return {}
+      return {
+
+      }
     },
     methods: {
       recordPass: function (levelKey, time) {
-        if (!time) {
-          time = 30
-        }
+        if (!time) { time = 30 }
         const recordKey = this.username + '_levels'
         let record = JSON.parse(localStorage.getItem(recordKey))
-        if (!record) {
-          record = {}
-        }
+        if (!record) { record = {} }
         let levelRecord = record[levelKey]
         if (!levelRecord) {
           levelRecord = {}
@@ -69,6 +67,10 @@
         const num = e.target.innerText
         if (typeof num === 'undefined') {
           return this.$store.commit('CLEARBUFFER')
+        }
+        if (this.$store.state.errorState) {
+          console.log('ERR')
+          this.$store.commit('POPBUFFER')
         }
         this.$store.commit('ADDTOBUFFER', {num})
         return this.checkTotal()
@@ -120,9 +122,13 @@
         }
         if (+total === +buffer) {
           this.$store.commit('INCCOUNT')
+          if (this.errorState) {
+            this.$store.commit('RESETALL')
+          }
           this.$store.commit('RESET')
           const count = this.$store.state.count
           console.log('COUNT', count)
+          if (this.mode === 'p') { return }
           if (+count === 18) {
             const levelKey = this.op + level.index
             this.$store.commit('SETPASS', {key: levelKey})
@@ -134,8 +140,7 @@
             console.log(count)
           }
         } else {
-          this.$store.commit('CLEARBUFFER')
-          this.$store.commit('RESETALL')
+          this.$store.commit('SETERRORSTATE')
           console.log(total, num1, num2, 'NG')
         }
       }
@@ -146,11 +151,17 @@
       }
     },
     computed: {
+      mode () {
+        return this.$store.state.mode || 't'
+      },
       op () {
         return this.$store.state.currentLevel.op
       },
       username () {
         return this.$store.state.username
+      },
+      errorState () {
+        return this.$store.state.errorState
       }
     }
   }
@@ -189,7 +200,7 @@
       // box-shadow: 1px 1px 3px #888888;
       width: 1em
       //height: $button-size - 10
-      border: 1px solid #000
+      border: 2px solid #000
       border-radius: 10px
       margin: 2px
       padding: 8px
