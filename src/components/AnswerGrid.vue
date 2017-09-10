@@ -92,7 +92,7 @@ export default vm
 </script>
 <style lang="sass">
 .answergrid
-  margin-top: 20px
+  margin-top: 17px
   margin-bottom: 14px
   TABLE
     border: none

@@ -69,8 +69,8 @@
           return this.$store.commit('CLEARBUFFER')
         }
         if (this.$store.state.errorState) {
-          console.log('ERR')
-          this.$store.commit('POPBUFFER')
+          // console.log('ERR')
+          this.$store.commit('CLEARERRORSTATE')
         }
         this.$store.commit('ADDTOBUFFER', {num})
         return this.checkTotal()

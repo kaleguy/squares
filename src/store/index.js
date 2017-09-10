@@ -87,6 +87,8 @@ export default new Vuex.Store({
     // user gave wrong answer
     SETERRORSTATE (state) {
       state.errorState = true
+      state.count = 0
+      state.time = 0
     },
     CLEARERRORSTATE (state) {
       state.errorState = false
@@ -99,7 +101,9 @@ export default new Vuex.Store({
     POPBUFFER (state) {
       if (state.buffer.length > 1) {
         state.buffer = ''
+        return
       }
+      state.buffer = state.buffer.substring(1)
     },
     CLEARBUFFER (state) {
       state.buffer = ''
