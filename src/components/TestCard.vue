@@ -1,34 +1,36 @@
 <template>
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="margin: auto;width:400px">
-      <answergrid v-if="mode==='p'"></answergrid>
-      <div
-        style="width:340px; margin-left:auto; margin-right: auto; margin-top:6px"
-        v-if="mode==='t'">
-        <dots></dots>
-        <timebar></timebar>
+      <div class="square-holder">
+        <answergrid v-if="mode==='p'"></answergrid>
+        <div
+          style="width:340px; margin-left:auto; margin-right: auto; margin-top:6px"
+          v-if="mode==='t'">
+          <dots></dots>
+          <timebar></timebar>
+        </div>
       </div>
       <div id="toggle" v-if="op!=='s'">
         <toggle-button :value="true"
                        :width="80"
                        color="#008000"
                        @change="switchMode"
-                       :height="40" :sync="true" />
+                       :height="40" :sync="true"/>
       </div>
       <div v-if="op==='s'">
-         <div class="smath">
-           <div v-if="level==1">
-             <dice></dice>
-           </div>
-           <div v-if="level==2">
-             <dice v-bind:count="5"></dice>
-             <dice></dice>
-           </div>
-           <div v-if="level==3">
-             <dice></dice>
-             <dice v-bind:count="dice2"></dice>
-           </div>
-         </div>
+        <div class="smath">
+          <div v-if="level==1">
+            <dice></dice>
+          </div>
+          <div v-if="level==2">
+            <dice v-bind:count="5"></dice>
+            <dice></dice>
+          </div>
+          <div v-if="level==3">
+            <dice></dice>
+            <dice v-bind:count="dice2"></dice>
+          </div>
+        </div>
       </div>
       <div v-else>
         <div class="math" v-bind:class="errorStateClass">
@@ -204,4 +206,7 @@ DIV.dtable
   width: 122px
 .error
   color: red
+.square-holder
+  height: 106px
+  border: 1px solid #fff
 </style>

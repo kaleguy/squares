@@ -27,6 +27,7 @@ const vm = {
     }
   },
   mounted () {
+    if (this.$store.mode === 'p') { return }
     const tb = document.getElementById('timebarFill')
     tb.style.width = 0
     this.$store.commit('RESETALL')
