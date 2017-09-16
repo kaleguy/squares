@@ -1,0 +1,142 @@
+<template>
+  <div>
+    <div id="toggle">
+      <toggle-button :value="true"
+                     :width="80"
+                     :color="{checked: 'orange', unchecked: 'blue'}"
+                     @change="switchMode"
+                     :height="40"
+                     :sync="true"/>
+    </div>
+    <factrowplus
+      v-if="flip"
+      class="factrow"
+      v-for="item, index in list" :key="item.id"
+      bind-id="$index"
+      bind-data="item"
+      :num1="index" :num2="level"></factrowplus>
+    <factrowplus
+      v-if="!flip"
+      class="factrow"
+      v-for="item, index in list" :key="item.id"
+      bind-id="$index"
+      bind-data="item"
+      :num1="level - 1" :num2="index + 1"></factrowplus>  </div>
+ </template>
+
+<script>
+import FactRowPlus from './FactRowPlus'
+const vm = {
+  name: 'facttableplus',
+  components: {
+    factrowplus: FactRowPlus
+  },
+  data () {
+    return {
+      flip: false,
+      list2: [ 1, 2, 3, 5, 6, 7 ],
+      list: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    }
+  },
+  methods: {
+    switchMode: function (v) {
+      console.log(v)
+      this.flip = Boolean(!v.value)
+    },
+    goto: function () {
+      this.$router.replace('/card/' + this.operator + '/' + this.level)
+    },
+    submit: function () {
+    },
+    warn: function (message, event) {
+      // now we have access to the native event
+      if (event) event.preventDefault()
+      alert(message)
+    },
+    product (a, b) {
+      let op = this.operator
+      if (op === 'd') {
+        op = '*'
+      }
+      if (op === 'X') {
+        op = '*'
+      }
+      if (op === '-') {
+        op = '+'
+      }
+      return eval('a ' + op + ' b')// eslint-disable-line
+    },
+    isActive (i) {
+      i = i + ''
+      if (i === this.level) {
+        return true
+      }
+      return false
+    },
+    num1Class () {
+      if (this.operator === 'd') { return 'product' }
+      if (this.operator === '-') { return 'product' }
+      return 'numerand1'
+    },
+    num2Class () {
+      if (this.operator === 'd') { return 'numerand1' }
+      if (this.operator === '-') { return 'numerand1' }
+      return 'numerand2'
+    },
+    num3Class (r) {
+      r = r + ''
+      if (r !== this.level) { return }
+      if (this.operator === 'd') { return 'numerand1' }
+      if (this.operator === '-') { return 'numerand1' }
+      return 'product'
+    }
+  },
+  computed: {
+    count () {
+      return 10
+    },
+    visOperator () {
+      if (this.operator === 'd') {
+        return '\u00f7'
+      }
+      if (this.operator === 'X') {
+        return '\u00d7'
+      }
+      if (this.operator === '-') {
+        return '\u2212'
+      }
+      return this.operator
+    },
+    visOperator2 () {
+      if (this.operator === 'X' || this.operator === 'd') {
+        return '\u00d7'
+      }
+      if (this.operator === '-') {
+        return '+'
+      }
+      return this.operator
+    },
+    operator () {
+      let op = this.$route.params.operator || '+'
+      return op
+    },
+    level () {
+      return this.$route.params.level / 1 || 1
+    }
+  },
+  mounted () {
+  },
+  updated () {
+  }
+
+}
+
+export default vm
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="sass">
+.factrow
+  margin-bottom: 12px
+</style>
