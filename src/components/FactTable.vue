@@ -1,4 +1,6 @@
 <template>
+  <div style="display:flex;height:100%;">
+    <div style="align-items:center;margin:auto">
   <div
     style="position:relative"
     @click="goto()">
@@ -12,7 +14,7 @@
     <div class="fact-table">
        <table align="center">
          <tr class="row">
-           <td class="toperator">{{visOperator2}}</td>
+           <td class="toperator"></td>
            <td v-for="c in 9" v-bind:class="num1Class()">{{c}}</td>
          </tr>
          <tr v-for="r in 9">
@@ -20,6 +22,8 @@
            <td v-for="c in 9" v-bind:class="num3Class(r)">{{product(r,c)}}</td>
          </tr>
        </table>
+    </div>
+  </div>
     </div>
   </div>
  </template>
@@ -150,7 +154,6 @@ export default vm
   font-size: 40px
   font-weight: bold
   color: #fff
-  margin-top: 40px
   width: 300px
   margin-left: auto
   margin-right: auto
@@ -179,6 +182,7 @@ export default vm
     line-height: 1
   .col
     border-right: 1px solid #fff
+    color: #fff
   .row
     // border-bottom: 2px solid #333
   TABLE

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="display:flex;height:100%;">
+    <div style="align-items:center;margin:auto">
     <table style="margin-bottom:10px;margin-top:8px" align="center"><tr><td>
     <span class="ftitle">+{{level}}</span>
     </td><td>
@@ -31,6 +32,7 @@
         :num1="level - 1" :num2="index + 1"></factrowplus>
       </div>
     </div>
+  </div>
  </template>
 
 <script>

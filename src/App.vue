@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="height:100%;">
     <router-view></router-view>
   </div>
 </template>
@@ -21,6 +21,8 @@ HTML, BODY
   height: 100%
   height: 100%
   width: 100%
+#app
+  height: 100%
 .squares
   width: 360px
   margin-left: auto

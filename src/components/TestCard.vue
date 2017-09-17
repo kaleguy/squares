@@ -13,7 +13,7 @@
       <div id="toggleh" v-if="op!=='s'">
         <toggle-button :value="true"
                        :width="80"
-                       color="#008000"
+                       :color="{checked: 'blue', unchecked: 'orange'}"
                        @change="switchMode"
                        :height="40" :sync="true"/>
       </div>
@@ -33,6 +33,9 @@
         </div>
       </div>
       <div v-else>
+        <div
+          @click="goto(level)"
+          class="question-button">?</div>
         <div class="math" v-bind:class="errorStateClass">
           <div>{{num1}}</div>
           <div>{{visOperator}} {{num2}}</div>
@@ -84,6 +87,9 @@ const vm = {
       if (v.value) { mode = 't' }
       console.log('MODE', mode, v)
       this.$store.commit('SETMODE', { mode })
+    },
+    goto: function () {
+      this.$router.replace('/facts/' + this.operator + '/' + this.level)
     }
   },
   computed: {
@@ -158,7 +164,7 @@ HTML, BODY
   max-width: 100%
   height: 100%
 #toggleh
-  margin-top: 70px
+  margin-top: 40px
   margin-left: 20px
   -webkit-transform: rotate(90deg)
   -moz-transform: rotate(90deg)
@@ -209,4 +215,17 @@ DIV.dtable
 .square-holder
   height: 106px
   border: 1px solid #fff
+.question-button
+  width: 47px
+  background: blue
+  color: #fff
+  font-family: Avenir "Avenir Next"
+  font-size: 37px
+  height: 47px
+  font-weight: bold
+  cursor: pointer
+  border-radius: 32px
+  margin-top: 115px
+  position: absolute
+  margin-left: 36px
 </style>

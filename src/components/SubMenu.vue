@@ -1,5 +1,8 @@
 <template>
-  <div class="squares" style="margin-top:40px;">
+  <div style="display:flex;height:100%;">
+    <div style="align-items:center;margin:auto">
+      <div style="height:500px">
+  <div class="squares">
     <div v-for="level in levels"
          v-bind:class="passed(level)"
          @click="goto(level)">
@@ -13,6 +16,9 @@
       style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;padding-top:0">
       <leftarrow style="margin-left:60px" width="200"></leftarrow>
     </div>
+  </div>
+    </div>
+  </div>
   </div>
 </template>
 

@@ -1,7 +1,9 @@
 <template>
+  <div style="display:flex;height:100%;">
+    <div style="align-items:center;margin:auto">
   <div class="xtable"
        @click="goto()"
-       style="cursor:pointer">
+       style="cursor:pointer;margin-top:-70px">
     <div class="xtitle">
       &#x00d7; {{level}}
     </div>
@@ -12,6 +14,8 @@
          v-bind:class="num1Class(item)"
          :num1="index"
          :num2="level">{{item}}</div>
+  </div>
+    </div>
   </div>
  </template>
 

@@ -1,5 +1,6 @@
 <template>
-  <div style="margin-top:120px;">
+  <div style="display:flex;height:100%;">
+    <div style="align-items:center;margin:auto">
     <div class="squares bsquares">
       <div class="title-button"
            style="margin-left:auto;margin-right:auto;cursor:pointer">squares</div>
@@ -11,6 +12,7 @@
              autocomplete="off"
              size="16"
              placeholder="Enter your name">
+    </div>
     </div>
     </div>
   </div>

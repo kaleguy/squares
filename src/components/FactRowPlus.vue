@@ -187,7 +187,6 @@ export default vm
   margin-right: auto
   .toperator
     padding: 6px
-    border-right: 2px solid #333
     font-weight: bold
     font-size: 2em
     line-height: 1
