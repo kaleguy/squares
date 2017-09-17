@@ -41,7 +41,7 @@ const vm = {
       this.$router.replace('/main/')
     },
     goto: function (level) {
-      this.$router.replace('/facts/' + this.operator + '/' + level)
+      this.$router.replace('/card/' + this.operator + '/' + level)
     },
     passed (level) {
       let cssClass = ''

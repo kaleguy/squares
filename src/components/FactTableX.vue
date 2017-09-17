@@ -129,6 +129,7 @@ export default vm
   line-height: 34px
   border-left: 1px solid #fff
   border-bottom: 1px solid #fff
+  font-weight: bold
 .numerand0
   color: #ffffff
   background: #000

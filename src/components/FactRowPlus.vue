@@ -191,12 +191,13 @@ export default vm
     font-size: 2em
     line-height: 1
 .cell
-  width: 28px
-  height: 28px
+  width: 24px
+  height: 24px
   display: inline-block
-  line-height: 28px
+  line-height: 24px
   border-left: 1px solid #fff
   border-bottom: 1px solid #fff
+  font-weight: bold
 .factr
   width: 524px
   margin-left: auto
