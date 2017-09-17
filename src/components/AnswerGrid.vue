@@ -2,7 +2,7 @@
 <div class="fact-table answergrid">
   <table>
     <tr>
-      <td>{{visOperator2}}</td>
+      <td class="vis-operator">{{visOperator2}}</td>
       <td
           class="numerand1"
           v-for="item in list"
@@ -99,4 +99,9 @@ export default vm
     TD
       border: none
       border-right: 1px solid #fff
+      border-bottom: 1px solid #fff
+    TD.vis-operator
+      font-weight: bold
+      font-size: 30px
+      line-height: 10px
 </style>

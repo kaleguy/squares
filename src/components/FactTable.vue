@@ -31,7 +31,12 @@ const vm = {
   },
   methods: {
     goto: function () {
-      this.$router.replace('/card/' + this.operator + '/' + this.level)
+      const op = this.operator
+      let target = '/factlist/' + op + '/' + this.level
+      if (op === 'X' || op === 'd') {
+        target = '/factlistX/' + op + '/' + this.level
+      }
+      this.$router.replace(target)
     },
     submit: function () {
     },
@@ -72,7 +77,7 @@ const vm = {
     },
     num3Class (r) {
       r = r + ''
-      if (r !== this.level) { return }
+      if (r !== this.level) { return 'numerand0' }
       if (this.operator === 'd') { return 'numerand1' }
       if (this.operator === '-') { return 'numerand1' }
       return 'product'
@@ -124,6 +129,9 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+.numerand0
+  background: #000
+  color: #fff
 .numerand1
   background: orange
 .activen
@@ -165,25 +173,25 @@ export default vm
   margin-right: auto
   .toperator
     padding: 6px
-    border-right: 2px solid #333
+    border-right: 2px solid #fff
     font-weight: bold
     font-size: 2em
     line-height: 1
   .col
-    border-right: 2px solid #333
+    border-right: 1px solid #fff
   .row
-    border-bottom: 2px solid #333
+    // border-bottom: 2px solid #333
   TABLE
     width: 100%
     border-collapse: collapse
-    border: 1px solid #ccc
+    border: 1px solid #fff
     // margin-left: -10px
     TD
       font-size: 20px
       font-weight: bold
       padding-top: 4px
       padding-bottom: 4px
-      border-bottom: 1px solid #ccc
-      border-right: 1px solid #ccc
+      border-bottom: 1px solid #fff
+      border-right: 1px solid #fff
       width: 30px
 </style>

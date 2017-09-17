@@ -7,6 +7,7 @@ import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
 import FactTable from '@/components/FactTable'
 import FactTablePlus from '@/components/FactTablePlus'
+import FactTableX from '@/components/FactTableX'
 
 Vue.use(Router)
 
@@ -41,6 +42,10 @@ export default new Router({
     {
       path: '/factlist/:operator/:level',
       component: FactTablePlus
+    },
+    {
+      path: '/factlistX/:operator/:level',
+      component: FactTableX
     }
   ]
 })

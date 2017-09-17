@@ -68,12 +68,12 @@ const vm = {
       return false
     },
     num1Class (i) {
-      if (this.blank) { return 'numerand0' }
+      if (this.blank) { return 'numerand00' }
       if (i <= this.num1 + 1) { return 'numerand1' }
       if (i - 1 > this.num1 && i <= (this.num1 + this.num2) + 1) {
         return 'numerand2'
       }
-      return 'numerand0'
+      return 'numerand00'
     },
     cnum (i) {
       if (this.blank) { return i }
@@ -88,7 +88,9 @@ const vm = {
       return _.range(1, 10)
     },
     list2 () {
-      return _.range(1, 19)
+      const max = 9 + this.level / 1 + 1
+      console.log('MAX', max)
+      return _.range(1, max)
     },
     count () {
       return 10
@@ -151,9 +153,9 @@ export default vm
 .numerandb
   background: green
   color: #ffffff
-.numerand0
+.numerand00
   background: #fff
-  color: #ffffff
+  color: #fff
 .active
   background: green
   font-weight: bold
@@ -177,7 +179,7 @@ export default vm
     width: 30px
 .fact-table
   cursor: pointer
-  width: 1340px
+  // width: 1340px
   border: 1px solid #fff
   margin-top: 30px
   position: relative

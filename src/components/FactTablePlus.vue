@@ -1,5 +1,8 @@
 <template>
   <div>
+    <table style="margin-bottom:10px;margin-top:8px" align="center"><tr><td>
+    <span class="ftitle">+{{level}}</span>
+    </td><td>
     <div id="toggle">
       <toggle-button :value="true"
                      :width="80"
@@ -8,20 +11,26 @@
                      :height="40"
                      :sync="true"/>
     </div>
-    <factrowplus
-      v-if="flip"
-      class="factrow"
-      v-for="item, index in list" :key="item.id"
-      bind-id="$index"
-      bind-data="item"
-      :num1="index" :num2="level"></factrowplus>
-    <factrowplus
-      v-if="!flip"
-      class="factrow"
-      v-for="item, index in list" :key="item.id"
-      bind-id="$index"
-      bind-data="item"
-      :num1="level - 1" :num2="index + 1"></factrowplus>  </div>
+    </td></tr></table>
+    <div
+      @click="goto()"
+      style="cursor:pointer">
+      <factrowplus
+        v-if="flip"
+        class="factrow"
+        v-for="item, index in list" :key="item.id"
+        bind-id="$index"
+        bind-data="item"
+        :num1="index" :num2="level"></factrowplus>
+      <factrowplus
+        v-if="!flip"
+        class="factrow"
+        v-for="item, index in list" :key="item.id"
+        bind-id="$index"
+        bind-data="item"
+        :num1="level - 1" :num2="index + 1"></factrowplus>
+      </div>
+    </div>
  </template>
 
 <script>
@@ -95,30 +104,9 @@ const vm = {
     count () {
       return 10
     },
-    visOperator () {
-      if (this.operator === 'd') {
-        return '\u00f7'
-      }
-      if (this.operator === 'X') {
-        return '\u00d7'
-      }
-      if (this.operator === '-') {
-        return '\u2212'
-      }
-      return this.operator
-    },
-    visOperator2 () {
-      if (this.operator === 'X' || this.operator === 'd') {
-        return '\u00d7'
-      }
-      if (this.operator === '-') {
-        return '+'
-      }
-      return this.operator
-    },
     operator () {
-      let op = this.$route.params.operator || '+'
-      return op
+      // let op = this.$route.params.operator || '+'
+      return '+'
     },
     level () {
       return this.$route.params.level / 1 || 1
@@ -139,4 +127,15 @@ export default vm
 <style lang="sass">
 .factrow
   margin-bottom: 12px
+.ftitle
+  display: inline-block
+  font-family: "Avenir Next"
+  font-weight: bold
+  font-size: 60px
+  line-height: 60px
+#toggle
+  width: 100px
+  margin-bottom: 12px
+  display: inline-block
+  margin-top: 8px
 </style>

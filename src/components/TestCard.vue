@@ -10,7 +10,7 @@
           <timebar></timebar>
         </div>
       </div>
-      <div id="toggle" v-if="op!=='s'">
+      <div id="toggleh" v-if="op!=='s'">
         <toggle-button :value="true"
                        :width="80"
                        color="#008000"
@@ -157,7 +157,7 @@ HTML, BODY
   width: 100%
   max-width: 100%
   height: 100%
-#toggle
+#toggleh
   margin-top: 70px
   margin-left: 20px
   -webkit-transform: rotate(90deg)
