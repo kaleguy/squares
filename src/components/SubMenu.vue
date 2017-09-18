@@ -1,7 +1,7 @@
 <template>
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
-      <div style="height:500px">
+      <div style="height:550px">
   <div class="squares">
     <div v-for="level in levels"
          v-bind:class="passed(level)"

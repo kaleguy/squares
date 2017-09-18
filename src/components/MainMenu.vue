@@ -1,5 +1,7 @@
 <template>
-  <div style="margin-top:40px;">
+    <div style="display:flex;height:100%;">
+      <div style="align-items:center;margin:auto">
+
     <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
       <div class="title-button">squares</div>
       <div class="title-button"
@@ -27,6 +29,7 @@
       </div>
     </div>
   </div>
+    </div>
 </template>
 
 

@@ -1,7 +1,8 @@
 <template>
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
-    <div class="squares bsquares">
+    <div class="squares bsquares"
+         style="margin-top:-55px">
       <div class="title-button"
            style="margin-left:auto;margin-right:auto;cursor:pointer">squares</div>
     </div>
