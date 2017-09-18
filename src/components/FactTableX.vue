@@ -121,7 +121,7 @@ export default vm
   margin-left: auto
   margin-right: auto
 .factrow
-  margin-bottom: 12px
+  margin-bottom: 0px
 .cell
   width: 34px
   height: 34px
