@@ -1,13 +1,13 @@
 <template>
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
-    <table style="margin-bottom:10px;margin-top:8px" align="center"><tr><td>
+    <table style="margin-bottom:10px;margin-top:-10px" align="center"><tr><td>
     <span class="ftitle">+{{level}}</span>
     </td><td>
     <div id="toggle">
       <toggle-button :value="true"
                      :width="80"
-                     :color="{checked: 'orange', unchecked: 'blue'}"
+                     :color="{unchecked: 'orange', checked: 'blue'}"
                      @change="switchMode"
                      :height="40"
                      :sync="true"/>
@@ -22,7 +22,7 @@
         v-for="item, index in list" :key="item.id"
         bind-id="$index"
         bind-data="item"
-        :num1="index" :num2="level"></factrowplus>
+        :num1="index" :num2="level" :r="true"></factrowplus>
       <factrowplus
         v-if="!flip"
         class="factrow"
@@ -128,7 +128,7 @@ export default vm
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
 .factrow
-  margin-bottom: 12px
+  margin-bottom: 0
 .ftitle
   display: inline-block
   font-family: "Avenir Next"

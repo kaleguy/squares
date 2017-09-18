@@ -2,7 +2,7 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
   <div
-    style="position:relative"
+    style="position:relative;margin-top:-30px"
     @click="goto()">
     <div class="fheading">
       <div class="numerand1">?</div>

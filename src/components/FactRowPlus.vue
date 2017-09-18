@@ -11,8 +11,10 @@
     </div>
     <div class="factr">
       <div
-        class="cell numerandb"
+        class="cell"
         v-for="item in list2"
+        bind-id="$index"
+        v-bind:class="num2Class(item)"
         bind-data="item">{{item}}
       </div>
     </div>
@@ -27,13 +29,13 @@ const vm = {
     blank: Boolean,
     num1: Number,
     num2: Number,
-    r: Number
+    r: Boolean,
+    mode: String
   },
   components: {
   },
   data () {
     return {
-      mode: 'r'
     }
   },
   methods: {
@@ -68,10 +70,29 @@ const vm = {
       return false
     },
     num1Class (i) {
-      if (this.blank) { return 'numerand00' }
-      if (i <= this.num1 + 1) { return 'numerand1' }
+      if (this.blank) {
+        return 'numerand00'
+      }
+      let class1 = 'numerand2'
+      let class2 = 'numerand1'
+      if (this.r) {
+        console.log('R: ', this.r)
+        class1 = 'numerand1'
+        class2 = 'numerand2'
+      }
+      if (i <= this.num1 + 1) { return class1 }
       if (i - 1 > this.num1 && i <= (this.num1 + this.num2) + 1) {
-        return 'numerand2'
+        return class2
+      }
+      return 'numerand00'
+    },
+    num2Class (i) {
+      if (this.blank) {
+        return 'numerand00'
+      }
+      if (i <= this.num1 + 1) { return 'numerandb' }
+      if (i - 1 > this.num1 && i <= (this.num1 + this.num2) + 1) {
+        return 'numerandb'
       }
       return 'numerand00'
     },
