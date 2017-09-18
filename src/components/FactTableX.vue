@@ -3,7 +3,7 @@
     <div style="align-items:center;margin:auto">
   <div class="xtable"
        @click="goto()"
-       style="cursor:pointer;margin-top:-70px">
+       style="cursor:pointer;margin-top:-90px;">
     <div class="xtitle">
       &#x00d7; {{level}}
     </div>

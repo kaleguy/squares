@@ -11,7 +11,7 @@
       <div class="large-operator">=</div>
       <div class="product">?</div>
     </div>
-    <div class="fact-table">
+    <div class="fact-table" style="margin-left:-20px">
        <table align="center">
          <tr class="row">
            <td class="toperator"></td>
