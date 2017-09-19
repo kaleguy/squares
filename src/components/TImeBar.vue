@@ -33,22 +33,27 @@ const vm = {
     this.$store.commit('RESETALL')
     let w = this.$store.state.time
     const me = this
+    let doTick = false
     function tick () {
       w = me.$store.state.time
+      if (doTick) {
+        me.$store.commit('TICK')
+      }
+      doTick = !doTick
       if (w < 285) {
         w = w + 1
         tb.style.width = w + 'px'
       } else {
         // tb.style.width = 0
         me.$store.commit('RESETALL')
-        w = -8
+        w = 0
       }
       me.$store.commit('SETTIME', { time: w })
     }
     if (window.mytimer) {
       window.clearInterval(window.mytimer)
     }
-    window.mytimer = window.setInterval(tick, 400)
+    window.mytimer = window.setInterval(tick, 500)
   },
   updated () {
   }

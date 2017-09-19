@@ -69,7 +69,8 @@ export default new Vuex.Store({
     time: 0,
     username: '',
     mode: 't', // t for test or p for practice
-    errorState: false
+    errorState: false,
+    ticks: 0
   },
   mutations: {
     RESET (state, o) {
@@ -79,6 +80,7 @@ export default new Vuex.Store({
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
+      state.ticks = 0
       if (!o) { return }
       state.currentLevel.index = o.level
       state.currentLevel.op = o.operator
@@ -93,6 +95,9 @@ export default new Vuex.Store({
     CLEARERRORSTATE (state) {
       state.errorState = false
       state.buffer = ''
+    },
+    TICK (state) {
+      state.ticks = state.ticks + 1
     },
     ADDTOBUFFER (state, o) {
       state.buffer = '' + state.buffer + o.num
@@ -118,6 +123,7 @@ export default new Vuex.Store({
       state.mode = o.mode
     },
     RESETALL (state, o) {
+      state.ticks = 0
       state.errorState = false
       state.count = 0
       state.time = 0

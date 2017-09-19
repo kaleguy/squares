@@ -36,6 +36,7 @@
         <div
           @click="goto(level)"
           class="question-button">?</div>
+        <tickcounter></tickcounter>
         <div class="math" v-bind:class="errorStateClass">
           <div>{{num1}}</div>
           <div>{{visOperator}} {{num2}}</div>
@@ -54,6 +55,7 @@ import NumPad from './NumPad'
 import TimeBar from './TimeBar'
 import Dice from './Dice'
 import AnswerGrid from './AnswerGrid'
+import TickCounter from './TickCounter'
 const keyBus = {
   key: ''
 }
@@ -67,7 +69,8 @@ const vm = {
     dots: DotBar,
     timebar: TimeBar,
     dice: Dice,
-    answergrid: AnswerGrid
+    answergrid: AnswerGrid,
+    tickcounter: TickCounter
   },
   data () {
     return {
