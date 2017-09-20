@@ -36,7 +36,9 @@ HTML, BODY
     line-height: 3em
     background: #33f
     color: #fff
-    cursor: default
+    cursor: pointer
+    font-weight: bold
+    font-family: "Avenir Next"
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   DIV
     // box-shadow: 2px 2px 5px #888888;

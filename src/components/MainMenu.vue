@@ -2,10 +2,12 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
       <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
-        <div class="title-button">{{username}}</div>
+        <div
+          @click="menu"
+          class="title-button">{{username}}</div>
         <div class="title-button"
              @click="goto('s')"
-             style="background:#fff;cursor:pointer;color:#000;font-size:44px;line-height:0.7;">
+             style="background:#fff;cursor:pointer;color:#000;font-size:44px;line-height:0.7;font-family:inherit">
           &#x25a0;&#x25a0;&#x25a0;<br />
           &#x25a0;&#x25a0;&#x25a0;<br />
           &#x25a0;&#x25a0;&#x25a0;
@@ -17,7 +19,7 @@
         <div @click="goto('X')">&#x00d7;</div>
         <div @click="goto('d')">&#x00f7;</div>
         <div @click="goto('gs')" class="icon icon-star" style="line-height:79px">{{levelCount}}</div>
-        <div @click="goto('gp')" class="icon icon-point" style="line-height:79px">9999</div>
+        <div @click="goto('gp')" class="icon icon-point" style="line-height:79px">{{points}}</div>
       </div>
     </div>
   </div>
@@ -26,6 +28,7 @@
 
 <script>
 import LeftArrow from './LeftArrow'
+import _ from 'lodash'
 const vm = {
   name: 'mainmenu',
   components: {
@@ -37,6 +40,8 @@ const vm = {
   },
   methods: {
     goto: function (op) {
+      if (op === 'gs') { return }
+      if (op === 'gp') { return }
       this.$router.replace('/menu/' + op)
     },
     menu: function () {
@@ -52,9 +57,18 @@ const vm = {
       return this.$store.state.username
     },
     levelCount () {
+      return Object.keys(this.record).length || ' '
+    },
+    points () {
+      console.log(this.record)
+      const points = _.reduce(this.record, (points, level) => {
+        return points + Object.values(level).sort((prev, next) => next - prev)[0]
+      }, 0)
+      return points
+    },
+    record () {
       const recordKey = this.username + '_levels'
-      let record = JSON.parse(localStorage.getItem(recordKey))
-      return Object.keys(record).length || ' '
+      return JSON.parse(localStorage.getItem(recordKey)) || {}
     }
   },
   mounted () {

@@ -1,7 +1,7 @@
 <template>
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
-      <div style="height:550px">
+      <div style="height:625px">
 
         <div class="squares bsquares">
           <div class="title-button" style="margin-left:auto;margin-right:auto">{{username}}</div>
