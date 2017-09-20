@@ -32,6 +32,7 @@ HTML, BODY
   flex-direction: row
   DIV.title-button
     font-size: 1em
+    font-weight: normal
     line-height: 3em
     background: #33f
     color: #fff
@@ -178,15 +179,13 @@ DIV.uname
       border-bottom: 1px solid #fff
       border-right: 1px solid #fff
       width: 30px
-.csquares DIV.icon
-  line-height: 79px
 DIV.icon
   display: inline-block
   font-size: 50px
   line-height: 60px
-  width: 50px
-  height: 50px
-  margin: 0 auto
+  // width: 50px
+  // height: 50px
+  // margin: 0 auto
   background-size: cover
   background-repeat: no-repeat
   background-position: 50% 50%

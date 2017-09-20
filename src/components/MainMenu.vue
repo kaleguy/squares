@@ -16,8 +16,8 @@
         <div @click="goto('-')">&minus;</div>
         <div @click="goto('X')">&#x00d7;</div>
         <div @click="goto('d')">&#x00f7;</div>
-        <div @click="goto('gs')" class="icon icon-star">1</div>
-        <div @click="goto('gp')" class="icon icon-point">9999</div>
+        <div @click="goto('gs')" class="icon icon-star" style="line-height:79px">{{levelCount}}</div>
+        <div @click="goto('gp')" class="icon icon-point" style="line-height:79px">9999</div>
       </div>
     </div>
   </div>
@@ -50,6 +50,11 @@ const vm = {
     },
     username () {
       return this.$store.state.username
+    },
+    levelCount () {
+      const recordKey = this.username + '_levels'
+      let record = JSON.parse(localStorage.getItem(recordKey))
+      return Object.keys(record).length || ' '
     }
   },
   mounted () {

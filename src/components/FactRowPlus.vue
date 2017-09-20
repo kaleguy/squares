@@ -220,7 +220,7 @@ export default vm
   border-bottom: 1px solid #fff
   font-weight: bold
 .factr
-  width: 524px
+  // width: 524px
   margin-left: auto
   margin-right: auto
 </style>

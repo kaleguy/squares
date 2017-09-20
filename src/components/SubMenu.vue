@@ -2,23 +2,25 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
       <div style="height:550px">
-  <div class="squares">
-    <div v-for="level in levels"
-         v-bind:class="passed(level)"
-         @click="goto(level)">
-      <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
+
+        <div class="squares bsquares">
+          <div class="title-button" style="margin-left:auto;margin-right:auto">{{username}}</div>
+        </div>
+
+        <div class="squares">
+          <div v-for="level in levels"
+               v-bind:class="passed(level)"
+               @click="goto(level)">
+            <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
+          </div>
+          <div
+            @click="menu"
+            style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;padding-top:0">
+            <leftarrow style="margin-left:60px" width="200"></leftarrow>
+          </div>
+        </div>
+      </div>
     </div>
-    <div
-      @click="menu"
-      class="uname">{{username}}</div>
-    <div
-      @click="menu"
-      style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;padding-top:0">
-      <leftarrow style="margin-left:60px" width="200"></leftarrow>
-    </div>
-  </div>
-    </div>
-  </div>
   </div>
 </template>
 
