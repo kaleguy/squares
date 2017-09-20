@@ -62,7 +62,8 @@ const vm = {
     points () {
       console.log(this.record)
       const points = _.reduce(this.record, (points, level) => {
-        return points + Object.values(level).sort((prev, next) => next - prev)[0]
+        let min = Object.values(level).sort((prev, next) => prev - next)[0]
+        return points + 140 - min
       }, 0)
       return points
     },
