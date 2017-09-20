@@ -51,6 +51,7 @@ function getRandom (first, min, max) {
 }
 
 // ========= The Store ===============
+// TODO: move LocalStorage calls here
 export default new Vuex.Store({
   state: {
     currentLevel: {
@@ -80,7 +81,7 @@ export default new Vuex.Store({
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
-      state.ticks = 0
+      // state.ticks = 0
       if (!o) { return }
       state.currentLevel.index = o.level
       state.currentLevel.op = o.operator

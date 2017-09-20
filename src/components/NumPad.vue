@@ -45,8 +45,9 @@
       }
     },
     methods: {
-      recordPass: function (levelKey, time) {
-        if (!time) { time = 30 }
+      recordPass: function (levelKey) {
+        // if (!time) { time = 140 }
+        let time = this.$store.state.ticks
         const recordKey = this.username + '_levels'
         let record = JSON.parse(localStorage.getItem(recordKey))
         if (!record) { record = {} }
@@ -55,7 +56,7 @@
           levelRecord = {}
           record[levelKey] = levelRecord
         }
-        let dateKey = moment().format('YYYY-MM-DD')
+        let dateKey = moment().format('YYYY-MM-DD-mm-ss')
         levelRecord[dateKey] = time
         localStorage.setItem(recordKey, JSON.stringify(record))
       },
@@ -127,7 +128,6 @@
           }
           this.$store.commit('RESET')
           const count = this.$store.state.count
-          console.log('COUNT', count)
           if (this.mode === 'p') { return }
           if (+count === 18) {
             const levelKey = this.op + level.index
@@ -137,7 +137,6 @@
             this.$swal('Good Job!', 'You passed this level', 'success')
               .then(() => this.$router.replace('/menu/' + this.op))
           } else {
-            console.log(count)
           }
         } else {
           this.$store.commit('SETERRORSTATE')

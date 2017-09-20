@@ -36,10 +36,35 @@ const vm = {
       return ticks
     },
     counta () {
+      if (!this.scores) { return }
+      let dates = Object.keys(this.scores).sort((a, b) => a < b)
+      if (dates[0]) { return 140 - this.scores[dates[0]] }
       return ' '
     },
     countb () {
+      if (!this.scores) { return }
+      let dates = Object.keys(this.scores).sort((a, b) => a < b)
+      if (dates[1]) { return 140 - this.scores[dates[1]] }
+      console.log(dates, dates[1])
       return ' '
+    },
+    username () {
+      return this.$store.state.username
+    },
+    scores () {
+      if (!this.username) {
+        return {}
+      }
+      const recordKey = this.username + '_levels'
+      const levelKey = this.op + '' + this.level.index
+      let record = JSON.parse(localStorage.getItem(recordKey))
+      return record[levelKey]
+    },
+    level () {
+      return this.$store.state.currentLevel
+    },
+    op () {
+      return this.$store.state.currentLevel.op
     }
   },
   mounted () {
@@ -55,7 +80,7 @@ export default vm
 .tick-counter
   float: right
   margin-top: 14px
-  margin-right: 30px
+  margin-right: 32px
   DIV
     background: blue
     width: 45px

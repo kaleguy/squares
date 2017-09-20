@@ -178,4 +178,28 @@ DIV.uname
       border-bottom: 1px solid #fff
       border-right: 1px solid #fff
       width: 30px
+.csquares DIV.icon
+  line-height: 79px
+DIV.icon
+  display: inline-block
+  font-size: 50px
+  line-height: 60px
+  width: 50px
+  height: 50px
+  margin: 0 auto
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: 50% 50%
+.icon-star
+  width: 100px
+  height: 100px
+  color: #90ee90
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS4yMDEgMjkuNjc2Ij48cG9seWdvbiBwb2ludHM9IjE1LjYwMiwwIDE5LjMyNSwxMS4yNzkgMzEuMiwxMS4zMzIgMjEuNjI0LDE4LjM2IDI1LjI0MywyOS42NzYgMTUuNjAyLDIyLjczOCA1Ljk2LDI5LjY3NiA5LjU3NywxOC4zNiAwLDExLjMzMiAxMS44NzgsMTEuMjc5IiBmaWxsPSIjMDA5OTAwIiAvPjwvc3ZnPg==")
+.icon-point
+  color: #90ee90
+  width: 100px
+  height: 100px
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle cx='70' cy='62' r='52' fill='#149718'/></svg>")
+
+
 </style>

@@ -48,7 +48,7 @@ const vm = {
       const passedLevels = this.$store.state.passedLevels
       const levelKey = this.operator + level
       if (passedLevels[levelKey]) {
-        cssClass = 'passed'
+        cssClass = 'icon icon-star'
       }
       // console.log(cssClass, passedLevels)
       return cssClass

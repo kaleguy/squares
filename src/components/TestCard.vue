@@ -1,6 +1,6 @@
 <template>
-  <div style="display: flex; flex-direction: column; height: 100%;">
-    <div style="margin: auto;width:400px">
+  <div style="display: flex; flex-direction: column; height: 100%; margin-left:-10px">
+    <div style="margin:auto; width:400px">
       <div class="square-holder">
         <answergrid v-if="mode==='p'"></answergrid>
         <div
