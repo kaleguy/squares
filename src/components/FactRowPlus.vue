@@ -2,7 +2,7 @@
   <div class="ftp">
     <div class="factr">
           <div
-            class="cell"
+            class="acell"
             v-for="item in list2"
             bind-id="$index"
             v-bind:class="num1Class(item)"
@@ -11,7 +11,7 @@
     </div>
     <div class="factr">
       <div
-        class="cell"
+        class="acell"
         v-for="item in list2"
         bind-id="$index"
         v-bind:class="num2Class(item)"
@@ -211,7 +211,7 @@ export default vm
     font-weight: bold
     font-size: 2em
     line-height: 1
-.cell
+.acell
   width: 24px
   height: 24px
   display: inline-block

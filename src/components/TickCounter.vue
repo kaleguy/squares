@@ -10,7 +10,7 @@
 
 <script>
 const vm = {
-  name: 'xicon',
+  name: 'tickcounter',
   data () {
     return {
       oldTicks: 0
@@ -37,8 +37,15 @@ const vm = {
     },
     counta () {
       if (!this.scores) { return }
-      let dates = Object.keys(this.scores).sort((a, b) => a < b)
-      if (dates[0]) { return 140 - this.scores[dates[0]] }
+      let dates = ''
+      try {
+        dates = Object.keys(this.scores).sort((a, b) => a < b)
+        if (dates[0]) {
+          return 140 - this.scores[dates[0]]
+        }
+      } catch (e) {
+        console.log('E', e)
+      }
       return ' '
     },
     countb () {
@@ -58,6 +65,9 @@ const vm = {
       const recordKey = this.username + '_levels'
       const levelKey = this.op + '' + this.level.index
       let record = JSON.parse(localStorage.getItem(recordKey))
+      if (!record) {
+        return {}
+      }
       return record[levelKey]
     },
     level () {
