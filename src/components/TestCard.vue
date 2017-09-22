@@ -89,6 +89,10 @@ const vm = {
       let mode = 'p'
       if (v.value) { mode = 't' }
       console.log('MODE', mode, v)
+      if (window.mytimer) {
+        this.$store.commit('RESETALL')
+        window.clearInterval(window.mytimer)
+      }
       this.$store.commit('SETMODE', { mode })
     },
     goto: function () {

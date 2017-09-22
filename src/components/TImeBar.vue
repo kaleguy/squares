@@ -27,7 +27,8 @@ const vm = {
     }
   },
   mounted () {
-    if (this.$store.mode === 'p') {
+    this.$store.commit('RESETALL')
+    if (this.$store.state.mode === 'p') {
       if (window.mytimer) {
         window.clearInterval(window.mytimer)
       }

@@ -3,8 +3,9 @@
     <div style="align-items:center;margin:auto">
       <div style="height:625px">
 
-        <div class="squares bsquares">
-          <div class="title-button" style="margin-left:auto;margin-right:auto">{{username}}</div>
+        <div class="squares csquares">
+          <div class="title-button" style="margin-left:auto;margin-right:auto;line-height:2.3em">{{username}}</div>
+          <div class="icon icon-point" style="line-height:79px">{{points}}</div>
         </div>
 
         <div class="squares">
@@ -26,6 +27,7 @@
 
 <script>
 import LeftArrow from './LeftArrow'
+import _ from 'lodash'
 const vm = {
   name: 'submenu',
   components: {
@@ -84,6 +86,20 @@ const vm = {
     },
     username () {
       return this.$store.state.username
+    },
+    points () {
+      const points = _.reduce(this.record, (points, level, k) => {
+        if (k.indexOf(this.operator) !== 0) {
+          return points
+        }
+        let min = Object.values(level).sort((prev, next) => prev - next)[0]
+        return points + 140 - min
+      }, 0)
+      return points
+    },
+    record () {
+      const recordKey = this.username + '_levels'
+      return JSON.parse(localStorage.getItem(recordKey)) || {}
     }
   },
   mounted () {
