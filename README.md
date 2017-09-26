@@ -32,3 +32,5 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+http://www.chartjs.org/docs/latest/axes/cartesian/time.html#scale-distribution

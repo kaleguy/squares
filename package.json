@@ -14,12 +14,13 @@
     "deploy": "rm -Rf docs && cp -Rf dist docs"
   },
   "dependencies": {
+    "chart.js": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "moment": "^2.18.1",
-    "momentjs": "^2.0.0",
     "shuffle-array": "^1.0.1",
     "vue": "^2.2.2",
     "vue-awesome": "^2.3.3",
+    "vue-chartjs": "^2.8.7",
     "vue-events": "^3.0.1",
     "vue-js-toggle-button": "^1.1.3",
     "vue-router": "^2.2.0",
