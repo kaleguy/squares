@@ -51,7 +51,6 @@ const vm = {
   },
   computed: {
     levels () {
-      console.log(this.$store.state.levels)
       return this.$store.state.levels
     },
     username () {
@@ -61,7 +60,6 @@ const vm = {
       return Object.keys(this.record).length || ' '
     },
     points () {
-      console.log(this.record)
       const points = _.reduce(this.record, (points, level) => {
         let min = Object.values(level).sort((prev, next) => prev - next)[0]
         return points + 140 - min

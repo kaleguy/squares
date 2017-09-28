@@ -2,6 +2,8 @@ import { Line } from 'vue-chartjs'
 import _ from 'lodash'
 import moment from 'moment'
 
+
+/*
 const dummyData = {
   '+1': { '2017-09-20-46-29': 49 },
   '+2': { '2017-09-22-51-06': 28 },
@@ -9,6 +11,7 @@ const dummyData = {
   '+3': { '2017-09-23-50-28': 36 },
   '+4': { '2017-09-25-50-28': 36 }
 }
+*/
 
 let yMax = 50 // max levels
 
@@ -27,12 +30,13 @@ function normalizeData (data, type) {
   values.forEach(v => {
     k = Object.keys(v)[0]
     let newK = k.substr(0, 10)
+    let plus = 140 - v[k]
+    if (type === 'stars') { plus = 1 }
     if (crushed[newK]) {
-      total = total + crushed[newK]
+      total = crushed[newK] + plus
     } else {
-      let plus = v[k]
-      if (type === 'stars') { plus = 1 }
       total = total + plus
+      console.log('RUNNINT TOTAL', total)
     }
     // newK = moment(newK)
     crushed[newK] = total
@@ -45,22 +49,14 @@ function normalizeData (data, type) {
   const startDate = moment(d[0].x)
   const endDate = moment(d[d.length - 1].x)
   const diffDays = endDate.diff(startDate, 'days')
-  console.log(diffDays)
   const dummyDate = {x: null, y: null}
   if (diffDays < 30) {
     dummyDate.x = startDate.add(30, 'days')
     d.push(dummyDate)
   }
 
-  // console.log(d)
   return d
 }
-
-let nData = normalizeData(dummyData)
-let d = moment()
-nData = []
-nData[0] = {x: d, y: 0}
-// console.log('NDATA', nData)
 
 export default Line.extend({
   props: {
@@ -75,9 +71,10 @@ export default Line.extend({
     console.log('TYPE', this.type, yMax)
     const recordKey = this.$store.state.username + '_levels'
     let record = JSON.parse(localStorage.getItem(recordKey))
+    console.log('RECORD', record)
     let nData = normalizeData(record, this.type)
 
-    console.log('RECORD', nData)
+    console.log('NRECORD', nData)
 
     this.renderChart({
       datasets: [

@@ -52,9 +52,7 @@ const vm = {
     passed (level) {
       let cssClass = ''
       const passedLevels = this.$store.state.passedLevels
-      console.log(passedLevels)
       const levelKey = this.operator + level
-      console.log('LKKK', levelKey)
       if (passedLevels[levelKey]) {
         cssClass = 'passed'
       }

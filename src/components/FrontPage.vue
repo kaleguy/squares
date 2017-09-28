@@ -62,7 +62,7 @@ const vm = {
           me.$router.replace('/main/')
         }
       })
-    console.log(t)
+    console.log('TYPEAHEAD', t)
   },
   updated () {
   }
