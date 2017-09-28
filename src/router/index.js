@@ -49,7 +49,7 @@ export default new Router({
       component: FactTableX
     },
     {
-      path: '/chart',
+      path: '/chart/:type',
       component: Chart
     }
   ]

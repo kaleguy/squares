@@ -18,8 +18,8 @@
         <div @click="goto('-')">&minus;</div>
         <div @click="goto('X')">&#x00d7;</div>
         <div @click="goto('d')">&#x00f7;</div>
-        <div @click="goto('gs')" class="icon icon-star" style="line-height:79px">{{levelCount}}</div>
-        <div @click="goto('gp')" class="icon icon-point" style="line-height:79px">{{points}}</div>
+        <div @click="goto('stars')" class="icon icon-star" style="line-height:79px">{{levelCount}}</div>
+        <div @click="goto('points')" class="icon icon-point" style="line-height:79px">{{points}}</div>
       </div>
     </div>
   </div>
@@ -40,8 +40,9 @@ const vm = {
   },
   methods: {
     goto: function (op) {
-      if (op === 'gs') { return }
-      if (op === 'gp') { return }
+      if (op === 'stars' || op === 'points') {
+        return this.$router.replace('/chart/' + op)
+      }
       this.$router.replace('/menu/' + op)
     },
     menu: function () {

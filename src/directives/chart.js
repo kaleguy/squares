@@ -10,8 +10,16 @@ const dummyData = {
   '+4': { '2017-09-25-50-28': 36 }
 }
 
-function normalizeData (data, points) {
+let yMax = 50 // max levels
+
+function normalizeData (data, type) {
   // const normalized = []
+  if (!data) {
+    let d = moment()
+    data = []
+    data[0] = {x: d, y: 0}
+    return data
+  }
   const values = Object.values(data)
   const crushed = {}
   let k = null
@@ -23,10 +31,10 @@ function normalizeData (data, points) {
       total = total + crushed[newK]
     } else {
       let plus = v[k]
-      if (points) { plus = 1 }
+      if (type === 'stars') { plus = 1 }
       total = total + plus
     }
-    newK = moment(newK)
+    // newK = moment(newK)
     crushed[newK] = total
   })
   let d = []
@@ -34,26 +42,50 @@ function normalizeData (data, points) {
     d.push({x: v, y: k})
   })
   d = d.sort((a, b) => { return a.x - b.x })
-  console.log(d)
+  const startDate = moment(d[0].x)
+  const endDate = moment(d[d.length - 1].x)
+  const diffDays = endDate.diff(startDate, 'days')
+  console.log(diffDays)
+  const dummyDate = {x: null, y: null}
+  if (diffDays < 30) {
+    dummyDate.x = startDate.add(30, 'days')
+    d.push(dummyDate)
+  }
+
+  // console.log(d)
   return d
 }
 
-const nData = normalizeData(dummyData)
-console.log('NDATA', nData)
+let nData = normalizeData(dummyData)
+let d = moment()
+nData = []
+nData[0] = {x: d, y: 0}
+// console.log('NDATA', nData)
 
 export default Line.extend({
+  props: {
+    type: String
+  },
   mounted () {
+    if (this.type === 'points') {
+      yMax = 4000
+    } else {
+      yMax = 50
+    }
+    console.log('TYPE', this.type, yMax)
     const recordKey = this.$store.state.username + '_levels'
     let record = JSON.parse(localStorage.getItem(recordKey))
-    console.log('RECORD', record)
+    let nData = normalizeData(record, this.type)
+
+    console.log('RECORD', nData)
 
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
         {
           label: 'Stars',
           backgroundColor: '#ffffff',
-          borderColor: 'rgb(255, 99, 132)',
+          borderColor: '#149718', // rgb(255, 99, 132)',
+          borderWidth: 6,
           color: '#00ff00',
           data: nData
         }
@@ -64,6 +96,9 @@ export default Line.extend({
         line: {
           tension: 0 // disables bezier curves
         }
+      },
+      legend: {
+        display: false
       },
       scales: {
         xAxes: [{
@@ -81,7 +116,7 @@ export default Line.extend({
           display: true,
           ticks: {
             suggestedMin: 0,
-            max: 500
+            max: yMax
           }
         }]
       }
