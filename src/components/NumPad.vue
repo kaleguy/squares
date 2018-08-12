@@ -15,7 +15,7 @@
     <div>0</div>
     <div class="del">
       <xicon width="50" style="margin-top:5px"></xicon>
-      </icon></div>
+    </div>
   </div>
 </template>
 
@@ -178,12 +178,10 @@
   /* or any other relative font sizes */
   .eq-button
     line-height: .8
-
   .eq
     font-size: 1.2em
     font-weight: bold
     line-height: .5em
-
   .numpad
     font-size: 4em
     font-weight: bold

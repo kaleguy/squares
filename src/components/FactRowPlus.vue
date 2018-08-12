@@ -157,7 +157,7 @@ export default vm
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
+<style lang="sass" scoped>
 .ftp
   position: relative
 .numerand1

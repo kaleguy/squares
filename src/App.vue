@@ -23,6 +23,17 @@ HTML, BODY
   width: 100%
 #app
   height: 100%
+.bsquares, .csquares
+  font-size: 32px
+  font-weight: bold
+  width: 316px
+.bsquares DIV
+  width: 140px
+  height: 120px
+.csquares DIV
+  width: 140px
+  height: 100px
+  line-height: .7
 .squares
   width: 360px
   margin-left: auto
@@ -46,18 +57,15 @@ HTML, BODY
     font-size: 3.5em
     padding-top: 26px
     line-height: 1em
-    width: 100px
+    width: 80px
     border: 3px solid #333
     border-radius: 10px
-    height: 80px
-    margin: 6px
+    height: 75px
+    margin: 2px
   DIV.review-button
     width: 330px
-.fa-icon
-  width: auto
-  height: 1em /* or any other relative font sizes */
-.fa
-  font-size: 70px
+
+// type-ahead
 .type-ahead-group
   position: relative
 .type-ahead-group > input
@@ -88,7 +96,6 @@ HTML, BODY
   text-align: left
   top: 100%
   z-index: 1000
-
 .type-ahead-group > ul > li > a
   clear: both
   color: #333
@@ -102,20 +109,8 @@ HTML, BODY
   background-color: #3F9BFA
   color: #FFFFFF
   text-decoration: none
-DIV.uname
-  font-weight: bold
-  font-size: 75px
-  color: #00F
-  font-family: "Avenir Next"
-  cursor: pointer
-  box-shadow: none
-  width: 100%
-  height: inherit
-  border: none
-  padding: 0
-  // text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-// Fact table and answergrid
+// Fact table sand answergrids
 .numerand0
   background: #000
   color: #fff
@@ -181,13 +176,11 @@ DIV.uname
       border-bottom: 1px solid #fff
       border-right: 1px solid #fff
       width: 30px
+// star and point icon/images
 DIV.icon
   display: inline-block
   font-size: 50px
   line-height: 60px
-  // width: 50px
-  // height: 50px
-  // margin: 0 auto
   background-size: cover
   background-repeat: no-repeat
   background-position: 50% 50%
@@ -201,6 +194,4 @@ DIV.icon
   width: 100px
   height: 100px
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle cx='70' cy='62' r='52' fill='#149718'/></svg>")
-
-
 </style>

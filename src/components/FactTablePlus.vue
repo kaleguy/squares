@@ -126,7 +126,7 @@ export default vm
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
+<style lang="sass" scoped>
 .factrow
   margin-bottom: 0
 .ftitle
@@ -135,9 +135,4 @@ export default vm
   font-weight: bold
   font-size: 60px
   line-height: 60px
-#toggle
-  width: 100px
-  margin-bottom: 12px
-  display: inline-block
-  margin-top: 8px
 </style>

@@ -49,11 +49,10 @@ export default vm
 
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 $size: 1.4em
 $color: green
 .dot
-  // box-shadow: 1px 1px 3px #888888;
   width: $size
   height: $size
   border-radius: 4px

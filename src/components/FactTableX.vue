@@ -2,8 +2,7 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
   <div class="xtable"
-       @click="goto()"
-       style="cursor:pointer;margin-top:-90px;">
+       @click="goto()">
     <div class="xtitle">
       &#x00d7; {{level}}
     </div>
@@ -111,7 +110,7 @@ export default vm
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
+<style lang="sass" scoped>
 .xtitle
   font-size: 60px
   font-weight: bold
@@ -120,6 +119,8 @@ export default vm
   width: 350px
   margin-left: auto
   margin-right: auto
+  cursor: pointer
+  margin-top: -90px;
 .factrow
   margin-bottom: 0px
 .cell

@@ -1,4 +1,5 @@
 <template>
+  <div>
     <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -68,6 +69,7 @@
        id="path202"
        style="fill:#0000ff;fill-opacity:1;stroke:#214f8f;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        inkscape:connector-curvature="0" /></g></svg>
+  </div>
 </template>
 
 <script>

@@ -91,17 +91,5 @@ export default vm
 
 </script>
 <style lang="sass">
-.answergrid
-  margin-top: 15px
-  margin-bottom: 14px
-  TABLE
-    border: none
-    TD
-      border: none
-      border-right: 1px solid #fff
-      border-bottom: 1px solid #fff
-    TD.vis-operator
-      font-weight: bold
-      font-size: 30px
-      line-height: 10px
+
 </style>

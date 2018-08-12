@@ -29,7 +29,6 @@ function getDealer () {
       shuffleUniq(deck[8])
       index = 0
     }
-    console.log('calling dealer', index, deck[index])
     return deck[index]
   }
   return dealer
@@ -103,13 +102,6 @@ export default new Vuex.Store({
     ADDTOBUFFER (state, o) {
       state.buffer = '' + state.buffer + o.num
       if (state.buffer.length > 2) { state.buffer = state.buffer.substring(1) }
-    },
-    POPBUFFER (state) {
-      if (state.buffer.length > 1) {
-        state.buffer = ''
-        return
-      }
-      state.buffer = state.buffer.substring(1)
     },
     CLEARBUFFER (state) {
       state.buffer = ''

@@ -2,21 +2,25 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
       <div style="height:625px">
-
         <div class="squares csquares">
-          <div class="title-button" style="margin-left:auto;margin-right:auto;line-height:2.3em">{{username}}</div>
-          <div class="icon icon-point" style="line-height:79px">{{points}}</div>
+          <div class="title-button">{{username}}</div>
+          <div class="icon icon-point">{{points}}</div>
         </div>
-
-        <div class="squares">
+        <div>
+          <div class="squares top-squares" style="width:200px;border:none;margin-left:auto;margin-right:auto;">
+            <div><span class="level">1</span></div>
+            <div><span class="level">2</span></div>
+          </div>
+        </div>
+        <div class="squares sub-squares">
           <div v-for="level in levels"
                v-bind:class="passed(level)"
                @click="goto(level)">
-            <span class="operator">{{visOperator}}</span><span class="level">{{level}}</span>
+            <!--<span class="operator">{{visOperator}}</span>-->
+            <levellabel :level="level"></levellabel>
           </div>
           <div
-            @click="menu"
-            style="width:200px;height:200px;border:none;box-shadow:none;margin-left:auto;margin-right:auto;padding-top:0">
+            @click="menu" class="arrow-button">
             <leftarrow style="margin-left:60px" width="200"></leftarrow>
           </div>
         </div>
@@ -26,11 +30,13 @@
 </template>
 
 <script>
+import LevelLabel from './LevelLabel'
 import LeftArrow from './LeftArrow'
 import _ from 'lodash'
 const vm = {
   name: 'submenu',
   components: {
+    levellabel: LevelLabel,
     leftarrow: LeftArrow
   },
   props: {
@@ -66,7 +72,15 @@ const vm = {
       // console.log('CURRENT LEVEL = ', this.$store.state.currentLevel)
       // const allLevels = this.$store.state.levels
       // const l = _.find(allLevels, l => l.operator === this.operator).levels
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      return [
+        '3a', '3b', '3c', '3d',
+        '4a', '4b', '4c', '4d',
+        '5a', '5b', '5c', '5d',
+        '6a', '6b', '6c', '6d',
+        '7a', '7b', '7c', '7d',
+        '8a', '8b', '8c', '8d',
+        '9a', '9b', '9d', '9d'
+      ]
     },
     visOperator () {
       if (this.operator === 'd') {
@@ -117,7 +131,11 @@ export default vm
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
+<style lang="sass" scoped>
+.title-button
+  margin-left: auto
+  margin-right: auto
+  line-height: 2.3em
 .operator
   font-size: 44px
   font-weight: bold
@@ -127,10 +145,26 @@ export default vm
   margin: 0
   margin-bottom: 200px
 .level
-  display: inline-block
-  padding: 0
   font-weight: bold
-.passed
-  color: #fff
-  background: green
+  font-size: 1em
+.arrow-button
+  width: 200px
+  height: 200px
+  border: none
+  box-shadow: none
+  margin-left: auto
+  margin-right: auto
+  padding-top: 0
+.icon
+  line-height: 79px
+.top-squares DIV
+  height: 66px
+  padding-top: 14px
+  font-weight: bold
+.sub-squares
+  DIV
+    font-size: 2.5em
+    font-weight: bold
+    padding-top: 10px
+    line-height: 0.65
 </style>

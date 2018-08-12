@@ -22,12 +22,8 @@ new Vue({
   template: '<App/>',
   components: { App },
   data: {
-    keys: 'bz'
   },
   mounted () {
-    // this.$events.fire('keys', this.eventData)
-    // this.$events.emit('testEvent', this.eventData)
-    // this.$events.$emit('testEvent', this.eventData)
   }
 })
 

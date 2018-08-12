@@ -2,7 +2,7 @@
   <div @click="menu" style="height:100%">
     <div style="display:flex;height:100%">
       <div style="margin:auto">
-        <div style="height:140px;width:140px" class="chead icon" v-bind:class="icon"></div>
+        <div class="chead icon" v-bind:class="icon"></div>
         <chart v-bind:type="type"></chart>
         </div>
       </div>
@@ -46,4 +46,6 @@ export default vm
 .chead
   position: middle
   margin-bottom: -100px
+  height: 140px;
+  width: 140px
 </style>

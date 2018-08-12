@@ -1,7 +1,7 @@
 <template>
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
-      <div class="squares bsquares" style="display: flex; flex-direction: row; height: 100%">
+      <div class="squares bsquares">
         <div
           @click="menu"
           class="title-button">{{username}}</div>
@@ -86,11 +86,9 @@ export default vm
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
-.bsquares, .csquares
-  DIV
-    font-weight: bold
-//  transform: rotate(90deg)
-//  transform-origin: left top 0
-//  font-weight: bold
+<style lang="sass" scoped>
+.bsquares
+  display: flex
+  flex-direction: row
+  height: 100%
 </style>
