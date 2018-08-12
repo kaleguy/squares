@@ -123,7 +123,12 @@ const vm = {
       return num
     },
     num2 () {
-      return this.$store.state.currentLevel.index
+      const index = this.$store.state.currentLevel.index
+      let num = index
+      if (index.length > 1) {
+        num = index.substring(0, 1)
+      }
+      return num
     },
     dice2 () {
       return this.$store.state.dice2

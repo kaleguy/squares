@@ -26,7 +26,7 @@ HTML, BODY
 .bsquares, .csquares
   font-size: 32px
   font-weight: bold
-  width: 316px
+  width: 303px
 .bsquares DIV
   width: 140px
   height: 120px
@@ -189,6 +189,8 @@ DIV.icon
   height: 100px
   color: #90ee90
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS4yMDEgMjkuNjc2Ij48cG9seWdvbiBwb2ludHM9IjE1LjYwMiwwIDE5LjMyNSwxMS4yNzkgMzEuMiwxMS4zMzIgMjEuNjI0LDE4LjM2IDI1LjI0MywyOS42NzYgMTUuNjAyLDIyLjczOCA1Ljk2LDI5LjY3NiA5LjU3NywxOC4zNiAwLDExLjMzMiAxMS44NzgsMTEuMjc5IiBmaWxsPSIjMDA5OTAwIiAvPjwvc3ZnPg==")
+.icon-star .dot-green
+  color: #93ED94
 .icon-point
   color: #90ee90
   width: 100px

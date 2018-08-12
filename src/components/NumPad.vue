@@ -10,7 +10,7 @@
     <div>8</div>
     <div>9</div>
     <div class="back" @click="menu">
-      <leftarrow width="110" style="margin-left:10px;margin-top:10px"></leftarrow>
+      <leftarrow width="110" style="border:none; margin-left:4px;margin-top:1px"></leftarrow>
     </div>
     <div>0</div>
     <div class="del">
@@ -81,7 +81,7 @@
       },
       checkTotal: function () {
         let num1 = this.$store.state.num1
-        let num2 = this.$store.state.currentLevel.index
+        let num2 = this.$store.state.currentLevel.index.substring(0, 1)
         let dice1 = this.$store.state.dice1
         let dice2 = this.$store.state.dice2
         if (this.op === '-') {

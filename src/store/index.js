@@ -1,40 +1,49 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { get } from 'lodash'
 
 const levels = require('./levels.json')
+// randomize the order of elements in a given array
 const shuffle = require('shuffle-array')
 
 Vue.use(Vuex)
 
 let deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+let deckA = [ 1, 2, 3 ] // eslint-disable-line
+let deckB = [ 4, 5, 6 ] // eslint-disable-line
+let deckC = [ 7, 8, 9 ] // eslint-disable-line
+let deckD = deck // eslint-disable-line
+
 shuffle(deck)
-function shuffleUniq (last) {
+function shuffleUniq (deck, last) {
   shuffle(deck)
   if (deck[0] === last) {
     deck.shift()
     deck.push(last)
   }
 }
-
-function getDealer () {
+// returns a function that will deal the next card in a randomly
+// shuffled deck
+function getDealer (myDeck) {
   let index = -1
+  let deck1 = myDeck
   const dealer = function (reset) {
     if (reset) {
       if (index === -1) { index = 0 }
-      shuffleUniq(deck[index])
+      shuffleUniq(deck1, deck1[index])
       index = -1
     }
-    index = index + 1
-    if (index > 8) {
-      shuffleUniq(deck[8])
+    index = index + 1 // deal next card
+    if (index > deck1.length - 1) {
+      shuffleUniq(deck1, deck1[deck1.length - 1]) // whatever is the current card, we don't want that to be the starting card on the next shuffle
       index = 0
     }
-    return deck[index]
+    return deck1[index]
   }
   return dealer
 }
 
-const deal1 = getDealer()
+let deal1 = getDealer(deck)
 
 
 function getRandom (first, min, max) {
@@ -75,7 +84,7 @@ export default new Vuex.Store({
   mutations: {
     RESET (state, o) {
       state.errorState = false
-      state.num1 = deal1()
+      state.num1 = deal1() // deal next num from current deck
       state.num2 = getRandom(state.num2)
       state.dice1 = getRandom(state.dice1, 1, 5)
       state.dice2 = getRandom(state.dice2, 1, 5)
@@ -120,6 +129,18 @@ export default new Vuex.Store({
       state.errorState = false
       state.count = 0
       state.time = 0
+      let sublevel = ''
+      let index = state.currentLevel.index
+      const newLevel = get(o, 'level', '')
+      if (newLevel) {
+        index = newLevel
+      }
+      if (index.length > 1) {
+        sublevel = index.substring(1, 2)
+      }
+      // get a new dealer with the correct deck
+      const deckName = 'deck' + sublevel.toUpperCase()
+      deal1 = getDealer(eval(deckName)) // eslint-disable-line
       state.num1 = deal1(true)
       state.num2 = getRandom()
       state.dice1 = getRandom(state.dice1, 1, 5)

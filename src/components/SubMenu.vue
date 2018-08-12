@@ -3,13 +3,21 @@
     <div style="align-items:center;margin:auto">
       <div style="height:625px">
         <div class="squares csquares">
-          <div class="title-button">{{username}}</div>
+          <div class="title-button" style="line-height:2.2em">{{username}}</div>
           <div class="icon icon-point">{{points}}</div>
         </div>
         <div>
-          <div class="squares top-squares" style="width:200px;border:none;margin-left:auto;margin-right:auto;">
-            <div><span class="level">1</span></div>
-            <div><span class="level">2</span></div>
+          <div class="squares top-squares" style="width:180px;border:none;margin-left:auto;margin-right:auto;">
+            <div
+              v-bind:class="passed('1')"
+              @click="goto('1')"
+              class="level">1
+            </div>
+            <div
+                v-bind:class="passed('1')"
+                @click="goto('2')"
+                class="level">2
+            </div>
           </div>
         </div>
         <div class="squares sub-squares">
@@ -21,7 +29,7 @@
           </div>
           <div
             @click="menu" class="arrow-button">
-            <leftarrow style="margin-left:60px" width="200"></leftarrow>
+            <leftarrow style="margin-left:60px; border:none" width="200"></leftarrow>
           </div>
         </div>
       </div>
@@ -79,7 +87,7 @@ const vm = {
         '6a', '6b', '6c', '6d',
         '7a', '7b', '7c', '7d',
         '8a', '8b', '8c', '8d',
-        '9a', '9b', '9d', '9d'
+        '9a', '9b', '9c', '9d'
       ]
     },
     visOperator () {
@@ -159,12 +167,15 @@ export default vm
   line-height: 79px
 .top-squares DIV
   height: 66px
-  padding-top: 14px
+  padding-top: 7px
   font-weight: bold
+  font-size: 3em
+  padding-bottom: 7px
 .sub-squares
   DIV
     font-size: 2.5em
     font-weight: bold
     padding-top: 10px
     line-height: 0.65
+    //padding-right: 4px
 </style>

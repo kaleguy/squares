@@ -1,7 +1,7 @@
 <template>
   <span class="level-label">
    <span>{{levelLabel}}</span>
-   <leveldots></leveldots>
+   <leveldots :level="level"></leveldots>
   </span>
 </template>
 
@@ -20,6 +20,7 @@ const vm = {
     leveldots: LevelDots
   },
   methods: {
+
   },
   computed: {
     levelLabel () {
