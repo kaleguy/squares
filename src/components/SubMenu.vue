@@ -7,7 +7,10 @@
           <div class="icon icon-point">{{points}}</div>
         </div>
         <div>
-          <div class="squares top-squares" style="width:180px;border:none;margin-left:auto;margin-right:auto;">
+          <div class="squares top-squares" style="width:280px;border:none;margin-left:auto;margin-right:auto;">
+            <div class="v-operator">
+              {{visOperator}}
+            </div>
             <div
               v-bind:class="passed('1')"
               @click="goto('1')"
@@ -169,8 +172,9 @@ export default vm
   height: 66px
   padding-top: 7px
   font-weight: bold
-  font-size: 3em
+  font-size: 3.4em
   padding-bottom: 7px
+  line-height: 72px
 .sub-squares
   DIV
     font-size: 2.5em
@@ -178,4 +182,7 @@ export default vm
     padding-top: 10px
     line-height: 0.65
     //padding-right: 4px
+DIV.v-operator
+  border: none
+  font-size: 7em
 </style>
