@@ -129,7 +129,7 @@
           this.$store.commit('RESET')
           const count = this.$store.state.count
           if (this.mode === 'p') { return }
-          if (+count === 18) {
+          if (+count === 27) {
             const levelKey = this.op + level.index
             this.$store.commit('SETPASS', {key: levelKey})
             this.recordPass(levelKey)

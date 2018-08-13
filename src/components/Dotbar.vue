@@ -28,7 +28,7 @@ const vm = {
   },
   computed: {
     dots () {
-      const numDots = 18
+      const numDots = 27
       const dotArray = []
       for (let i = 0; i < numDots; i++) {
         dotArray[i] = 0

@@ -225,7 +225,7 @@ DIV.dtable
 .error
   color: red
 .square-holder
-  height: 106px
+  //height: 106px
   border: 1px solid #fff
 .question-button
   width: 47px
