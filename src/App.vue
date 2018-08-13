@@ -148,7 +148,8 @@ HTML, BODY
   cursor: pointer
   width: 340px
   border: 1px solid #fff
-  margin-top: 30px
+  margin-top: 20px
+  margin-bottom: 28px
   position: relative
   margin-left: auto
   margin-right: auto

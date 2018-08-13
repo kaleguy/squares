@@ -64,7 +64,7 @@ const vm = {
     },
     isActive (i) {
       i = i + ''
-      if (i === this.level) {
+      if (i === this.visLevel) {
         return true
       }
       return false
@@ -76,7 +76,6 @@ const vm = {
       let class1 = 'numerand2'
       let class2 = 'numerand1'
       if (this.r) {
-        console.log('R: ', this.r)
         class1 = 'numerand1'
         class2 = 'numerand2'
       }
@@ -109,8 +108,7 @@ const vm = {
       return _.range(1, 10)
     },
     list2 () {
-      const max = 9 + this.level / 1 + 1
-      console.log('MAX', max)
+      const max = 9 + this.visLevel / 1 + 1
       return _.range(1, max)
     },
     count () {
@@ -143,7 +141,11 @@ const vm = {
     },
     level () {
       return this.$route.params.level || '1'
+    },
+    visLevel () {
+      return this.level.substring(0, 1)
     }
+
   },
   mounted () {
   },

@@ -7,7 +7,7 @@
     <div class="fheading">
       <div class="numerand1">?</div>
       <div class="large-operator">{{visOperator}}</div>
-      <div class="numerand2">{{level}}</div>
+      <div class="numerand2">{{visLevel}}</div>
       <div class="large-operator">=</div>
       <div class="product">?</div>
     </div>
@@ -64,7 +64,7 @@ const vm = {
     },
     isActive (i) {
       i = i + ''
-      if (i === this.level) {
+      if (i === this.visLevel) {
         return true
       }
       return false
@@ -81,7 +81,7 @@ const vm = {
     },
     num3Class (r) {
       r = r + ''
-      if (r !== this.level) { return 'numerand0' }
+      if (r !== this.visLevel) { return 'numerand0' }
       if (this.operator === 'd') { return 'numerand1' }
       if (this.operator === '-') { return 'numerand1' }
       return 'product'
@@ -118,6 +118,9 @@ const vm = {
     },
     level () {
       return this.$route.params.level || '1'
+    },
+    visLevel () {
+      return this.level.substring(0, 1)
     }
   },
   mounted () {

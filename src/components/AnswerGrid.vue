@@ -2,6 +2,14 @@
 <div class="fact-table answergrid">
   <table>
     <tr>
+      <td class="vis-operator"></td>
+      <td
+        class="white-square"
+        v-for="item in list"
+        bind-id="$index"
+        bind-data="item">{{getDot(item)}}</td>
+    </tr>
+    <tr>
       <td class="vis-operator">{{visOperator2}}</td>
       <td
           class="numerand1"
@@ -10,7 +18,7 @@
           bind-data="item">{{item}}</td>
     </tr>
     <tr>
-      <td class="activen">{{level}}</td>
+      <td class="activen">{{visLevel}}</td>
       <td
         class="product"
         v-for="item in products"
@@ -35,6 +43,26 @@ const vm = {
   components: {
   },
   methods: {
+    getDot (i) {
+      let dot = '\u25CF'
+      if (this.level.length > 1) {
+        let levelType = this.level.substring(1, 2)
+        switch (levelType) {
+          case 'a':
+            if (i > 3) { dot = '' }
+            break
+          case 'b':
+            if (i < 4) { dot = '' }
+            if (i > 6) { dot = '' }
+            break
+          case 'c':
+            if (i < 7) { dot = '' }
+            break
+          default:
+        }
+      }
+      return dot
+    }
   },
   computed: {
     products () {
@@ -44,7 +72,7 @@ const vm = {
       if (op === 'd') { op = '/' }
       if (op === 'X') { op = '*' }
       let total = 0
-      let level = this.level
+      let level = this.visLevel
       this.list.forEach((n) => {
         eval ('total = ' + n + ' ' + op + ' ' + level) // eslint-disable-line
         p.push(total)
@@ -78,6 +106,9 @@ const vm = {
     },
     level () {
       return this.$route.params.level || '1'
+    },
+    visLevel () {
+      return this.level.substring(0, 1)
     }
   },
   mounted () {
@@ -91,5 +122,12 @@ export default vm
 
 </script>
 <style lang="sass">
-
+.fact-table TABLE TD.vis-operator
+  font-weight: bold
+  font-size: 34px
+  line-height: .5
+.white-square
+  background: #fff
+  font-size: 30px
+  line-height: .5
 </style>

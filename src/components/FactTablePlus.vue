@@ -2,7 +2,7 @@
   <div style="display:flex;height:100%;">
     <div style="align-items:center;margin:auto">
     <table style="margin-bottom:10px;margin-top:-10px" align="center"><tr><td>
-    <span class="ftitle">+{{level}}</span>
+    <span class="ftitle">+{{visLevel}}</span>
     </td><td>
     <div id="toggle">
       <toggle-button :value="true"
@@ -22,14 +22,14 @@
         v-for="item, index in list" :key="item.id"
         bind-id="$index"
         bind-data="item"
-        :num1="index" :num2="level" :r="true"></factrowplus>
+        :num1="index" :num2="visLevel" :r="true"></factrowplus>
       <factrowplus
         v-if="!flip"
         class="factrow"
         v-for="item, index in list" :key="item.id"
         bind-id="$index"
         bind-data="item"
-        :num1="level - 1" :num2="index + 1"></factrowplus>
+        :num1="visLevel - 1" :num2="index + 1"></factrowplus>
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@ const vm = {
     },
     isActive (i) {
       i = i + ''
-      if (i === this.level) {
+      if (i === this.visLevel) {
         return true
       }
       return false
@@ -96,7 +96,7 @@ const vm = {
     },
     num3Class (r) {
       r = r + ''
-      if (r !== this.level) { return }
+      if (r !== this.visLevel) { return }
       if (this.operator === 'd') { return 'numerand1' }
       if (this.operator === '-') { return 'numerand1' }
       return 'product'
@@ -111,7 +111,12 @@ const vm = {
       return '+'
     },
     level () {
-      return this.$route.params.level / 1 || 1
+      let s = this.$route.params.level
+      // s = s.substring(0, 1)
+      return s || 1
+    },
+    visLevel () {
+      return this.level.substring(0, 1) / 1
     }
   },
   mounted () {
