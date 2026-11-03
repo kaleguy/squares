@@ -56,7 +56,7 @@
 <script>
 import DotBar from './Dotbar'
 import NumPad from './NumPad'
-import TimeBar from './TimeBar'
+import TimeBar from './TImeBar'
 import Dice from './Dice'
 import AnswerGrid from './AnswerGrid'
 import TickCounter from './TickCounter'
