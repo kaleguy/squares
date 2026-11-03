@@ -46,7 +46,7 @@ export default vm
   box-sizing: border-box
   width: 100%
   height: 100%
-  padding: 5px 8px
+  padding: 4px 6px
   gap: 2px
   line-height: 1
 .level-label > SPAN

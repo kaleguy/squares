@@ -33,12 +33,10 @@ HTML, BODY
 .page
   display: flex
   justify-content: center
-  align-items: flex-start
+  align-items: safe center
   box-sizing: border-box
-  min-height: 100%
-  padding: 16px 0 28px
-.page.login-page, .page.menu-page
-  padding-top: 72px
+  min-height: 100vh
+  padding: 16px 0
 .bsquares, .csquares
   font-size: 32px
   font-weight: 700

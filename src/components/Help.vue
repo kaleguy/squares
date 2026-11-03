@@ -89,9 +89,10 @@ export default {
 @import ../styles/tokens
 
 .help-page
-  min-height: 100%
+  min-height: 100vh
   display: flex
   justify-content: center
+  align-items: safe center
   padding: 28px 18px 56px
   box-sizing: border-box
 .help-wrap

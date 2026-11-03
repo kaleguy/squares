@@ -139,20 +139,20 @@ export default vm
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
 .level-screen
-  width: 360px
+  width: 312px
 .level-head
   display: flex
   align-items: center
   gap: 4px
-  width: 348px
-  margin: 0 2px 12px
+  width: 308px
+  margin: 0 2px 10px
 .level-back, .level-points
   display: flex
   align-items: center
   justify-content: center
   box-sizing: content-box
-  width: 80px
-  height: 80px
+  width: 70px
+  height: 70px
   padding: 0
   border: 2px solid #1A2744
   border-radius: 8px
@@ -177,7 +177,7 @@ export default vm
   align-items: center
   justify-content: center
   box-sizing: border-box
-  height: 84px
+  height: 74px
   border: 2px solid #1A2744
   border-radius: 8px
   box-shadow: 0 3px 0 #1A2744
@@ -193,11 +193,13 @@ export default vm
   &:active
     transform: none
     box-shadow: 0 3px 0 #1A2744
+.sub-squares
+  width: 312px
 .squares.short-row
   flex-wrap: nowrap
   align-items: center
   justify-content: flex-start
-  width: 360px
+  width: 312px
   margin-bottom: 0
 .short-row > .level,
 .sub-squares > DIV
@@ -206,8 +208,8 @@ export default vm
   align-items: stretch
   justify-content: center
   box-sizing: content-box
-  width: 80px
-  height: 80px
+  width: 70px
+  height: 70px
   padding: 0
   font-size: 24px
   font-weight: 700
@@ -217,8 +219,8 @@ export default vm
   align-items: center
   justify-content: center
   box-sizing: content-box
-  width: 84px
-  height: 84px
+  width: 74px
+  height: 74px
   margin: 2px
   padding: 0
   border: none
