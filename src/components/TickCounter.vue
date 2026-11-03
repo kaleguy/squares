@@ -92,14 +92,14 @@ export default vm
   gap: 8px
   margin: 0
   DIV
-    background: #fff
+    background: var(--tile)
     width: 44px
     height: 44px
-    border: 2px solid #1A2744
+    border: 2px solid var(--line)
     border-radius: 8px
-    box-shadow: 0 2px 0 #1A2744
+    box-shadow: 0 2px 0 var(--lip)
     line-height: 40px
     font-size: 18px
     font-weight: 700
-    color: #1A2744
+    color: var(--ink)
 </style>

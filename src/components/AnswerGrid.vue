@@ -127,7 +127,7 @@ export default vm
   font-size: 34px
   line-height: .5
 .white-square
-  background: #fff
+  background: var(--tile)
   font-size: 30px
   line-height: .5
 </style>

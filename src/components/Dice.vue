@@ -93,17 +93,17 @@ $color: green
   height: 120px
   margin-left: auto
   margin-right: auto
-  background: #fff
+  background: var(--tile)
   margin-top: 0
   margin-bottom: 0
-  border: 2px solid #1A2744
+  border: 2px solid var(--line)
   border-radius: 8px
-  box-shadow: 0 3px 0 #1A2744
+  box-shadow: 0 3px 0 var(--lip)
   TD
     padding: 4px
-    background: #fff
-    border: 8px solid #fff
+    background: var(--tile)
+    border: 8px solid var(--tile)
   .d
-    background: #1A2744
+    background: var(--ink)
     border-radius: 2px
 </style>

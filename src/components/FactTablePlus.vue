@@ -7,7 +7,7 @@
     <div id="toggle">
       <toggle-button :value="true"
                      :width="80"
-                     :color="{unchecked: '#F0B429', checked: '#2F6FE0'}"
+                     :color="{unchecked: 'var(--operand)', checked: 'var(--level)'}"
                      @change="switchMode"
                      :height="40"
                      :sync="true"/>
@@ -138,7 +138,7 @@ export default vm
   display: inline-block
   font-family: inherit
   font-weight: 700
-  color: #1A2744
+  color: var(--ink)
   font-size: 60px
   line-height: 60px
 </style>

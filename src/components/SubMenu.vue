@@ -64,7 +64,7 @@ const vm = {
       const passedLevels = this.$store.state.passedLevels
       const levelKey = this.operator + level
       if (passedLevels[levelKey]) {
-        cssClass = 'icon icon-star'
+        cssClass = 'passed'
       }
       // console.log(cssClass, passedLevels)
       return cssClass
@@ -154,9 +154,9 @@ export default vm
   width: 70px
   height: 70px
   padding: 0
-  border: 2px solid #1A2744
+  border: 2px solid var(--line)
   border-radius: 8px
-  box-shadow: 0 3px 0 #1A2744
+  box-shadow: 0 3px 0 var(--lip)
   font-family: inherit
   font-size: 26px
   font-weight: 700
@@ -164,10 +164,10 @@ export default vm
   cursor: pointer
   &:active
     transform: translateY(2px)
-    box-shadow: 0 1px 0 #1A2744
+    box-shadow: 0 1px 0 var(--lip)
 .level-back
-  background: #fff
-  color: #1A2744
+  background: var(--tile)
+  color: var(--ink)
   DIV
     display: flex
     line-height: 0
@@ -178,21 +178,21 @@ export default vm
   justify-content: center
   box-sizing: border-box
   height: 74px
-  border: 2px solid #1A2744
+  border: 2px solid var(--line)
   border-radius: 8px
-  box-shadow: 0 3px 0 #1A2744
-  background: #fff
+  box-shadow: 0 3px 0 var(--lip)
+  background: var(--tile)
   text-align: center
   font-size: 28px
   font-weight: 700
   line-height: 1
 .level-points
-  background: #1C7A45
+  background: var(--answer)
   color: #fff
   cursor: default
   &:active
     transform: none
-    box-shadow: 0 3px 0 #1A2744
+    box-shadow: 0 3px 0 var(--lip)
 .sub-squares
   width: 312px
 .squares.short-row
@@ -214,6 +214,10 @@ export default vm
   font-size: 24px
   font-weight: 700
   line-height: 1
+.short-row > .level.passed,
+.sub-squares > DIV.passed
+  background-color: var(--level)
+  color: var(--level-text)
 .short-row .v-operator
   display: flex
   align-items: center

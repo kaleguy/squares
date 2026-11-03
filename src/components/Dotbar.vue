@@ -55,8 +55,8 @@ $size: 1.4em
   width: $size
   height: $size
   border-radius: 3px
-  border: 2px solid #1A2744
-  background: #fff
+  border: 2px solid var(--line)
+  background: var(--tile)
   display: inline-block
   margin: 3px
   margin-bottom: 0
@@ -67,6 +67,6 @@ $size: 1.4em
   margin-left: auto
   margin-right: auto
 .ball
-  background: #1C7A45
-  border-color: #1C7A45
+  background: var(--answer)
+  border-color: var(--answer)
 </style>

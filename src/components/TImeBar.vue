@@ -73,13 +73,13 @@ export default vm
 <style lang="sass">
 .timebar
   width: 285px
-  background: #B7C3D6
+  background: var(--track)
   height: 12px
   margin-left: auto
   margin-right: auto
   margin-bottom: 10px
 #timebarFill
-  background: #1C7A45
+  background: var(--answer)
   height: 100%
   width: 0
 </style>

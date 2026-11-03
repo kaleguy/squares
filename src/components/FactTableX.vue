@@ -115,7 +115,7 @@ export default vm
   font-size: 60px
   font-weight: 700
   font-family: inherit
-  color: #1A2744
+  color: var(--ink)
 .xtable
   width: 350px
   margin-left: auto
@@ -128,13 +128,13 @@ export default vm
   height: 34px
   display: inline-block
   line-height: 34px
-  border-left: 1px solid #E8EEF6
-  border-bottom: 1px solid #E8EEF6
+  border-left: 1px solid var(--paper)
+  border-bottom: 1px solid var(--paper)
   font-weight: bold
 .numerand0
-  color: #ffffff
-  background: #1A2744
+  color: var(--tile)
+  background: var(--ink)
 .numerand1x
-  color: #ffffff
-  background: #2F6FE0
+  color: var(--level-text)
+  background: var(--level)
 </style>

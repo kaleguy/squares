@@ -68,7 +68,7 @@
      id="g10"><path
        d="m 383.07536,296.81604 -15.203,-13.205 15.203,-13.139 0,6.296 11.997,0 0,13.645 -11.997,0 0,6.403 z"
        id="path202"
-       style="fill:#1A2744;fill-opacity:1;stroke:#1A2744;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:currentColor;stroke:currentColor;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter"
        inkscape:connector-curvature="0" /></g></svg>
   </div>
 </template>

@@ -165,26 +165,26 @@ export default vm
   position: relative
 .numerand1
   background: $operand
-  color: $ink
+  color: #1A2744
 .activen
-  background: $pen
-  color: $tile
+  background: $level
+  color: $level-text
 .product
   background: $answer
-  color: $tile
+  color: #fff
 .numerand2
-  background: $pen
-  color: $tile
+  background: $level
+  color: $level-text
 .numerandb
   background: $answer
-  color: $tile
+  color: #fff
 .numerand00
   background: $tile
   color: $tile
 .active
   background: $answer
   font-weight: bold
-  color: $tile
+  color: #fff
 .fheading
   font-size: 40px
   font-weight: bold
@@ -205,7 +205,7 @@ export default vm
 .fact-table
   cursor: pointer
   // width: 1340px
-  border: 1px solid #fff
+  border: 1px solid var(--paper)
   margin-top: 30px
   position: relative
   margin-left: auto

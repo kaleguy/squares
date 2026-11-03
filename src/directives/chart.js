@@ -82,9 +82,9 @@ export default Line.extend({
         {
           label: 'Stars',
           backgroundColor: '#ffffff',
-          borderColor: '#149718', // rgb(255, 99, 132)',
+          borderColor: (getComputedStyle(document.documentElement).getPropertyValue('--answer') || '#1C7A45').trim(),
           borderWidth: 6,
-          color: '#00ff00',
+          color: (getComputedStyle(document.documentElement).getPropertyValue('--answer') || '#1C7A45').trim(),
           data: nData
         }
       ]

@@ -12,8 +12,28 @@ export default {
 
 <style lang="sass">
 @import ./styles/tokens
+\:root
+  --paper: #E8EEF6
+  --ink: #1A2744
+  --tile: #FFFFFF
+  --line: #1A2744
+  --lip: #1A2744
+  --operand: #F0B429
+  --answer: #1C7A45
+  --miss: #C4362C
+  --mark-on: #1C7A45
+  --mark-off: #C8890E
+  --grid: rgba(26, 39, 68, 0.055)
+  --muted: #8B97AD
+  --track: #B7C3D6
+  --level: #1B4D38
+  --level-text: #FFFFFF
+  --passed-dot-on: #FFFFFF
+  --passed-dot-off: #F0C36A
 HTML
   height: 100%
+*
+  touch-action: manipulation
 HTML, BODY
   margin: 0
   font-family: "Atkinson Hyperlegible", "Avenir Next", "Segoe UI", sans-serif
@@ -24,7 +44,7 @@ HTML, BODY
   text-align: center
   color: $ink
   background-color: $paper
-  background-image: linear-gradient(rgba(26, 39, 68, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 39, 68, 0.055) 1px, transparent 1px)
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px)
   background-size: 28px 28px
   min-height: 100%
   width: 100%
@@ -79,15 +99,15 @@ HTML, BODY
     width: 80px
     color: $ink
     background-color: $tile
-    border: 2px solid $ink
+    border: 2px solid $line
     border-radius: 8px
-    box-shadow: 0 3px 0 $ink
+    box-shadow: 0 3px 0 $lip
     height: 75px
     margin: 2px
     user-select: none
     &:active
       transform: translateY(2px)
-      box-shadow: 0 1px 0 $ink
+      box-shadow: 0 1px 0 $lip
   DIV.op-tile
     display: flex
     align-items: center
@@ -133,6 +153,14 @@ HTML, BODY
     padding: 0
     line-height: 1
     color: $tile
+  DIV.icon-star
+    background-color: $level
+    background-image: none
+    color: $level-text
+  DIV.icon-point
+    color: #fff
+    background-size: 100% 100%
+    background-image: radial-gradient(circle closest-side, var(--answer) 0 84%, transparent 85%)
   DIV.level-dots
     border: none
     box-shadow: none
@@ -172,8 +200,8 @@ HTML, BODY
   background-color: $tile
   background-image: none
   border-radius: 8px
-  border: 2px solid $ink
-  box-shadow: 0 3px 0 $ink
+  border: 2px solid $line
+  box-shadow: 0 3px 0 $lip
   color: $ink
   font-family: inherit
   font-size: 22px
@@ -181,16 +209,16 @@ HTML, BODY
   line-height: 1.3
   padding: 10px 12px
   &::placeholder
-    color: #8B97AD
+    color: var(--muted)
     font-weight: 400
   &:focus
-    outline: 3px solid $pen
+    outline: 3px solid $ink
     outline-offset: 2px
 .type-ahead-group > ul
   background-color: $tile
   border-radius: 8px
-  border: 2px solid $ink
-  box-shadow: 0 3px 0 $ink
+  border: 2px solid $line
+  box-shadow: 0 3px 0 $lip
   display: none
   float: left
   font-size: 22px
@@ -213,8 +241,8 @@ HTML, BODY
   padding: 6px 16px
   white-space: nowrap
 .type-ahead-group > ul > li.active > a, .type-ahead-group > ul > li > a:hover
-  background-color: $pen
-  color: $tile
+  background-color: $level
+  color: $level-text
   text-decoration: none
 
 // Fact table sand answergrids
@@ -223,20 +251,20 @@ HTML, BODY
   color: $tile
 .numerand1
   background: $operand
-  color: $ink
+  color: #1A2744
 .activen
-  background: $pen
-  color: $tile
+  background: $level
+  color: $level-text
 .product
   background: $answer
-  color: $tile
+  color: #fff
 .numerand2
-  background: $pen
-  color: $tile
+  background: $level
+  color: $level-text
 .active
   background: $answer
   font-weight: 700
-  color: $tile
+  color: #fff
 .fheading
   font-size: 40px
   font-weight: 700
@@ -273,8 +301,8 @@ HTML, BODY
     background: $ink
     color: $tile
   .col.activen
-    background: $pen
-    color: $tile
+    background: $level
+    color: $level-text
   .row
   TABLE
     width: 100%
@@ -288,7 +316,7 @@ HTML, BODY
       border-bottom: 1px solid $paper
       border-right: 1px solid $paper
       width: 30px
-// star and point icon/images
+// passed-level count and point total
 DIV.icon
   display: inline-block
   font-size: 50px
@@ -299,19 +327,17 @@ DIV.icon
 .icon-star
   width: 100px
   height: 100px
-  color: $tile
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.201 29.676'><polygon points='15.602,0 19.325,11.279 31.2,11.332 21.624,18.36 25.243,29.676 15.602,22.738 5.96,29.676 9.577,18.36 0,11.332 11.878,11.279' fill='%231C7A45'/></svg>")
-.icon-star .dot-green
-  color: $tile
-.icon-star .dot-orange
-  color: rgba(255, 255, 255, 0.62)
+  color: $level-text
+  background-color: $level
+  background-image: none
 .icon-point
-  color: $tile
+  color: #fff
   width: 100px
   height: 100px
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%231C7A45'/></svg>")
+  background-size: 100% 100%
+  background-image: radial-gradient(circle closest-side, var(--answer) 0 84%, transparent 85%)
 @media (prefers-reduced-motion: reduce)
   body .squares DIV:active, body .numpad DIV:active, body .srow:active, body .question-button:active
     transform: none
-    box-shadow: 0 3px 0 $ink
+    box-shadow: 0 3px 0 $lip
 </style>

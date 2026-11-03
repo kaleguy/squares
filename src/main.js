@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import { applyTheme, currentThemeId } from './lib/theme'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueEvents from 'vue-events'
@@ -14,6 +15,7 @@ Vue.use(VueEvents)
 Vue.use(VueSweetAlert)
 
 Vue.config.productionTip = false
+applyTheme(currentThemeId())
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

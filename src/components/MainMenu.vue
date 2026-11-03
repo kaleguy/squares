@@ -62,7 +62,7 @@ const vm = {
       return titleCase(this.$store.state.username)
     },
     levelCount () {
-      return Object.keys(this.record).length || ' '
+      return Object.keys(this.record).length
     },
     points () {
       const points = _.reduce(this.record, (points, level) => {

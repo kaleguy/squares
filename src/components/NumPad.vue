@@ -225,11 +225,11 @@
     border-radius: 6px
     DIV
       width: 1em
-      border: 2px solid #1A2744
+      border: 2px solid var(--line)
       border-radius: 8px
-      background-color: #fff
-      color: #1A2744
-      box-shadow: 0 3px 0 #1A2744
+      background-color: var(--tile)
+      color: var(--ink)
+      box-shadow: 0 3px 0 var(--lip)
       margin: 2px
       padding: 8px
       line-height: 1
@@ -239,7 +239,7 @@
       user-select: none
       &:active
         transform: translateY(2px)
-        box-shadow: 0 1px 0 #1A2744
+        box-shadow: 0 1px 0 var(--lip)
     DIV DIV
       border: none
       box-shadow: none
@@ -252,7 +252,7 @@
       &:active
         transform: none
     .del
-      color: #C4362C
+      color: var(--miss)
       font-size: 40px
       line-height: 1.8
       height: 57px
@@ -261,7 +261,7 @@
     .back
       width: 64px
       height: 57px
-      color: #1A2744
+      color: var(--ink)
       font-size: 40px
       line-height: 1.8
 </style>

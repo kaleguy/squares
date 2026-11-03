@@ -7,6 +7,31 @@
       <h1>Help</h1>
 
       <section>
+        <h2>Colors</h2>
+        <p>Pick a color for the levels you have passed. Night and Chalk darken the whole page.</p>
+        <div class="palette-row" role="group" aria-label="Color theme">
+          <button
+            v-for="theme in themes"
+            type="button"
+            class="palette-choice"
+            :key="theme.id"
+            :class="{ 'is-on': theme.id === current }"
+            :aria-pressed="theme.id === current ? 'true' : 'false'"
+            @click="choose(theme.id)">
+            <span class="palette-plate" :style="plate(theme)">
+              <span class="palette-tile" :style="swatch(theme)">
+                <span class="palette-num">3</span>
+                <span class="palette-grid">
+                  <i v-for="n in 9" :key="n" :style="{ background: n < 4 ? theme.dotOn : theme.dotOff }"></i>
+                </span>
+              </span>
+            </span>
+            <span class="palette-label">{{ theme.label }}</span>
+          </button>
+        </div>
+      </section>
+
+      <section>
         <h2>Your name</h2>
         <p>Type your name and press Return. Squares keeps your scores on this device.</p>
         <shot file="static/help/name.png" caption="The name screen."></shot>
@@ -14,13 +39,13 @@
 
       <section>
         <h2>The menu</h2>
-        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The star is how many levels you have passed. The green circle is your points.</p>
+        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The filled square is how many levels you have passed, and it shows zero until you pass one. The green circle is your points.</p>
         <shot file="static/help/menu.png" caption="The main menu."></shot>
       </section>
 
       <section>
         <h2>Levels</h2>
-        <p>Levels 1 and 2 are short. The rest are grouped by number. The small squares show which facts are in that level. A star means you passed it.</p>
+        <p>Levels 1 and 2 are short. The rest are grouped by number. The small squares show which facts are in that level. A filled square means you passed it.</p>
         <shot file="static/help/levels.png" caption="Picking a level."></shot>
       </section>
 
@@ -32,7 +57,7 @@
 
       <section>
         <h2>Facts</h2>
-        <p>The table shows the whole set for that level. Amber is one number, blue is the level, and green is the answer.</p>
+        <p>The table shows the whole set for that level. Amber is one number, the color you picked is the level, and green is the answer.</p>
         <shot file="static/help/facts.png" caption="The fact table."></shot>
       </section>
 
@@ -47,6 +72,7 @@
 
 <script>
 import LeftArrow from './LeftArrow'
+import { THEMES, applyTheme, currentThemeId } from '../lib/theme'
 
 const Shot = {
   name: 'shot',
@@ -73,7 +99,30 @@ export default {
     leftarrow: LeftArrow,
     shot: Shot
   },
+  data () {
+    return {
+      themes: THEMES,
+      current: currentThemeId()
+    }
+  },
   methods: {
+    swatch (theme) {
+      const line = theme.line || '#1A2744'
+      const lip = theme.lip || '#1A2744'
+      return {
+        background: theme.level,
+        color: theme.levelText,
+        borderColor: line,
+        boxShadow: '0 3px 0 ' + lip
+      }
+    },
+    plate (theme) {
+      if (!theme.paper) return {}
+      return { background: theme.paper }
+    },
+    choose (id) {
+      this.current = applyTheme(id)
+    },
     back () {
       if (this.$store.state.username) {
         this.$router.replace('/main/')
@@ -119,6 +168,60 @@ export default {
   font-weight: 400
   line-height: 1.45
   margin: 0 0 12px
+.palette-row
+  display: flex
+  flex-wrap: wrap
+  gap: 16px 8px
+.palette-choice
+  flex: 0 0 calc(33.333% - 6px)
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 8px
+  margin: 0
+  padding: 0
+  border: none
+  background: transparent
+  color: $ink
+  font: inherit
+  cursor: pointer
+.palette-plate
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 6px
+  border-radius: 12px
+.palette-tile
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  gap: 3px
+  width: 58px
+  height: 58px
+  box-sizing: border-box
+  border: 2px solid $line
+  border-radius: 8px
+  box-shadow: 0 3px 0 $lip
+.palette-choice.is-on .palette-tile
+  transform: translateY(2px)
+  box-shadow: 0 1px 0 $lip
+.palette-num
+  font-size: 16px
+  font-weight: 700
+  line-height: 1
+.palette-grid
+  display: grid
+  grid-template-columns: repeat(3, 7px)
+  grid-template-rows: repeat(3, 7px)
+  gap: 1px
+.palette-grid i
+  display: block
+  border-radius: 1px
+.palette-label
+  font-size: 14px
+  font-weight: 700
+  line-height: 1
 .shot
   margin: 0
 .shot img

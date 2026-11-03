@@ -87,7 +87,11 @@ DIV.level-dots.level-dots
   font-size: 0
   line-height: 0
 .dot-orange
-  background: #C8890E
+  background: var(--mark-off)
 .dot-green
-  background: #1C7A45
+  background: var(--mark-on)
+.passed .dot-green
+  background: var(--passed-dot-on)
+.passed .dot-orange
+  background: var(--passed-dot-off)
 </style>

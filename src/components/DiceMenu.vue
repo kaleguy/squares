@@ -90,7 +90,7 @@ DIV.dtable
   height: 122px
   width: 122px
 .smenu TABLE.dice
-  border: 2px solid #1A2744
+  border: 2px solid var(--line)
   box-shadow: none
 DIV.arrow
   font-size: 80px
@@ -98,15 +98,15 @@ DIV.arrow
   height: 100px
   line-height: 1.8
 .srow
-  border: 2px solid #1A2744
-  background: #fff
+  border: 2px solid var(--line)
+  background: var(--tile)
   border-radius: 8px
-  box-shadow: 0 3px 0 #1A2744
+  box-shadow: 0 3px 0 var(--lip)
   padding-top: 10px
   margin-bottom: 12px
   &:active
     transform: translateY(2px)
-    box-shadow: 0 1px 0 #1A2744
+    box-shadow: 0 1px 0 var(--lip)
 .passed
-  background: #1C7A45
+  background: var(--level)
 </style>

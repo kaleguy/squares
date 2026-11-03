@@ -31,7 +31,7 @@
             <div class="toggle-rot">
               <toggle-button :value="true"
                              :width="80"
-                             :color="{checked: '#2F6FE0', unchecked: '#F0B429'}"
+                             :color="{checked: 'var(--level)', unchecked: 'var(--operand)'}"
                              @change="switchMode"
                              :height="40" :sync="true"/>
             </div>
@@ -179,8 +179,11 @@ export default vm
   display: flex
   align-items: flex-start
   justify-content: center
-  gap: 14px
+  gap: 20px
   margin-top: 12px
+  .math
+    margin-left: 0
+    margin-right: 0
 .problem-tools
   display: flex
   flex-direction: column
@@ -212,26 +215,25 @@ export default vm
   font-family: inherit
   font-weight: 700
   font-variant-numeric: tabular-nums
-  color: #1A2744
-  background-color: #fff
-  border: 2px solid #1A2744
-  box-shadow: 0 3px 0 #1A2744
+  color: var(--ink)
+  background-color: var(--tile)
+  border: 2px solid var(--line)
+  box-shadow: 0 3px 0 var(--lip)
   max-width: 300px
   width: 3em
   margin-left: auto
   margin-right: auto
   border-radius: 8px
   margin-bottom: 8px
-  padding: 0px
+  padding: 14px 30px 0 0
   line-height: .95em
-  padding-right: 30px
   height: 3.5em
   overflow: hidden
   DIV
     text-align: right
     margin-left: 30px
 .total
-  border-top: 6px solid #1A2744
+  border-top: 6px solid var(--ink)
   padding-top: 5px
   margin-top: 12px
 DIV.dtable
@@ -239,17 +241,17 @@ DIV.dtable
   height: 122px
   width: 122px
 .math.error
-  color: #C4362C
-  border-color: #C4362C
-  box-shadow: 0 3px 0 #C4362C
+  color: var(--miss)
+  border-color: var(--miss)
+  box-shadow: 0 3px 0 var(--miss)
   .total
-    border-top-color: #C4362C
+    border-top-color: var(--miss)
 .square-holder
   border: 1px solid transparent
 .question-button
   width: 44px
-  background: #1A2744
-  color: #fff
+  background: var(--ink)
+  color: var(--tile)
   font-family: inherit
   font-size: 28px
   height: 44px
@@ -257,11 +259,11 @@ DIV.dtable
   font-weight: 700
   cursor: pointer
   border-radius: 8px
-  box-shadow: 0 3px 0 #1A2744
+  box-shadow: 0 3px 0 var(--lip)
   margin: 0
   position: static
   user-select: none
   &:active
     transform: translateY(2px)
-    box-shadow: 0 1px 0 #1A2744
+    box-shadow: 0 1px 0 var(--lip)
 </style>
