@@ -2,9 +2,11 @@
   <div class="help-page">
     <div class="help-wrap">
       <div class="help-back" @click="back">
-        <leftarrow width="64"></leftarrow>
+        <leftarrow width="40" tight></leftarrow>
       </div>
       <h1>Help</h1>
+      <p>Squares is a program to memorize basic math facts quickly and efficiently. Each square is one set of facts. You have to answer that set over and over, with no mistakes, in a set amount of time.</p>
+      <p>Pass all the squares, and your facts are memorized.</p>
 
       <section>
         <h2>Colors</h2>
@@ -150,9 +152,10 @@ export default {
   text-align: left
   color: $ink
 .help-back
-  width: 64px
+  width: 40px
   cursor: pointer
-  margin-bottom: 4px
+  margin-bottom: 16px
+  color: $ink
 .help-wrap h1
   font-size: 40px
   font-weight: 700

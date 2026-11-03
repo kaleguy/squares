@@ -10,7 +10,7 @@
     <div>8</div>
     <div>9</div>
     <div class="back" @click="menu">
-      <leftarrow width="110" style="border:none; margin-left:4px;margin-top:1px"></leftarrow>
+      <leftarrow width="40" tight></leftarrow>
     </div>
     <div>0</div>
     <div class="del">
@@ -259,9 +259,12 @@
       width: 64px
       display: block
     .back
+      display: flex
+      align-items: center
+      justify-content: center
       width: 64px
       height: 57px
       color: var(--ink)
       font-size: 40px
-      line-height: 1.8
+      line-height: 1
 </style>
