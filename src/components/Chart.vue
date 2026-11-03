@@ -46,6 +46,6 @@ export default vm
 .chead
   position: middle
   margin-bottom: -100px
-  height: 140px;
+  height: 140px
   width: 140px
 </style>

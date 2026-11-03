@@ -120,7 +120,7 @@ export default vm
   margin-left: auto
   margin-right: auto
   cursor: pointer
-  margin-top: -90px;
+  margin-top: -90px
 .factrow
   margin-bottom: 0px
 .cell
