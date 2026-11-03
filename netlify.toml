@@ -1,0 +1,6 @@
+[build]
+  command = "node --openssl-legacy-provider build/build.js"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
