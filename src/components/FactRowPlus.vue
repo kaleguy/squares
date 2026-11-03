@@ -160,33 +160,35 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
+@import ../styles/tokens
 .ftp
   position: relative
 .numerand1
-  background: orange
+  background: $operand
+  color: $ink
 .activen
-  background: blue
-  color: #fff
+  background: $pen
+  color: $tile
 .product
-  background: green
-  color: #fff
+  background: $answer
+  color: $tile
 .numerand2
-  background: blue
-  color: #fff
+  background: $pen
+  color: $tile
 .numerandb
-  background: green
-  color: #ffffff
+  background: $answer
+  color: $tile
 .numerand00
-  background: #fff
-  color: #fff
+  background: $tile
+  color: $tile
 .active
-  background: green
+  background: $answer
   font-weight: bold
-  color: #fff
+  color: $tile
 .fheading
   font-size: 40px
   font-weight: bold
-  color: #fff
+  color: $ink
   margin-top: 40px
   width: 300px
   margin-left: auto
@@ -198,7 +200,7 @@ export default vm
     border-radius: 6px
     display: inline-block
   .large-operator
-    color: #000
+    color: $ink
     width: 30px
 .fact-table
   cursor: pointer
@@ -218,8 +220,8 @@ export default vm
   height: 24px
   display: inline-block
   line-height: 24px
-  border-left: 1px solid #fff
-  border-bottom: 1px solid #fff
+  border-left: 1px solid $paper
+  border-bottom: 1px solid $paper
   font-weight: bold
 .factr
   // width: 524px

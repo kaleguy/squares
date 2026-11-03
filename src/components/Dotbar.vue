@@ -51,12 +51,12 @@ export default vm
 
 <style lang="sass" scoped>
 $size: 1.4em
-$color: green
 .dot
   width: $size
   height: $size
-  border-radius: 4px
-  border: 2px solid $color
+  border-radius: 3px
+  border: 2px solid #1A2744
+  background: #fff
   display: inline-block
   margin: 3px
   margin-bottom: 0
@@ -67,5 +67,6 @@ $color: green
   margin-left: auto
   margin-right: auto
 .ball
-  background: $color
+  background: #1C7A45
+  border-color: #1C7A45
 </style>

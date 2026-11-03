@@ -1,6 +1,6 @@
 <template>
-  <div style="display: flex; flex-direction: column; height: 100%; margin-left:-10px">
-    <div style="margin:auto; width:400px">
+  <div class="page">
+    <div style="width:400px; margin-left:-10px">
       <div class="square-holder">
         <answergrid v-if="mode==='p'"></answergrid>
         <div
@@ -9,13 +9,6 @@
           <dots></dots>
           <timebar></timebar>
         </div>
-      </div>
-      <div id="toggleh" v-if="op!=='s'">
-        <toggle-button :value="true"
-                       :width="80"
-                       :color="{checked: 'blue', unchecked: 'orange'}"
-                       @change="switchMode"
-                       :height="40" :sync="true"/>
       </div>
       <div v-if="op==='s'">
         <div class="smath">
@@ -32,16 +25,27 @@
           </div>
         </div>
       </div>
-      <div v-else>
-        <div
-          @click="goto(level)"
-          class="question-button">?</div>
-        <tickcounter></tickcounter>
+      <div v-else class="problem-row">
+        <div class="problem-tools">
+          <div id="toggleh">
+            <div class="toggle-rot">
+              <toggle-button :value="true"
+                             :width="80"
+                             :color="{checked: '#2F6FE0', unchecked: '#F0B429'}"
+                             @change="switchMode"
+                             :height="40" :sync="true"/>
+            </div>
+          </div>
+          <div
+            @click="goto(level)"
+            class="question-button">?</div>
+        </div>
         <div class="math" v-bind:class="errorStateClass">
           <div>{{num1}}</div>
           <div>{{visOperator}} {{num2}}</div>
           <div class="total">{{buffer}}</div>
         </div>
+        <tickcounter></tickcounter>
       </div>
       <numpad></numpad>
     </div>
@@ -171,19 +175,31 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-HTML, BODY
-  width: 100%
-  max-width: 100%
-  height: 100%
+.problem-row
+  display: flex
+  align-items: flex-start
+  justify-content: center
+  gap: 14px
+  margin-top: 12px
+.problem-tools
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 14px
+  width: 48px
+  padding-top: 16px
 #toggleh
-  margin-top: 40px
-  margin-left: 20px
-  -webkit-transform: rotate(90deg)
-  -moz-transform: rotate(90deg)
-  -o-transform: rotate(90deg)
-  -ms-transform: rotate(90deg)
-  transform: rotate(90deg)
-  float: left
+  position: relative
+  width: 40px
+  height: 80px
+  margin: 0
+.toggle-rot
+  position: absolute
+  width: 80px
+  height: 40px
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%) rotate(90deg)
 .smath
   max-width: 400px
   margin-left: auto
@@ -192,52 +208,60 @@ HTML, BODY
   margin-bottom: 8px
   padding-top: 30px
 .math
-  // box-shadow: 2px 2px 5px #888888;
-  font-size: 3.5em
-  font-family: verdana
-  font-weight: bold
-  color: #00f
-  border: 2px solid blue
+  font-size: 4em
+  font-family: inherit
+  font-weight: 700
+  font-variant-numeric: tabular-nums
+  color: #1A2744
+  background-color: #fff
+  border: 2px solid #1A2744
+  box-shadow: 0 3px 0 #1A2744
   max-width: 300px
   width: 3em
   margin-left: auto
   margin-right: auto
-  border-radius: 20px
+  border-radius: 8px
   margin-bottom: 8px
   padding: 0px
   line-height: .95em
   padding-right: 30px
   height: 3.5em
+  overflow: hidden
   DIV
     text-align: right
-    //border: 1px solid red
     margin-left: 30px
 .total
-  border-top: 10px solid blue
-  //width: 160px
-  //float: right
+  border-top: 6px solid #1A2744
   padding-top: 5px
   margin-top: 12px
 DIV.dtable
   display: inline-block
   height: 122px
   width: 122px
-.error
-  color: red
+.math.error
+  color: #C4362C
+  border-color: #C4362C
+  box-shadow: 0 3px 0 #C4362C
+  .total
+    border-top-color: #C4362C
 .square-holder
-  //height: 106px
-  border: 1px solid #fff
+  border: 1px solid transparent
 .question-button
-  width: 47px
-  background: blue
+  width: 44px
+  background: #1A2744
   color: #fff
-  font-family: Avenir "Avenir Next"
-  font-size: 37px
-  height: 47px
-  font-weight: bold
+  font-family: inherit
+  font-size: 28px
+  height: 44px
+  line-height: 44px
+  font-weight: 700
   cursor: pointer
-  border-radius: 32px
-  margin-top: 115px
-  position: absolute
-  margin-left: 36px
+  border-radius: 8px
+  box-shadow: 0 3px 0 #1A2744
+  margin: 0
+  position: static
+  user-select: none
+  &:active
+    transform: translateY(2px)
+    box-shadow: 0 1px 0 #1A2744
 </style>

@@ -1,39 +1,33 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
-      <div style="height:625px">
-        <div class="squares csquares">
-          <div class="title-button" style="line-height:2.2em">{{username}}</div>
-          <div class="icon icon-point">{{points}}</div>
+  <div class="page">
+    <div class="level-screen">
+      <div class="level-head">
+        <button type="button" class="level-back" @click="menu" aria-label="Back">
+          <leftarrow width="48" tight></leftarrow>
+        </button>
+        <div class="level-name">{{username}}</div>
+        <div class="level-points">{{points}}</div>
+      </div>
+      <div class="squares short-row">
+        <div class="v-operator"><span>{{visOperator}}</span></div>
+        <div
+          v-bind:class="passed('1')"
+          @click="goto('1')"
+          class="level">
+          <levellabel level="1d"></levellabel>
         </div>
-        <div>
-          <div class="squares top-squares" style="width:280px;border:none;margin-left:auto;margin-right:auto;">
-            <div class="v-operator">
-              {{visOperator}}
-            </div>
-            <div
-              v-bind:class="passed('1')"
-              @click="goto('1')"
-              class="level">1
-            </div>
-            <div
-                v-bind:class="passed('1')"
-                @click="goto('2')"
-                class="level">2
-            </div>
-          </div>
+        <div
+          v-bind:class="passed('2')"
+          @click="goto('2')"
+          class="level">
+          <levellabel level="2d"></levellabel>
         </div>
-        <div class="squares sub-squares">
-          <div v-for="level in levels"
-               v-bind:class="passed(level)"
-               @click="goto(level)">
-            <!--<span class="operator">{{visOperator}}</span>-->
-            <levellabel :level="level"></levellabel>
-          </div>
-          <div
-            @click="menu" class="arrow-button">
-            <leftarrow style="margin-left:60px; border:none" width="200"></leftarrow>
-          </div>
+      </div>
+      <div class="squares sub-squares">
+        <div v-for="level in levels"
+             v-bind:class="passed(level)"
+             @click="goto(level)">
+          <levellabel :level="level"></levellabel>
         </div>
       </div>
     </div>
@@ -44,6 +38,7 @@
 import LevelLabel from './LevelLabel'
 import LeftArrow from './LeftArrow'
 import _ from 'lodash'
+import { titleCase, levelsKey } from '../lib/name'
 const vm = {
   name: 'submenu',
   components: {
@@ -110,7 +105,7 @@ const vm = {
       return op
     },
     username () {
-      return this.$store.state.username
+      return titleCase(this.$store.state.username)
     },
     points () {
       const points = _.reduce(this.record, (points, level, k) => {
@@ -123,7 +118,7 @@ const vm = {
       return points
     },
     record () {
-      const recordKey = this.username + '_levels'
+      const recordKey = levelsKey(this.$store.state.username)
       return JSON.parse(localStorage.getItem(recordKey)) || {}
     }
   },
@@ -143,46 +138,101 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
-.title-button
-  margin-left: auto
-  margin-right: auto
-  line-height: 2.3em
-.operator
-  font-size: 44px
-  font-weight: bold
-  display: inline-block
-  padding-top: 0
-  line-height: .5em
-  margin: 0
-  margin-bottom: 200px
-.level
-  font-weight: bold
-  font-size: 1em
-.arrow-button
-  width: 200px
-  height: 200px
+.level-screen
+  width: 360px
+.level-head
+  display: flex
+  align-items: center
+  gap: 4px
+  width: 348px
+  margin: 0 2px 12px
+.level-back, .level-points
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: content-box
+  width: 80px
+  height: 80px
+  padding: 0
+  border: 2px solid #1A2744
+  border-radius: 8px
+  box-shadow: 0 3px 0 #1A2744
+  font-family: inherit
+  font-size: 26px
+  font-weight: 700
+  line-height: 1
+  cursor: pointer
+  &:active
+    transform: translateY(2px)
+    box-shadow: 0 1px 0 #1A2744
+.level-back
+  background: #fff
+  color: #1A2744
+  DIV
+    display: flex
+    line-height: 0
+.level-name
+  flex: 1
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: border-box
+  height: 84px
+  border: 2px solid #1A2744
+  border-radius: 8px
+  box-shadow: 0 3px 0 #1A2744
+  background: #fff
+  text-align: center
+  font-size: 28px
+  font-weight: 700
+  line-height: 1
+.level-points
+  background: #1C7A45
+  color: #fff
+  cursor: default
+  &:active
+    transform: none
+    box-shadow: 0 3px 0 #1A2744
+.squares.short-row
+  flex-wrap: nowrap
+  align-items: center
+  justify-content: flex-start
+  width: 360px
+  margin-bottom: 0
+.short-row > .level,
+.sub-squares > DIV
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  justify-content: center
+  box-sizing: content-box
+  width: 80px
+  height: 80px
+  padding: 0
+  font-size: 24px
+  font-weight: 700
+  line-height: 1
+.short-row .v-operator
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: content-box
+  width: 84px
+  height: 84px
+  margin: 2px
+  padding: 0
   border: none
   box-shadow: none
-  margin-left: auto
-  margin-right: auto
-  padding-top: 0
-.icon
-  line-height: 79px
-.top-squares DIV
-  height: 66px
-  padding-top: 7px
-  font-weight: bold
-  font-size: 3.4em
-  padding-bottom: 7px
-  line-height: 72px
-.sub-squares
-  DIV
-    font-size: 2.5em
-    font-weight: bold
-    padding-top: 10px
-    line-height: 0.65
-    //padding-right: 4px
-DIV.v-operator
-  border: none
-  font-size: 7em
+  background-color: transparent
+  font-size: 140px
+  line-height: 1
+  cursor: default
+  pointer-events: none
+  &:active
+    transform: none
+    box-shadow: none
+  span
+    display: block
+    line-height: 1
+    transform: translateY(-11px)
 </style>

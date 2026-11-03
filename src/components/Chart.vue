@@ -1,10 +1,8 @@
 <template>
-  <div @click="menu" style="height:100%">
-    <div style="display:flex;height:100%">
-      <div style="margin:auto">
+  <div @click="menu" class="page">
+      <div>
         <div class="chead icon" v-bind:class="icon"></div>
         <chart v-bind:type="type"></chart>
-        </div>
       </div>
   </div>
 </template>

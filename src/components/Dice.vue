@@ -96,12 +96,14 @@ $color: green
   background: #fff
   margin-top: 0
   margin-bottom: 0
-  border: 3px solid #666
-  border-radius: 10px
+  border: 2px solid #1A2744
+  border-radius: 8px
+  box-shadow: 0 3px 0 #1A2744
   TD
     padding: 4px
     background: #fff
     border: 8px solid #fff
   .d
-    background: blue
+    background: #1A2744
+    border-radius: 2px
 </style>

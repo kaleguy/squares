@@ -1,5 +1,6 @@
 <template>
-  <div class="dsquares smenu" style="margin-top:40px;">
+  <div class="page">
+  <div class="dsquares smenu">
     <div @click="goto(1)" style="cursor:pointer"
          v-bind:class="passed('1')"
          class="srow">
@@ -22,6 +23,7 @@
          @click="menu">
       <leftarrow style="margin-left:60px" width="200"></leftarrow>
     </div>
+  </div>
   </div>
 </template>
 
@@ -88,20 +90,23 @@ DIV.dtable
   height: 122px
   width: 122px
 .smenu TABLE.dice
-  border: 1px solid #ccc
+  border: 2px solid #1A2744
+  box-shadow: none
 DIV.arrow
   font-size: 80px
   width: 100px
   height: 100px
   line-height: 1.8
-.passed
-  background: green
 .srow
-  border: 1px solid #ccc
-  background: #33f
-  border-radius: 10px
+  border: 2px solid #1A2744
+  background: #fff
+  border-radius: 8px
+  box-shadow: 0 3px 0 #1A2744
   padding-top: 10px
-  margin-bottom: 8px
+  margin-bottom: 12px
+  &:active
+    transform: translateY(2px)
+    box-shadow: 0 1px 0 #1A2744
 .passed
-  background: green
+  background: #1C7A45
 </style>

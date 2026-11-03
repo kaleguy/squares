@@ -10,8 +10,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
-   viewBox="0 0 100 100"
+   v-bind:viewBox="tight ? '0 0 35 34' : '0 0 100 100'"
    v-bind:width="width"
+   v-bind:height="tight ? width : undefined"
    xml:space="preserve"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="dark blue left arrow.svg">
@@ -67,7 +68,7 @@
      id="g10"><path
        d="m 383.07536,296.81604 -15.203,-13.205 15.203,-13.139 0,6.296 11.997,0 0,13.645 -11.997,0 0,6.403 z"
        id="path202"
-       style="fill:#0000ff;fill-opacity:1;stroke:#214f8f;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#1A2744;fill-opacity:1;stroke:#1A2744;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        inkscape:connector-curvature="0" /></g></svg>
   </div>
 </template>
@@ -76,7 +77,8 @@
 const vm = {
   name: 'leftarrow',
   props: {
-    width: String
+    width: String,
+    tight: Boolean
   },
   components: {
   },

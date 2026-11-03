@@ -9,6 +9,7 @@ import FactTable from '@/components/FactTable'
 import FactTablePlus from '@/components/FactTablePlus'
 import FactTableX from '@/components/FactTableX'
 import Chart from '@/components/Chart'
+import Help from '@/components/Help'
 
 Vue.use(Router)
 
@@ -23,6 +24,10 @@ export default new Router({
     {
       path: '/main/',
       component: MainMenu
+    },
+    {
+      path: '/help',
+      component: Help
     },
     {
       path: '/menu/s',

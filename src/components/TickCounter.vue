@@ -1,14 +1,13 @@
 <template>
   <div class="tick-counter">
-    <table>
-      <tr><td><div>{{count}}</div></td></tr>
-      <tr><td></td></tr><div>{{counta}}</div></td></tr>
-      <tr><td></td></tr><div>{{countb}}</div></td></tr>
-    </table>
+    <div>{{count}}</div>
+    <div>{{counta}}</div>
+    <div>{{countb}}</div>
   </div>
 </template>
 
 <script>
+import { levelsKey } from '../lib/name'
 const vm = {
   name: 'tickcounter',
   data () {
@@ -62,7 +61,7 @@ const vm = {
       if (!this.username) {
         return {}
       }
-      const recordKey = this.username + '_levels'
+      const recordKey = levelsKey(this.username)
       const levelKey = this.op + '' + this.level.index
       let record = JSON.parse(localStorage.getItem(recordKey))
       if (!record) {
@@ -88,16 +87,19 @@ export default vm
 </script>
 <style lang="sass">
 .tick-counter
-  float: right
-  margin-top: 14px
-  margin-right: 32px
+  display: flex
+  flex-direction: column
+  gap: 8px
+  margin: 0
   DIV
-    background: blue
-    width: 45px
-    height: 45px
-    border-radius: 40px
-    line-height: 45px
-    font-size: 20px
-    color: #fff
-    float: right
+    background: #fff
+    width: 44px
+    height: 44px
+    border: 2px solid #1A2744
+    border-radius: 8px
+    box-shadow: 0 2px 0 #1A2744
+    line-height: 40px
+    font-size: 18px
+    font-weight: 700
+    color: #1A2744
 </style>

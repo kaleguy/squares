@@ -1,10 +1,11 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
-    <div class="squares bsquares"
-         style="margin-top:-55px">
-      <div class="title-button"
-           style="margin-left:auto;margin-right:auto;cursor:pointer">squares</div>
+  <div class="page login-page">
+    <div>
+    <div class="squares bsquares">
+      <div class="title-button brand-tile">
+        <span class="brand-name">squares</span>
+        <span class="brand-sub">math facts</span>
+      </div>
     </div>
     <div style="width:278px; margin-left:auto;margin-right:auto;margin-top:20px">
     <div class="type-ahead-group">
@@ -15,11 +16,13 @@
              placeholder="Enter your name">
     </div>
     </div>
+    <button type="button" class="help-link" @click="help">Help</button>
     </div>
   </div>
 </template>
 
 <script>
+import { titleCase, levelsKey } from '../lib/name'
 const TypeAhead = require('../lib/type-ahead')
 const vm = {
   name: 'frontpage',
@@ -30,6 +33,9 @@ const vm = {
     }
   },
   methods: {
+    help: function () {
+      this.$router.push('/help')
+    },
     getRecords: function (key) {
       const records = JSON.parse(localStorage.getItem(key))
       if (!records) { return }
@@ -46,7 +52,9 @@ const vm = {
     if (!nameList) {
       nameList = {}
     }
-    const names = Object.keys(nameList)
+    const names = Object.keys(nameList).map(titleCase).filter(function (name, index, list) {
+      return list.indexOf(name) === index
+    })
     const t = new TypeAhead(
       document.getElementById('name'),
       names,
@@ -54,10 +62,11 @@ const vm = {
         minLength: 1,
         onKeyDown: function (value) {
           if (value.length < 2) { return }
-          me.$store.commit('SETUSER', { username: value })
-          const recordKey = value + '_levels'
-          me.getRecords(recordKey)
-          nameList[value] = 1
+          const name = titleCase(value)
+          me.$store.commit('SETUSER', { username: name })
+          me.getRecords(levelsKey(value))
+          if (name !== value) { delete nameList[value] }
+          nameList[name] = 1
           localStorage.setItem('nameList', JSON.stringify(nameList))
           me.$router.replace('/main/')
         }
@@ -74,15 +83,30 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+.squares DIV.title-button.brand-tile
+  flex-direction: column
+  gap: 10px
+  width: 220px
+  height: 220px
+  margin: 0 auto
+  padding: 0
+  .brand-name
+    font-size: 46px
+    font-weight: 700
+    line-height: 1
+  .brand-sub
+    font-size: 16px
+    font-weight: 400
+    line-height: 1
 .bsquares, .csquares
   font-size: 32px
   font-weight: bold
   width: 303px
 .bsquares DIV
   width: 140px
-  height: 120px
+  height: 140px
 .csquares DIV
   width: 140px
-  height: 100px
-  line-height: .7
+  height: 140px
+  line-height: 1
 </style>

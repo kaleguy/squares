@@ -1,8 +1,8 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
+  <div class="page">
+    <div>
   <div
-    style="position:relative;margin-top:-30px"
+    style="position:relative"
     @click="goto()">
     <div class="fheading">
       <div class="numerand1">?</div>

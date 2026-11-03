@@ -24,6 +24,7 @@
   /* global playAudio */
   import LeftArrow from './LeftArrow'
   import X from './X'
+  import { levelsKey } from '../lib/name'
 
   const moment = require('moment')
   const keyBus = {
@@ -48,7 +49,7 @@
       recordPass: function (levelKey) {
         // if (!time) { time = 140 }
         let time = this.$store.state.ticks
-        const recordKey = this.username + '_levels'
+        const recordKey = levelsKey(this.username)
         let record = JSON.parse(localStorage.getItem(recordKey))
         if (!record) { record = {} }
         let levelRecord = record[levelKey]
@@ -64,13 +65,42 @@
       },
       warn: function (message, event) {
       },
+      keyFromEvent: function (e) {
+        let el = e.target
+        if (el !== this.$el && el.closest) {
+          const key = el.closest('.numpad > div')
+          if (key) return key
+        }
+        // Rounded corners and the press lip sit outside the key, so a click
+        // there hits the pad. Count it as the nearest key.
+        const x = e.clientX
+        const y = e.clientY
+        let best = null
+        let bestD = 64
+        Array.from(this.$el.children).forEach(key => {
+          const r = key.getBoundingClientRect()
+          const cx = Math.min(Math.max(x, r.left), r.right)
+          const cy = Math.min(Math.max(y, r.top), r.bottom)
+          const d = (x - cx) * (x - cx) + (y - cy) * (y - cy)
+          if (d < bestD) {
+            bestD = d
+            best = key
+          }
+        })
+        return best
+      },
       getNum: function (e) {
-        const num = e.target.innerText
-        if (typeof num === 'undefined') {
+        const el = this.keyFromEvent(e)
+        if (!el) return
+        if (el.classList.contains('back')) {
+          if (e.target === this.$el) this.menu()
+          return
+        }
+        const num = (el.innerText || '').trim()
+        if (!/^[0-9]$/.test(num)) {
           return this.$store.commit('CLEARBUFFER')
         }
         if (this.$store.state.errorState) {
-          // console.log('ERR')
           this.$store.commit('CLEARERRORSTATE')
         }
         this.$store.commit('ADDTOBUFFER', {num})
@@ -194,19 +224,35 @@
     border: 0px solid #ccc
     border-radius: 6px
     DIV
-      // box-shadow: 1px 1px 3px #888888;
       width: 1em
-      //height: $button-size - 10
-      border: 2px solid #000
-      border-radius: 10px
+      border: 2px solid #1A2744
+      border-radius: 8px
+      background-color: #fff
+      color: #1A2744
+      box-shadow: 0 3px 0 #1A2744
       margin: 2px
       padding: 8px
       line-height: 1
       height: .9em
       cursor: pointer
-      font-weight: bold
+      font-weight: 700
+      user-select: none
+      &:active
+        transform: translateY(2px)
+        box-shadow: 0 1px 0 #1A2744
+    DIV DIV
+      border: none
+      box-shadow: none
+      background-color: transparent
+      width: auto
+      height: auto
+      margin: 0
+      padding: 0
+      line-height: 0
+      &:active
+        transform: none
     .del
-      color: #00f
+      color: #C4362C
       font-size: 40px
       line-height: 1.8
       height: 57px
@@ -215,7 +261,7 @@
     .back
       width: 64px
       height: 57px
-      color: #00f
+      color: #1A2744
       font-size: 40px
       line-height: 1.8
 </style>

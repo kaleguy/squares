@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { get } from 'lodash'
+import { titleCase } from '../lib/name'
 
 const levels = require('./levels.json')
 // randomize the order of elements in a given array
@@ -109,8 +110,9 @@ export default new Vuex.Store({
       state.ticks = state.ticks + 1
     },
     ADDTOBUFFER (state, o) {
-      state.buffer = '' + state.buffer + o.num
-      if (state.buffer.length > 2) { state.buffer = state.buffer.substring(1) }
+      const digit = String(o.num == null ? '' : o.num).trim()
+      if (!/^[0-9]$/.test(digit)) return
+      state.buffer = (String(state.buffer).replace(/\D/g, '') + digit).slice(-2)
     },
     CLEARBUFFER (state) {
       state.buffer = ''
@@ -155,7 +157,7 @@ export default new Vuex.Store({
       state.passedLevels[o.key] = 1
     },
     SETUSER (state, o) {
-      state.username = o.username
+      state.username = titleCase(o.username)
     }
   },
   actions: {

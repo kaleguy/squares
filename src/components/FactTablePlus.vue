@@ -1,13 +1,13 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
-    <table style="margin-bottom:10px;margin-top:-10px" align="center"><tr><td>
+  <div class="page">
+    <div>
+    <table style="margin-bottom:10px" align="center"><tr><td>
     <span class="ftitle">+{{visLevel}}</span>
     </td><td>
     <div id="toggle">
       <toggle-button :value="true"
                      :width="80"
-                     :color="{unchecked: 'orange', checked: 'blue'}"
+                     :color="{unchecked: '#F0B429', checked: '#2F6FE0'}"
                      @change="switchMode"
                      :height="40"
                      :sync="true"/>
@@ -136,8 +136,9 @@ export default vm
   margin-bottom: 0
 .ftitle
   display: inline-block
-  font-family: "Avenir Next"
-  font-weight: bold
+  font-family: inherit
+  font-weight: 700
+  color: #1A2744
   font-size: 60px
   line-height: 60px
 </style>

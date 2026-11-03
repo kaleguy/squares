@@ -1,26 +1,27 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
-      <div class="squares bsquares">
+  <div class="page menu-page">
+    <div>
+      <div class="squares bsquares main-board">
         <div
           @click="menu"
           class="title-button">{{username}}</div>
-        <div class="title-button"
+        <div class="count-tile"
              @click="goto('s')"
-             style="background:#fff;cursor:pointer;color:#000;font-size:44px;line-height:0.7;font-family:inherit">
-          &#x25a0;&#x25a0;&#x25a0;<br />
-          &#x25a0;&#x25a0;&#x25a0;<br />
-          &#x25a0;&#x25a0;&#x25a0;
+             aria-label="Counting">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </div>
       </div>
-      <div class="squares csquares">
-        <div @click="goto('+')">&#x002b;</div>
-        <div @click="goto('-')">&minus;</div>
-        <div @click="goto('X')">&#x00d7;</div>
-        <div @click="goto('d')">&#x00f7;</div>
-        <div @click="goto('stars')" class="icon icon-star" style="line-height:79px">{{levelCount}}</div>
-        <div @click="goto('points')" class="icon icon-point" style="line-height:79px">{{points}}</div>
+      <div class="squares csquares main-board">
+        <div class="op-tile" @click="goto('+')"><span>&#x002b;</span></div>
+        <div class="op-tile" @click="goto('-')"><span>&minus;</span></div>
+        <div class="op-tile" @click="goto('X')"><span>&#x00d7;</span></div>
+        <div class="op-tile" @click="goto('d')"><span>&#x00f7;</span></div>
+        <div @click="goto('stars')" class="icon icon-star">{{levelCount}}</div>
+        <div @click="goto('points')" class="icon icon-point">{{points}}</div>
       </div>
+      <button type="button" class="help-link" @click="help">Help</button>
     </div>
   </div>
 </template>
@@ -29,6 +30,7 @@
 <script>
 import LeftArrow from './LeftArrow'
 import _ from 'lodash'
+import { titleCase, levelsKey } from '../lib/name'
 const vm = {
   name: 'mainmenu',
   components: {
@@ -47,6 +49,9 @@ const vm = {
     },
     menu: function () {
       this.$router.replace('/')
+    },
+    help: function () {
+      this.$router.push('/help')
     }
   },
   computed: {
@@ -54,7 +59,7 @@ const vm = {
       return this.$store.state.levels
     },
     username () {
-      return this.$store.state.username
+      return titleCase(this.$store.state.username)
     },
     levelCount () {
       return Object.keys(this.record).length || ' '
@@ -67,7 +72,7 @@ const vm = {
       return points
     },
     record () {
-      const recordKey = this.username + '_levels'
+      const recordKey = levelsKey(this.$store.state.username)
       return JSON.parse(localStorage.getItem(recordKey)) || {}
     }
   },

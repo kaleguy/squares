@@ -72,15 +72,14 @@ export default vm
 
 <style lang="sass">
 .timebar
-  // box-shadow: 1px 1px 3px #888888;
   width: 285px
-  background: green
-  height: 1em
+  background: #B7C3D6
+  height: 12px
   margin-left: auto
   margin-right: auto
   margin-bottom: 10px
 #timebarFill
-  background: lightgreen
+  background: #1C7A45
   height: 100%
-  width: 240px
+  width: 0
 </style>

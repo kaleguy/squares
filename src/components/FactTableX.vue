@@ -1,6 +1,6 @@
 <template>
-  <div style="display:flex;height:100%;">
-    <div style="align-items:center;margin:auto">
+  <div class="page">
+    <div>
   <div class="xtable"
        @click="goto()">
     <div class="xtitle">
@@ -113,14 +113,14 @@ export default vm
 <style lang="sass" scoped>
 .xtitle
   font-size: 60px
-  font-weight: bold
-  font-family: "Avenir Next"
+  font-weight: 700
+  font-family: inherit
+  color: #1A2744
 .xtable
   width: 350px
   margin-left: auto
   margin-right: auto
   cursor: pointer
-  margin-top: -90px
 .factrow
   margin-bottom: 0px
 .cell
@@ -128,13 +128,13 @@ export default vm
   height: 34px
   display: inline-block
   line-height: 34px
-  border-left: 1px solid #fff
-  border-bottom: 1px solid #fff
+  border-left: 1px solid #E8EEF6
+  border-bottom: 1px solid #E8EEF6
   font-weight: bold
 .numerand0
   color: #ffffff
-  background: #000
+  background: #1A2744
 .numerand1x
   color: #ffffff
-  background: blue
+  background: #2F6FE0
 </style>

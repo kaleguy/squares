@@ -1,6 +1,7 @@
 import { Line } from 'vue-chartjs'
 import _ from 'lodash'
 import moment from 'moment'
+import { levelsKey } from '../lib/name'
 
 
 /*
@@ -69,7 +70,7 @@ export default Line.extend({
       yMax = 50
     }
     console.log('TYPE', this.type, yMax)
-    const recordKey = this.$store.state.username + '_levels'
+    const recordKey = levelsKey(this.$store.state.username)
     let record = JSON.parse(localStorage.getItem(recordKey))
     console.log('RECORD', record)
     let nData = normalizeData(record, this.type)

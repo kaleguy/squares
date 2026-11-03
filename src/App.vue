@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="height:100%;">
+  <div id="app">
     <router-view></router-view>
   </div>
 </template>
@@ -11,29 +11,45 @@ export default {
 </script>
 
 <style lang="sass">
+@import ./styles/tokens
+HTML
+  height: 100%
 HTML, BODY
   margin: 0
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  font-family: "Atkinson Hyperlegible", "Avenir Next", "Segoe UI", sans-serif
+  font-variant-numeric: tabular-nums lining-nums
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  -webkit-tap-highlight-color: transparent
   text-align: center
-  color: #2c3e50
-  height: 100%
-  height: 100%
+  color: $ink
+  background-color: $paper
+  background-image: linear-gradient(rgba(26, 39, 68, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 39, 68, 0.055) 1px, transparent 1px)
+  background-size: 28px 28px
+  min-height: 100%
   width: 100%
 #app
-  height: 100%
+  min-height: 100%
+.page
+  display: flex
+  justify-content: center
+  align-items: flex-start
+  box-sizing: border-box
+  min-height: 100%
+  padding: 16px 0 28px
+.page.login-page, .page.menu-page
+  padding-top: 72px
 .bsquares, .csquares
   font-size: 32px
-  font-weight: bold
+  font-weight: 700
   width: 303px
 .bsquares DIV
   width: 140px
-  height: 120px
+  height: 140px
 .csquares DIV
   width: 140px
-  height: 100px
-  line-height: .7
+  height: 140px
+  line-height: 1
 .squares
   width: 360px
   margin-left: auto
@@ -42,54 +58,147 @@ HTML, BODY
   flex-wrap: wrap
   flex-direction: row
   DIV.title-button
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 140px
+    height: 140px
+    padding: 0
     font-size: 1em
-    font-weight: normal
-    line-height: 3em
-    background: #33f
-    color: #fff
+    font-weight: 700
+    line-height: 1
+    background-color: $ink
+    color: $tile
     cursor: pointer
-    font-weight: bold
-    font-family: "Avenir Next"
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-family: inherit
+    text-shadow: none
   DIV
-    // box-shadow: 2px 2px 5px #888888;
     cursor: pointer
     font-size: 3.5em
+    font-weight: 700
     padding-top: 26px
     line-height: 1em
     width: 80px
-    border: 3px solid #333
-    border-radius: 10px
+    color: $ink
+    background-color: $tile
+    border: 2px solid $ink
+    border-radius: 8px
+    box-shadow: 0 3px 0 $ink
     height: 75px
     margin: 2px
+    user-select: none
+    &:active
+      transform: translateY(2px)
+      box-shadow: 0 1px 0 $ink
+  DIV.op-tile
+    display: flex
+    align-items: center
+    justify-content: center
+    overflow: hidden
+    width: 140px
+    height: 140px
+    padding: 0
+    font-size: 200px
+    line-height: 1
+    SPAN
+      display: block
+      line-height: 1
+      // Glyphs sit low in the em box, so the oversized line box is shifted up until the ink is centered.
+      transform: translateY(-16px)
+  DIV.count-tile
+    width: 140px
+    height: 140px
+    display: grid
+    grid-template-columns: repeat(3, 36px)
+    grid-template-rows: repeat(3, 36px)
+    gap: 8px
+    place-content: center
+    padding: 0
+    color: $ink
+    background-color: $tile
+    SPAN
+      display: block
+      width: 36px
+      height: 36px
+      margin: 0
+      padding: 0
+      border: none
+      border-radius: 3px
+      box-shadow: none
+      background-color: $ink
+  DIV.icon-star, DIV.icon-point
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 140px
+    height: 140px
+    padding: 0
+    line-height: 1
+    color: $tile
+  DIV.level-dots
+    border: none
+    box-shadow: none
+    background-color: transparent
+    transform: none
   DIV.review-button
     width: 330px
+
+.squares.main-board
+  width: 300px
+  gap: 12px
+  DIV
+    margin: 0
+.squares.bsquares.main-board
+  margin-bottom: 12px
+
+.help-link
+  display: block
+  margin: 22px auto 0
+  padding: 8px 12px
+  border: none
+  background: transparent
+  color: $ink
+  font: inherit
+  font-size: 18px
+  font-weight: 700
+  text-decoration: underline
+  text-underline-offset: 3px
+  cursor: pointer
 
 // type-ahead
 .type-ahead-group
   position: relative
 .type-ahead-group > input
-  background-color: #FFFFFF
+  box-sizing: border-box
+  width: 100%
+  background-color: $tile
   background-image: none
-  border-radius: 4px
-  border: 1px solid #CCCCCC
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
-  color: #555555
-  font-size: 24px
-  line-height: 1.42857143
-  padding: 6px 12px
-  //width: 100%
+  border-radius: 8px
+  border: 2px solid $ink
+  box-shadow: 0 3px 0 $ink
+  color: $ink
+  font-family: inherit
+  font-size: 22px
+  font-weight: 700
+  line-height: 1.3
+  padding: 10px 12px
+  &::placeholder
+    color: #8B97AD
+    font-weight: 400
+  &:focus
+    outline: 3px solid $pen
+    outline-offset: 2px
 .type-ahead-group > ul
-  background-color: #FFFFFF
-  border-radius: 4px
-  border: 1px solid rgba(0, 0, 0, 0.1)
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.17)
+  background-color: $tile
+  border-radius: 8px
+  border: 2px solid $ink
+  box-shadow: 0 3px 0 $ink
   display: none
   float: left
-  font-size: 24px
-  left: 20px
+  font-size: 22px
+  left: 0
   list-style: none
-  margin: 2px 0 0
+  margin: 8px 0 0
   min-width: 170px
   padding: 5px 0
   position: absolute
@@ -98,40 +207,42 @@ HTML, BODY
   z-index: 1000
 .type-ahead-group > ul > li > a
   clear: both
-  color: #333
+  color: $ink
   cursor: default
   display: block
-  font-weight: 400
-  line-height: 1.42857143
-  padding: 3px 20px
+  font-weight: 700
+  line-height: 1.3
+  padding: 6px 16px
   white-space: nowrap
 .type-ahead-group > ul > li.active > a, .type-ahead-group > ul > li > a:hover
-  background-color: #3F9BFA
-  color: #FFFFFF
+  background-color: $pen
+  color: $tile
   text-decoration: none
 
 // Fact table sand answergrids
 .numerand0
-  background: #000
-  color: #fff
+  background: $ink
+  color: $tile
 .numerand1
-  background: orange
+  background: $operand
+  color: $ink
 .activen
-  background: blue
-  color: #fff
+  background: $pen
+  color: $tile
 .product
-  background: green
-  color: #fff
+  background: $answer
+  color: $tile
 .numerand2
-  background: blue
+  background: $pen
+  color: $tile
 .active
-  background: green
-  font-weight: bold
-  color: #fff
+  background: $answer
+  font-weight: 700
+  color: $tile
 .fheading
   font-size: 40px
-  font-weight: bold
-  color: #fff
+  font-weight: 700
+  color: $ink
   width: 300px
   margin-left: auto
   margin-right: auto
@@ -142,12 +253,12 @@ HTML, BODY
     border-radius: 6px
     display: inline-block
   .large-operator
-    color: #000
+    color: $ink
     width: 30px
 .fact-table
   cursor: pointer
   width: 340px
-  border: 1px solid #fff
+  border: 1px solid $paper
   margin-top: 20px
   margin-bottom: 28px
   position: relative
@@ -155,27 +266,29 @@ HTML, BODY
   margin-right: auto
   .toperator
     padding: 6px
-    border-right: 2px solid #fff
-    font-weight: bold
+    border-right: 2px solid $paper
+    font-weight: 700
     font-size: 2em
     line-height: 1
   .col
-    border-right: 1px solid #fff
-    color: #fff
+    border-right: 1px solid $paper
+    background: $ink
+    color: $tile
+  .col.activen
+    background: $pen
+    color: $tile
   .row
-  // border-bottom: 2px solid #333
   TABLE
     width: 100%
     border-collapse: collapse
-    border: 1px solid #fff
-    // margin-left: -10px
+    border: 1px solid $paper
     TD
       font-size: 20px
-      font-weight: bold
+      font-weight: 700
       padding-top: 4px
       padding-bottom: 4px
-      border-bottom: 1px solid #fff
-      border-right: 1px solid #fff
+      border-bottom: 1px solid $paper
+      border-right: 1px solid $paper
       width: 30px
 // star and point icon/images
 DIV.icon
@@ -188,13 +301,19 @@ DIV.icon
 .icon-star
   width: 100px
   height: 100px
-  color: #90ee90
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS4yMDEgMjkuNjc2Ij48cG9seWdvbiBwb2ludHM9IjE1LjYwMiwwIDE5LjMyNSwxMS4yNzkgMzEuMiwxMS4zMzIgMjEuNjI0LDE4LjM2IDI1LjI0MywyOS42NzYgMTUuNjAyLDIyLjczOCA1Ljk2LDI5LjY3NiA5LjU3NywxOC4zNiAwLDExLjMzMiAxMS44NzgsMTEuMjc5IiBmaWxsPSIjMDA5OTAwIiAvPjwvc3ZnPg==")
+  color: $tile
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.201 29.676'><polygon points='15.602,0 19.325,11.279 31.2,11.332 21.624,18.36 25.243,29.676 15.602,22.738 5.96,29.676 9.577,18.36 0,11.332 11.878,11.279' fill='%231C7A45'/></svg>")
 .icon-star .dot-green
-  color: #93ED94
+  color: $tile
+.icon-star .dot-orange
+  color: rgba(255, 255, 255, 0.62)
 .icon-point
-  color: #90ee90
+  color: $tile
   width: 100px
   height: 100px
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle cx='70' cy='62' r='52' fill='#149718'/></svg>")
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%231C7A45'/></svg>")
+@media (prefers-reduced-motion: reduce)
+  body .squares DIV:active, body .numpad DIV:active, body .srow:active, body .question-button:active
+    transform: none
+    box-shadow: 0 3px 0 $ink
 </style>

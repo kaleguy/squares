@@ -1,8 +1,6 @@
 <template>
   <div class="level-dots">
-    <span v-bind:class="dotClass('a')">&#9632;&#9632;&#9632;</span>
-    <span v-bind:class="dotClass('b')">&#9632;&#9632;&#9632;</span>
-    <span v-bind:class="dotClass('c')">&#9632;&#9632;&#9632;</span>
+    <span v-for="n in 9" :key="n" v-bind:class="dotClass(rowOf(n))"></span>
   </div>
 </template>
 
@@ -19,6 +17,11 @@ const vm = {
   components: {
   },
   methods: {
+    rowOf (n) {
+      if (n <= 3) { return 'a' }
+      if (n <= 6) { return 'b' }
+      return 'c'
+    },
     dotClass (sublevel) {
       let cssClass = 'dot-orange'
       const levelType = this.level.substring(1, 2)
@@ -53,19 +56,38 @@ export default vm
 
 </script>
 <style lang="sass">
-DIV.level-dots
-  border: none
-  height: 0
-  padding-top: 0
-  font-size: 10px
+DIV.level-dots.level-dots
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-template-rows: repeat(3, 1fr)
+  gap: 2px
+  flex: none
+  align-self: center
+  width: 34px
+  height: 34px
+  min-height: 0
   margin: 0
-.level-dots SPAN
-  font-size: 22px
+  padding: 0
   border: none
+  box-shadow: none
+  background: transparent
+  font-size: 0
+  line-height: 0
+.level-dots SPAN
   display: block
-  line-height: .6
+  width: auto
+  height: auto
+  min-width: 0
+  min-height: 0
+  margin: 0
+  padding: 0
+  border: none
+  border-radius: 2px
+  box-shadow: none
+  font-size: 0
+  line-height: 0
 .dot-orange
-  color: #F8C471
+  background: #C8890E
 .dot-green
-  color: #1F9524
+  background: #1C7A45
 </style>
