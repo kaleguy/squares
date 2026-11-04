@@ -26,7 +26,9 @@ export const THEMES = [
   {
     id: 'ink',
     label: 'Ink',
-    level: '#1A2744',
+    // A lighter, more saturated ink-blue. Matching the page ink exactly left
+    // the level colour invisible wherever the two sat together.
+    level: '#2F5496',
     levelText: '#FFFFFF',
     dotOn: '#FFFFFF',
     dotOff: '#F0C36A'
@@ -34,16 +36,20 @@ export const THEMES = [
   {
     id: 'ochre',
     label: 'Ochre',
-    level: '#C4841A',
-    levelText: '#1A2744',
+    // Deepened from #C4841A, which sat at 2.7:1 on the paper. No mid gold
+    // clears both the paper and its own text, so it goes dark with white text.
+    level: '#96680F',
+    levelText: '#FFFFFF',
     dotOn: '#1A2744',
     dotOff: '#FFFFFF'
   },
   {
     id: 'blue',
     label: 'Blue',
-    level: '#D7E3F2',
-    levelText: '#1A2744',
+    // Deep enough to read against the paper and the tiles; the old pale blue
+    // sat at 1.1:1 on both. Leans cyan to stay clear of Ink's navy.
+    level: '#1F6E8C',
+    levelText: '#FFFFFF',
     dotOn: '#1C7A45',
     dotOff: '#C8890E'
   },
@@ -82,7 +88,9 @@ export const THEMES = [
     grid: 'rgba(244, 240, 228, 0.07)',
     muted: '#A8B5A4',
     track: '#2C463A',
-    level: '#F4F0E4',
+    // Coloured chalk. Matching the page ink exactly left the level colour
+    // invisible wherever the two sat together.
+    level: '#C98FC4',
     levelText: '#12211B',
     dotOn: '#1C7A45',
     dotOff: '#C4841A'

@@ -26,7 +26,7 @@ export default {
   --grid: rgba(244, 240, 228, 0.07)
   --muted: #A8B5A4
   --track: #2C463A
-  --level: #F4F0E4
+  --level: #C98FC4
   --level-text: #12211B
   --passed-dot-on: #1C7A45
   --passed-dot-off: #C4841A
@@ -370,6 +370,10 @@ HTML, BODY
   .col.activen
     background: $level
     color: $level-text
+    // Ink and Chalk set the level colour to the ink, so the cell would vanish
+    // into the column. Ring it in the one colour the level is always legible
+    // against: its own text colour.
+    box-shadow: inset 0 0 0 3px $level-text
   .row
   TABLE
     width: 100%
