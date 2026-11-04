@@ -111,25 +111,4 @@ export default vm
   display: flex
   flex-direction: row
   height: 100%
-.help-icon
-  display: flex
-  align-items: center
-  justify-content: center
-  width: 56px
-  height: 56px
-  margin: 22px auto 0
-  padding: 0
-  border: none
-  border-radius: 8px
-  background: var(--ink)
-  color: var(--tile)
-  box-shadow: 0 3px 0 var(--lip)
-  font-family: inherit
-  font-size: 34px
-  font-weight: 700
-  line-height: 1
-  cursor: pointer
-  &:active
-    transform: translateY(2px)
-    box-shadow: 0 1px 0 var(--lip)
 </style>

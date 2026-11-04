@@ -119,8 +119,7 @@ export default {
       }
     },
     plate (theme) {
-      if (!theme.paper) return {}
-      return { background: theme.paper }
+      return { background: theme.paper || '#E8EEF6' }
     },
     choose (id) {
       this.current = applyTheme(id)
@@ -174,7 +173,7 @@ export default {
 .palette-row
   display: flex
   flex-wrap: wrap
-  gap: 16px 8px
+  gap: 20px 14px
 .palette-choice
   flex: 0 0 calc(33.333% - 6px)
   display: flex
@@ -192,7 +191,10 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  padding: 6px
+  width: 100%
+  box-sizing: border-box
+  min-height: 86px
+  padding: 14px 10px
   border-radius: 12px
 .palette-tile
   display: flex
@@ -206,9 +208,9 @@ export default {
   border: 2px solid $line
   border-radius: 8px
   box-shadow: 0 3px 0 $lip
-.palette-choice.is-on .palette-tile
-  transform: translateY(2px)
-  box-shadow: 0 1px 0 $lip
+.palette-choice.is-on .palette-plate
+  outline: 3px solid var(--ink)
+  outline-offset: 3px
 .palette-num
   font-size: 16px
   font-weight: 700

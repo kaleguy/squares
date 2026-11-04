@@ -16,7 +16,7 @@
              placeholder="Enter your name">
     </div>
     </div>
-    <button type="button" class="help-link" @click="help">Help</button>
+    <button type="button" class="help-icon" @click="help" aria-label="Help">?</button>
     </div>
   </div>
 </template>
