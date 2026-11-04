@@ -19,7 +19,8 @@
          </tr>
          <tr v-for="r in 9">
            <td class="col" v-bind:class="{activen: isActive(r)}">{{r}}</td>
-           <td v-for="c in 9" v-bind:class="num3Class(r)">{{product(r,c)}}</td>
+           <td v-for="c in 9"
+               v-bind:class="[num3Class(r), {weak: isWeak(r, c)}]">{{product(r,c)}}</td>
          </tr>
        </table>
     </div>
@@ -29,6 +30,8 @@
  </template>
 
 <script>
+import { getWeights, factKey } from '../lib/facts'
+
 const vm = {
   name: 'facttable',
   components: {
@@ -62,6 +65,11 @@ const vm = {
       }
       return eval('a ' + op + ' b')// eslint-disable-line
     },
+    // A fact the dealer is currently favouring, ringed so the whole table
+    // reads as what still needs work.
+    isWeak (r, c) {
+      return (this.weights[factKey(this.operator, r, c)] || 0) > 0
+    },
     isActive (i) {
       i = i + ''
       if (i === this.visLevel) {
@@ -88,6 +96,9 @@ const vm = {
     }
   },
   computed: {
+    weights () {
+      return getWeights(this.$store.state.username)
+    },
     count () {
       return 10
     },
@@ -136,4 +147,6 @@ export default vm
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
+.weak
+  box-shadow: inset 0 0 0 3px var(--miss)
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { get } from 'lodash'
 import { titleCase } from '../lib/name'
+import { weightedDeck } from '../lib/facts'
 
 const levels = require('./levels.json')
 // randomize the order of elements in a given array
@@ -10,10 +11,6 @@ const shuffle = require('shuffle-array')
 Vue.use(Vuex)
 
 let deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-let deckA = [ 1, 2, 3 ] // eslint-disable-line
-let deckB = [ 4, 5, 6 ] // eslint-disable-line
-let deckC = [ 7, 8, 9 ] // eslint-disable-line
-let deckD = deck // eslint-disable-line
 
 shuffle(deck)
 function shuffleUniq (deck, last) {
@@ -140,9 +137,10 @@ export default new Vuex.Store({
       if (index.length > 1) {
         sublevel = index.substring(1, 2)
       }
-      // get a new dealer with the correct deck
-      const deckName = 'deck' + sublevel.toUpperCase()
-      deal1 = getDealer(eval(deckName)) // eslint-disable-line
+      // Get a new dealer with the correct deck, weighted towards whatever
+      // has been going wrong at this level.
+      const dealOp = get(o, 'operator', state.currentLevel.op)
+      deal1 = getDealer(weightedDeck(sublevel, state.username, dealOp, index))
       state.num1 = deal1(true)
       state.num2 = getRandom()
       state.dice1 = getRandom(state.dice1, 1, 5)

@@ -26,6 +26,7 @@
   import X from './X'
   import { levelsKey } from '../lib/name'
   import { roundTarget, scoredTicks } from '../lib/round'
+  import { noteFact } from '../lib/facts'
 
   const moment = require('moment')
   const keyBus = {
@@ -160,7 +161,9 @@
         if (buffer < 10 && total > 9) {
           return
         }
+        const card = this.$store.state.num1
         if (+total === +buffer) {
+          noteFact(this.username, this.op, level.index, card, true)
           this.$store.commit('INCCOUNT')
           if (this.errorState && this.mode === 't') {
             this.$store.commit('RESETALL')
@@ -178,6 +181,7 @@
           } else {
           }
         } else {
+          noteFact(this.username, this.op, level.index, card, false)
           // Leave the timed round for practice. The wrong digits stay, and the
           // timer must stop without dealing a new problem.
           if (this.mode === 't' && this.op !== 's') {
