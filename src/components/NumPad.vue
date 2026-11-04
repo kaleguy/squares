@@ -47,7 +47,7 @@
     },
     methods: {
       recordPass: function (levelKey) {
-        // if (!time) { time = 60 }
+        // if (!time) { time = 70 }
         let time = this.$store.state.ticks
         const recordKey = levelsKey(this.username)
         let record = JSON.parse(localStorage.getItem(recordKey))

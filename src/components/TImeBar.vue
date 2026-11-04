@@ -44,7 +44,7 @@ const vm = {
     tb.style.width = 0
     this.$store.commit('RESETALL')
     const bar = 285
-    const step = bar / 120
+    const step = bar / 140
     let w = 0
     const me = this
     let doTick = false

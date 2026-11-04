@@ -113,7 +113,7 @@ const vm = {
           return points
         }
         let min = Object.values(level).sort((prev, next) => prev - next)[0]
-        return points + Math.max(0, 60 - min)
+        return points + Math.max(0, 70 - min)
       }, 0)
       return points
     },
