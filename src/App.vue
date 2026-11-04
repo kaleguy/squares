@@ -170,6 +170,36 @@ HTML, BODY
       font-size: 26px
       font-weight: 700
       line-height: 1
+  DIV.op-scores
+    width: 140px
+    height: 140px
+    display: grid
+    grid-template-columns: repeat(2, 58px)
+    grid-template-rows: repeat(2, 58px)
+    gap: 8px
+    place-content: center
+    padding: 0
+    background-color: $tile
+    SPAN
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 58px
+      height: 58px
+      margin: 0
+      padding: 0
+      border: none
+      border-radius: 50%
+      box-shadow: none
+      background-color: var(--answer)
+      color: #fff
+      font-size: 22px
+      font-weight: 700
+      line-height: 1
+      &.is-wide
+        font-size: 16px
+      &.is-wider
+        font-size: 13px
   DIV.icon-star, DIV.icon-point
     display: flex
     align-items: center

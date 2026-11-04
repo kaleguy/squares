@@ -41,7 +41,7 @@
 
       <section>
         <h2>The menu</h2>
-        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement. Each one shows zero until you pass a level. The green circle adds your best score on each level you have passed. A score starts at 70 and counts down, so a faster round is worth more.</p>
+        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement. Each one shows zero until you pass a level. The four balls are the scores for those same operations. Each ball adds your best score on the levels you have passed, and shows zero until you pass one. A score starts at 70 and counts down, so a faster round is worth more.</p>
         <shot file="static/help/menu.png" caption="The main menu."></shot>
       </section>
 

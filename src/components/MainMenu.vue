@@ -21,7 +21,9 @@
         <div @click="goto('stars')" class="op-counts" :aria-label="opCountLabel">
           <span v-for="op in opCounts" :key="op.id">{{op.count}}</span>
         </div>
-        <div @click="goto('points')" class="icon icon-point">{{points}}</div>
+        <div @click="goto('points')" class="op-scores" :aria-label="opScoreLabel">
+          <span v-for="op in opScores" :key="op.id" :class="{ 'is-wide': op.score > 99, 'is-wider': op.score > 999 }">{{op.score}}</span>
+        </div>
       </div>
       <button type="button" class="help-icon" @click="help" aria-label="Help">?</button>
     </div>
@@ -31,7 +33,6 @@
 
 <script>
 import LeftArrow from './LeftArrow'
-import _ from 'lodash'
 import { titleCase, levelsKey } from '../lib/name'
 const vm = {
   name: 'mainmenu',
@@ -79,12 +80,25 @@ const vm = {
     opCountLabel () {
       return this.opCounts.map(op => op.name + ' ' + op.count).join(', ')
     },
-    points () {
-      const points = _.reduce(this.record, (points, level) => {
-        let min = Object.values(level).sort((prev, next) => prev - next)[0]
-        return points + Math.max(0, 70 - min)
-      }, 0)
-      return points
+    opScores () {
+      return [
+        { id: '+', name: 'Plus' },
+        { id: '-', name: 'Minus' },
+        { id: 'X', name: 'Times' },
+        { id: 'd', name: 'Divide' }
+      ].map(op => {
+        const score = Object.keys(this.record).reduce((total, key) => {
+          if (key.charAt(0) !== op.id) return total
+          const times = Object.values(this.record[key]).map(Number).filter(function (n) { return !isNaN(n) })
+          if (!times.length) return total
+          const best = times.sort(function (a, b) { return a - b })[0]
+          return total + Math.max(0, 70 - best)
+        }, 0)
+        return { id: op.id, name: op.name, score: score }
+      })
+    },
+    opScoreLabel () {
+      return this.opScores.map(op => op.name + ' ' + op.score).join(', ')
     },
     record () {
       const recordKey = levelsKey(this.$store.state.username)
