@@ -8,6 +8,7 @@
 
 <script>
 import { levelsKey } from '../lib/name'
+import { roundSeconds } from '../lib/round'
 const vm = {
   name: 'tickcounter',
   data () {
@@ -30,7 +31,7 @@ const vm = {
       } else {
         ticks = this.oldTicks
       }
-      ticks = 70 - ticks
+      ticks = roundSeconds(this.$store.state.currentLevel.index) - ticks
       if (ticks < 0) { ticks = 0 }
       return ticks
     },

@@ -8,6 +8,8 @@
 
 
 <script>
+import { roundSeconds } from '../lib/round'
+
 const vm = {
   name: 'timebar',
   props: {
@@ -44,7 +46,6 @@ const vm = {
     tb.style.width = 0
     this.$store.commit('RESETALL')
     const bar = 285
-    const step = bar / 140
     let w = 0
     const me = this
     let doTick = false
@@ -53,7 +54,10 @@ const vm = {
         me.$store.commit('TICK')
       }
       doTick = !doTick
-      w = w + step
+      // Two steps a second, for as many seconds as the level is worth. Read
+      // per tick, and from the route: this component mounts before its parent
+      // has put the new level into the store.
+      w = w + bar / (roundSeconds(me.$route.params.level) * 2)
       if (w >= bar) {
         me.$store.commit('RESETALL')
         w = 0

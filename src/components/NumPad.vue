@@ -25,6 +25,7 @@
   import LeftArrow from './LeftArrow'
   import X from './X'
   import { levelsKey } from '../lib/name'
+  import { roundTarget, scoredTicks } from '../lib/round'
 
   const moment = require('moment')
   const keyBus = {
@@ -47,8 +48,8 @@
     },
     methods: {
       recordPass: function (levelKey) {
-        // if (!time) { time = 70 }
-        let time = this.$store.state.ticks
+        const level = this.$store.state.currentLevel.index
+        let time = scoredTicks(this.$store.state.ticks, level)
         const recordKey = levelsKey(this.username)
         let record = JSON.parse(localStorage.getItem(recordKey))
         if (!record) { record = {} }
@@ -167,7 +168,7 @@
           this.$store.commit('RESET')
           const count = this.$store.state.count
           if (this.mode === 'p') { return }
-          if (+count === 27) {
+          if (+count === roundTarget(level.index)) {
             const levelKey = this.op + level.index
             this.$store.commit('SETPASS', {key: levelKey})
             this.recordPass(levelKey)
