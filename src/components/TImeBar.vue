@@ -43,22 +43,23 @@ const vm = {
     const tb = document.getElementById('timebarFill')
     tb.style.width = 0
     this.$store.commit('RESETALL')
-    let w = this.$store.state.time
+    const bar = 285
+    const step = bar / 120
+    let w = 0
     const me = this
     let doTick = false
     function tick () {
-      w = me.$store.state.time
       if (doTick) {
         me.$store.commit('TICK')
       }
       doTick = !doTick
-      if (w < 285) {
-        w = w + 1
-        tb.style.width = w + 'px'
-      } else {
-        // tb.style.width = 0
+      w = w + step
+      if (w >= bar) {
         me.$store.commit('RESETALL')
         w = 0
+        tb.style.width = '0px'
+      } else {
+        tb.style.width = w + 'px'
       }
       me.$store.commit('SETTIME', { time: w })
     }

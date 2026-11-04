@@ -13,23 +13,23 @@ export default {
 <style lang="sass">
 @import ./styles/tokens
 \:root
-  --paper: #E8EEF6
-  --ink: #1A2744
-  --tile: #FFFFFF
-  --line: #1A2744
-  --lip: #1A2744
+  --paper: #12211B
+  --ink: #F4F0E4
+  --tile: #1C3328
+  --line: #E6E0D0
+  --lip: #070E0B
   --operand: #F0B429
   --answer: #1C7A45
-  --miss: #C4362C
-  --mark-on: #1C7A45
-  --mark-off: #C8890E
-  --grid: rgba(26, 39, 68, 0.055)
-  --muted: #8B97AD
-  --track: #B7C3D6
-  --level: #1B4D38
-  --level-text: #FFFFFF
-  --passed-dot-on: #FFFFFF
-  --passed-dot-off: #F0C36A
+  --miss: #FF8A82
+  --mark-on: #8FCBAA
+  --mark-off: #F0C36A
+  --grid: rgba(244, 240, 228, 0.07)
+  --muted: #A8B5A4
+  --track: #2C463A
+  --level: #F4F0E4
+  --level-text: #12211B
+  --passed-dot-on: #1C7A45
+  --passed-dot-off: #C4841A
 HTML
   height: 100%
 *

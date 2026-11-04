@@ -90,16 +90,17 @@ export const THEMES = [
 ]
 
 const KEY = 'squares-theme'
+const DEFAULT_ID = 'chalk'
 
 export function themeById (id) {
-  return THEMES.find(function (theme) { return theme.id === id }) || THEMES[0]
+  return THEMES.find(function (theme) { return theme.id === id }) || THEMES.find(function (theme) { return theme.id === DEFAULT_ID })
 }
 
 export function currentThemeId () {
   try {
     return themeById(localStorage.getItem(KEY)).id
   } catch (e) {
-    return THEMES[0].id
+    return DEFAULT_ID
   }
 }
 

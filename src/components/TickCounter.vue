@@ -30,7 +30,7 @@ const vm = {
       } else {
         ticks = this.oldTicks
       }
-      ticks = 140 - ticks
+      ticks = 60 - ticks
       if (ticks < 0) { ticks = 0 }
       return ticks
     },
@@ -40,7 +40,7 @@ const vm = {
       try {
         dates = Object.keys(this.scores).sort((a, b) => a < b)
         if (dates[0]) {
-          return 140 - this.scores[dates[0]]
+          return Math.max(0, 60 - this.scores[dates[0]])
         }
       } catch (e) {
         console.log('E', e)
@@ -50,7 +50,7 @@ const vm = {
     countb () {
       if (!this.scores) { return }
       let dates = Object.keys(this.scores).sort((a, b) => a < b)
-      if (dates[1]) { return 140 - this.scores[dates[1]] }
+      if (dates[1]) { return Math.max(0, 60 - this.scores[dates[1]]) }
       console.log(dates, dates[1])
       return ' '
     },

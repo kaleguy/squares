@@ -31,7 +31,7 @@ function normalizeData (data, type) {
   values.forEach(v => {
     k = Object.keys(v)[0]
     let newK = k.substr(0, 10)
-    let plus = 140 - v[k]
+    let plus = Math.max(0, 60 - v[k])
     if (type === 'stars') { plus = 1 }
     if (crushed[newK]) {
       total = crushed[newK] + plus

@@ -4,7 +4,7 @@
       <div class="help-back" @click="back">
         <leftarrow width="40" tight></leftarrow>
       </div>
-      <h1>Help</h1>
+      <h1>About Squares</h1>
       <p>Squares is a program to memorize basic math facts quickly and efficiently. Each square is one set of facts. You have to answer that set over and over, with no mistakes, in a set amount of time.</p>
       <p>Pass all the squares, and your facts are memorized.</p>
 
@@ -41,7 +41,7 @@
 
       <section>
         <h2>The menu</h2>
-        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement. Each one shows zero until you pass a level. The green circle is your points.</p>
+        <p>Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement. Each one shows zero until you pass a level. The green circle adds your best score on each level you have passed. A score starts at 60 and counts down, so a faster round is worth more.</p>
         <shot file="static/help/menu.png" caption="The main menu."></shot>
       </section>
 
@@ -53,7 +53,7 @@
 
       <section>
         <h2>A round</h2>
-        <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. The bar is time, and the number on the right is your score, up to 140. Finish all 27 to pass. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The question mark opens the facts.</p>
+        <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. The bar is one minute. The number on the right starts at 60 and counts down. Finish all 27 before it runs out to pass. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The question mark opens the facts.</p>
         <shot file="static/help/drill.png" caption="Answering a problem."></shot>
       </section>
 
