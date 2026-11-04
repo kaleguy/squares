@@ -3,9 +3,9 @@
     <div class="level-screen">
       <div class="level-head">
         <button type="button" class="level-back" @click="menu" aria-label="Back">
-          <leftarrow width="48" tight></leftarrow>
+          <leftarrow width="40" tight></leftarrow>
         </button>
-        <div class="level-name">{{username}}</div>
+        <div class="level-name" :class="{ 'is-long': username.length > 9 }">{{username}}</div>
         <div class="level-points">{{points}}</div>
       </div>
       <div class="squares short-row">
@@ -145,7 +145,7 @@ export default vm
   align-items: center
   gap: 4px
   width: 308px
-  margin: 0 2px 10px
+  margin: 0 2px 2px
 .level-back, .level-points
   display: flex
   align-items: center
@@ -183,9 +183,14 @@ export default vm
   box-shadow: 0 3px 0 var(--lip)
   background: var(--tile)
   text-align: center
+  padding: 0 8px
+  overflow: hidden
+  white-space: nowrap
   font-size: 28px
   font-weight: 700
   line-height: 1
+  &.is-long
+    font-size: 20px
 .level-points
   background: var(--answer)
   color: #fff

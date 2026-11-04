@@ -154,7 +154,10 @@ export default new Vuex.Store({
       state.currentLevel.op = o.operator
     },
     SETPASS (state, o) {
-      state.passedLevels[o.key] = 1
+      Vue.set(state.passedLevels, o.key, 1)
+    },
+    CLEARPASS (state, o) {
+      Vue.delete(state.passedLevels, o.key)
     },
     SETUSER (state, o) {
       state.username = titleCase(o.username)

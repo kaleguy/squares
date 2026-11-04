@@ -61,6 +61,14 @@
         levelRecord[dateKey] = time
         localStorage.setItem(recordKey, JSON.stringify(record))
       },
+      recordFail: function (levelKey) {
+        if (!this.$store.state.passedLevels[levelKey]) return
+        const recordKey = levelsKey(this.username)
+        const record = JSON.parse(localStorage.getItem(recordKey)) || {}
+        delete record[levelKey]
+        localStorage.setItem(recordKey, JSON.stringify(record))
+        this.$store.commit('CLEARPASS', { key: levelKey })
+      },
       submit: function () {
       },
       warn: function (message, event) {
@@ -176,6 +184,7 @@
               window.clearInterval(window.mytimer)
               window.mytimer = null
             }
+            this.recordFail(this.op + this.$store.state.currentLevel.index)
             this.$store.commit('SETERRORSTATE')
             this.$store.commit('SETMODE', { mode: 'p' })
           } else {

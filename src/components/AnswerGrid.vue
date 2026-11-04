@@ -8,7 +8,7 @@
         :class="{ missed: missedColumn === item }"
         v-for="item in list"
         bind-id="$index"
-        bind-data="item"><i v-if="missedColumn === item" class="miss-dot"></i><template v-else>{{getDot(item)}}</template></td>
+        bind-data="item">{{dotFor(item)}}</td>
     </tr>
     <tr>
       <td class="vis-operator">{{visOperator2}}</td>
@@ -44,6 +44,10 @@ const vm = {
   components: {
   },
   methods: {
+    dotFor (i) {
+      if (this.missedColumn === i) return '\u25CF'
+      return this.getDot(i)
+    },
     getDot (i) {
       let dot = '\u25CF'
       if (this.level.length > 1) {
@@ -138,11 +142,5 @@ export default vm
   font-size: 30px
   line-height: .5
 .white-square.missed
-  line-height: 1
-.miss-dot
-  display: inline-block
-  width: 16px
-  height: 16px
-  border-radius: 50%
-  background: var(--miss)
+  color: var(--miss)
 </style>

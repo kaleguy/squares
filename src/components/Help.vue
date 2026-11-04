@@ -47,7 +47,7 @@
 
       <section>
         <h2>Levels</h2>
-        <p>Levels 1 and 2 are short. The rest are grouped by number. The small squares show which facts are in that level. A filled square means you passed it.</p>
+        <p>Levels 1 and 2 are short. The rest are grouped by number. The small squares show which facts are in that level. A filled square means you passed it. If you try that level again and miss, it is no longer passed.</p>
         <shot file="static/help/levels.png" caption="Picking a level."></shot>
       </section>
 
