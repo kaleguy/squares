@@ -4,7 +4,7 @@
   <div class="xtable"
        @click="goto()">
     <div class="xtitle">
-      &#x00d7; {{level}}
+      &#x00d7; {{visLevel}}
     </div>
     <div class="cell"
          v-for="item, index in list" :key="item.id"
@@ -12,7 +12,7 @@
          bind-data="item"
          v-bind:class="num1Class(item)"
          :num1="index"
-         :num2="level">{{item}}</div>
+         :num2="visLevel">{{item}}</div>
   </div>
     </div>
   </div>
@@ -61,13 +61,13 @@ const vm = {
     },
     isActive (i) {
       i = i + ''
-      if (i === this.level) {
+      if (i === this.visLevel + '') {
         return true
       }
       return false
     },
     num1Class (i) {
-      if (i % this.level === 0) { return 'numerand1x' }
+      if (i % this.visLevel === 0) { return 'numerand1x' }
       return 'numerand0'
     },
     num2Class () {
@@ -77,7 +77,7 @@ const vm = {
     },
     num3Class (r) {
       r = r + ''
-      if (r !== this.level) { return }
+      if (r !== this.visLevel + '') { return }
       if (this.operator === 'd') { return 'numerand1x' }
       if (this.operator === '-') { return 'numerand1x' }
       return 'product'
@@ -91,8 +91,13 @@ const vm = {
       //  let op = this.$route.params.operator || '+'
       return 'X'
     },
+    // The level as routed, sublevel and all, so going back lands on it.
     level () {
-      return this.$route.params.level / 1 || 1
+      return this.$route.params.level || '1'
+    },
+    // The number that level stands for: "3a" is the three times table.
+    visLevel () {
+      return parseInt(this.level, 10) || 1
     },
     list () {
       return _.range(1, 101)
@@ -134,7 +139,9 @@ export default vm
 .numerand0
   color: var(--tile)
   background: var(--ink)
+// The multiples are the answers to this table, so they take the answer
+// colour. The level colour matches the ink on the Ink and Chalk themes.
 .numerand1x
-  color: var(--level-text)
-  background: var(--level)
+  color: #fff
+  background: var(--answer)
 </style>

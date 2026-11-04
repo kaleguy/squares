@@ -6,6 +6,7 @@
             v-for="item in list2"
             bind-id="$index"
             v-bind:class="num1Class(item)"
+            v-bind:style="cellStyle"
             bind-data="item">{{cnum(item)}}
           </div>
     </div>
@@ -15,6 +16,7 @@
         v-for="item in list2"
         bind-id="$index"
         v-bind:class="num2Class(item)"
+        v-bind:style="cellStyle"
         bind-data="item">{{item}}
       </div>
     </div>
@@ -110,6 +112,17 @@ const vm = {
     list2 () {
       const max = 9 + this.visLevel / 1 + 1
       return _.range(1, max)
+    },
+    // The row grows with the level, so the cells shrink to hold the board
+    // width the rest of the app uses.
+    cellStyle () {
+      const size = Math.min(24, 340 / (9 + this.visLevel / 1))
+      return {
+        width: size + 'px',
+        height: size + 'px',
+        lineHeight: size + 'px',
+        fontSize: Math.min(16, size * 0.66) + 'px'
+      }
     },
     count () {
       return 10

@@ -74,7 +74,8 @@ const vm = {
       const p = []
       let op = this.operator
       if (op === '-') { op = '+' }
-      if (op === 'd') { op = '/' }
+      // The row is headed with a times sign, so divide lists products too.
+      if (op === 'd') { op = '*' }
       if (op === 'X') { op = '*' }
       let total = 0
       let level = this.visLevel
