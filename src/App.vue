@@ -144,6 +144,32 @@ HTML, BODY
       border-radius: 3px
       box-shadow: none
       background-color: $ink
+  DIV.op-counts
+    width: 140px
+    height: 140px
+    display: grid
+    grid-template-columns: repeat(2, 58px)
+    grid-template-rows: repeat(2, 58px)
+    gap: 8px
+    place-content: center
+    padding: 0
+    background-color: $tile
+    SPAN
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 58px
+      height: 58px
+      margin: 0
+      padding: 0
+      border: none
+      border-radius: 6px
+      box-shadow: none
+      background-color: $level
+      color: $level-text
+      font-size: 26px
+      font-weight: 700
+      line-height: 1
   DIV.icon-star, DIV.icon-point
     display: flex
     align-items: center
@@ -176,6 +202,9 @@ HTML, BODY
     margin: 0
 .squares.bsquares.main-board
   margin-bottom: 12px
+
+.vue-js-switch.toggled .v-switch-core:before
+  background-color: var(--level-text) !important
 
 .help-link
   display: block

@@ -153,7 +153,7 @@
         }
         if (+total === +buffer) {
           this.$store.commit('INCCOUNT')
-          if (this.errorState) {
+          if (this.errorState && this.mode === 't') {
             this.$store.commit('RESETALL')
           }
           this.$store.commit('RESET')
@@ -169,7 +169,18 @@
           } else {
           }
         } else {
-          this.$store.commit('SETERRORSTATE')
+          // Leave the timed round for practice. The wrong digits stay, and the
+          // timer must stop without dealing a new problem.
+          if (this.mode === 't' && this.op !== 's') {
+            if (window.mytimer) {
+              window.clearInterval(window.mytimer)
+              window.mytimer = null
+            }
+            this.$store.commit('SETERRORSTATE')
+            this.$store.commit('SETMODE', { mode: 'p' })
+          } else {
+            this.$store.commit('SETERRORSTATE')
+          }
           console.log(total, num1, num2, 'NG')
         }
       }

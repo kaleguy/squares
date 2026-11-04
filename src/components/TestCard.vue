@@ -29,7 +29,7 @@
         <div class="problem-tools">
           <div id="toggleh">
             <div class="toggle-rot">
-              <toggle-button :value="true"
+              <toggle-button :value="mode === 't'"
                              :width="80"
                              :color="{checked: 'var(--level)', unchecked: 'var(--operand)'}"
                              @change="switchMode"

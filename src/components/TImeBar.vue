@@ -26,6 +26,12 @@ const vm = {
       return this.$store.state.count
     }
   },
+  beforeDestroy () {
+    if (window.mytimer) {
+      window.clearInterval(window.mytimer)
+      window.mytimer = null
+    }
+  },
   mounted () {
     this.$store.commit('RESETALL')
     if (this.$store.state.mode === 'p') {

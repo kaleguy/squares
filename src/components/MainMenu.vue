@@ -18,7 +18,9 @@
         <div class="op-tile" @click="goto('-')"><span>&minus;</span></div>
         <div class="op-tile" @click="goto('X')"><span>&#x00d7;</span></div>
         <div class="op-tile" @click="goto('d')"><span>&#x00f7;</span></div>
-        <div @click="goto('stars')" class="icon icon-star">{{levelCount}}</div>
+        <div @click="goto('stars')" class="op-counts" :aria-label="opCountLabel">
+          <span v-for="op in opCounts" :key="op.id">{{op.count}}</span>
+        </div>
         <div @click="goto('points')" class="icon icon-point">{{points}}</div>
       </div>
       <button type="button" class="help-icon" @click="help" aria-label="Help">?</button>
@@ -61,8 +63,21 @@ const vm = {
     username () {
       return titleCase(this.$store.state.username)
     },
-    levelCount () {
-      return Object.keys(this.record).length
+    opCounts () {
+      const keys = Object.keys(this.record)
+      return [
+        { id: '+', name: 'Plus' },
+        { id: '-', name: 'Minus' },
+        { id: 'X', name: 'Times' },
+        { id: 'd', name: 'Divide' }
+      ].map(op => ({
+        id: op.id,
+        name: op.name,
+        count: keys.filter(key => key.charAt(0) === op.id).length
+      }))
+    },
+    opCountLabel () {
+      return this.opCounts.map(op => op.name + ' ' + op.count).join(', ')
     },
     points () {
       const points = _.reduce(this.record, (points, level) => {

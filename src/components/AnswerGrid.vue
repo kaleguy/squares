@@ -5,9 +5,10 @@
       <td class="vis-operator"></td>
       <td
         class="white-square"
+        :class="{ missed: missedColumn === item }"
         v-for="item in list"
         bind-id="$index"
-        bind-data="item">{{getDot(item)}}</td>
+        bind-data="item"><i v-if="missedColumn === item" class="miss-dot"></i><template v-else>{{getDot(item)}}</template></td>
     </tr>
     <tr>
       <td class="vis-operator">{{visOperator2}}</td>
@@ -109,6 +110,12 @@ const vm = {
     },
     visLevel () {
       return this.level.substring(0, 1)
+    },
+    missedColumn () {
+      if (!this.$store.state.errorState) return null
+      const n = this.$store.state.num1
+      if (n < 1 || n > 9) return null
+      return n
     }
   },
   mounted () {
@@ -130,4 +137,12 @@ export default vm
   background: var(--tile)
   font-size: 30px
   line-height: .5
+.white-square.missed
+  line-height: 1
+.miss-dot
+  display: inline-block
+  width: 16px
+  height: 16px
+  border-radius: 50%
+  background: var(--miss)
 </style>
