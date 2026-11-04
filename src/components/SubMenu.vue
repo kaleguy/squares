@@ -14,20 +14,20 @@
           v-bind:class="passed('1')"
           @click="goto('1')"
           class="level">
-          <levellabel level="1d"></levellabel>
+          <levellabel level="1d" :score="scoreFor('1')"></levellabel>
         </div>
         <div
           v-bind:class="passed('2')"
           @click="goto('2')"
           class="level">
-          <levellabel level="2d"></levellabel>
+          <levellabel level="2d" :score="scoreFor('2')"></levellabel>
         </div>
       </div>
       <div class="squares sub-squares">
         <div v-for="level in levels"
              v-bind:class="passed(level)"
              @click="goto(level)">
-          <levellabel :level="level"></levellabel>
+          <levellabel :level="level" :score="scoreFor(level)"></levellabel>
         </div>
       </div>
     </div>
@@ -68,6 +68,16 @@ const vm = {
       }
       // console.log(cssClass, passedLevels)
       return cssClass
+    },
+    scoreFor (level) {
+      const levelKey = this.operator + level
+      if (!this.$store.state.passedLevels[levelKey]) return null
+      const levelRecord = this.record[levelKey]
+      if (!levelRecord) return 0
+      const times = Object.values(levelRecord).map(Number).filter(function (n) { return !isNaN(n) })
+      if (!times.length) return 0
+      const best = times.sort(function (a, b) { return a - b })[0]
+      return Math.max(0, 70 - best)
     }
   },
   computed: {
@@ -221,8 +231,8 @@ export default vm
   line-height: 1
 .short-row > .level.passed,
 .sub-squares > DIV.passed
-  background-color: var(--level)
-  color: var(--level-text)
+  background-color: var(--answer)
+  color: #fff
 .short-row .v-operator
   display: flex
   align-items: center
@@ -246,4 +256,12 @@ export default vm
     display: block
     line-height: 1
     transform: translateY(-11px)
+</style>
+<style lang="sass">
+.short-row > .level.passed .dot-green,
+.sub-squares > DIV.passed .dot-green
+  background: var(--mark-on)
+.short-row > .level.passed .dot-orange,
+.sub-squares > DIV.passed .dot-orange
+  background: var(--mark-off)
 </style>
