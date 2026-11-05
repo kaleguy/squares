@@ -29,7 +29,7 @@
             <div class="toggle-rot">
               <toggle-button :value="mode === 't'"
                              :width="80"
-                             :color="{checked: 'var(--level)', unchecked: 'var(--operand)'}"
+                             :color="{checked: 'var(--answer)', unchecked: 'var(--operand)'}"
                              @change="switchMode"
                              :height="40" :sync="true"/>
             </div>

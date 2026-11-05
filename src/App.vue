@@ -233,12 +233,8 @@ HTML, BODY
 .squares.bsquares.main-board
   margin-bottom: 12px
 
-.vue-js-switch.toggled .v-switch-core:before
-  background-color: var(--level-text) !important
-
-// The arrow out of a menu. It carries no tile of its own, and takes the
-// colour of the name tile below it. Both menus use it, so it lives here
-// rather than with either of them.
+// The arrow out of a menu. It colours itself, so this only places it.
+// Both menus use it, so it lives here rather than with either of them.
 .plain-back
   display: flex
   align-items: center
