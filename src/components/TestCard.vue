@@ -36,7 +36,7 @@
           </div>
           <div
             @click="goto(level)"
-            class="question-button">?</div>
+            class="question-button">i</div>
         </div>
         <div class="math" v-bind:class="errorStateClass">
           <div>{{num1}}</div>

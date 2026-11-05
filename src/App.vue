@@ -249,7 +249,6 @@ HTML, BODY
   border: none
   background: transparent
   box-shadow: none
-  color: var(--answer)
   cursor: pointer
   DIV
     display: flex
