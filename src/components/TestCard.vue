@@ -221,10 +221,10 @@ export default vm
   margin-left: auto
   margin-right: auto
   border-radius: 8px
-  margin-bottom: 8px
+  margin-bottom: 4px
   padding: 14px 30px 0 0
   line-height: .95em
-  height: 3.5em
+  height: 3.3em
   overflow: hidden
   DIV
     text-align: right
@@ -249,6 +249,11 @@ DIV.dtable
   // the problem sat wherever the one on show happened to end. One slot of a
   // fixed height holds either, and it carries the gap down to the problem too,
   // which is why the row below adds none.
+  //
+  // Three rows of dots with their clock fill it exactly. A level of nine
+  // cards needs barely half of that, and the spare has to go somewhere. It
+  // goes above the dots, where it reads as the page's top margin, rather
+  // than between the dots and the clock, where it read as a hole.
   height: 152px
 .clock-holder
   width: 340px
@@ -259,14 +264,20 @@ DIV.dtable
   flex-direction: column
   padding-top: 6px
   box-sizing: border-box
-  // Equal springs above and below leave the clock halfway between the squares
-  // and the problem, on a one row level as much as a three row one. The clock
-  // is wrapped in a div of its own, so the springs go on that.
-  > div:last-child
+  // The dots and the clock sit together just above the problem; the one
+  // spring, above the dots, takes whatever the level does not need. Each is
+  // wrapped in a div of its own, so the margins go on those.
+  > div:first-child
     margin-top: auto
-    margin-bottom: auto
+  > div:last-child
+    margin-top: 14px
+    margin-bottom: 14px
     .timebar
       margin-bottom: 0
+// The grid is shorter than the slot; this is its share of the slack, the
+// rest falling between it and the problem.
+.answergrid
+  padding-top: 16px
 .question-button
   width: 44px
   background: var(--ink)
