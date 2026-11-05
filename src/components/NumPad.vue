@@ -1,11 +1,20 @@
 <template>
-  <keypad @digit="onDigit" @back="menu" @clear="clear"></keypad>
+  <div>
+    <keypad @digit="onDigit" @back="menu" @clear="clear"></keypad>
+    <passcard v-if="passed"
+              title="Level passed"
+              :score="score"
+              :detail="passDetail"
+              :is-best="isBest"
+              @done="done"></passcard>
+  </div>
 </template>
 
 
 <script>
   /* global playAudio */
   import Keypad from './Keypad'
+  import PassCard from './PassCard'
   import { levelsKey } from '../lib/name'
   import { roundTarget, scoredTicks } from '../lib/round'
   import { noteFact } from '../lib/facts'
@@ -20,21 +29,41 @@
   const vm = {
     name: 'numpad',
     components: {
-      keypad: Keypad
+      keypad: Keypad,
+      passcard: PassCard
     },
     props: {},
     data () {
       return {
-
+        passed: false,
+        score: 0,
+        isBest: false,
+        passDetail: ''
       }
     },
     methods: {
+      best: function (levelRecord) {
+        if (!levelRecord) { return 0 }
+        const times = Object.values(levelRecord).map(Number).filter(n => !isNaN(n))
+        if (!times.length) { return 0 }
+        return Math.max(0, 70 - times.sort((a, b) => a - b)[0])
+      },
+      done: function () {
+        this.passed = false
+        this.$router.replace('/menu/' + this.op)
+      },
       recordPass: function (levelKey) {
         const level = this.$store.state.currentLevel.index
         let time = scoredTicks(this.$store.state.ticks, level)
         const recordKey = levelsKey(this.username)
         let record = JSON.parse(localStorage.getItem(recordKey))
         if (!record) { record = {} }
+        // What the round just passed was worth, and whether it beat the best.
+        this.score = Math.max(0, 70 - time)
+        this.isBest = this.score > this.best(record[levelKey])
+        const secs = this.$store.state.ticks
+        this.passDetail = roundTarget(level) + ' answers in ' + secs +
+          (secs === 1 ? ' second' : ' seconds')
         let levelRecord = record[levelKey]
         if (!levelRecord) {
           levelRecord = {}
@@ -128,8 +157,7 @@
             this.$store.commit('SETPASS', {key: levelKey})
             this.recordPass(levelKey)
             playAudio('yay')
-            this.$swal('Good Job!', 'You passed this level', 'success')
-              .then(() => this.$router.replace('/menu/' + this.op))
+            this.passed = true
           } else {
           }
         } else {

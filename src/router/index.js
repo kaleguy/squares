@@ -61,6 +61,12 @@ export default new Router({
     {
       path: '/chart/:type',
       component: Chart
+    },
+    // The fact list used to live on its own routes. A link kept from then
+    // should land on the name screen rather than on a blank page.
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
