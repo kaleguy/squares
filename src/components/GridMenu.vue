@@ -19,7 +19,8 @@
         <div class="op-tile" @click="goto('X')"><span>&#x00d7;</span></div>
         <div class="op-tile" @click="goto('d')"><span>&#x00f7;</span></div>
       </div>
-      <button type="button" class="help-icon" @click="help">Help</button>
+      <button type="button" class="help-icon" @click="help"
+              aria-label="Help">?</button>
     </div>
   </div>
 </template>
@@ -95,21 +96,6 @@ export default vm
 .grid-back-row
   width: 292px
   margin: 0 auto 4px
-.plain-back
-  display: flex
-  align-items: center
-  justify-content: center
-  width: 56px
-  height: 56px
-  padding: 0
-  border: none
-  background: transparent
-  box-shadow: none
-  color: var(--ink)
-  cursor: pointer
-  DIV
-    display: flex
-    line-height: 0
 .squares DIV.is-flat
   cursor: default
   &:active

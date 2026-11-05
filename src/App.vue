@@ -85,8 +85,8 @@ HTML, BODY
     font-size: 1em
     font-weight: 700
     line-height: 1
-    background-color: $ink
-    color: $tile
+    background-color: var(--answer)
+    color: #fff
     cursor: pointer
     font-family: inherit
     text-shadow: none
@@ -236,24 +236,46 @@ HTML, BODY
 .vue-js-switch.toggled .v-switch-core:before
   background-color: var(--level-text) !important
 
-// The way into the help screen. It is worded rather than a question mark:
-// the choice screen spends that glyph on the note beside each of its two
-// buttons, and one glyph cannot mean both "what is this" and "help".
-.help-icon
+// The arrow out of a menu. It carries no tile of its own, and takes the
+// colour of the name tile below it. Both menus use it, so it lives here
+// rather than with either of them.
+.plain-back
   display: flex
   align-items: center
   justify-content: center
-  width: 120px
-  height: 48px
-  margin: 22px auto 0
+  width: 56px
+  height: 56px
   padding: 0
   border: none
-  border-radius: 8px
-  background: var(--ink)
-  color: var(--tile)
+  background: transparent
+  box-shadow: none
+  color: var(--answer)
+  cursor: pointer
+  DIV
+    display: flex
+    line-height: 0
+
+// The way into the help screen: a question mark in a circle. The word was
+// a heavy block at the foot of every screen. The glyph is free to mean
+// "help" now that the choice screen's notes are marked with an i instead.
+// The border is what keeps it from reading as a fifth score ball on the
+// menus, where four of them sit in the same green just above.
+.help-icon
+  box-sizing: border-box
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 52px
+  height: 52px
+  margin: 22px auto 0
+  padding: 0
+  border: 2px solid var(--line)
+  border-radius: 50%
+  background: var(--answer)
+  color: #fff
   box-shadow: 0 3px 0 var(--lip)
   font-family: inherit
-  font-size: 22px
+  font-size: 28px
   font-weight: 700
   line-height: 1
   cursor: pointer

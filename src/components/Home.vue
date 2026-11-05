@@ -6,15 +6,16 @@
         <span>Steps</span>
         <button type="button" class="mode-why"
                 @click.stop="note = 'steps'"
-                aria-label="What is Steps?">?</button>
+                aria-label="What is Steps?">i</button>
       </div>
       <div class="mode-tile" @click="go('/grid/')">
         <span>Grid</span>
         <button type="button" class="mode-why"
                 @click.stop="note = 'grid'"
-                aria-label="What is Grid?">?</button>
+                aria-label="What is Grid?">i</button>
       </div>
-      <button type="button" class="help-icon" @click="help">Help</button>
+      <button type="button" class="help-icon" @click="help"
+              aria-label="Help">?</button>
     </div>
     <div class="note-veil" v-if="note" @click="note = null">
       <div class="note-card">
@@ -99,8 +100,8 @@ export default vm
   border: 2px solid var(--line)
   border-radius: 8px
   box-shadow: 0 3px 0 var(--lip)
-  background: var(--ink)
-  color: var(--tile)
+  background: var(--answer)
+  color: #fff
   font-size: 26px
   font-weight: 700
   line-height: 1

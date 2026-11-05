@@ -16,7 +16,8 @@
              placeholder="Enter your name">
     </div>
     </div>
-    <button type="button" class="help-icon" @click="help">Help</button>
+    <button type="button" class="help-icon" @click="help"
+              aria-label="Help">?</button>
     </div>
   </div>
 </template>
@@ -84,6 +85,8 @@ export default vm
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
 .squares DIV.title-button.brand-tile
+  background-color: var(--ink)
+  color: var(--tile)
   flex-direction: column
   gap: 10px
   width: 220px

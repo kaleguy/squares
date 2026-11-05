@@ -30,7 +30,8 @@
           <span v-for="op in opScores" :key="op.id" :class="{ 'is-wide': op.score > 99, 'is-wider': op.score > 999 }">{{op.score}}</span>
         </div>
       </div>
-      <button type="button" class="help-icon" @click="help">Help</button>
+      <button type="button" class="help-icon" @click="help"
+              aria-label="Help">?</button>
     </div>
   </div>
 </template>
