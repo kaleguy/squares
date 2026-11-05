@@ -236,12 +236,15 @@ HTML, BODY
 .vue-js-switch.toggled .v-switch-core:before
   background-color: var(--level-text) !important
 
+// The way into the help screen. It is worded rather than a question mark:
+// the choice screen spends that glyph on the note beside each of its two
+// buttons, and one glyph cannot mean both "what is this" and "help".
 .help-icon
   display: flex
   align-items: center
   justify-content: center
-  width: 56px
-  height: 56px
+  width: 120px
+  height: 48px
   margin: 22px auto 0
   padding: 0
   border: none
@@ -250,7 +253,7 @@ HTML, BODY
   color: var(--tile)
   box-shadow: 0 3px 0 var(--lip)
   font-family: inherit
-  font-size: 34px
+  font-size: 22px
   font-weight: 700
   line-height: 1
   cursor: pointer

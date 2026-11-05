@@ -16,7 +16,7 @@
              placeholder="Enter your name">
     </div>
     </div>
-    <button type="button" class="help-icon" @click="help" aria-label="Help">?</button>
+    <button type="button" class="help-icon" @click="help">Help</button>
     </div>
   </div>
 </template>
@@ -68,7 +68,7 @@ const vm = {
           if (name !== value) { delete nameList[value] }
           nameList[name] = 1
           localStorage.setItem('nameList', JSON.stringify(nameList))
-          me.$router.replace('/main/')
+          me.$router.replace('/home')
         }
       })
     console.log('TYPEAHEAD', t)

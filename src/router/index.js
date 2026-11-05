@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import FrontPage from '@/components/FrontPage'
+import Home from '@/components/Home'
+import GridMenu from '@/components/GridMenu'
+import GridCard from '@/components/GridCard'
 import MainMenu from '@/components/MainMenu'
 import SubMenu from '@/components/SubMenu'
 import DiceMenu from '@/components/DiceMenu'
@@ -20,6 +23,18 @@ export default new Router({
     {
       path: '/',
       component: FrontPage
+    },
+    {
+      path: '/home',
+      component: Home
+    },
+    {
+      path: '/grid/',
+      component: GridMenu
+    },
+    {
+      path: '/gridcard/:operator',
+      component: GridCard
     },
     {
       path: '/main/',

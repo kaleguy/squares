@@ -1,6 +1,11 @@
 <template>
   <div class="page menu-page">
     <div>
+      <div class="main-back-row">
+        <button type="button" class="plain-back" @click="home" aria-label="Back">
+          <leftarrow width="40" tight></leftarrow>
+        </button>
+      </div>
       <div class="squares bsquares main-board">
         <div
           @click="menu"
@@ -25,7 +30,7 @@
           <span v-for="op in opScores" :key="op.id" :class="{ 'is-wide': op.score > 99, 'is-wider': op.score > 999 }">{{op.score}}</span>
         </div>
       </div>
-      <button type="button" class="help-icon" @click="help" aria-label="Help">?</button>
+      <button type="button" class="help-icon" @click="help">Help</button>
     </div>
   </div>
 </template>
@@ -52,6 +57,11 @@ const vm = {
     },
     menu: function () {
       this.$router.replace('/')
+    },
+    // The arrow goes up to Steps and Grid; the name keeps its own job of
+    // going out to the name screen.
+    home: function () {
+      this.$router.replace('/home')
     },
     help: function () {
       this.$router.push('/help')
@@ -125,4 +135,7 @@ export default vm
   display: flex
   flex-direction: row
   height: 100%
+.main-back-row
+  width: 292px
+  margin: 0 auto 4px
 </style>
