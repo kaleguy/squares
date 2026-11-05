@@ -1,6 +1,9 @@
 <template>
   <div class="page">
     <div class="home">
+      <!-- The name the splash gives the app, kept on the one screen that
+           has room for it. -->
+      <div class="home-title">squares</div>
       <div class="home-name" @click="rename">{{username}}</div>
       <div class="mode-tile" @click="go('/main/')">
         <span>Steps</span>
@@ -89,6 +92,13 @@ export default vm
   width: 280px
   margin-left: auto
   margin-right: auto
+.home-title
+  margin-bottom: 24px
+  color: var(--ink)
+  font-size: 46px
+  font-weight: 700
+  line-height: 1
+  text-align: center
 .home-name
   display: flex
   align-items: center
