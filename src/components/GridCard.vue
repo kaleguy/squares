@@ -25,7 +25,7 @@
         <span class="grid-answer">{{buffer}}</span>
       </div>
 
-      <keypad @digit="onDigit" @back="leave" @clear="buffer = ''"></keypad>
+      <keypad @digit="onDigit" @back="leave" @clear="clearBuffer"></keypad>
     </div>
 
     <passcard v-if="passed"
@@ -42,7 +42,9 @@
 <script>
 /* global playAudio */
 // A Grid round: the whole table in one sitting, against a four minute clock,
-// with a square for every fact.
+// with a square for every fact. A wrong answer halts the run on that fact
+// until the right answer is given, and then starts it over, the way a missed
+// card does in Steps.
 import Keypad from './Keypad'
 import PassCard from './PassCard'
 import { titleCase } from '../lib/name'
@@ -73,7 +75,9 @@ const vm = {
       isBest: false,
       side: GRID_SIDE,
       timer: null,
-      restartTimer: null
+      // The wrong answer is left on show. The next digit pressed clears it,
+      // as it does on a Steps card.
+      clearOnNextPress: false
     }
   },
   methods: {
@@ -84,6 +88,7 @@ const vm = {
       this.dealt = 0
       this.filled = {}
       this.missed = null
+      this.clearOnNextPress = false
       this.elapsed = 0
       this.buffer = ''
       this.passed = false
@@ -92,7 +97,6 @@ const vm = {
     },
     clearTimers: function () {
       if (this.timer) { window.clearInterval(this.timer); this.timer = null }
-      if (this.restartTimer) { window.clearTimeout(this.restartTimer); this.restartTimer = null }
     },
     tick: function () {
       this.elapsed += 1
@@ -115,10 +119,15 @@ const vm = {
       return this.filled[factKey(fact)] ? 'done' : ''
     },
     onDigit: function (num) {
-      if (this.missed || !this.current) { return }
+      if (!this.current) { return }
+      if (this.clearOnNextPress) { this.buffer = ''; this.clearOnNextPress = false }
       if (this.buffer.length >= 2) { return }
       this.buffer += num
       this.check()
+    },
+    clearBuffer: function () {
+      this.buffer = ''
+      this.clearOnNextPress = false
     },
     check: function () {
       const fact = this.current
@@ -128,16 +137,19 @@ const vm = {
       // A two digit answer needs its second digit before it is judged.
       if (entered < 10 && total > 9) { return }
       if (entered === total) {
+        // Getting the missed one right is what frees the run, and the run it
+        // frees starts from an empty board.
+        if (this.missed) { this.reset(); return }
         this.$set(this.filled, factKey(fact), true)
         this.dealt += 1
         this.buffer = ''
         if (Object.keys(this.filled).length === this.facts.length) { this.finish() }
       } else {
+        // The run halts here, on the fact it went wrong on, until that fact
+        // is answered. Nothing moves on by itself.
         this.missed = fact
+        this.clearOnNextPress = true
         if (this.timer) { window.clearInterval(this.timer); this.timer = null }
-        const me = this
-        // Long enough to see which one it was, and the answer given.
-        this.restartTimer = window.setTimeout(function () { me.reset() }, 1600)
       }
     },
     // The board is full. Score what is left of the clock, keep it if it is

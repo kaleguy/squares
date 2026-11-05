@@ -41,8 +41,8 @@
 
       <section>
         <h2>Steps and Grid</h2>
-        <p>Steps teaches the facts a small set at a time, and is where to begin if you do not know many of them yet. Grid tests every fact in one sitting, for when you already know most of them. The question mark on each button says the same thing. Your name above them goes back to the name screen.</p>
-        <p>A Grid round puts the whole table on a board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are four minutes for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored. A wrong answer turns its square red, holds a moment so you can see which it was, and starts the round over, the same way missing one does in Steps.</p>
+        <p>Steps teaches the facts a small set at a time, and is where to begin if you do not know many of them yet. Grid tests every fact in one sitting, for when you already know most of them. The i on each button says the same thing. Your name above them goes back to the name screen.</p>
+        <p>A Grid round puts the whole table on a board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are four minutes for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored. A wrong answer turns its square red and stops the clock there. The round waits until you answer that fact, and then starts over from an empty board, the same way missing one does in Steps.</p>
       </section>
 
       <section>
@@ -59,7 +59,7 @@
 
       <section>
         <h2>A round</h2>
-        <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The question mark opens the facts.</p>
+        <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The i opens the facts.</p>
         <shot file="static/help/drill.png" caption="Answering a problem."></shot>
       </section>
 
