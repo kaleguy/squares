@@ -59,7 +59,9 @@
           levelRecord = {}
           record[levelKey] = levelRecord
         }
-        let dateKey = moment().format('YYYY-MM-DD-mm-ss')
+        // With no hour in it, two rounds an hour apart to the minute and
+        // second overwrote each other, and the later one was lost.
+        let dateKey = moment().format('YYYY-MM-DD-HH-mm-ss')
         levelRecord[dateKey] = time
         localStorage.setItem(recordKey, JSON.stringify(record))
       },
@@ -276,6 +278,15 @@
       line-height: 0
       &:active
         transform: none
+    // Leaving and clearing are not answers, so they wear no tile at all:
+    // only the ten digits read as keys to press. The border stays, turned
+    // transparent, so the bottom row still lines up with the rows above.
+    .back, .del
+      border-color: transparent
+      background-color: transparent
+      box-shadow: none
+      &:active
+        box-shadow: none
     .del
       color: var(--miss)
       font-size: 40px

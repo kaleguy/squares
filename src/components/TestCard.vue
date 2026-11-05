@@ -3,9 +3,7 @@
     <div style="width:400px; margin-left:-10px">
       <div class="square-holder">
         <answergrid v-if="mode==='p'"></answergrid>
-        <div
-          style="width:340px; margin-left:auto; margin-right: auto; margin-top:6px"
-          v-if="mode==='t'">
+        <div class="clock-holder" v-if="mode==='t'">
           <dots></dots>
           <timebar></timebar>
         </div>
@@ -180,7 +178,6 @@ export default vm
   align-items: flex-start
   justify-content: center
   gap: 20px
-  margin-top: 12px
   .math
     margin-left: 0
     margin-right: 0
@@ -248,6 +245,28 @@ DIV.dtable
     border-top-color: var(--miss)
 .square-holder
   border: 1px solid transparent
+  // The dots with their clock and the practice grid are different heights, so
+  // the problem sat wherever the one on show happened to end. One slot of a
+  // fixed height holds either, and it carries the gap down to the problem too,
+  // which is why the row below adds none.
+  height: 152px
+.clock-holder
+  width: 340px
+  margin-left: auto
+  margin-right: auto
+  height: 100%
+  display: flex
+  flex-direction: column
+  padding-top: 6px
+  box-sizing: border-box
+  // Equal springs above and below leave the clock halfway between the squares
+  // and the problem, on a one row level as much as a three row one. The clock
+  // is wrapped in a div of its own, so the springs go on that.
+  > div:last-child
+    margin-top: auto
+    margin-bottom: auto
+    .timebar
+      margin-bottom: 0
 .question-button
   width: 44px
   background: var(--ink)
