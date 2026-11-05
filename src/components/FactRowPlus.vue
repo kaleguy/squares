@@ -1,23 +1,23 @@
 <template>
   <div class="ftp">
-    <div class="factr">
-          <div
-            class="acell"
-            v-for="item in list2"
-            bind-id="$index"
-            v-bind:class="num1Class(item)"
-            v-bind:style="cellStyle"
-            bind-data="item">{{cnum(item)}}
-          </div>
+    <!-- The run of numbers under all nine bars. Reading a bar down to it
+         gives the total, so it is the answer row for every bar rather than
+         being repeated under each one. -->
+    <div class="factr" v-if="ruler">
+      <div
+        class="acell numerandb"
+        v-for="item in list2"
+        :key="'u' + item"
+        v-bind:style="cellStyle">{{item}}
+      </div>
     </div>
-    <div class="factr">
+    <div class="factr" v-else>
       <div
         class="acell"
         v-for="item in list2"
-        bind-id="$index"
-        v-bind:class="num2Class(item)"
-        v-bind:style="cellStyle"
-        bind-data="item">{{item}}
+        :key="'b' + item"
+        v-bind:class="num1Class(item)"
+        v-bind:style="cellStyle">{{cnum(item)}}
       </div>
     </div>
   </div>
@@ -28,6 +28,7 @@ import _ from 'lodash'
 const vm = {
   name: 'factrowplus',
   props: {
+    ruler: Boolean,
     blank: Boolean,
     num1: Number,
     num2: Number,

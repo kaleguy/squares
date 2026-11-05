@@ -1,16 +1,20 @@
 <template>
   <div class="page">
-    <div>
+    <div class="fact-screen">
+      <div class="fact-head">
+        <span class="ftitle">{{visOperator}}{{visLevel}}</span>
+        <div id="toggle" v-if="!isTimes">
+          <toggle-button :value="!flip"
+                         :width="80"
+                         :color="{unchecked: 'var(--operand)', checked: 'var(--level)'}"
+                         @change="switchMode"
+                         :height="40"
+                         :sync="true"/>
+        </div>
+      </div>
   <div
-    style="position:relative"
+    style="position:relative; cursor:pointer"
     @click="goto()">
-    <div class="fheading">
-      <div class="numerand1">?</div>
-      <div class="large-operator">{{visOperator}}</div>
-      <div class="numerand2">{{visLevel}}</div>
-      <div class="large-operator">=</div>
-      <div class="product">?</div>
-    </div>
     <div class="fact-table" style="margin-left:-20px">
        <table align="center">
          <tr class="row">
@@ -24,26 +28,53 @@
          </tr>
        </table>
     </div>
+    <!-- Nine rows of the level's own width, numbered straight through: the
+         number ending each row is that row's multiple. -->
+    <div class="times-rows" v-if="isTimes">
+      <div class="times-row" v-for="r in 9" :key="'t' + r">
+        <div class="times-cell"
+             v-for="c in levelNum"
+             :key="'t' + r + '-' + c"
+             v-bind:class="{ product: c === levelNum }">{{(r - 1) * levelNum + c}}</div>
+      </div>
+    </div>
+    <div v-else class="plus-bars">
+      <factrowplus
+        class="factrow"
+        v-for="(item, index) in nine" :key="'b' + index"
+        :num1="flip ? index : levelNum - 1"
+        :num2="flip ? levelNum : index + 1"
+        :r="flip"></factrowplus>
+      <factrowplus class="factrow" ruler></factrowplus>
+    </div>
   </div>
+      <div class="fact-foot"></div>
     </div>
   </div>
  </template>
 
 <script>
+import FactRowPlus from './FactRowPlus'
 import { getWeights, factKey } from '../lib/facts'
 
 const vm = {
   name: 'facttable',
   components: {
+    factrowplus: FactRowPlus
+  },
+  data () {
+    return {
+      // Which way round the plus bars are read. The times rows do not flip.
+      flip: false,
+      nine: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    }
   },
   methods: {
+    switchMode: function (v) {
+      this.flip = Boolean(!v.value)
+    },
     goto: function () {
-      const op = this.operator
-      let target = '/factlist/' + op + '/' + this.level
-      if (op === 'X' || op === 'd') {
-        target = '/factlistX/' + op + '/' + this.level
-      }
-      this.$router.replace(target)
+      this.$router.replace('/card/' + this.operator + '/' + this.level)
     },
     submit: function () {
     },
@@ -65,9 +96,12 @@ const vm = {
       }
       return eval('a ' + op + ' b')// eslint-disable-line
     },
-    // A fact the dealer is currently favouring, ringed so the whole table
-    // reads as what still needs work.
+    // A fact in this level that the dealer is currently favouring. Weights
+    // are kept for every level, but ringing the whole table scattered marks
+    // across rows this screen is not about; the level's own row is the one a
+    // child is here to read.
     isWeak (r, c) {
+      if (r + '' !== this.visLevel) { return false }
       return (this.weights[factKey(this.operator, r, c)] || 0) > 0
     },
     isActive (i) {
@@ -132,6 +166,12 @@ const vm = {
     },
     visLevel () {
       return this.level.substring(0, 1)
+    },
+    levelNum () {
+      return +this.visLevel || 1
+    },
+    isTimes () {
+      return this.operator === 'X' || this.operator === 'd'
     }
   },
   mounted () {
@@ -149,4 +189,49 @@ export default vm
 <style lang="sass">
 .weak
   box-shadow: inset 0 0 0 3px var(--miss)
+.fact-head
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 12px
+  // The heading counted towards what the page centres, so the pair of grids
+  // sat above centre by half of it. The same height left empty below them
+  // evens it up.
+  height: 88px
+.fact-foot
+  height: 88px
+.ftitle
+  display: inline-block
+  font-family: inherit
+  font-weight: 700
+  color: var(--ink)
+  font-size: 52px
+  line-height: 1
+.factrow
+  margin-bottom: 0
+.plus-bars, .times-rows
+  margin-top: 28px
+.times-rows
+  display: flex
+  flex-direction: column
+  align-items: center
+.times-row
+  display: flex
+.times-cell
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: border-box
+  width: 34px
+  height: 28px
+  border-right: 1px solid var(--paper)
+  border-bottom: 1px solid var(--paper)
+  background: var(--ink)
+  color: var(--tile)
+  font-size: 16px
+  font-weight: 700
+  line-height: 1
+  &.product
+    background: var(--answer)
+    color: #fff
 </style>

@@ -9,8 +9,6 @@ import SubMenu from '@/components/SubMenu'
 import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
 import FactTable from '@/components/FactTable'
-import FactTablePlus from '@/components/FactTablePlus'
-import FactTableX from '@/components/FactTableX'
 import Chart from '@/components/Chart'
 import Help from '@/components/Help'
 
@@ -59,14 +57,6 @@ export default new Router({
     {
       path: '/facts/:operator/:level',
       component: FactTable
-    },
-    {
-      path: '/factlist/:operator/:level',
-      component: FactTablePlus
-    },
-    {
-      path: '/factlistX/:operator/:level',
-      component: FactTableX
     },
     {
       path: '/chart/:type',
