@@ -17,8 +17,36 @@
                 @click.stop="note = 'grid'"
                 aria-label="What is Grid?">i</button>
       </div>
-      <button type="button" class="help-icon" @click="help"
-              aria-label="Help">?</button>
+      <!-- The two pieces of chrome, side by side: what the app is, and
+           how it looks. -->
+      <div class="home-chrome">
+        <button type="button" class="help-icon" @click="help"
+                aria-label="Help">?</button>
+        <button type="button" class="help-icon gear-icon" @click="settings = true"
+                aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <g fill="#fff">
+              <rect x="10.2" y="1" width="3.6" height="22" rx="1.4"/>
+              <rect x="10.2" y="1" width="3.6" height="22" rx="1.4"
+                    transform="rotate(45 12 12)"/>
+              <rect x="10.2" y="1" width="3.6" height="22" rx="1.4"
+                    transform="rotate(90 12 12)"/>
+              <rect x="10.2" y="1" width="3.6" height="22" rx="1.4"
+                    transform="rotate(135 12 12)"/>
+              <circle cx="12" cy="12" r="7.6"/>
+            </g>
+            <circle cx="12" cy="12" r="3" fill="var(--answer)"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="note-veil" v-if="settings" @click="settings = false">
+      <div class="note-card settings-card" @click.stop>
+        <div class="note-title">Colors</div>
+        <div class="note-body settings-body">Pick a color for the levels you have passed. Night and Chalk darken the whole page.</div>
+        <themepicker></themepicker>
+        <button type="button" class="settings-done" @click="settings = false">Done</button>
+      </div>
     </div>
     <div class="note-veil" v-if="note" @click="note = null">
       <div class="note-card">
@@ -34,6 +62,7 @@
 // The screen that chooses how to drill: one fact set at a time, or the whole
 // table in one sitting. It sits between the name and the operator menu.
 import { titleCase } from '../lib/name'
+import ThemePicker from './ThemePicker'
 
 const NOTES = {
   steps: {
@@ -50,9 +79,13 @@ const NOTES = {
 
 const vm = {
   name: 'home',
+  components: {
+    themepicker: ThemePicker
+  },
   data () {
     return {
-      note: null
+      note: null,
+      settings: false
     }
   },
   methods: {
@@ -143,6 +176,35 @@ export default vm
   &:active
     transform: translateY(2px)
     box-shadow: 0 1px 0 var(--lip)
+.home-chrome
+  display: flex
+  justify-content: center
+  gap: 16px
+.home-chrome .help-icon
+  margin: 22px 0 0
+.gear-icon svg
+  display: block
+  width: 26px
+  height: 26px
+.settings-done
+  box-sizing: border-box
+  width: 130px
+  height: 48px
+  margin-top: 22px
+  padding: 0
+  border: 2px solid var(--line)
+  border-radius: 8px
+  box-shadow: 0 3px 0 var(--lip)
+  background: var(--ink)
+  color: var(--tile)
+  font-family: inherit
+  font-size: 20px
+  font-weight: 700
+  line-height: 1
+  cursor: pointer
+  &:active
+    transform: translateY(2px)
+    box-shadow: 0 1px 0 var(--lip)
 .mode-why
   position: absolute
   top: 10px
@@ -195,4 +257,11 @@ export default vm
   margin-top: 12px
   color: var(--muted)
   font-size: 14px
+// Wider than a note: three swatches have to stand in a row.
+.note-card.settings-card
+  width: 320px
+  padding: 22px
+.note-body.settings-body
+  font-size: 16px
+  margin-bottom: 18px
 </style>

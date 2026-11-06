@@ -10,27 +10,7 @@
 
       <section>
         <h2>Colors</h2>
-        <p>Pick a color for the levels you have passed. Night and Chalk darken the whole page.</p>
-        <div class="palette-row" role="group" aria-label="Color theme">
-          <button
-            v-for="theme in themes"
-            type="button"
-            class="palette-choice"
-            :key="theme.id"
-            :class="{ 'is-on': theme.id === current }"
-            :aria-pressed="theme.id === current ? 'true' : 'false'"
-            @click="choose(theme.id)">
-            <span class="palette-plate" :style="plate(theme)">
-              <span class="palette-tile" :style="swatch(theme)">
-                <span class="palette-num">3</span>
-                <span class="palette-grid">
-                  <i v-for="n in 9" :key="n" :style="{ background: n < 4 ? theme.dotOn : theme.dotOff }"></i>
-                </span>
-              </span>
-            </span>
-            <span class="palette-label">{{ theme.label }}</span>
-          </button>
-        </div>
+        <p>The gear beside the question mark on the Steps and Grid screen picks a color for the levels you have passed. Night and Chalk darken the whole page.</p>
       </section>
 
       <section>
@@ -81,7 +61,6 @@
 
 <script>
 import LeftArrow from './LeftArrow'
-import { THEMES, applyTheme, currentThemeId } from '../lib/theme'
 
 const Shot = {
   name: 'shot',
@@ -108,29 +87,7 @@ export default {
     leftarrow: LeftArrow,
     shot: Shot
   },
-  data () {
-    return {
-      themes: THEMES,
-      current: currentThemeId()
-    }
-  },
   methods: {
-    swatch (theme) {
-      const line = theme.line || '#1A2744'
-      const lip = theme.lip || '#1A2744'
-      return {
-        background: theme.level,
-        color: theme.levelText,
-        borderColor: line,
-        boxShadow: '0 3px 0 ' + lip
-      }
-    },
-    plate (theme) {
-      return { background: theme.paper || '#E8EEF6' }
-    },
-    choose (id) {
-      this.current = applyTheme(id)
-    },
     back () {
       if (this.$store.state.username) {
         // Help is opened from the name screen, the choice and the operator
@@ -183,63 +140,6 @@ export default {
   font-weight: 400
   line-height: 1.45
   margin: 0 0 12px
-.palette-row
-  display: flex
-  flex-wrap: wrap
-  gap: 20px 14px
-.palette-choice
-  flex: 0 0 calc(33.333% - 6px)
-  display: flex
-  flex-direction: column
-  align-items: center
-  gap: 8px
-  margin: 0
-  padding: 0
-  border: none
-  background: transparent
-  color: $ink
-  font: inherit
-  cursor: pointer
-.palette-plate
-  display: flex
-  align-items: center
-  justify-content: center
-  width: 100%
-  box-sizing: border-box
-  min-height: 86px
-  padding: 14px 10px
-  border-radius: 12px
-.palette-tile
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  gap: 3px
-  width: 58px
-  height: 58px
-  box-sizing: border-box
-  border: 2px solid $line
-  border-radius: 8px
-  box-shadow: 0 3px 0 $lip
-.palette-choice.is-on .palette-plate
-  outline: 3px solid var(--ink)
-  outline-offset: 3px
-.palette-num
-  font-size: 16px
-  font-weight: 700
-  line-height: 1
-.palette-grid
-  display: grid
-  grid-template-columns: repeat(3, 7px)
-  grid-template-rows: repeat(3, 7px)
-  gap: 1px
-.palette-grid i
-  display: block
-  border-radius: 1px
-.palette-label
-  font-size: 14px
-  font-weight: 700
-  line-height: 1
 .shot
   margin: 0
 .shot img
