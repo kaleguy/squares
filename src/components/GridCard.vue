@@ -5,7 +5,8 @@
            problem on a Steps card. The board is the tallest thing here, and
            the room beside it was empty. -->
       <div class="grid-top">
-        <div class="grid-tools">
+        <!-- Centred on the board rather than hung from its top edge. -->
+        <div class="grid-tools" :style="{ height: boardSize + 'px' }">
           <div class="grid-toggle">
             <div class="grid-toggle-rot">
               <toggle-button :value="mode === 't'"
@@ -47,16 +48,17 @@
           </div>
         </div>
 
-        <div class="grid-counter">
+        <div class="grid-counter" :style="{ height: boardSize + 'px' }">
           <div>{{practising ? ' ' : remaining}}</div>
           <div>{{recent[0] === undefined ? ' ' : recent[0]}}</div>
           <div>{{recent[1] === undefined ? ' ' : recent[1]}}</div>
         </div>
       </div>
 
-      <!-- Nothing to answer means nothing to show. -->
-      <div class="grid-problem" :class="{ error: errorState }" v-if="current">
-        <span>{{firstNum}} {{visOperator}} {{current.b}} =</span>
+      <!-- Nothing to answer shows nothing, but keeps its room: the keypad
+           stays where it is when practice has nothing to drill. -->
+      <div class="grid-problem" :class="{ error: errorState, blank: !current }">
+        <span v-if="current">{{firstNum}} {{visOperator}} {{current.b}} =</span>
         <span class="grid-answer">{{buffer}}</span>
       </div>
 
@@ -363,6 +365,7 @@ export default vm
   display: flex
   flex-direction: column
   align-items: center
+  justify-content: center
   gap: 14px
   width: 48px
 .grid-toggle
@@ -395,6 +398,7 @@ export default vm
 .grid-counter
   display: flex
   flex-direction: column
+  justify-content: center
   gap: 8px
   width: 48px
   DIV
@@ -496,6 +500,8 @@ export default vm
     color: var(--miss)
     border-color: var(--miss)
     box-shadow: 0 3px 0 var(--miss)
+  &.blank
+    visibility: hidden
 .grid-answer
   min-width: 54px
   text-align: left
