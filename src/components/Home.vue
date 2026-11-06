@@ -46,7 +46,7 @@
     <div class="note-veil" v-if="about" @click="about = false">
       <div class="note-card">
         <div class="note-title">Squares</div>
-        <div class="note-body about-body">Squares memorizes the basic math facts. Each square is one set of facts: answer it over and over, with no mistakes, inside the time given, and it is passed. Pass them all and the table is yours. Your scores are kept on this device.</div>
+        <div class="note-body about-body">Squares is a program to memorize basic math facts. Each square is one set of facts: answer it over and over, with no mistakes, inside the time given, and it is passed. Pass them all and the table is yours. Your scores are kept on this device.</div>
         <div class="note-body about-body">The gear sets the colors. The question mark on any other screen explains that screen.</div>
         <div class="about-credit">
           <div>&copy; Joseph Orr</div>
