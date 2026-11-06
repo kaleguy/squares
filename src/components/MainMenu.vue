@@ -65,7 +65,7 @@ const vm = {
       this.$router.replace('/home')
     },
     help: function () {
-      this.$router.push('/help')
+      this.$router.push('/help/steps')
     }
   },
   computed: {

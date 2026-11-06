@@ -4,57 +4,60 @@
       <div class="help-back" @click="back">
         <leftarrow width="40" tight></leftarrow>
       </div>
-      <h1>About Squares</h1>
-      <p>Squares is a program to memorize basic math facts quickly and efficiently. Each square is one set of facts. You have to answer that set over and over, with no mistakes, in a set amount of time.</p>
-      <p>Pass all the squares, and your facts are memorized.</p>
 
-      <section>
-        <h2>Theme</h2>
-        <p>The gear beside the question mark on the Steps and Grid screen sets the colors the app is drawn in. Night and Chalk darken the whole page.</p>
-      </section>
+      <template v-if="isGrid">
+        <h1>Grid</h1>
+        <p>Grid tests every fact in one sitting. Start here if you already know most of them.</p>
 
-      <section>
-        <h2>Your name</h2>
-        <p>Type your name and press Return. Squares keeps your scores on this device.</p>
-        <shot file="static/help/name.png" caption="The name screen."></shot>
-      </section>
+        <section>
+          <h2>This screen</h2>
+          <p>Plus, minus, times, and divide each have a whole table behind them. The four balls are your best score on those tables, and each shows zero until you fill one. Your name goes back to the name screen, and the arrow goes back to Steps and Grid.</p>
+          <shot file="static/help/grid-menu.png" caption="The Grid menu."></shot>
+        </section>
 
-      <section>
-        <h2>Steps and Grid</h2>
-        <p>Steps teaches the facts a small set at a time, and is where to begin if you do not know many of them yet. Grid tests every fact in one sitting, for when you already know most of them. The i on each button says the same thing. Your name above them goes back to the name screen.</p>
-        <p>A Grid round puts the whole table on a board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are four minutes for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored. A wrong answer turns its square red and stops the clock there. The round waits until you answer that fact, and then starts over from an empty board, the same way missing one does in Steps.</p>
-      </section>
+        <section>
+          <h2>A round</h2>
+          <p>The whole table is on the board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are four minutes for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored.</p>
+          <p>A wrong answer turns its square red and stops the clock there. The round waits until you answer that fact, and then starts over from an empty board, the same way missing one does in Steps. X clears the digits, and the arrow goes back.</p>
+          <shot file="static/help/grid.png" caption="A Grid round."></shot>
+        </section>
+      </template>
 
-      <section>
-        <h2>The menu</h2>
-        <p>The arrow goes back to Steps and Grid. Your name goes back to the name screen. The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement. Each one shows zero until you pass a level. The four balls are the scores for those same operations. Each ball adds your best score on the levels you have passed, and shows zero until you pass one. A score starts at 70 and counts down, so a faster round is worth more.</p>
-        <shot file="static/help/menu.png" caption="The main menu."></shot>
-      </section>
+      <template v-else>
+        <h1>Steps</h1>
+        <p>Steps teaches the facts a small set at a time. Each square is one set: answer it over and over, with no mistakes, inside the time given, and it is passed. Pass all the squares and those facts are memorized.</p>
 
-      <section>
-        <h2>Levels</h2>
-        <p>Levels 1 to 4 hold the fewest facts, so each is drilled whole. The rest are grouped by number. The small squares show which facts are in that level. A green square means you passed it. The yellow number in the circle is the score, and the grid behind it shows which facts are in that level. If you try that level again and miss, it is no longer passed.</p>
-        <shot file="static/help/levels.png" caption="Picking a level."></shot>
-      </section>
+        <section>
+          <h2>This screen</h2>
+          <p>The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement, and the four balls are your scores for them. Each shows zero until you pass a level. A score starts at 70 and counts down, so a faster round is worth more. Your name goes back to the name screen, and the arrow goes back to Steps and Grid.</p>
+          <shot file="static/help/menu.png" caption="The operator menu."></shot>
+        </section>
 
-      <section>
-        <h2>A round</h2>
-        <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The i opens the facts.</p>
-        <shot file="static/help/drill.png" caption="Answering a problem."></shot>
-      </section>
+        <section>
+          <h2>Levels</h2>
+          <p>Levels 1 to 4 hold the fewest facts, so each is drilled whole. The rest are grouped by number. The small squares show which facts are in that level. A green square means you passed it. The yellow number in the circle is the score, and the grid behind it shows which facts are in that level. If you try that level again and miss, it is no longer passed.</p>
+          <shot file="static/help/levels.png" caption="Picking a level."></shot>
+        </section>
 
-      <section>
-        <h2>Facts</h2>
-        <p>The table shows the whole set for that level. Amber is one number, the color you picked is the level, and green is the answer. A red ring on the level's own row means you got that one wrong recently, so it is being dealt more often until it comes good.</p>
-        <p>Under the table the same facts are laid out again. Plus and minus draw each fact as a bar of counters over one row of numbers: read a bar down to that row for the total. Times and divide draw nine rows of the level's own width, numbered straight through, so the number ending each row is that row's multiple. Tapping anywhere goes back to the round.</p>
-        <shot file="static/help/facts.png" caption="The fact table."></shot>
-      </section>
+        <section>
+          <h2>A round</h2>
+          <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The i opens the facts.</p>
+          <shot file="static/help/drill.png" caption="Answering a problem."></shot>
+        </section>
 
-      <section>
-        <h2>Counting</h2>
-        <p>Count the pips on the dice and enter the total.</p>
-        <shot file="static/help/dice.png" caption="A counting problem."></shot>
-      </section>
+        <section>
+          <h2>Facts</h2>
+          <p>The table shows the whole set for that level. Amber is one number, the color you picked is the level, and green is the answer. A red ring on the level's own row means you got that one wrong recently, so it is being dealt more often until it comes good.</p>
+          <p>Under the table the same facts are laid out again. Plus and minus draw each fact as a bar of counters over one row of numbers: read a bar down to that row for the total. Times and divide draw nine rows of the level's own width, numbered straight through, so the number ending each row is that row's multiple. Tapping anywhere goes back to the round.</p>
+          <shot file="static/help/facts.png" caption="The fact table."></shot>
+        </section>
+
+        <section>
+          <h2>Counting</h2>
+          <p>Count the pips on the dice and enter the total.</p>
+          <shot file="static/help/dice.png" caption="A counting problem."></shot>
+        </section>
+      </template>
     </div>
   </div>
 </template>
@@ -86,6 +89,11 @@ export default {
   components: {
     leftarrow: LeftArrow,
     shot: Shot
+  },
+  computed: {
+    isGrid () {
+      return this.$route.params.section === 'grid'
+    }
   },
   methods: {
     back () {

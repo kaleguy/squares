@@ -39,6 +39,11 @@ export default new Router({
       component: MainMenu
     },
     {
+      // Help is scoped to the screen that opened it: /help/steps, /help/grid.
+      path: '/help/:section',
+      component: Help
+    },
+    {
       path: '/help',
       component: Help
     },

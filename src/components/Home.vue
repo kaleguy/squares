@@ -20,7 +20,7 @@
       <!-- The two pieces of chrome, side by side: what the app is, and
            how it looks. -->
       <div class="home-chrome">
-        <button type="button" class="help-icon" @click="help"
+        <button type="button" class="help-icon" @click="about = true"
                 aria-label="Help">?</button>
         <button type="button" class="help-icon gear-icon" @click="settings = true"
                 aria-label="Settings">
@@ -38,6 +38,21 @@
             <circle cx="12" cy="12" r="3" fill="var(--answer)"/>
           </svg>
         </button>
+      </div>
+    </div>
+    <!-- All the help this screen needs: what the app is, and where the rest
+         of it is written. Every other screen's question mark explains that
+         screen, so none of that is repeated here. -->
+    <div class="note-veil" v-if="about" @click="about = false">
+      <div class="note-card">
+        <div class="note-title">Squares</div>
+        <div class="note-body about-body">Squares memorizes the basic math facts. Each square is one set of facts: answer it over and over, with no mistakes, inside the time given, and it is passed. Pass them all and the table is yours. Your scores are kept on this device.</div>
+        <div class="note-body about-body">The gear sets the colors. The question mark on any other screen explains that screen.</div>
+        <div class="about-credit">
+          <div>&copy; Joseph Orr</div>
+          <a href="https://www.trilog.app" target="_blank" rel="noopener" @click.stop>www.trilog.app</a>
+        </div>
+        <div class="note-close">Tap to close</div>
       </div>
     </div>
     <div class="note-veil" v-if="settings" @click="settings = false">
@@ -86,7 +101,8 @@ const vm = {
   data () {
     return {
       note: null,
-      settings: false
+      settings: false,
+      about: false
     }
   },
   methods: {
@@ -95,9 +111,6 @@ const vm = {
     },
     rename: function () {
       this.$router.replace('/')
-    },
-    help: function () {
-      this.$router.push('/help')
     }
   },
   computed: {
@@ -262,6 +275,20 @@ export default vm
 .note-card.settings-card
   width: 320px
   padding: 22px
+.about-body
+  font-size: 16px
+  line-height: 1.35
+  & + .about-body
+    margin-top: 12px
+.about-credit
+  margin-top: 14px
+  font-size: 14px
+  line-height: 1.5
+.about-credit a
+  // The score green is too close to the tile it sits on in the dark themes;
+  // a mark's green reads on all six.
+  color: var(--mark-on)
+  text-decoration: none
 .note-title.settings-title
   margin-bottom: 16px
 </style>
