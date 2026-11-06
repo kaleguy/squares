@@ -73,7 +73,7 @@
           <div class="settings-empty" v-if="!names.length">Nothing kept on this device.</div>
           <template v-for="name in names">
             <div class="settings-confirm" v-if="confirming === name" :key="'c' + name">
-              <div>Delete {{name}}, and every score kept under that name?</div>
+              <div>Delete this user. This will also delete the user&rsquo;s data.</div>
               <div class="settings-confirm-buttons">
                 <button type="button" class="settings-keep"
                         @click="confirming = null">Keep</button>
