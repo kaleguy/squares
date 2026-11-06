@@ -17,7 +17,7 @@
 
         <section>
           <h2>A round</h2>
-          <p>The whole table is on the board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are four minutes for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored.</p>
+          <p>The whole table is on the board, with the operator in the corner and the two runs of numbers along the edges. Every fact comes up once, and each right answer fills that fact's own square. There are three minutes and twenty seconds for all of them, and what is left of the clock when the board fills is your score, the same way a level is scored.</p>
           <p>A wrong answer turns its square red and stops the clock there. The round waits until you answer that fact, and then starts over from an empty board, the same way missing one does in Steps. X clears the digits, and the arrow goes back.</p>
           <p>The ones are left out. Adding, taking away, multiplying or dividing by one is already in the number itself, so those squares are greyed and never come up. The counter on the right is what is left of the clock, over your last two scores at this table, and the i shows the whole table answered.</p>
           <shot file="static/help/grid.png" caption="A Grid round."></shot>

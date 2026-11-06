@@ -16,3 +16,36 @@ export function levelsKey (name) {
   }
   return next
 }
+
+// Everyone this device has kept anything for, title-cased, in order.
+export function users () {
+  const list = JSON.parse(localStorage.getItem('nameList')) || {}
+  const seen = {}
+  return Object.keys(list).map(titleCase).filter(function (name) {
+    if (seen[name]) { return false }
+    seen[name] = true
+    return true
+  }).sort()
+}
+
+// A name and everything kept under it: the scores, the fact weights, the Grid
+// bests and the Grid misses, under the title-cased key and under whatever
+// casing the name was first typed in.
+export function deleteUser (name) {
+  const titled = titleCase(name)
+  const list = JSON.parse(localStorage.getItem('nameList')) || {}
+  const bases = {}
+  bases[titled] = true
+  bases[name] = true
+  Object.keys(list).forEach(function (key) {
+    if (titleCase(key) !== titled) { return }
+    bases[key] = true
+    delete list[key]
+  })
+  localStorage.setItem('nameList', JSON.stringify(list))
+  Object.keys(bases).forEach(function (base) {
+    ;['_levels', '_facts', '_grid', '_gridmiss'].forEach(function (suffix) {
+      localStorage.removeItem(base + suffix)
+    })
+  })
+}

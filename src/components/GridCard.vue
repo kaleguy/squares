@@ -78,7 +78,7 @@
 
 <script>
 /* global playAudio */
-// A Grid round: the whole table in one sitting, against a four minute clock,
+// A Grid round: the whole table in one sitting, against a 200 second clock,
 // with a square for every fact. A wrong answer halts the run on that fact
 // until the right answer is given, and then starts it over, the way a missed
 // card does in Steps. The switch beside the board drops out of the timing and

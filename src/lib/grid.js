@@ -1,13 +1,14 @@
-// One run at a whole table: every fact once, four minutes, and a square for
+// One run at a whole table: every fact once, 200 seconds, and a square for
 // each. Mirrors Squares/Model/GridRound.swift in the iOS app.
 //
 // Steps allows 2.6 seconds an answer (70 for 27). The whole table with no
 // repetition, and a miss costing the lot, is harder than that, so a Grid
-// round allows just under 3.
+// round allows about 3: 200 seconds over the 64 facts of plus and times, or
+// the 72 of minus and divide.
 
 import { titleCase } from './name'
 
-export const GRID_SECONDS = 240
+export const GRID_SECONDS = 200
 export const GRID_SIDE = 9
 
 // Grid keeps its own bests: a whole table at once is not the same feat as a

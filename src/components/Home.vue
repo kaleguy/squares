@@ -57,10 +57,41 @@
     </div>
     <div class="note-veil" v-if="settings" @click="settings = false">
       <div class="note-card settings-card" @click.stop>
+        <div class="note-title settings-title">Settings</div>
+
         <!-- No sentence under it: the swatches are the whole of what the
              choice does, drawn as the thing it changes. -->
-        <div class="note-title settings-title">Theme</div>
+        <div class="settings-heading">Theme</div>
         <themepicker></themepicker>
+
+        <!-- Everyone this device is keeping scores for. The X asks first: a
+             name goes with everything that name has ever done here. -->
+        <div class="settings-heading">Names</div>
+        <!-- Room for the question when one is being asked, so the buttons
+             are never half off the bottom of the list. -->
+        <div class="settings-names" :style="{ maxHeight: confirming ? '260px' : '148px' }">
+          <div class="settings-empty" v-if="!names.length">Nothing kept on this device.</div>
+          <template v-for="name in names">
+            <div class="settings-confirm" v-if="confirming === name" :key="'c' + name">
+              <div>Delete {{name}}, and every score kept under that name?</div>
+              <div class="settings-confirm-buttons">
+                <button type="button" class="settings-keep"
+                        @click="confirming = null">Keep</button>
+                <button type="button" class="settings-delete"
+                        @click="removeUser(name)">Delete</button>
+              </div>
+            </div>
+            <div class="settings-name" v-else :key="'n' + name">
+              <span>{{name}}</span>
+              <button type="button" class="settings-x"
+                      :aria-label="'Delete ' + name"
+                      @click="confirming = name">
+                <x width="15"></x>
+              </button>
+            </div>
+          </template>
+        </div>
+
         <button type="button" class="settings-done" @click="settings = false">Done</button>
       </div>
     </div>
@@ -77,8 +108,9 @@
 <script>
 // The screen that chooses how to drill: one fact set at a time, or the whole
 // table in one sitting. It sits between the name and the operator menu.
-import { titleCase } from '../lib/name'
+import { titleCase, users, deleteUser } from '../lib/name'
 import ThemePicker from './ThemePicker'
+import X from './X'
 
 const NOTES = {
   steps: {
@@ -96,13 +128,17 @@ const NOTES = {
 const vm = {
   name: 'home',
   components: {
-    themepicker: ThemePicker
+    themepicker: ThemePicker,
+    x: X
   },
   data () {
     return {
       note: null,
       settings: false,
-      about: false
+      about: false,
+      names: users(),
+      // The name whose delete has been asked for but not yet confirmed.
+      confirming: null
     }
   },
   methods: {
@@ -111,6 +147,16 @@ const vm = {
     },
     rename: function () {
       this.$router.replace('/')
+    },
+    removeUser: function (name) {
+      deleteUser(name)
+      this.names = users()
+      this.confirming = null
+      // Deleting whoever is playing leaves nobody playing.
+      if (titleCase(this.$store.state.username) === name) {
+        this.$store.commit('SETUSER', { username: '' })
+        this.$router.replace('/')
+      }
     }
   },
   computed: {
@@ -202,9 +248,9 @@ export default vm
   height: 26px
 .settings-done
   box-sizing: border-box
+  margin-top: 22px
   width: 130px
   height: 48px
-  margin-top: 22px
   padding: 0
   border: 2px solid var(--line)
   border-radius: 8px
@@ -291,4 +337,63 @@ export default vm
   text-decoration: none
 .note-title.settings-title
   margin-bottom: 16px
+.settings-heading
+  margin: 4px 0 10px
+  color: var(--muted)
+  font-size: 16px
+  font-weight: 700
+  text-align: left
+.settings-names
+  overflow-y: auto
+  text-align: left
+.settings-empty
+  color: var(--muted)
+  font-size: 16px
+.settings-name
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: 36px
+  color: var(--ink)
+  font-size: 18px
+  font-weight: 700
+.settings-x
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 36px
+  height: 36px
+  padding: 0
+  border: none
+  background: transparent
+  color: var(--miss)
+  cursor: pointer
+.settings-confirm
+  padding: 6px 0
+  color: var(--ink)
+  font-size: 15px
+  text-align: center
+.settings-confirm-buttons
+  display: flex
+  justify-content: center
+  gap: 10px
+  margin-top: 8px
+.settings-keep, .settings-delete
+  box-sizing: border-box
+  width: 100px
+  height: 38px
+  padding: 0
+  border: 2px solid var(--line)
+  border-radius: 8px
+  box-shadow: 0 2px 0 var(--lip)
+  font-family: inherit
+  font-size: 16px
+  font-weight: 700
+  cursor: pointer
+.settings-keep
+  background: var(--tile)
+  color: var(--ink)
+.settings-delete
+  background: var(--miss)
+  color: #fff
 </style>
