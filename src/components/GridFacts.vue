@@ -1,17 +1,20 @@
 <template>
   <div class="page">
     <div class="gridfacts" @click="back">
-      <div class="gridfacts-head">{{isTimes ? '×' : '+'}}</div>
       <table class="gridfacts-table">
         <tr>
-          <td class="gridfacts-corner"></td>
+          <!-- The operation sits in the corner the two runs of numbers meet
+               at, the way it does on the board being timed. -->
+          <td class="gridfacts-corner">{{visOperator}}</td>
           <td class="gridfacts-edge" v-for="c in 9" :key="'c' + c">{{c}}</td>
         </tr>
         <tr v-for="r in 9" :key="'r' + r">
           <td class="gridfacts-edge">{{r}}</td>
+          <!-- The diagonal is green: the table is the same read either way
+               across it, so half of it is the other half seen in a mirror. -->
           <td v-for="c in 9" :key="'b' + r + '-' + c"
               class="gridfacts-cell"
-              :class="{ skip: !counts(r, c) }">{{product(r, c)}}</td>
+              :class="{ diagonal: r === c }">{{product(r, c)}}</td>
         </tr>
       </table>
       <div class="gridfacts-back">Tap to go back</div>
@@ -23,18 +26,11 @@
 // The whole table, answered: what the i on a Grid round opens. Minus reads
 // its addition table and divide its times table, the same way the Steps fact
 // table does, because that is the pair the answer is made from.
-import { factCounts } from '../lib/grid'
-
 const vm = {
   name: 'gridfacts',
   methods: {
     product: function (a, b) {
       return this.isTimes ? a * b : a + b
-    },
-    // The ones the round leaves out are drawn flat, so the table reads as the
-    // one being timed.
-    counts: function (a, b) {
-      return factCounts(this.op, { a: a, b: b })
     },
     back: function () {
       this.$router.replace('/gridcard/' + this.op)
@@ -46,6 +42,12 @@ const vm = {
     },
     isTimes () {
       return this.op === 'X' || this.op === 'd'
+    },
+    visOperator () {
+      if (this.op === 'd') { return '÷' }
+      if (this.op === 'X') { return '×' }
+      if (this.op === '-') { return '−' }
+      return this.op
     }
   },
   mounted () {
@@ -62,13 +64,6 @@ export default vm
   margin: 0 auto
   cursor: pointer
   user-select: none
-.gridfacts-head
-  color: var(--ink)
-  font-size: 52px
-  font-weight: 700
-  line-height: 1
-  text-align: center
-  margin-bottom: 20px
 .gridfacts-table
   width: 340px
   border-collapse: collapse
@@ -83,16 +78,18 @@ export default vm
   text-align: center
   border: 1px solid var(--paper)
 .gridfacts-corner
-  background: transparent
+  background: var(--ink)
+  color: var(--tile)
+  font-size: 22px
 .gridfacts-edge
   background: var(--operand)
   color: #1A2744
 .gridfacts-cell
   background: var(--ink)
   color: var(--tile)
-  &.skip
-    background: var(--track)
-    color: var(--muted)
+  &.diagonal
+    background: var(--answer)
+    color: #fff
 .gridfacts-back
   margin-top: 20px
   color: var(--muted)
