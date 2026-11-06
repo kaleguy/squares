@@ -37,8 +37,10 @@
             </div>
           </div>
 
-          <!-- Practice is not timed, so there is no clock to show. -->
-          <div class="grid-clock" v-if="!practising">
+          <!-- Practice is not timed, so there is no clock to show. Its room
+               is kept, so that the problem and the keypad stay where they
+               were when the switch moves. -->
+          <div class="grid-clock" :class="{ hidden: practising }">
             <div class="grid-clock-fill"
                  :class="{ error: errorState }"
                  :style="{ width: clockWidth }"></div>
@@ -88,10 +90,9 @@ import {
 } from '../lib/grid'
 
 const moment = require('moment')
+// The board is the same size in both modes. Growing it for practice moved
+// every square under the finger that had just tapped one.
 const CELL = 22
-// Practice has no clock under the board, so the board takes the room. Any
-// wider and the counter beside it runs off the edge of a phone.
-const PRACTICE_CELL = 25
 
 const vm = {
   name: 'gridcard',
@@ -282,7 +283,7 @@ const vm = {
       return !!this.missed
     },
     cell () {
-      return this.practising ? PRACTICE_CELL : CELL
+      return CELL
     },
     boardSize () {
       return this.cell * (GRID_SIDE + 1)
@@ -465,6 +466,8 @@ export default vm
   height: 12px
   margin: 10px 0 0
   background: var(--track)
+  &.hidden
+    visibility: hidden
 .grid-clock-fill
   height: 100%
   width: 0
