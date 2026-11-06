@@ -10,6 +10,7 @@ import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
 import FactTable from '@/components/FactTable'
 import Chart from '@/components/Chart'
+import GridFacts from '@/components/GridFacts'
 import Help from '@/components/Help'
 
 Vue.use(Router)
@@ -33,6 +34,10 @@ export default new Router({
     {
       path: '/gridcard/:operator',
       component: GridCard
+    },
+    {
+      path: '/gridfacts/:operator',
+      component: GridFacts
     },
     {
       path: '/main/',

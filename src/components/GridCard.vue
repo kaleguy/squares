@@ -1,27 +1,60 @@
 <template>
   <div class="page">
     <div class="grid-round">
-      <div class="grid-board">
-        <div class="grid-row">
-          <div class="grid-corner">{{visOperator}}</div>
-          <div class="grid-head" v-for="c in side" :key="'c' + c">{{c}}</div>
+      <!-- The switch and the counter flank the board, the way they flank the
+           problem on a Steps card. The board is the tallest thing here, and
+           the room beside it was empty. -->
+      <div class="grid-top">
+        <div class="grid-tools">
+          <div class="grid-toggle">
+            <div class="grid-toggle-rot">
+              <toggle-button :value="mode === 't'"
+                             :width="80"
+                             :color="{checked: 'var(--answer)', unchecked: 'var(--operand)'}"
+                             @change="switchMode"
+                             :height="40" :sync="true"/>
+            </div>
+          </div>
+          <div class="grid-info" @click="openFacts">i</div>
         </div>
-        <div class="grid-row" v-for="r in side" :key="'r' + r">
-          <div class="grid-head">{{r}}</div>
-          <div v-for="c in side" :key="'s' + r + '-' + c"
-               class="grid-square"
-               :class="squareClass(r, c)"></div>
+
+        <div class="grid-middle" :style="{ width: boardSize + 'px' }">
+          <div class="grid-nothing" v-if="practising && !practice.length"
+               :style="{ height: boardSize + 'px' }">
+            This is practice mode, which is for practicing missed items.
+            You don't have any missed items yet.
+          </div>
+          <div class="grid-board" v-else :style="{ '--gcell': cell + 'px' }">
+            <div class="grid-row">
+              <div class="grid-corner">{{visOperator}}</div>
+              <div class="grid-head" v-for="c in side" :key="'c' + c">{{c}}</div>
+            </div>
+            <div class="grid-row" v-for="r in side" :key="'r' + r">
+              <div class="grid-head">{{r}}</div>
+              <div v-for="c in side" :key="'s' + r + '-' + c"
+                   class="grid-square"
+                   :class="squareClass(r, c)"></div>
+            </div>
+          </div>
+
+          <!-- Practice is not timed, so there is no clock to show. -->
+          <div class="grid-clock" v-if="!practising">
+            <div class="grid-clock-fill"
+                 :class="{ error: errorState }"
+                 :style="{ width: clockWidth }"></div>
+          </div>
+        </div>
+
+        <div class="grid-counter">
+          <div>{{practising ? ' ' : remaining}}</div>
+          <div>{{recent[0] === undefined ? ' ' : recent[0]}}</div>
+          <div>{{recent[1] === undefined ? ' ' : recent[1]}}</div>
         </div>
       </div>
 
-      <div class="grid-clock">
-        <div class="grid-clock-fill"
-             :class="{ error: missed }"
-             :style="{ width: clockWidth }"></div>
-      </div>
-
-      <div class="grid-problem" :class="{ error: missed }">
-        <span v-if="current">{{firstNum}} {{visOperator}} {{current.b}} =</span>
+      <!-- Nothing to answer means nothing to show. -->
+      <div class="grid-problem" :class="{ error: errorState }" v-if="current">
+        <span>{{firstNum}} {{visOperator}} {{current.b}} =</span>
         <span class="grid-answer">{{buffer}}</span>
       </div>
 
@@ -44,17 +77,21 @@
 // A Grid round: the whole table in one sitting, against a four minute clock,
 // with a square for every fact. A wrong answer halts the run on that fact
 // until the right answer is given, and then starts it over, the way a missed
-// card does in Steps.
+// card does in Steps. The switch beside the board drops out of the timing and
+// into practice, which drills only what was missed lately.
 import Keypad from './Keypad'
 import PassCard from './PassCard'
 import { titleCase } from '../lib/name'
 import {
   GRID_SECONDS, GRID_SIDE, shuffledFacts, firstOf, answerOf, factKey,
-  gridRecords, saveGridRecords, gridBest
+  factCounts, gridRecords, saveGridRecords, gridBest, practiceFacts, recordMiss
 } from '../lib/grid'
 
 const moment = require('moment')
-const BOARD = 220
+const CELL = 22
+// Practice has no clock under the board, so the board takes the room. Any
+// wider and the counter beside it runs off the edge of a phone.
+const PRACTICE_CELL = 25
 
 const vm = {
   name: 'gridcard',
@@ -64,6 +101,7 @@ const vm = {
   },
   data () {
     return {
+      mode: 't',
       facts: [],
       dealt: 0,
       filled: {},
@@ -77,14 +115,19 @@ const vm = {
       timer: null,
       // The wrong answer is left on show. The next digit pressed clears it,
       // as it does on a Steps card.
-      clearOnNextPress: false
+      clearOnNextPress: false,
+      // Practice: the facts to drill, both ways round, and how each stands.
+      practice: [],
+      practiceIndex: 0,
+      right: {},
+      wrong: {}
     }
   },
   methods: {
     // Back to an empty board and a full clock, with the facts in a new order.
     reset: function () {
       this.clearTimers()
-      this.facts = shuffledFacts()
+      this.facts = shuffledFacts(this.op)
       this.dealt = 0
       this.filled = {}
       this.missed = null
@@ -95,10 +138,31 @@ const vm = {
       const me = this
       this.timer = window.setInterval(function () { me.tick() }, 1000)
     },
+    // Practice drills what was most recently missed; test times the table.
+    // Changing mode starts whichever one is asked for from the beginning.
+    switchMode: function (e) {
+      const on = e && e.value !== undefined ? e.value : e
+      const next = on ? 't' : 'p'
+      if (next === this.mode) { return }
+      this.mode = next
+      this.buffer = ''
+      this.clearOnNextPress = false
+      this.missed = null
+      if (next === 'p') {
+        this.clearTimers()
+        this.practice = practiceFacts(this.username, this.op)
+        this.practiceIndex = 0
+        this.right = {}
+        this.wrong = {}
+      } else {
+        this.reset()
+      }
+    },
     clearTimers: function () {
       if (this.timer) { window.clearInterval(this.timer); this.timer = null }
     },
     tick: function () {
+      if (this.mode !== 't') { return }
       this.elapsed += 1
       // Out of time is not a miss: nothing was got wrong, so nothing is
       // marked. The run simply starts again.
@@ -113,10 +177,23 @@ const vm = {
     leave: function () {
       this.$router.replace('/grid/')
     },
+    openFacts: function () {
+      this.$router.replace('/gridfacts/' + this.op)
+    },
+    // Timing: filled green as the facts come good, and red on the one the run
+    // went wrong at. Practice: amber for a fact waiting to be drilled, then
+    // green or red for how it has just been answered.
     squareClass: function (r, c) {
       const fact = { a: r, b: c }
+      if (!factCounts(this.op, fact)) { return 'skip' }
+      const key = factKey(fact)
+      if (this.practising) {
+        if (this.right[key]) { return 'done' }
+        if (this.wrong[key]) { return 'missed' }
+        return this.pending[key] ? 'pending' : ''
+      }
       if (this.missed && this.missed.a === r && this.missed.b === c) { return 'missed' }
-      return this.filled[factKey(fact)] ? 'done' : ''
+      return this.filled[key] ? 'done' : ''
     },
     onDigit: function (num) {
       if (!this.current) { return }
@@ -136,6 +213,24 @@ const vm = {
       const entered = +this.buffer
       // A two digit answer needs its second digit before it is judged.
       if (entered < 10 && total > 9) { return }
+
+      if (this.practising) {
+        // Nothing is timed and nothing is lost here. A right answer greens
+        // that square and moves on; a wrong one reds it and waits, and the
+        // whole list comes round again either way.
+        if (entered === total) {
+          this.$delete(this.wrong, factKey(fact))
+          this.$set(this.right, factKey(fact), true)
+          this.buffer = ''
+          this.practiceIndex = (this.practiceIndex + 1) % this.practice.length
+        } else {
+          this.$delete(this.right, factKey(fact))
+          this.$set(this.wrong, factKey(fact), true)
+          this.clearOnNextPress = true
+        }
+        return
+      }
+
       if (entered === total) {
         // Getting the missed one right is what frees the run, and the run it
         // frees starts from an empty board.
@@ -149,6 +244,7 @@ const vm = {
         // is answered. Nothing moves on by itself.
         this.missed = fact
         this.clearOnNextPress = true
+        recordMiss(this.username, this.op, fact)
         if (this.timer) { window.clearInterval(this.timer); this.timer = null }
       }
     },
@@ -174,22 +270,57 @@ const vm = {
     op () {
       return this.$route.params.operator || '+'
     },
+    practising () {
+      return this.mode === 'p'
+    },
+    // A wrong answer reddens the problem as well as its square, the way a
+    // missed card does, so the mistake is read where it was made.
+    errorState () {
+      if (this.practising) {
+        return !!(this.current && this.wrong[factKey(this.current)])
+      }
+      return !!this.missed
+    },
+    cell () {
+      return this.practising ? PRACTICE_CELL : CELL
+    },
+    boardSize () {
+      return this.cell * (GRID_SIDE + 1)
+    },
+    pending () {
+      const marks = {}
+      this.practice.forEach(f => { marks[factKey(f)] = true })
+      return marks
+    },
     current () {
+      if (this.practising) {
+        if (!this.practice.length) { return null }
+        return this.practice[this.practiceIndex % this.practice.length]
+      }
       return this.dealt < this.facts.length ? this.facts[this.dealt] : null
     },
     firstNum () {
       return this.current ? firstOf(this.op, this.current) : ''
     },
+    remaining () {
+      return Math.max(0, GRID_SECONDS - this.elapsed)
+    },
+    // The scores of the two most recent rounds at this table.
+    recent () {
+      if (!this.username) { return [] }
+      const mine = gridRecords(this.username)[this.op] || {}
+      return Object.keys(mine).sort().reverse()
+        .map(d => Math.max(0, GRID_SECONDS - mine[d]))
+    },
     clockWidth () {
       const done = Math.min(1, this.elapsed / GRID_SECONDS)
-      return Math.round(BOARD * done) + 'px'
+      return Math.round(this.boardSize * done) + 'px'
     },
     passDetail () {
-      const total = GRID_SIDE * GRID_SIDE
       const taken = GRID_SECONDS - this.score
       const mm = Math.floor(taken / 60)
       const ss = taken % 60
-      return 'All ' + total + ' facts in ' + mm + ':' + (ss < 10 ? '0' : '') + ss
+      return 'All ' + this.facts.length + ' facts in ' + mm + ':' + (ss < 10 ? '0' : '') + ss
     },
     visOperator () {
       if (this.op === 'd') { return '÷' }
@@ -217,14 +348,79 @@ export default vm
 </script>
 
 <style lang="sass">
-$cell: 22px
 .grid-round
   width: 360px
   margin-left: auto
   margin-right: auto
+.grid-top
+  display: flex
+  align-items: flex-start
+  justify-content: center
+  gap: 12px
+  margin-bottom: 12px
+.grid-tools
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 14px
+  width: 48px
+.grid-toggle
+  position: relative
+  width: 40px
+  height: 80px
+  margin: 0
+.grid-toggle-rot
+  position: absolute
+  width: 80px
+  height: 40px
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%) rotate(90deg)
+.grid-info
+  box-sizing: border-box
+  width: 44px
+  height: 44px
+  border-radius: 8px
+  box-shadow: 0 3px 0 var(--lip)
+  background: var(--ink)
+  color: var(--tile)
+  font-family: inherit
+  font-size: 28px
+  font-weight: 700
+  line-height: 44px
+  text-align: center
+  cursor: pointer
+  user-select: none
+.grid-counter
+  display: flex
+  flex-direction: column
+  gap: 8px
+  width: 48px
+  DIV
+    box-sizing: border-box
+    width: 44px
+    height: 44px
+    border: 2px solid var(--line)
+    border-radius: 8px
+    box-shadow: 0 2px 0 var(--lip)
+    background: var(--tile)
+    color: var(--ink)
+    font-size: 18px
+    font-weight: 700
+    line-height: 40px
+    text-align: center
+.grid-nothing
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: border-box
+  padding: 0 8px
+  color: var(--ink)
+  font-size: 17px
+  line-height: 1.35
+  text-align: center
 .grid-board
-  width: $cell * 10
-  margin: 0 auto 10px
+  margin: 0 auto
 .grid-row
   display: flex
 .grid-corner, .grid-head
@@ -232,8 +428,8 @@ $cell: 22px
   align-items: center
   justify-content: center
   box-sizing: border-box
-  width: $cell
-  height: $cell
+  width: var(--gcell)
+  height: var(--gcell)
   font-size: 13px
   font-weight: 700
   line-height: 1
@@ -246,8 +442,8 @@ $cell: 22px
   color: #1A2744
 .grid-square
   box-sizing: border-box
-  width: $cell - 2px
-  height: $cell - 2px
+  width: calc(var(--gcell) - 2px)
+  height: calc(var(--gcell) - 2px)
   margin: 1px
   border: 1.5px solid var(--line)
   border-radius: 2px
@@ -258,10 +454,16 @@ $cell: 22px
   &.missed
     border-color: var(--miss)
     background: var(--miss)
+  &.pending
+    border-color: var(--operand)
+    background: var(--operand)
+  // The ones the table leaves out: there, but not in play.
+  &.skip
+    border-color: var(--track)
+    background: var(--track)
 .grid-clock
-  width: $cell * 10
   height: 12px
-  margin: 0 auto 12px
+  margin: 10px 0 0
   background: var(--track)
 .grid-clock-fill
   height: 100%

@@ -35,12 +35,22 @@ export function gridBest (name, op, base) {
   return Math.max(0, base - fastest)
 }
 
+// Adding, taking away, multiplying or dividing by one teaches nothing that is
+// not already in the number itself, so the table leaves those out. Plus and
+// times lose the row as well as the column, because 1 + 7 is the same fact as
+// 7 + 1; minus and divide only ever apply the column, so only the column goes.
+export function factCounts (op, fact) {
+  if (fact.b === 1) { return false }
+  if ((op === '+' || op === 'X') && fact.a === 1) { return false }
+  return true
+}
+
 // Every fact in the table, in a new order.
-export function shuffledFacts () {
+export function shuffledFacts (op) {
   const facts = []
   for (let a = 1; a <= GRID_SIDE; a++) {
     for (let b = 1; b <= GRID_SIDE; b++) {
-      facts.push({ a: a, b: b })
+      if (factCounts(op, { a: a, b: b })) { facts.push({ a: a, b: b }) }
     }
   }
   for (let i = facts.length - 1; i > 0; i--) {
@@ -68,4 +78,52 @@ export function answerOf (op, fact) {
 
 export function factKey (fact) {
   return fact.a + 'x' + fact.b
+}
+
+// What Grid practice drills: the facts most recently missed, by operator.
+export function gridMissKey (name) {
+  return titleCase(name) + '_gridmiss'
+}
+
+export function gridMisses (name) {
+  return JSON.parse(localStorage.getItem(gridMissKey(name))) || {}
+}
+
+export function saveGridMisses (name, misses) {
+  localStorage.setItem(gridMissKey(name), JSON.stringify(misses))
+}
+
+// The ten most recent misses, newest first. A fact missed again moves back to
+// the front rather than being kept twice.
+export function recordMiss (name, op, fact) {
+  if (!name) { return }
+  const all = gridMisses(name)
+  const mine = (all[op] || []).filter(p => !(p[0] === fact.a && p[1] === fact.b))
+  mine.unshift([fact.a, fact.b])
+  all[op] = mine.slice(0, 10)
+  saveGridMisses(name, all)
+}
+
+// Each missed fact both ways round: 4 x 5 missed is 5 x 4 to practise too.
+// A fact the table leaves out is left out here.
+export function practiceFacts (name, op) {
+  const saved = gridMisses(name)[op] || []
+  const seen = {}
+  const list = []
+  saved.forEach(pair => {
+    if (pair.length !== 2) { return }
+    ;[{ a: pair[0], b: pair[1] }, { a: pair[1], b: pair[0] }].forEach(fact => {
+      const key = factKey(fact)
+      if (!factCounts(op, fact) || seen[key]) { return }
+      seen[key] = true
+      list.push(fact)
+    })
+  })
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const swap = list[i]
+    list[i] = list[j]
+    list[j] = swap
+  }
+  return list
 }
