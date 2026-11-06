@@ -22,8 +22,8 @@
 </template>
 
 <script>
-// The six palettes, each shown as the thing the choice actually changes: a
-// passed level sitting on that palette's paper. It lived in the help page
+// The six themes, each shown as the thing the choice actually changes: a
+// passed level sitting on that theme's paper. It lived in the help page
 // until the gear on the choice screen gave it a door of its own.
 import { THEMES, applyTheme, currentThemeId } from '../lib/theme'
 

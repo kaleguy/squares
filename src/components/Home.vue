@@ -42,8 +42,9 @@
     </div>
     <div class="note-veil" v-if="settings" @click="settings = false">
       <div class="note-card settings-card" @click.stop>
-        <div class="note-title">Colors</div>
-        <div class="note-body settings-body">Pick a color for the levels you have passed. Night and Chalk darken the whole page.</div>
+        <!-- No sentence under it: the swatches are the whole of what the
+             choice does, drawn as the thing it changes. -->
+        <div class="note-title settings-title">Theme</div>
         <themepicker></themepicker>
         <button type="button" class="settings-done" @click="settings = false">Done</button>
       </div>
@@ -261,7 +262,6 @@ export default vm
 .note-card.settings-card
   width: 320px
   padding: 22px
-.note-body.settings-body
-  font-size: 16px
-  margin-bottom: 18px
+.note-title.settings-title
+  margin-bottom: 16px
 </style>

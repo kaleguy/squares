@@ -9,8 +9,8 @@
       <p>Pass all the squares, and your facts are memorized.</p>
 
       <section>
-        <h2>Colors</h2>
-        <p>The gear beside the question mark on the Steps and Grid screen picks a color for the levels you have passed. Night and Chalk darken the whole page.</p>
+        <h2>Theme</h2>
+        <p>The gear beside the question mark on the Steps and Grid screen sets the colors the app is drawn in. Night and Chalk darken the whole page.</p>
       </section>
 
       <section>
