@@ -12,6 +12,7 @@
 
 
 <script>
+  import * as analytics from '../lib/analytics'
   /* global playAudio */
   import Keypad from './Keypad'
   import PassCard from './PassCard'
@@ -156,6 +157,14 @@
             const levelKey = this.op + level.index
             this.$store.commit('SETPASS', {key: levelKey})
             this.recordPass(levelKey)
+            analytics.capture('level passed', {
+              operator: this.op,
+              level: level.index,
+              seconds: this.$store.state.ticks,
+              score: this.score,
+              best: this.isBest,
+              spoken: false
+            })
             playAudio('yay')
             this.passed = true
           } else {
@@ -172,6 +181,7 @@
             this.recordFail(this.op + this.$store.state.currentLevel.index)
             this.$store.commit('SETERRORSTATE')
             this.$store.commit('SETMODE', { mode: 'p' })
+            analytics.capture('mode set', { mode: 'p', in: 'steps' })
           } else {
             this.$store.commit('SETERRORSTATE')
           }

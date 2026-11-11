@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import * as analytics from '../lib/analytics'
 // The screen that chooses how to drill: one fact set at a time, or the whole
 // table in one sitting. It sits between the name and the operator menu.
 import { titleCase, users, deleteUser } from '../lib/name'
@@ -150,6 +151,7 @@ const vm = {
     },
     removeUser: function (name) {
       deleteUser(name)
+      analytics.capture('name deleted')
       this.names = users()
       this.confirming = null
       // Deleting whoever is playing leaves nobody playing.

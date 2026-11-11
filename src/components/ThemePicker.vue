@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import * as analytics from '../lib/analytics'
 // The six themes, each shown as the thing the choice actually changes: a
 // passed level sitting on that theme's paper. It lived in the help page
 // until the gear on the choice screen gave it a door of its own.
@@ -51,6 +52,7 @@ const vm = {
     },
     choose: function (id) {
       this.current = applyTheme(id)
+      analytics.capture('theme chosen', { theme: this.current })
     }
   }
 }

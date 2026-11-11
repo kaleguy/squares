@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import * as analytics from '../lib/analytics'
 import { titleCase, levelsKey } from '../lib/name'
 const TypeAhead = require('../lib/type-ahead')
 const vm = {
@@ -59,7 +60,11 @@ const vm = {
         onKeyDown: function (value) {
           if (value.length < 2) { return }
           const name = titleCase(value)
+          // The type-ahead calls this twice for one Enter, so the event is
+          // tied to the name actually changing rather than to the handler.
+          const previous = me.$store.state.username
           me.$store.commit('SETUSER', { username: name })
+          if (name && name !== previous) { analytics.capture('name entered') }
           me.getRecords(levelsKey(value))
           if (name !== value) { delete nameList[value] }
           nameList[name] = 1

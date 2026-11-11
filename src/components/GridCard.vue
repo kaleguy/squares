@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import * as analytics from '../lib/analytics'
 /* global playAudio */
 // A Grid round: the whole table in one sitting, against a 200 second clock,
 // with a square for every fact. A wrong answer halts the run on that fact
@@ -267,6 +268,12 @@ const vm = {
         saveGridRecords(name, all)
       }
       this.passed = true
+      analytics.capture('board filled', {
+        operator: this.op,
+        seconds: this.elapsed,
+        score: this.score,
+        best: this.isBest
+      })
     }
   },
   computed: {

@@ -52,6 +52,7 @@
 
 
 <script>
+import * as analytics from '../lib/analytics'
 import DotBar from './Dotbar'
 import NumPad from './NumPad'
 import TimeBar from './TImeBar'
@@ -96,6 +97,7 @@ const vm = {
         window.clearInterval(window.mytimer)
       }
       this.$store.commit('SETMODE', { mode })
+      analytics.capture('mode set', { mode: mode, in: 'steps' })
     },
     goto: function () {
       this.$router.replace('/facts/' + this.operator + '/' + this.level)
