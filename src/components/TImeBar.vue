@@ -46,7 +46,6 @@ const vm = {
     tb.style.width = 0
     this.$store.commit('RESETALL')
     const bar = 285
-    let w = 0
     const me = this
     let doTick = false
     function tick () {
@@ -57,14 +56,17 @@ const vm = {
       // Two steps a second, for as many seconds as the level is worth. Read
       // per tick, and from the route: this component mounts before its parent
       // has put the new level into the store.
-      w = w + bar / (roundSeconds(me.$route.params.level) * 2)
+      //
+      // The width comes from the store rather than a count kept out here, so
+      // that a mistake can wind it back. Held in this closure it was beyond
+      // the reach of the mutation that restarts the round, and the bar went on
+      // filling from wherever it had got to.
+      let w = me.$store.state.time + bar / (roundSeconds(me.$route.params.level) * 2)
       if (w >= bar) {
         me.$store.commit('RESETALL')
         w = 0
-        tb.style.width = '0px'
-      } else {
-        tb.style.width = w + 'px'
       }
+      tb.style.width = w + 'px'
       me.$store.commit('SETTIME', { time: w })
     }
     if (window.mytimer) {

@@ -47,7 +47,7 @@
 
         <section>
           <h2>A round</h2>
-          <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red, moves the switch up, and leaves the answer in place. The practice grid marks that fact with a red dot. Practice from there, or push the switch back down to start over. You can also move the switch yourself to turn the timer off and see the answers. X clears the digits. The arrow goes back. The i opens the facts.</p>
+          <p>The problem is in the big tile. Tap the keypad to answer. Each right answer fills a square along the top. A whole level is three rows, 27 answers in 70 seconds. The a, b and c levels only hold three facts each, so they are one row, 9 answers in 35 seconds. The number on the right counts down from whichever it is, and your score is what is left, measured the same way for both. A wrong answer turns red and stays put. Enter the right number to carry on: the round starts again from the top, and that fact comes round more often until it sticks. Move the switch yourself to turn the timer off and practice, where the grid marks what you have been missing. X clears the digits. The arrow goes back. The i opens the facts.</p>
           <shot file="static/help/drill.png" caption="Answering a problem."></shot>
         </section>
 

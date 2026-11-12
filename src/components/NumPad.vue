@@ -102,7 +102,9 @@
         this.$router.replace('/menu/' + this.op)
       },
       checkTotal: function () {
-        let num1 = this.$store.state.num1
+        // The eval below is the only reader of num1 once the operator has
+        // been folded in, and eslint cannot see inside it.
+        let num1 = this.$store.state.num1 // eslint-disable-line no-unused-vars
         let num2 = this.$store.state.currentLevel.index.substring(0, 1)
         let dice1 = this.$store.state.dice1
         let dice2 = this.$store.state.dice2
@@ -147,9 +149,6 @@
         if (+total === +buffer) {
           noteFact(this.username, this.op, level.index, card, true)
           this.$store.commit('INCCOUNT')
-          if (this.errorState && this.mode === 't') {
-            this.$store.commit('RESETALL')
-          }
           this.$store.commit('RESET')
           const count = this.$store.state.count
           if (this.mode === 'p') { return }
@@ -171,21 +170,16 @@
           }
         } else {
           noteFact(this.username, this.op, level.index, card, false)
-          // Leave the timed round for practice. The wrong digits stay, and the
-          // timer must stop without dealing a new problem.
+          // The card holds the problem until the right number is entered: the
+          // wrong digits stay, red, and the next keypress clears them. The
+          // round starts again from the top, which is what the mistake costs,
+          // but it stays a timed round. Dropping into practice meant a
+          // mistyped digit cost a trip to the switch and back, and a mistyped
+          // digit is most of what goes wrong.
           if (this.mode === 't' && this.op !== 's') {
-            if (window.mytimer) {
-              window.clearInterval(window.mytimer)
-              window.mytimer = null
-            }
             this.recordFail(this.op + this.$store.state.currentLevel.index)
-            this.$store.commit('SETERRORSTATE')
-            this.$store.commit('SETMODE', { mode: 'p' })
-            analytics.capture('mode set', { mode: 'p', in: 'steps' })
-          } else {
-            this.$store.commit('SETERRORSTATE')
           }
-          console.log(total, num1, num2, 'NG')
+          this.$store.commit('SETERRORSTATE')
         }
       }
     },

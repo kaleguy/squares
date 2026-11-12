@@ -93,10 +93,15 @@ export default new Vuex.Store({
       state.currentLevel.op = o.operator
       state.errorState = false
     },
-    // user gave wrong answer
+    // A wrong answer ends the run, so the round starts over from the top:
+    // the count, the clock and the bar all go back to the beginning. The bar
+    // reads its width from `time`, so zeroing that here is what winds it back;
+    // without `ticks` the round would restart on paper while the score carried
+    // on from where the mistake happened.
     SETERRORSTATE (state) {
       state.errorState = true
       state.count = 0
+      state.ticks = 0
       state.time = 0
     },
     CLEARERRORSTATE (state) {
