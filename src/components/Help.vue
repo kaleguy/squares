@@ -148,8 +148,10 @@ export default {
 .help-wrap p
   font-size: 18px
   font-weight: 400
-  line-height: 1.45
-  margin: 0 0 12px
+  // 22 over 18. The default leading set the lines nearly as far apart as
+  // the paragraphs, and a page that is nothing but text read as one block.
+  line-height: 22px
+  margin: 0 0 16px
 .shot
   margin: 0
 .shot img
