@@ -16,7 +16,10 @@ so a record exported from a browser drops straight into the phone.
   every score kept in this browser. Whoever played last is written to
   `localStorage` under `lastUser`, and the app opens on them. The field is
   shown only when the device knows no names; after that it is a list to tap,
-  with **Add a name** to bring the field back.
+  with **Add a name** to bring the field back. Five names is as many as it
+  keeps: a sixth is answered with how to make room rather than with a rule
+  standing there before anybody has met it. A name is swiped to the left to
+  delete, which asks first, because it deletes that name's scores with it.
 - **The operator menu** is the top of the app: the app's own name, the
   player's name on a bar, the four signs, and three circles - help, the
   scores, and the gear that sets the colours and keeps the names. Each sign is

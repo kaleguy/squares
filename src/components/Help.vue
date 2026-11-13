@@ -60,6 +60,7 @@
       <section>
         <h2>What is kept, and where</h2>
         <p>Every name and every score stays in this browser, on this device. Nothing is sent anywhere and there is no account to make: a name is the whole of signing in, and the app opens on whoever played last.</p>
+        <p>Five names is as many as it keeps. To make room for another, swipe a name to the left on the name screen and delete it &mdash; which deletes that name&rsquo;s scores with it.</p>
       </section>
 
       <div class="help-credit">
