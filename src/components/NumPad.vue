@@ -1,6 +1,6 @@
 <template>
   <div>
-    <keypad @digit="onDigit" @back="menu" @clear="clear"></keypad>
+    <keypad @digit="onDigit" @clear="clear"></keypad>
     <passcard v-if="passed"
               title="Level passed"
               :score="score"
@@ -17,7 +17,7 @@
   import Keypad from './Keypad'
   import PassCard from './PassCard'
   import { levelsKey } from '../lib/name'
-  import { roundTarget, scoredTicks } from '../lib/round'
+  import { ROUND_TARGET, ROUND_SECONDS } from '../lib/round'
   import { noteFact } from '../lib/facts'
 
   const moment = require('moment')
@@ -54,17 +54,15 @@
         this.$router.replace('/menu/' + this.op)
       },
       recordPass: function (levelKey) {
-        const level = this.$store.state.currentLevel.index
-        let time = scoredTicks(this.$store.state.ticks, level)
+        const time = this.$store.state.ticks
         const recordKey = levelsKey(this.username)
         let record = JSON.parse(localStorage.getItem(recordKey))
         if (!record) { record = {} }
         // What the round just passed was worth, and whether it beat the best.
-        this.score = Math.max(0, 70 - time)
+        this.score = Math.max(0, ROUND_SECONDS - time)
         this.isBest = this.score > this.best(record[levelKey])
-        const secs = this.$store.state.ticks
-        this.passDetail = roundTarget(level) + ' answers in ' + secs +
-          (secs === 1 ? ' second' : ' seconds')
+        this.passDetail = ROUND_TARGET + ' answers in ' + time +
+          (time === 1 ? ' second' : ' seconds')
         let levelRecord = record[levelKey]
         if (!levelRecord) {
           levelRecord = {}
@@ -102,40 +100,30 @@
         this.$router.replace('/menu/' + this.op)
       },
       checkTotal: function () {
-        // The eval below is the only reader of num1 once the operator has
-        // been folded in, and eslint cannot see inside it.
-        let num1 = this.$store.state.num1 // eslint-disable-line no-unused-vars
-        let num2 = this.$store.state.currentLevel.index.substring(0, 1)
-        if (this.op === '-') {
-          num1 = +this.$store.state.num1 + +num2
-        }
-        if (this.op === 'd') {
-          num1 = +this.$store.state.num1 * +num2
-        }
+        // The level's own number is one side of every fact; the card dealt
+        // is the other. Minus and divide read their tables backwards - the
+        // card is shown as the answer and the sum built up from it - so for
+        // those two the card dealt is what the answer comes to. This used to
+        // assemble a sum out of two operands and an operation and eval it,
+        // from when the counting level dealt its own pair; nothing deals a
+        // pair any more.
         const level = this.$store.state.currentLevel
-        let op = this.op
-        if (op === 'X') {
-          op = '*'
-        }
-        if (op === 'd') {
-          op = '/'
-        }
-        let total = 0
-        // const l = 'total = +num1 ' + op + ' +num2'
-        eval('total = +num1 ' + op + ' +num2') // eslint-disable-line
-        total = total / 1
+        const card = +this.$store.state.num1
+        const n = +level.index.substring(0, 1)
+        let total = card
+        if (this.op === 'X') { total = card * n }
+        if (this.op === '+') { total = card + n }
         const buffer = this.$store.state.buffer
         if (buffer < 10 && total > 9) {
           return
         }
-        const card = this.$store.state.num1
         if (+total === +buffer) {
           noteFact(this.username, this.op, level.index, card, true)
           this.$store.commit('INCCOUNT')
           this.$store.commit('RESET')
           const count = this.$store.state.count
           if (this.mode === 'p') { return }
-          if (+count === roundTarget(level.index)) {
+          if (+count === ROUND_TARGET) {
             const levelKey = this.op + level.index
             this.$store.commit('SETPASS', {key: levelKey})
             this.recordPass(levelKey)

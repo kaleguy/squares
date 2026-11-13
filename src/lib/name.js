@@ -17,6 +17,17 @@ export function levelsKey (name) {
   return next
 }
 
+// Whoever was playing when the app was last closed. Entering a name is the
+// whole of signing in here, so this is the whole of staying signed in: no
+// password, nothing sent anywhere, just the name to open on.
+export function lastUser () {
+  return localStorage.getItem('lastUser') || ''
+}
+
+export function setLastUser (name) {
+  localStorage.setItem('lastUser', name)
+}
+
 // Everyone this device has kept anything for, title-cased, in order.
 export function users () {
   const list = JSON.parse(localStorage.getItem('nameList')) || {}
@@ -43,6 +54,8 @@ export function deleteUser (name) {
     delete list[key]
   })
   localStorage.setItem('nameList', JSON.stringify(list))
+  // A name deleted out from under the app clears the name it opens on.
+  if (titleCase(lastUser()) === titled) { setLastUser('') }
   Object.keys(bases).forEach(function (base) {
     ;['_levels', '_facts', '_grid', '_gridmiss'].forEach(function (suffix) {
       localStorage.removeItem(base + suffix)

@@ -11,9 +11,6 @@
       <span class="palette-plate" :style="plate(theme)">
         <span class="palette-tile" :style="swatch(theme)">
           <span class="palette-num">3</span>
-          <span class="palette-grid">
-            <i v-for="n in 9" :key="n" :style="{ background: n < 4 ? theme.dotOn : theme.dotOff }"></i>
-          </span>
         </span>
       </span>
       <span class="palette-label">{{ theme.label }}</span>
@@ -24,8 +21,13 @@
 <script>
 import * as analytics from '../lib/analytics'
 // The six themes, each shown as the thing the choice actually changes: a
-// passed level sitting on that theme's paper. It lived in the help page
-// until the gear on the choice screen gave it a door of its own.
+// level in the colour that theme gives a level, on that theme's paper. Four
+// of the six change nothing else, so it is the one thing a swatch can show
+// that tells them apart.
+//
+// The tile used to carry nine dots as well, a third of them lit, from when a
+// level tile said which third of the level it asked. The thirds are off the
+// menu and the dots went with them.
 import { THEMES, applyTheme, currentThemeId } from '../lib/theme'
 
 const vm = {

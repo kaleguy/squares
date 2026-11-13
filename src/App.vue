@@ -22,14 +22,11 @@ export default {
   --answer: #1C7A45
   --miss: #FF8A82
   --mark-on: #8FCBAA
-  --mark-off: #F0C36A
   --grid: rgba(244, 240, 228, 0.07)
   --muted: #A8B5A4
   --track: #2C463A
   --level: #C98FC4
   --level-text: #12211B
-  --passed-dot-on: #1C7A45
-  --passed-dot-off: #C4841A
 HTML
   height: 100%
 *
@@ -57,191 +54,16 @@ HTML, BODY
   box-sizing: border-box
   min-height: 100vh
   padding: 16px 0
-.bsquares, .csquares
-  font-size: 32px
-  font-weight: 700
-  width: 303px
-.bsquares DIV
-  width: 140px
-  height: 140px
-.csquares DIV
-  width: 140px
-  height: 140px
-  line-height: 1
-.squares
-  width: 360px
-  margin-left: auto
-  margin-right: auto
-  display: flex
-  flex-wrap: wrap
-  flex-direction: row
-  DIV.title-button
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 140px
-    height: 140px
-    padding: 0
-    font-size: 1em
-    font-weight: 700
-    line-height: 1
-    background-color: var(--answer)
-    color: #fff
-    cursor: pointer
-    font-family: inherit
-    text-shadow: none
-  DIV
-    cursor: pointer
-    font-size: 3.5em
-    font-weight: 700
-    padding-top: 26px
-    line-height: 1em
-    width: 80px
-    color: $ink
-    background-color: $tile
-    border: 2px solid $line
-    border-radius: 8px
-    box-shadow: 0 3px 0 $lip
-    height: 75px
-    margin: 2px
-    user-select: none
-    &:active
-      transform: translateY(2px)
-      box-shadow: 0 1px 0 $lip
-  DIV.op-tile
-    display: flex
-    align-items: center
-    justify-content: center
-    overflow: hidden
-    width: 140px
-    height: 140px
-    padding: 0
-    font-size: 200px
-    line-height: 1
-    SPAN
-      display: block
-      line-height: 1
-      // Glyphs sit low in the em box, so the oversized line box is shifted up until the ink is centered.
-      transform: translateY(-16px)
-  DIV.op-counts
-    width: 140px
-    height: 140px
-    display: grid
-    grid-template-columns: repeat(2, 58px)
-    grid-template-rows: repeat(2, 58px)
-    gap: 8px
-    place-content: center
-    padding: 0
-    background-color: $tile
-    SPAN
-      display: flex
-      align-items: center
-      justify-content: center
-      width: 58px
-      height: 58px
-      margin: 0
-      padding: 0
-      border: none
-      border-radius: 6px
-      box-shadow: none
-      background-color: $level
-      color: $level-text
-      font-size: 26px
-      font-weight: 700
-      line-height: 1
-  DIV.op-scores
-    width: 140px
-    height: 140px
-    display: grid
-    grid-template-columns: repeat(2, 58px)
-    grid-template-rows: repeat(2, 58px)
-    gap: 8px
-    place-content: center
-    padding: 0
-    background-color: $tile
-    SPAN
-      display: flex
-      align-items: center
-      justify-content: center
-      width: 58px
-      height: 58px
-      margin: 0
-      padding: 0
-      border: none
-      border-radius: 50%
-      box-shadow: none
-      background-color: var(--answer)
-      color: #fff
-      font-size: 22px
-      font-weight: 700
-      line-height: 1
-      &.is-wide
-        font-size: 16px
-      &.is-wider
-        font-size: 13px
-  DIV.icon-star, DIV.icon-point
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 140px
-    height: 140px
-    padding: 0
-    line-height: 1
-    color: $tile
-  DIV.icon-star
-    background-color: $level
-    background-image: none
-    color: $level-text
-  DIV.icon-point
-    color: #fff
-    background-size: 100% 100%
-    background-image: radial-gradient(circle closest-side, var(--answer) 0 84%, transparent 85%)
-  DIV.level-dots
-    border: none
-    box-shadow: none
-    background-color: transparent
-    transform: none
-  DIV.review-button
-    width: 330px
-
-.squares.main-board
-  width: 300px
-  gap: 12px
-  DIV
-    margin: 0
-.squares.bsquares.main-board
-  margin-bottom: 12px
-
-// The arrow out of a menu. It colours itself, so this only places it.
-// Both menus use it, so it lives here rather than with either of them.
-.plain-back
-  display: flex
-  align-items: center
-  justify-content: center
-  width: 56px
-  height: 56px
-  padding: 0
-  border: none
-  background: transparent
-  box-shadow: none
-  cursor: pointer
-  DIV
-    display: flex
-    line-height: 0
-
-// The way into the help screen: a question mark in a circle. The word was
-// a heavy block at the foot of every screen. The glyph is free to mean
-// "help" now that the choice screen's notes are marked with an i instead.
-// The border is what keeps it from reading as a fifth score ball on the
-// menus, where four of them sit in the same green just above.
-.help-icon
+// The three circles at the foot of the menu: what the app is, how it is
+// going, and how it looks. The border keeps them from reading as a row of
+// score balls in the same green.
+.round-icon
   box-sizing: border-box
   display: flex
   align-items: center
   justify-content: center
   width: 52px
   height: 52px
-  margin: 22px auto 0
   padding: 0
   border: 2px solid var(--line)
   border-radius: 50%
@@ -256,60 +78,126 @@ HTML, BODY
   &:active
     transform: translateY(2px)
     box-shadow: 0 1px 0 var(--lip)
-
-// type-ahead
-.type-ahead-group
-  position: relative
-.type-ahead-group > input
-  box-sizing: border-box
-  width: 100%
-  background-color: $tile
-  background-image: none
-  border-radius: 8px
-  border: 2px solid $line
-  box-shadow: 0 3px 0 $lip
-  color: $ink
-  font-family: inherit
-  font-size: 22px
-  font-weight: 700
-  line-height: 1.3
-  padding: 10px 12px
-  &::placeholder
-    color: var(--muted)
-    font-weight: 400
-  &:focus
-    outline: 3px solid $ink
-    outline-offset: 2px
-.type-ahead-group > ul
-  background-color: $tile
-  border-radius: 8px
-  border: 2px solid $line
-  box-shadow: 0 3px 0 $lip
-  display: none
-  float: left
-  font-size: 22px
+  SVG
+    display: block
+    width: 26px
+    height: 26px
+// A card raised over the screen, and the veil it sits on. It was the note
+// the Steps-or-Grid screen raised; the settings card and the card that says
+// what a score is are drawn the same way.
+.note-veil
+  position: fixed
   left: 0
-  list-style: none
-  margin: 8px 0 0
-  min-width: 170px
-  padding: 5px 0
-  position: absolute
-  text-align: left
-  top: 100%
-  z-index: 1000
-.type-ahead-group > ul > li > a
-  clear: both
-  color: $ink
-  cursor: default
-  display: block
+  top: 0
+  right: 0
+  bottom: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  background: rgba(0, 0, 0, 0.4)
+  z-index: 20
+.note-card
+  box-sizing: border-box
+  width: 300px
+  padding: 24px
+  border: 2px solid var(--line)
+  border-radius: 8px
+  box-shadow: 0 3px 0 var(--lip)
+  background: var(--tile)
+  color: var(--ink)
+  text-align: center
+.note-title
+  font-size: 28px
   font-weight: 700
-  line-height: 1.3
-  padding: 6px 16px
-  white-space: nowrap
-.type-ahead-group > ul > li.active > a, .type-ahead-group > ul > li > a:hover
-  background-color: $level
-  color: $level-text
-  text-decoration: none
+  line-height: 1
+  margin-bottom: 12px
+.note-body
+  font-size: 16px
+  line-height: 1.35
+// Wider than a note: three swatches have to stand in a row.
+.note-card.settings-card
+  width: 320px
+  padding: 22px
+.note-title.settings-title
+  margin-bottom: 16px
+.settings-heading
+  margin: 4px 0 10px
+  color: var(--muted)
+  font-size: 16px
+  font-weight: 700
+  text-align: left
+.settings-names
+  overflow-y: auto
+  text-align: left
+.settings-empty
+  color: var(--muted)
+  font-size: 16px
+.settings-name
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: 36px
+  color: var(--ink)
+  font-size: 18px
+  font-weight: 700
+.settings-x
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 36px
+  height: 36px
+  padding: 0
+  border: none
+  background: transparent
+  color: var(--miss)
+  cursor: pointer
+.settings-confirm
+  padding: 6px 0
+  color: var(--ink)
+  font-size: 15px
+  text-align: center
+.settings-confirm-buttons
+  display: flex
+  justify-content: center
+  gap: 10px
+  margin-top: 8px
+.settings-keep, .settings-delete
+  box-sizing: border-box
+  width: 100px
+  height: 38px
+  padding: 0
+  border: 2px solid var(--line)
+  border-radius: 8px
+  box-shadow: 0 2px 0 var(--lip)
+  font-family: inherit
+  font-size: 16px
+  font-weight: 700
+  cursor: pointer
+.settings-keep
+  background: var(--tile)
+  color: var(--ink)
+.settings-delete
+  background: var(--miss)
+  color: #fff
+.settings-done
+  box-sizing: border-box
+  width: 130px
+  height: 48px
+  margin-top: 22px
+  padding: 0
+  border: 2px solid var(--line)
+  border-radius: 8px
+  box-shadow: 0 3px 0 var(--lip)
+  background: var(--ink)
+  color: var(--tile)
+  font-family: inherit
+  font-size: 20px
+  font-weight: 700
+  line-height: 1
+  cursor: pointer
+  &:active
+    transform: translateY(2px)
+    box-shadow: 0 1px 0 var(--lip)
 
 // Fact table sand answergrids
 .numerand0
@@ -386,28 +274,8 @@ HTML, BODY
       border-bottom: 1px solid $paper
       border-right: 1px solid $paper
       width: 30px
-// passed-level count and point total
-DIV.icon
-  display: inline-block
-  font-size: 50px
-  line-height: 60px
-  background-size: cover
-  background-repeat: no-repeat
-  background-position: 50% 50%
-.icon-star
-  width: 100px
-  height: 100px
-  color: $level-text
-  background-color: $level
-  background-image: none
-.icon-point
-  color: #fff
-  width: 100px
-  height: 100px
-  background-size: 100% 100%
-  background-image: radial-gradient(circle closest-side, var(--answer) 0 84%, transparent 85%)
 @media (prefers-reduced-motion: reduce)
-  body .squares DIV:active, body .numpad DIV:active, body .srow:active, body .question-button:active
+  body .numpad DIV:active, body .level-tile:active, body .op-tile:active
     transform: none
     box-shadow: 0 3px 0 $lip
 </style>

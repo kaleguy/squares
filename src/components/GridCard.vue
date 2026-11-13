@@ -7,6 +7,9 @@
       <div class="grid-top">
         <!-- Centred on the board rather than hung from its top edge. -->
         <div class="grid-tools" :style="{ height: boardSize + 'px' }">
+          <button type="button" class="tool-back" @click="leave" aria-label="Back">
+            <leftarrow width="46" tight></leftarrow>
+          </button>
           <div class="grid-toggle">
             <div class="grid-toggle-rot">
               <toggle-button :value="mode === 't'"
@@ -16,7 +19,8 @@
                              :height="40" :sync="true"/>
             </div>
           </div>
-          <div class="grid-info" @click="openFacts">i</div>
+          <button type="button" class="question-button" @click="openFacts"
+                  aria-label="Facts">i</button>
         </div>
 
         <div class="grid-middle" :style="{ width: boardSize + 'px' }">
@@ -48,11 +52,13 @@
           </div>
         </div>
 
-        <div class="grid-counter" :style="{ height: boardSize + 'px' }">
+        <button type="button" class="grid-counter" @click="tip = true"
+                :style="{ height: boardSize + 'px' }"
+                :aria-label="remaining + ' seconds left. What the scores are.'">
           <div>{{practising ? ' ' : remaining}}</div>
           <div>{{recent[0] === undefined ? ' ' : recent[0]}}</div>
           <div>{{recent[1] === undefined ? ' ' : recent[1]}}</div>
-        </div>
+        </button>
       </div>
 
       <!-- Nothing to answer shows nothing, but keeps its room: the keypad
@@ -62,8 +68,10 @@
         <span class="grid-answer">{{buffer}}</span>
       </div>
 
-      <keypad @digit="onDigit" @back="leave" @clear="clearBuffer"></keypad>
+      <keypad @digit="onDigit" @clear="clearBuffer"></keypad>
     </div>
+
+    <scoretip v-if="tip" :seconds="200" @close="tip = false"></scoretip>
 
     <passcard v-if="passed"
               title="Full board"
@@ -86,6 +94,8 @@ import * as analytics from '../lib/analytics'
 // into practice, which drills only what was missed lately.
 import Keypad from './Keypad'
 import PassCard from './PassCard'
+import LeftArrow from './LeftArrow'
+import ScoreTip from './ScoreTip'
 import { titleCase } from '../lib/name'
 import {
   GRID_SECONDS, GRID_SIDE, shuffledFacts, firstOf, answerOf, factKey,
@@ -101,10 +111,13 @@ const vm = {
   name: 'gridcard',
   components: {
     keypad: Keypad,
-    passcard: PassCard
+    passcard: PassCard,
+    leftarrow: LeftArrow,
+    scoretip: ScoreTip
   },
   data () {
     return {
+      tip: false,
       mode: 't',
       facts: [],
       dealt: 0,
@@ -176,10 +189,10 @@ const vm = {
       this.reset()
     },
     done: function () {
-      this.$router.replace('/grid/')
+      this.$router.replace('/menu/' + this.op)
     },
     leave: function () {
-      this.$router.replace('/grid/')
+      this.$router.replace('/menu/' + this.op)
     },
     openFacts: function () {
       this.$router.replace('/gridfacts/' + this.op)
@@ -373,8 +386,22 @@ export default vm
   flex-direction: column
   align-items: center
   justify-content: center
-  gap: 14px
+  gap: 10px
   width: 48px
+.tool-back
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 46px
+  height: 44px
+  padding: 0
+  border: none
+  background: transparent
+  color: var(--ink)
+  cursor: pointer
+  DIV
+    display: flex
+    line-height: 0
 .grid-toggle
   position: relative
   width: 40px
@@ -387,27 +414,17 @@ export default vm
   left: 50%
   top: 50%
   transform: translate(-50%, -50%) rotate(90deg)
-.grid-info
-  box-sizing: border-box
-  width: 44px
-  height: 44px
-  border-radius: 8px
-  box-shadow: 0 3px 0 var(--lip)
-  background: var(--ink)
-  color: var(--tile)
-  font-family: inherit
-  font-size: 28px
-  font-weight: 700
-  line-height: 44px
-  text-align: center
-  cursor: pointer
-  user-select: none
 .grid-counter
   display: flex
   flex-direction: column
   justify-content: center
   gap: 8px
   width: 48px
+  padding: 0
+  border: none
+  background: transparent
+  font-family: inherit
+  cursor: pointer
   DIV
     box-sizing: border-box
     width: 44px
@@ -474,7 +491,7 @@ export default vm
     border-color: var(--track)
     background: var(--track)
 .grid-clock
-  height: 12px
+  height: 18px
   margin: 10px 0 0
   background: var(--track)
   &.hidden

@@ -9,28 +9,34 @@
     <div>7</div>
     <div>8</div>
     <div>9</div>
-    <div class="back" @click="$emit('back')">
-      <leftarrow width="40" tight></leftarrow>
-    </div>
+    <!-- The corner the way out used to take. It is up beside the problem
+         now, with the switch and the facts, which leaves the keypad to the
+         things that are about what is being typed. On the iOS app this
+         corner holds the microphone; there is no microphone here. -->
+    <div class="blank"></div>
     <div>0</div>
-    <div class="del">
-      <xicon width="50" style="margin-top:5px"></xicon>
+    <!-- The usual backspace, not the cross this key used to wear: a cross
+         beside the times table reads as a times sign, and this key is
+         nothing of the sort. -->
+    <div class="del" aria-label="Delete">
+      <svg viewBox="0 0 28 20" aria-hidden="true">
+        <path fill="var(--miss)"
+              d="M10.4 1.6 Q11.2 1 12.2 1 H24.4 Q27 1 27 3.6 V16.4 Q27 19 24.4 19 H12.2
+                 Q11.2 19 10.4 18.4 L2.1 11.4 Q1 10.4 1 10 Q1 9.6 2.1 8.6 Z"/>
+        <g stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round">
+          <line x1="15.4" y1="6.6" x2="22.2" y2="13.4"/>
+          <line x1="22.2" y1="6.6" x2="15.4" y2="13.4"/>
+        </g>
+      </svg>
     </div>
   </div>
 </template>
 
 <script>
-  // The ten digits, a way out and a way to clear, with no idea what it is
-  // answering. Steps and Grid press the same keys.
-  import LeftArrow from './LeftArrow'
-  import X from './X'
-
+  // The ten digits and a way to rub one out, with no idea what it is
+  // answering. A level and the whole table press the same keys.
   const vm = {
     name: 'keypad',
-    components: {
-      leftarrow: LeftArrow,
-      xicon: X
-    },
     methods: {
       keyFromEvent: function (e) {
         let el = e.target
@@ -59,10 +65,7 @@
       getNum: function (e) {
         const el = this.keyFromEvent(e)
         if (!el) return
-        if (el.classList.contains('back')) {
-          if (e.target === this.$el) this.$emit('back')
-          return
-        }
+        if (el.classList.contains('blank')) return
         const num = (el.innerText || '').trim()
         if (!/^[0-9]$/.test(num)) {
           return this.$emit('clear')
@@ -76,79 +79,47 @@
 </script>
 
 <style lang="sass">
-  $button-size: 3em
-  .fa-icon
-    width: auto
-    height: 1em
-  /* or any other relative font sizes */
-  .eq-button
-    line-height: .8
-  .eq
-    font-size: 1.2em
-    font-weight: bold
-    line-height: .5em
+  // The keys take the room the way out and the spoken-answer bar used to
+  // take between them.
   .numpad
-    font-size: 4em
-    font-weight: bold
-    display: flex
-    flex-direction: row
-    flex-flow: row wrap
-    width: 4.2em
-    margin-left: auto
-    margin-right: auto
-    border: 0px solid #ccc
-    border-radius: 6px
+    display: grid
+    grid-template-columns: repeat(3, 100px)
+    gap: 4px
+    justify-content: center
+    width: 308px
+    margin: 0 auto
     DIV
-      width: 1em
+      box-sizing: border-box
+      display: flex
+      align-items: center
+      justify-content: center
+      height: 92px
       border: 2px solid var(--line)
       border-radius: 8px
       background-color: var(--tile)
       color: var(--ink)
       box-shadow: 0 3px 0 var(--lip)
-      margin: 2px
-      padding: 8px
-      line-height: 1
-      height: .9em
-      cursor: pointer
+      font-size: 76px
       font-weight: 700
+      line-height: 1
+      cursor: pointer
       user-select: none
       &:active
         transform: translateY(2px)
         box-shadow: 0 1px 0 var(--lip)
-    DIV DIV
-      border: none
-      box-shadow: none
-      background-color: transparent
-      width: auto
-      height: auto
-      margin: 0
-      padding: 0
-      line-height: 0
-      &:active
-        transform: none
-    // Leaving and clearing are not answers, so they wear no tile at all:
-    // only the ten digits read as keys to press. The border stays, turned
-    // transparent, so the bottom row still lines up with the rows above.
-    .back, .del
+    // Rubbing an answer out is not an answer, so it wears no tile: only the
+    // ten digits read as keys to press.
+    .del, .blank
       border-color: transparent
       background-color: transparent
       box-shadow: none
       &:active
+        transform: none
         box-shadow: none
-    .del
-      color: var(--miss)
-      font-size: 40px
-      line-height: 1.8
-      height: 57px
-      width: 64px
+    .blank
+      cursor: default
+    .del svg
       display: block
-    .back
-      display: flex
-      align-items: center
-      justify-content: center
-      width: 64px
-      height: 57px
-      color: var(--ink)
-      font-size: 40px
-      line-height: 1
+      width: 46px
+      height: 33px
 </style>

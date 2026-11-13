@@ -105,8 +105,6 @@ export function describe (route) {
   const level = route.params && route.params.level
   switch (parts[0]) {
     case undefined: return ['name', {}]
-    case 'home': return ['steps or grid', {}]
-    case 'grid': return ['grid menu', {}]
     case 'gridcard': return ['grid round', { operator: op }]
     case 'gridfacts': return ['grid answers', { operator: op }]
     case 'main': return ['operator menu', {}]
@@ -114,7 +112,7 @@ export function describe (route) {
     case 'menu': return ['level menu', { operator: op }]
     case 'card': return ['card', { operator: op, level: level }]
     case 'facts': return ['fact list', { operator: op, level: level }]
-    case 'chart': return ['chart', { chart: route.params.type }]
+    case 'scores': return ['scoreboard', {}]
     default: return [parts[0], {}]
   }
 }

@@ -1,7 +1,7 @@
 // Which facts keep going wrong, and how much extra practice each one is owed.
 //
 // A fact is one card of one table, so 3x7 is the same fact whether it was met
-// in level 3c or in 3d.
+// in level 3 or in 3d.
 //
 // Kept under its own storage key, away from the level records. Mirrors
 // Facts.swift and the dealer in Store.swift, so the two apps read each other.
@@ -12,12 +12,7 @@ import { titleCase } from './name'
 // straight to the top, and two right answers work it back out.
 const MAX_WEIGHT = 2
 
-const BASE_DECKS = {
-  '': [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  A: [1, 2, 3],
-  B: [4, 5, 6],
-  C: [7, 8, 9]
-}
+const BASE_DECK = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 export function factsKey (name) {
   return titleCase(name) + '_facts'
@@ -55,13 +50,11 @@ export function noteFact (name, op, level, card, correct) {
 // The level's cards, plus an extra copy of each card that is owed practice, so
 // what went wrong comes round again sooner. Every card is still in there once,
 // so nothing drops out of the round.
-export function weightedDeck (sublevel, name, op, level) {
-  const letter = String(sublevel || '').toUpperCase()
-  const base = BASE_DECKS['ABC'.indexOf(letter) > -1 ? letter : '']
-  const cards = base.slice()
+export function weightedDeck (name, op, level) {
+  const cards = BASE_DECK.slice()
   if (!name) { return cards }
   const weights = getWeights(name)
-  base.forEach(function (card) {
+  BASE_DECK.forEach(function (card) {
     const weight = weights[factKey(op, level, card)] || 0
     for (let i = 0; i < weight; i++) { cards.push(card) }
   })

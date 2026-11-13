@@ -1,98 +1,82 @@
 <template>
   <div>
     <div class="timebar">
-      <div id="timebarFill"></div>
+      <div class="timebar-fill" :style="{ width: width + 'px' }"></div>
     </div>
   </div>
 </template>
 
-
 <script>
-import { roundSeconds } from '../lib/round'
+import { ROUND_SECONDS } from '../lib/round'
 
+const BAR = 285
+
+// The round's clock. Mounting it starts the round; leaving stops it.
+//
+// The ticks are read off the real clock rather than counted in timer fires.
+// Counting fires, two to a second, let a busy page stretch a second and the
+// round with it, and left the bar half a second ahead of the number beside
+// it. The bar and the number step together now, once a second, on the second.
 const vm = {
   name: 'timebar',
-  props: {
-    active: 'boolean'
-  },
-  components: {
-  },
   data () {
     return {
+      width: 0
     }
   },
   methods: {
-  },
-  computed: {
-    count () {
-      return this.$store.state.count
+    stop () {
+      if (window.mytimer) {
+        window.clearInterval(window.mytimer)
+        window.mytimer = null
+      }
+    },
+    tick () {
+      const elapsed = Math.floor((Date.now() - this.started) / 1000)
+      if (elapsed === this.$store.state.ticks) { return }
+      // A mistake winds the clock back, and the round with it.
+      if (this.$store.state.ticks === 0 && elapsed > 1) {
+        this.started = Date.now()
+        this.width = 0
+        return
+      }
+      this.$store.commit('SETTICKS', { ticks: elapsed })
+      this.width = Math.min(BAR, elapsed * BAR / ROUND_SECONDS)
+      this.$store.commit('SETTIME', { time: this.width })
+      // Out of time: the round starts over.
+      if (elapsed >= ROUND_SECONDS) {
+        this.$store.commit('RESETALL')
+        this.started = Date.now()
+        this.width = 0
+      }
     }
   },
   beforeDestroy () {
-    if (window.mytimer) {
-      window.clearInterval(window.mytimer)
-      window.mytimer = null
-    }
+    this.stop()
   },
   mounted () {
     this.$store.commit('RESETALL')
-    if (this.$store.state.mode === 'p') {
-      if (window.mytimer) {
-        window.clearInterval(window.mytimer)
-      }
-      return
-    }
-    const tb = document.getElementById('timebarFill')
-    tb.style.width = 0
-    this.$store.commit('RESETALL')
-    const bar = 285
-    const me = this
-    let doTick = false
-    function tick () {
-      if (doTick) {
-        me.$store.commit('TICK')
-      }
-      doTick = !doTick
-      // Two steps a second, for as many seconds as the level is worth. Read
-      // per tick, and from the route: this component mounts before its parent
-      // has put the new level into the store.
-      //
-      // The width comes from the store rather than a count kept out here, so
-      // that a mistake can wind it back. Held in this closure it was beyond
-      // the reach of the mutation that restarts the round, and the bar went on
-      // filling from wherever it had got to.
-      let w = me.$store.state.time + bar / (roundSeconds(me.$route.params.level) * 2)
-      if (w >= bar) {
-        me.$store.commit('RESETALL')
-        w = 0
-      }
-      tb.style.width = w + 'px'
-      me.$store.commit('SETTIME', { time: w })
-    }
-    if (window.mytimer) {
-      window.clearInterval(window.mytimer)
-    }
-    window.mytimer = window.setInterval(tick, 500)
-  },
-  updated () {
+    this.stop()
+    if (this.$store.state.mode === 'p') { return }
+    this.started = Date.now()
+    this.width = 0
+    window.mytimer = window.setInterval(this.tick, 100)
   }
-
 }
 
 export default vm
-
 </script>
 
 <style lang="sass">
 .timebar
   width: 285px
+  // Taller than the hairline it was. It is the only thing on the card that
+  // moves of its own accord, and a round is read off it.
+  height: 18px
+  margin: 0 auto 10px
   background: var(--track)
-  height: 12px
-  margin-left: auto
-  margin-right: auto
-  margin-bottom: 10px
-#timebarFill
-  background: var(--answer)
+.timebar-fill
   height: 100%
   width: 0
+  background: var(--answer)
 </style>

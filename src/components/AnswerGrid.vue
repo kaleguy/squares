@@ -1,5 +1,11 @@
 <template>
-<div class="fact-table answergrid">
+<div class="answergrid-holder">
+  <!-- The switch beside the problem is the only other thing that says the
+       clock is off, and it says it quietly: a green knob one way up or the
+       other. This is the head of the screen in practice, so this is where
+       the word belongs. -->
+  <div class="practice-title">Practice mode</div>
+  <div class="fact-table answergrid">
   <table>
     <tr>
       <td class="vis-operator"></td>
@@ -27,6 +33,7 @@
         bind-data="item">{{item}}</td>
     </tr>
   </table>
+  </div>
 </div>
 </template>
 
@@ -44,29 +51,10 @@ const vm = {
   components: {
   },
   methods: {
+    // A dot over every fact in the level. It used to mark out which third
+    // of the level was being asked, and the thirds are gone.
     dotFor (i) {
-      if (this.missedColumn === i) return '\u25CF'
-      return this.getDot(i)
-    },
-    getDot (i) {
-      let dot = '\u25CF'
-      if (this.level.length > 1) {
-        let levelType = this.level.substring(1, 2)
-        switch (levelType) {
-          case 'a':
-            if (i > 3) { dot = '' }
-            break
-          case 'b':
-            if (i < 4) { dot = '' }
-            if (i > 6) { dot = '' }
-            break
-          case 'c':
-            if (i < 7) { dot = '' }
-            break
-          default:
-        }
-      }
-      return dot
+      return '\u25CF'
     }
   },
   computed: {
@@ -111,7 +99,7 @@ const vm = {
       return op
     },
     level () {
-      return this.$route.params.level || '1'
+      return this.$route.params.level || '2'
     },
     visLevel () {
       return this.level.substring(0, 1)
@@ -134,6 +122,14 @@ export default vm
 
 </script>
 <style lang="sass">
+.practice-title
+  height: 22px
+  color: var(--muted)
+  font-size: 18px
+  font-weight: 700
+  line-height: 22px
+.answergrid-holder
+  padding-top: 2px
 .fact-table TABLE TD.vis-operator
   font-weight: bold
   font-size: 34px

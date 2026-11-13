@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { get } from 'lodash'
-import { titleCase } from '../lib/name'
+import { titleCase, setLastUser } from '../lib/name'
 import { weightedDeck } from '../lib/facts'
 
-const levels = require('./levels.json')
 // randomize the order of elements in a given array
 const shuffle = require('shuffle-array')
 
@@ -44,18 +43,6 @@ function getDealer (myDeck) {
 let deal1 = getDealer(deck)
 
 
-function getRandom (first, min, max) {
-  if (!min) { min = 1 }
-  if (!max) { max = 9 }
-  if (!first) { first = 0 }
-  let second = Math.floor(Math.random() * (max - min + 1) + min)
-  if (first !== second) {
-    return second
-  } else {
-    return getRandom(first, min, max)
-  }
-}
-
 // ========= The Store ===============
 // TODO: move LocalStorage calls here
 export default new Vuex.Store({
@@ -64,11 +51,8 @@ export default new Vuex.Store({
       op: '',
       index: 0
     },
-    levels,
     passedLevels: {},
     num1: 0,
-    num2: 0,
-    total: 0,
     buffer: '',
     count: 0,
     time: 0,
@@ -81,7 +65,6 @@ export default new Vuex.Store({
     RESET (state, o) {
       state.errorState = false
       state.num1 = deal1() // deal next num from current deck
-      state.num2 = getRandom(state.num2)
       state.buffer = ''
       // state.ticks = 0
       if (!o) { return }
@@ -104,8 +87,10 @@ export default new Vuex.Store({
       state.errorState = false
       state.buffer = ''
     },
-    TICK (state) {
-      state.ticks = state.ticks + 1
+    // The clock is read off the real clock and set here, rather than counted
+    // up a tick at a time, so a second is a second.
+    SETTICKS (state, o) {
+      state.ticks = o.ticks
     },
     ADDTOBUFFER (state, o) {
       const digit = String(o.num == null ? '' : o.num).trim()
@@ -129,21 +114,16 @@ export default new Vuex.Store({
       state.errorState = false
       state.count = 0
       state.time = 0
-      let sublevel = ''
       let index = state.currentLevel.index
       const newLevel = get(o, 'level', '')
       if (newLevel) {
         index = newLevel
       }
-      if (index.length > 1) {
-        sublevel = index.substring(1, 2)
-      }
-      // Get a new dealer with the correct deck, weighted towards whatever
-      // has been going wrong at this level.
+      // Get a new dealer with the level's nine cards, weighted towards
+      // whatever has been going wrong at this level.
       const dealOp = get(o, 'operator', state.currentLevel.op)
-      deal1 = getDealer(weightedDeck(sublevel, state.username, dealOp, index))
+      deal1 = getDealer(weightedDeck(state.username, dealOp, index))
       state.num1 = deal1(true)
-      state.num2 = getRandom()
       state.buffer = ''
       state.mode = 't'
       if (!o) { return }
@@ -156,8 +136,11 @@ export default new Vuex.Store({
     CLEARPASS (state, o) {
       Vue.delete(state.passedLevels, o.key)
     },
+    // Whoever is playing is who the app opens on next time. An empty name
+    // is a user deleted out from under the app, and clears it.
     SETUSER (state, o) {
       state.username = titleCase(o.username)
+      setLastUser(state.username)
     }
   },
   actions: {

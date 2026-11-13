@@ -1,106 +1,73 @@
 <template>
-  <div class="tick-counter">
+  <button type="button" class="tick-counter" @click="$emit('explain')"
+          :aria-label="count + ' seconds left. What the scores are.'">
     <div>{{count}}</div>
-    <div>{{counta}}</div>
-    <div>{{countb}}</div>
-  </div>
+    <div>{{recent[0]}}</div>
+    <div>{{recent[1]}}</div>
+  </button>
 </template>
 
 <script>
 import { levelsKey } from '../lib/name'
-import { roundSeconds } from '../lib/round'
+import { ROUND_SECONDS } from '../lib/round'
+
+// The countdown, plus the scores from the two most recent attempts.
+//
+// Touching it says what it is. A score is seconds left on a clock, which
+// nobody guesses from a bare number in a box.
 const vm = {
   name: 'tickcounter',
-  data () {
-    return {
-      oldTicks: 0
-    }
-  },
-  props: {
-    width: String
-  },
-  components: {
-  },
-  methods: {
-  },
   computed: {
+    // One a second, the same second the bar steps in. It used to show only
+    // even numbers, dropping two at a time, which read as a clock losing
+    // time rather than keeping it.
     count () {
-      let ticks = this.$store.state.ticks
-      if (ticks % 2 === 0) {
-        this.oldTicks = ticks
-      } else {
-        ticks = this.oldTicks
-      }
-      ticks = roundSeconds(this.$store.state.currentLevel.index) - ticks
-      if (ticks < 0) { ticks = 0 }
-      return ticks
+      return Math.max(0, ROUND_SECONDS - this.$store.state.ticks)
     },
-    counta () {
-      if (!this.scores) { return }
-      let dates = ''
-      try {
-        dates = Object.keys(this.scores).sort((a, b) => a < b)
-        if (dates[0]) {
-          return Math.max(0, 70 - this.scores[dates[0]])
-        }
-      } catch (e) {
-        console.log('E', e)
-      }
-      return ' '
-    },
-    countb () {
-      if (!this.scores) { return }
-      let dates = Object.keys(this.scores).sort((a, b) => a < b)
-      if (dates[1]) { return Math.max(0, 70 - this.scores[dates[1]]) }
-      console.log(dates, dates[1])
-      return ' '
-    },
-    username () {
-      return this.$store.state.username
+    recent () {
+      const scores = this.scores
+      const dates = Object.keys(scores).sort().reverse()
+      return [0, 1].map(function (i) {
+        if (!dates[i]) { return ' ' }
+        return Math.max(0, ROUND_SECONDS - scores[dates[i]])
+      })
     },
     scores () {
-      if (!this.username) {
-        return {}
-      }
-      const recordKey = levelsKey(this.username)
-      const levelKey = this.op + '' + this.level.index
-      let record = JSON.parse(localStorage.getItem(recordKey))
-      if (!record) {
-        return {}
-      }
-      return record[levelKey]
-    },
-    level () {
-      return this.$store.state.currentLevel
-    },
-    op () {
-      return this.$store.state.currentLevel.op
+      const username = this.$store.state.username
+      if (!username) { return {} }
+      const record = JSON.parse(localStorage.getItem(levelsKey(username))) || {}
+      return record[this.$store.state.currentLevel.op + this.$store.state.currentLevel.index] || {}
     }
-  },
-  mounted () {
-  },
-  updated () {
   }
 }
 
 export default vm
-
 </script>
+
 <style lang="sass">
 .tick-counter
   display: flex
   flex-direction: column
   gap: 8px
   margin: 0
+  padding: 0
+  border: none
+  background: transparent
+  font-family: inherit
+  cursor: pointer
   DIV
-    background: var(--tile)
-    width: 44px
-    height: 44px
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 48px
+    height: 48px
     border: 2px solid var(--line)
     border-radius: 8px
     box-shadow: 0 2px 0 var(--lip)
-    line-height: 40px
+    background: var(--tile)
+    color: var(--ink)
     font-size: 18px
     font-weight: 700
-    color: var(--ink)
+    line-height: 1
 </style>

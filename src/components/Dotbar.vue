@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { roundTarget } from '../lib/round'
+import { ROUND_TARGET } from '../lib/round'
 
 const vm = {
   name: 'dots',
@@ -30,7 +30,7 @@ const vm = {
   },
   computed: {
     dots () {
-      const numDots = roundTarget(this.$store.state.currentLevel.index)
+      const numDots = ROUND_TARGET
       const dotArray = []
       for (let i = 0; i < numDots; i++) {
         dotArray[i] = 0

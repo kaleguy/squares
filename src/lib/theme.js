@@ -8,7 +8,6 @@ const LIGHT = {
   answer: '#1C7A45',
   miss: '#C4362C',
   markOn: '#1C7A45',
-  markOff: '#C8890E',
   grid: 'rgba(26, 39, 68, 0.055)',
   muted: '#8B97AD',
   track: '#B7C3D6'
@@ -19,9 +18,7 @@ export const THEMES = [
     id: 'pine',
     label: 'Pine',
     level: '#1B4D38',
-    levelText: '#FFFFFF',
-    dotOn: '#FFFFFF',
-    dotOff: '#F0C36A'
+    levelText: '#FFFFFF'
   },
   {
     id: 'ink',
@@ -29,9 +26,7 @@ export const THEMES = [
     // A lighter, more saturated ink-blue. Matching the page ink exactly left
     // the level colour invisible wherever the two sat together.
     level: '#2F5496',
-    levelText: '#FFFFFF',
-    dotOn: '#FFFFFF',
-    dotOff: '#F0C36A'
+    levelText: '#FFFFFF'
   },
   {
     id: 'ochre',
@@ -39,9 +34,7 @@ export const THEMES = [
     // Deepened from #C4841A, which sat at 2.7:1 on the paper. No mid gold
     // clears both the paper and its own text, so it goes dark with white text.
     level: '#96680F',
-    levelText: '#FFFFFF',
-    dotOn: '#1A2744',
-    dotOff: '#FFFFFF'
+    levelText: '#FFFFFF'
   },
   {
     id: 'blue',
@@ -49,9 +42,7 @@ export const THEMES = [
     // Deep enough to read against the paper and the tiles; the old pale blue
     // sat at 1.1:1 on both. Leans cyan to stay clear of Ink's navy.
     level: '#1F6E8C',
-    levelText: '#FFFFFF',
-    dotOn: '#1C7A45',
-    dotOff: '#C8890E'
+    levelText: '#FFFFFF'
   },
   {
     id: 'night',
@@ -64,14 +55,11 @@ export const THEMES = [
     answer: '#1C7A45',
     miss: '#FF8A82',
     markOn: '#7DCEA0',
-    markOff: '#F0C36A',
     grid: 'rgba(231, 238, 246, 0.07)',
     muted: '#93A0B5',
     track: '#3A465C',
     level: '#A9C4F2',
-    levelText: '#141C2B',
-    dotOn: '#141C2B',
-    dotOff: '#C4841A'
+    levelText: '#141C2B'
   },
   {
     id: 'chalk',
@@ -84,16 +72,13 @@ export const THEMES = [
     answer: '#1C7A45',
     miss: '#FF8A82',
     markOn: '#8FCBAA',
-    markOff: '#F0C36A',
     grid: 'rgba(244, 240, 228, 0.07)',
     muted: '#A8B5A4',
     track: '#2C463A',
     // Coloured chalk. Matching the page ink exactly left the level colour
     // invisible wherever the two sat together.
     level: '#C98FC4',
-    levelText: '#12211B',
-    dotOn: '#1C7A45',
-    dotOff: '#C4841A'
+    levelText: '#12211B'
   }
 ]
 
@@ -125,14 +110,11 @@ export function applyTheme (id) {
     '--answer': theme.answer,
     '--miss': theme.miss,
     '--mark-on': theme.markOn,
-    '--mark-off': theme.markOff,
     '--grid': theme.grid,
     '--muted': theme.muted,
     '--track': theme.track,
     '--level': theme.level,
-    '--level-text': theme.levelText,
-    '--passed-dot-on': theme.dotOn,
-    '--passed-dot-off': theme.dotOff
+    '--level-text': theme.levelText
   }
   Object.keys(vars).forEach(function (name) {
     root.style.setProperty(name, vars[name])
