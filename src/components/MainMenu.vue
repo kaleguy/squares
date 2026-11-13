@@ -9,14 +9,7 @@
       <div class="squares bsquares main-board">
         <div
           @click="menu"
-          class="title-button">{{username}}</div>
-        <div class="count-tile"
-             @click="goto('s')"
-             aria-label="Counting">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
+          class="title-button name-bar">{{username}}</div>
       </div>
       <div class="squares csquares main-board">
         <div class="op-tile" @click="goto('+')"><span>&#x002b;</span></div>
@@ -139,4 +132,11 @@ export default vm
 .main-back-row
   width: 292px
   margin: 0 auto 4px
+// The name has the row to itself now that counting has gone, so it takes
+// the width of the two tiles below rather than sitting square over one of
+// them. Scoped, so it outranks the square .title-button in App.vue.
+.bsquares DIV.title-button.name-bar
+  width: 292px
+  height: 104px
+  font-size: 44px
 </style>

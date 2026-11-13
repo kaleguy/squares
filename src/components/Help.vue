@@ -35,7 +35,7 @@
 
         <section>
           <h2>This screen</h2>
-          <p>The nine squares are counting. Plus, minus, times, and divide open those facts. The four small squares show how many levels you have passed in those operations, in the same arrangement, and the four balls are your scores for them. Each shows zero until you pass a level. A score starts at 70 and counts down, so a faster round is worth more. Your name goes back to the name screen, and the arrow goes back to Steps and Grid.</p>
+          <p>Plus, minus, times, and divide each open their own facts. The four small squares show how many levels you have passed in those operations, in the same arrangement, and the four balls are your scores for them. Each shows zero until you pass a level. A score starts at 70 and counts down, so a faster round is worth more. Your name goes back to the name screen, and the arrow goes back to Steps and Grid.</p>
           <shot file="static/help/menu.png" caption="The operator menu."></shot>
         </section>
 
@@ -56,12 +56,6 @@
           <p>The table shows the whole set for that level. Amber is one number, the color you picked is the level, and green is the answer. A red ring on the level's own row means you got that one wrong recently, so it is being dealt more often until it comes good.</p>
           <p>Under the table the same facts are laid out again. Plus and minus draw each fact as a bar of counters over one row of numbers: read a bar down to that row for the total. Times and divide draw nine rows of the level's own width, numbered straight through, so the number ending each row is that row's multiple. Tapping anywhere goes back to the round.</p>
           <shot file="static/help/facts.png" caption="The fact table."></shot>
-        </section>
-
-        <section>
-          <h2>Counting</h2>
-          <p>Count the pips on the dice and enter the total.</p>
-          <shot file="static/help/dice.png" caption="A counting problem."></shot>
         </section>
       </template>
     </div>

@@ -8,22 +8,7 @@
           <timebar></timebar>
         </div>
       </div>
-      <div v-if="op==='s'">
-        <div class="smath">
-          <div v-if="level==1">
-            <dice></dice>
-          </div>
-          <div v-if="level==2">
-            <dice v-bind:count="5"></dice>
-            <dice></dice>
-          </div>
-          <div v-if="level==3">
-            <dice></dice>
-            <dice v-bind:count="dice2"></dice>
-          </div>
-        </div>
-      </div>
-      <div v-else class="problem-row">
+      <div class="problem-row">
         <div class="problem-tools">
           <div id="toggleh">
             <div class="toggle-rot">
@@ -56,7 +41,6 @@ import * as analytics from '../lib/analytics'
 import DotBar from './Dotbar'
 import NumPad from './NumPad'
 import TimeBar from './TImeBar'
-import Dice from './Dice'
 import AnswerGrid from './AnswerGrid'
 import TickCounter from './TickCounter'
 const keyBus = {
@@ -71,7 +55,6 @@ const vm = {
     numpad: NumPad,
     dots: DotBar,
     timebar: TimeBar,
-    dice: Dice,
     answergrid: AnswerGrid,
     tickcounter: TickCounter
   },
@@ -133,9 +116,6 @@ const vm = {
         num = index.substring(0, 1)
       }
       return num
-    },
-    dice2 () {
-      return this.$store.state.dice2
     },
     total () {
       return this.$store.state.total
@@ -202,13 +182,6 @@ export default vm
   left: 50%
   top: 50%
   transform: translate(-50%, -50%) rotate(90deg)
-.smath
-  max-width: 400px
-  margin-left: auto
-  margin-right: auto
-  height: 160px
-  margin-bottom: 8px
-  padding-top: 30px
 .math
   font-size: 4em
   font-family: inherit

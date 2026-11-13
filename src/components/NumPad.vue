@@ -106,8 +106,6 @@
         // been folded in, and eslint cannot see inside it.
         let num1 = this.$store.state.num1 // eslint-disable-line no-unused-vars
         let num2 = this.$store.state.currentLevel.index.substring(0, 1)
-        let dice1 = this.$store.state.dice1
-        let dice2 = this.$store.state.dice2
         if (this.op === '-') {
           num1 = +this.$store.state.num1 + +num2
         }
@@ -121,21 +119,6 @@
         }
         if (op === 'd') {
           op = '/'
-        }
-        if (op === 's') {
-          op = '+'
-          if (level.index === '1') {
-            num1 = +dice1
-            num2 = +0
-          }
-          if (level.index === '2') {
-            num1 = +dice1 + 5
-            num2 = +0
-          }
-          if (level.index === '3') {
-            num1 = +dice1
-            num2 = +dice2
-          }
         }
         let total = 0
         // const l = 'total = +num1 ' + op + ' +num2'
@@ -176,7 +159,7 @@
           // but it stays a timed round. Dropping into practice meant a
           // mistyped digit cost a trip to the switch and back, and a mistyped
           // digit is most of what goes wrong.
-          if (this.mode === 't' && this.op !== 's') {
+          if (this.mode === 't') {
             this.recordFail(this.op + this.$store.state.currentLevel.index)
           }
           this.$store.commit('SETERRORSTATE')

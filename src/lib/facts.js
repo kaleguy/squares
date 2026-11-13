@@ -1,8 +1,7 @@
 // Which facts keep going wrong, and how much extra practice each one is owed.
 //
 // A fact is one card of one table, so 3x7 is the same fact whether it was met
-// in level 3c or in 3d. Counting deals dice rather than cards, so it has no
-// facts to track.
+// in level 3c or in 3d.
 //
 // Kept under its own storage key, away from the level records. Mirrors
 // Facts.swift and the dealer in Store.swift, so the two apps read each other.
@@ -39,7 +38,7 @@ export function getWeights (name) {
 
 // Note how the card just answered went, so the dealer can favour it.
 export function noteFact (name, op, level, card, correct) {
-  if (!name || op === 's') { return }
+  if (!name) { return }
   const weights = getWeights(name)
   const key = factKey(op, level, card)
   const weight = weights[key] || 0
@@ -60,7 +59,7 @@ export function weightedDeck (sublevel, name, op, level) {
   const letter = String(sublevel || '').toUpperCase()
   const base = BASE_DECKS['ABC'.indexOf(letter) > -1 ? letter : '']
   const cards = base.slice()
-  if (!name || op === 's') { return cards }
+  if (!name) { return cards }
   const weights = getWeights(name)
   base.forEach(function (card) {
     const weight = weights[factKey(op, level, card)] || 0

@@ -6,7 +6,6 @@ import GridMenu from '@/components/GridMenu'
 import GridCard from '@/components/GridCard'
 import MainMenu from '@/components/MainMenu'
 import SubMenu from '@/components/SubMenu'
-import DiceMenu from '@/components/DiceMenu'
 import TestCard from '@/components/TestCard'
 import FactTable from '@/components/FactTable'
 import Chart from '@/components/Chart'
@@ -51,10 +50,6 @@ export default new Router({
     {
       path: '/help',
       component: Help
-    },
-    {
-      path: '/menu/s',
-      component: DiceMenu
     },
     {
       path: '/menu/:operator',

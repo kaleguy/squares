@@ -123,27 +123,6 @@ HTML, BODY
       line-height: 1
       // Glyphs sit low in the em box, so the oversized line box is shifted up until the ink is centered.
       transform: translateY(-16px)
-  DIV.count-tile
-    width: 140px
-    height: 140px
-    display: grid
-    grid-template-columns: repeat(3, 36px)
-    grid-template-rows: repeat(3, 36px)
-    gap: 8px
-    place-content: center
-    padding: 0
-    color: $ink
-    background-color: $tile
-    SPAN
-      display: block
-      width: 36px
-      height: 36px
-      margin: 0
-      padding: 0
-      border: none
-      border-radius: 3px
-      box-shadow: none
-      background-color: $ink
   DIV.op-counts
     width: 140px
     height: 140px

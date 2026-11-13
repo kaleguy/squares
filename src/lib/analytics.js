@@ -111,9 +111,7 @@ export function describe (route) {
     case 'gridfacts': return ['grid answers', { operator: op }]
     case 'main': return ['operator menu', {}]
     case 'help': return ['help', {}]
-    case 'menu': return op === 's'
-      ? ['counting menu', {}]
-      : ['level menu', { operator: op }]
+    case 'menu': return ['level menu', { operator: op }]
     case 'card': return ['card', { operator: op, level: level }]
     case 'facts': return ['fact list', { operator: op, level: level }]
     case 'chart': return ['chart', { chart: route.params.type }]

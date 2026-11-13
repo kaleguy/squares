@@ -68,8 +68,6 @@ export default new Vuex.Store({
     passedLevels: {},
     num1: 0,
     num2: 0,
-    dice1: 0,
-    dice2: 0,
     total: 0,
     buffer: '',
     count: 0,
@@ -84,8 +82,6 @@ export default new Vuex.Store({
       state.errorState = false
       state.num1 = deal1() // deal next num from current deck
       state.num2 = getRandom(state.num2)
-      state.dice1 = getRandom(state.dice1, 1, 5)
-      state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
       // state.ticks = 0
       if (!o) { return }
@@ -148,8 +144,6 @@ export default new Vuex.Store({
       deal1 = getDealer(weightedDeck(sublevel, state.username, dealOp, index))
       state.num1 = deal1(true)
       state.num2 = getRandom()
-      state.dice1 = getRandom(state.dice1, 1, 5)
-      state.dice2 = getRandom(state.dice2, 1, 5)
       state.buffer = ''
       state.mode = 't'
       if (!o) { return }
