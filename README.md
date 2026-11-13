@@ -73,6 +73,11 @@ npm test
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 The help page's screenshots are in `static/help`, shot from this app in the
-default theme and cropped to the content.
+default theme and cropped to the content. They are taken with the page zoomed
+to 200%, so that each one carries twice the detail of the 324px column it is
+shown in: a screenshot taken at 1:1 is soft on any retina screen. At that zoom
+a screen is taller than the window, so each is captured in two or three passes
+and joined, the join taken from the screen's own bounding box rather than
+guessed.
 
 [Icons by Real Favicon Generator](https://realfavicongenerator.net)
