@@ -63,6 +63,12 @@
         <p>Five names is as many as it keeps. To make room for another, swipe a name to the left on the name screen and delete it &mdash; which deletes that name&rsquo;s scores with it.</p>
       </section>
 
+      <!-- The page is long, and the way out was only at the top of it:
+           reading to the end meant scrolling all the way back up to leave. -->
+      <div class="help-back help-back-end" @click="back">
+        <leftarrow width="40" tight></leftarrow>
+      </div>
+
       <div class="help-credit">
         <div>&copy; Joseph Orr</div>
         <a href="https://www.trilog.app" target="_blank" rel="noopener">www.trilog.app</a>
@@ -131,6 +137,9 @@ export default {
   cursor: pointer
   margin-bottom: 16px
   color: $ink
+.help-back-end
+  margin-top: 20px
+  margin-bottom: 0
 .help-wrap h1
   font-size: 40px
   font-weight: 700
