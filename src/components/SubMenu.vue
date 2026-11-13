@@ -132,6 +132,10 @@ export default vm
   justify-content: center
   height: 74px
   font-size: 140px
+  // The sign is drawn heavy here, the way it is on the menu before this
+  // one. It used to inherit the weight from a wrapper that is gone, and
+  // came out in the book weight: a thin sign over nine heavy digits.
+  font-weight: 700
   line-height: 1
   cursor: default
   pointer-events: none
@@ -158,7 +162,11 @@ export default vm
   background: var(--tile)
   color: var(--ink)
   font-family: inherit
-  font-size: 74px
+  // Sixty-six, not the seventy-four the iOS app sets. Atkinson is a wider
+  // face than the Avenir the port falls back to, and at the same size its
+  // "all" took 87 of the tile's 106 where Avenir's takes 78. This is the
+  // size at which the two screens read alike.
+  font-size: 66px
   font-weight: 700
   line-height: 1
   cursor: pointer
