@@ -218,9 +218,13 @@ export default vm
   font-size: 200px
   font-weight: 700
   line-height: 1
-  // Glyphs sit low in the em box, so the oversized line box is shifted up
-  // until the ink is centred.
-  transform: translateY(-16px)
+  // All four signs centre their ink on the maths axis, 71.5px above the
+  // baseline at this size, and a 200px line box centred in a 140px tile
+  // puts that axis two points above the tile's own centre. So two points
+  // down, and the same two for all four. It was sixteen points up, from
+  // when these tiles were drawn another way, which left every sign riding
+  // high in its square.
+  transform: translateY(2px)
 .menu-chrome
   display: flex
   justify-content: center
