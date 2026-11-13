@@ -9,35 +9,57 @@ const shuffle = require('shuffle-array')
 
 Vue.use(Vuex)
 
-let deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+const deck = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
-shuffle(deck)
-function shuffleUniq (deck, last) {
-  shuffle(deck)
-  if (deck[0] === last) {
-    deck.shift()
-    deck.push(last)
+// Shuffle until no card has landed beside another of itself, and the deck
+// does not open on `last`, the card just dealt.
+//
+// A weighted deck holds up to three copies of a card, and a plain shuffle
+// puts two of them side by side often enough to notice: a twentieth of all
+// deals repeated the problem just answered. The same problem twice running
+// reads as the app having lost its place, and the second answer is not
+// practice - it is the first answer again, still in the hand.
+function spread (deck, last) {
+  for (let attempt = 0; attempt < 16; attempt++) {
+    shuffle(deck)
+    let stuck = false
+    for (let i = 0; i < deck.length; i++) {
+      const before = i === 0 ? last : deck[i - 1]
+      if (deck[i] !== before) { continue }
+      // Trade it for a later card that is not the one in front of it.
+      // Whatever that breaks is behind the trade and still ahead of this
+      // loop, so it gets traded in its turn.
+      let j = i + 1
+      while (j < deck.length && deck[j] === before) { j++ }
+      if (j < deck.length) {
+        const card = deck[i]
+        deck[i] = deck[j]
+        deck[j] = card
+      } else {
+        stuck = true // nothing but copies of it left to the end of the deck
+      }
+    }
+    if (!stuck) { return }
   }
 }
-// returns a function that will deal the next card in a randomly
-// shuffled deck
-function getDealer (myDeck) {
+
+// returns a function that will deal the next card of the deck, in an order
+// that never asks the same card twice running. `after` is the card on show,
+// which the deck must not open on either.
+function getDealer (myDeck, after) {
   let index = -1
-  let deck1 = myDeck
-  const dealer = function (reset) {
-    if (reset) {
-      if (index === -1) { index = 0 }
-      shuffleUniq(deck1, deck1[index])
-      index = -1
-    }
+  const deck1 = myDeck
+  spread(deck1, after)
+  return function () {
     index = index + 1 // deal next card
     if (index > deck1.length - 1) {
-      shuffleUniq(deck1, deck1[deck1.length - 1]) // whatever is the current card, we don't want that to be the starting card on the next shuffle
+      // A new order for the next pass through, which must not open on the
+      // card this one ended with.
+      spread(deck1, deck1[deck1.length - 1])
       index = 0
     }
     return deck1[index]
   }
-  return dealer
 }
 
 let deal1 = getDealer(deck)
@@ -122,8 +144,11 @@ export default new Vuex.Store({
       // Get a new dealer with the level's nine cards, weighted towards
       // whatever has been going wrong at this level.
       const dealOp = get(o, 'operator', state.currentLevel.op)
-      deal1 = getDealer(weightedDeck(state.username, dealOp, index))
-      state.num1 = deal1(true)
+      // The card on show is the one not to open on: a round that starts
+      // again, because the clock ran out, should not start again on the
+      // problem it was looking at.
+      deal1 = getDealer(weightedDeck(state.username, dealOp, index), state.num1)
+      state.num1 = deal1()
       state.buffer = ''
       state.mode = 't'
       if (!o) { return }

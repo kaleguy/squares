@@ -141,10 +141,20 @@ const vm = {
     }
   },
   methods: {
-    // Back to an empty board and a full clock, with the facts in a new order.
+    // Back to an empty board and a full clock, with the facts in a new
+    // order - one that does not open on the fact now on show. A run starts
+    // over when the fact it halted on is answered, and asking that same fact
+    // again as the first of the new run is asking what was just answered.
+    // The table holds every fact once, so moving the opener to the back is
+    // the whole of it.
     reset: function () {
       this.clearTimers()
+      const showing = this.current
       this.facts = shuffledFacts(this.op)
+      if (showing && this.facts.length > 1 &&
+          this.facts[0].a === showing.a && this.facts[0].b === showing.b) {
+        this.facts.push(this.facts.shift())
+      }
       this.dealt = 0
       this.filled = {}
       this.missed = null

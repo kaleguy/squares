@@ -34,6 +34,14 @@ so a record exported from a browser drops straight into the phone.
   A wrong answer reddens the problem and starts the run over, and that fact
   comes round more often afterwards. The boxes beside the problem are the
   clock and the last two scores there; touching them says what a score is.
+  The deck never deals the same card twice running: coming round more often
+  means extra copies of that card, and a plain shuffle used to put two of them
+  side by side often enough that a twentieth of all deals repeated the problem
+  just answered. `spread` in `src/store/index.js` reshuffles until nothing
+  sits beside another of itself and the deck does not open on the card on
+  show, so a restart on the clock and a wrap to a new order both come up on
+  something else. The whole table is cheaper, holding every fact once: its
+  `reset` only moves the opener to the back.
 - **Practice** turns the clock off, says so at the head of the screen, and
   lists the level's facts above the problem.
 - **The whole table** (`/gridcard/:operator`) deals every fact once against a
