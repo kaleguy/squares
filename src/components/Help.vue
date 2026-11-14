@@ -20,6 +20,7 @@
       <section>
         <h2>Levels</h2>
         <p>A sign opens nine tiles. Eight of them are levels, 2 to 9, and each is the whole of that number&rsquo;s facts. One is left out, since adding, taking away, multiplying or dividing by one is already in the number itself. The ninth, marked all, is the whole table in one sitting. A tile turns green once it has been won.</p>
+        <p>The clock in the corner is how long this table has had altogether: rounds, fact tables, and the time spent looking at the menu. It is kept under the name that is playing, so two people sharing a browser keep separate clocks.</p>
         <shot file="static/help/levels.jpg" caption="A table&rsquo;s nine tiles."></shot>
       </section>
 

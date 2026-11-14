@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import { applyTheme, currentThemeId } from './lib/theme'
 import { start as startAnalytics, screenFor } from './lib/analytics'
+import { operatorOf, visit, watchVisibility } from './lib/study'
 import { lastUser, levelsKey, titleCase, users } from './lib/name'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -35,8 +36,13 @@ if (resumed && users().indexOf(resumed) > -1) {
     router.replace('/main/')
   }
 }
-// The screens are named where the routing already knows which one is which.
-router.afterEach(function (to) { screenFor(to) })
+// The screens are named where the routing already knows which one is which,
+// and the study clock is told which table it is on in the same place.
+router.afterEach(function (to) {
+  screenFor(to)
+  visit(operatorOf(to), store.state.username)
+})
+watchVisibility()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

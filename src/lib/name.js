@@ -57,7 +57,7 @@ export function deleteUser (name) {
   // A name deleted out from under the app clears the name it opens on.
   if (titleCase(lastUser()) === titled) { setLastUser('') }
   Object.keys(bases).forEach(function (base) {
-    ;['_levels', '_facts', '_grid', '_gridmiss'].forEach(function (suffix) {
+    ;['_levels', '_facts', '_grid', '_gridmiss', '_time'].forEach(function (suffix) {
       localStorage.removeItem(base + suffix)
     })
   })

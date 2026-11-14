@@ -29,6 +29,12 @@
 
       <div class="level-foot"></div>
     </div>
+
+    <!-- Outside the centred column: the page centres what is on it, and a
+         total that moves with the tiles is a thing to go looking for. In the
+         corner it is always the same corner. Small and grey on purpose - it
+         is not a target and nothing is scored off it. -->
+    <div class="level-clock" :aria-label="'Time on this table'">{{clock}}</div>
   </div>
 </template>
 
@@ -37,11 +43,17 @@ import LeftArrow from './LeftArrow'
 import { titleCase } from '../lib/name'
 import { gridRecords } from '../lib/grid'
 import { MENU_LEVELS, OPERATORS, glyphFor } from '../lib/levels'
+import { readout, seconds } from '../lib/study'
 
 const vm = {
   name: 'submenu',
   components: {
     leftarrow: LeftArrow
+  },
+  data () {
+    // Read back once a second, since the clock it comes from runs whether
+    // this screen is looking or not.
+    return { total: 0, ticker: null }
   },
   methods: {
     menu () {
@@ -80,12 +92,28 @@ const vm = {
     },
     username () {
       return titleCase(this.$store.state.username)
+    },
+    // How long has gone into this table, all time, counting the visit open
+    // now. The clock itself is kept in lib/study.js, where the router winds
+    // it on; this only reads it.
+    clock () {
+      return readout(this.total)
     }
   },
   mounted () {
     if (!this.username) {
       this.$router.replace('/')
+      return
     }
+    const me = this
+    const read = function () {
+      me.total = seconds(me.operator, me.$store.state.username)
+    }
+    read()
+    this.ticker = window.setInterval(read, 1000)
+  },
+  beforeDestroy () {
+    if (this.ticker) { window.clearInterval(this.ticker) }
   }
 }
 
@@ -107,6 +135,14 @@ export default vm
   box-sizing: border-box
 .level-foot
   height: 94px
+.level-clock
+  position: fixed
+  left: 24px
+  bottom: 16px
+  font-size: 15px
+  font-weight: 400
+  font-variant-numeric: tabular-nums
+  color: var(--muted)
 .level-back, .level-spacer
   display: flex
   align-items: center

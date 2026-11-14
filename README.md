@@ -28,7 +28,12 @@ so a record exported from a browser drops straight into the phone.
 - **A level menu** is nine tiles, three to a row: levels 2 to 9, each the
   whole of that number's facts, and `all`, which is the whole table in one
   sitting. One is left out, since adding, taking away, multiplying or dividing
-  by one is already in the number itself.
+  by one is already in the number itself. In the corner, how long this table
+  has had altogether, under `<Name>_time`: a best time says how fast one round
+  was and nothing about how much of the week went into it. `lib/study.js`
+  keeps it, wound on from the router, where the app already knows which table
+  a screen belongs to; every screen of a table counts, the menu included, and
+  a hidden tab counts for nothing.
 - **A round** is twenty-seven answers, no mistakes, in seventy seconds. The
   squares along the top count the answers and the bar under them is the clock.
   A wrong answer reddens the problem and starts the run over, and that fact
