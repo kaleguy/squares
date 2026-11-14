@@ -45,8 +45,17 @@ function send (event, props) {
   ph.capture(event, props)
 }
 
+// A development build reports nothing, the way the iOS app's DEBUG guard
+// does. The token is in the page source of every build, so until this went in
+// every run of the dev server went into the same project as trilog.app.
+function development () {
+  const host = window.location.hostname
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]' ||
+    host === '' || /\.local$/.test(host)
+}
+
 export function start () {
-  if (loading || live()) { return }
+  if (loading || live() || development()) { return }
   loading = true
   const script = document.createElement('script')
   script.src = ASSET_HOST + '/static/array.js'
@@ -81,6 +90,7 @@ export function start () {
 }
 
 export function capture (event, props) {
+  if (development()) { return }
   const payload = Object.assign({ platform: 'web' }, props || {})
   if (live()) {
     send(event, payload)
